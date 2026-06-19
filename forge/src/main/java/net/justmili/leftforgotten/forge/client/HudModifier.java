@@ -2,13 +2,13 @@ package net.justmili.leftforgotten.forge.client;
 
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
+import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.core.util.ResourceUtil;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
@@ -48,7 +48,7 @@ public class HudModifier {
         if (id.equals(VanillaGuiOverlay.ARMOR_LEVEL.id())) {
             event.setCanceled(true);
 
-            if (nonSurvivalGamemode()) return;
+            if (CommonClient.nonSurvivalGamemode()) return;
 
             int level = getPlayer().getArmorValue();
             for (int i = 1; level > 0 && i < 20; i += 2) {
@@ -87,7 +87,7 @@ public class HudModifier {
         // Mount HP move down, account for AbstractHorse jump bar when saddled and Armor
         if (id.equals(VanillaGuiOverlay.MOUNT_HEALTH.id())) {
             event.setCanceled(true);
-            if (nonSurvivalGamemode()) return; // Doesn't render in Creative
+            if (CommonClient.nonSurvivalGamemode()) return; // Doesn't render in Creative
 
             if (getPlayer().getArmorValue() > 0) {
                 // Armor on
@@ -111,10 +111,5 @@ public class HudModifier {
                 if (!CandyTweak.OLD_VERSION_OVERLAY.get()) CandyTweak.OLD_VERSION_OVERLAY.setCacheAndDiskThenSave(true);
             }
         }
-    }
-
-    private static boolean nonSurvivalGamemode() {
-        if (minecraft.gameMode == null) return false;
-        return !(minecraft.gameMode.canHurtPlayer() && minecraft.getCameraEntity() instanceof Player);
     }
 }

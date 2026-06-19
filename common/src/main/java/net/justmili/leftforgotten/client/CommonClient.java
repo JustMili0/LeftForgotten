@@ -36,4 +36,9 @@ public class CommonClient {
     public static boolean notInAlpha() {
         return !inAlpha();
     }
+
+    public static boolean nonSurvivalGamemode() {
+        if (minecraft.gameMode == null) return false;
+        return !(minecraft.gameMode.canHurtPlayer() && minecraft.getCameraEntity() instanceof Player);
+    }
 }

@@ -2,6 +2,7 @@ package net.justmili.leftforgotten.mechanics.gameplay;
 
 import dev.architectury.event.CompoundEventResult;
 import dev.architectury.event.EventResult;
+import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -103,9 +104,11 @@ public class AlphaFoodSystem {
             Item item = stack.getItem();
             boolean canEat = !healthCheck(player) || entry.hasAction(FoodAction.ALWAYS_EDIBLE);
             if (canEat) {
-                stack.shrink(1);
-                player.getInventory().setChanged();
-                player.setHealth(Math.min(player.getHealth() + entry.health(), player.getMaxHealth()));
+                if (!CommonClient.nonSurvivalGamemode()) {
+                    stack.shrink(1);
+                    player.getInventory().setChanged();
+                    player.setHealth(Math.min(player.getHealth() + entry.health(), player.getMaxHealth()));
+                }
                 playConsumptionSound(player.level(), player.getX(), player.getY(), player.getZ(), item);
                 for (FoodAction action : entry.actions()) {
                     applyAction(action, player, stack, item);
