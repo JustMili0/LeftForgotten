@@ -13,15 +13,13 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
-import static net.justmili.leftforgotten.client.CommonHudModifier.Common.mirrorX;
-import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedSprite;
+import static net.justmili.leftforgotten.client.CommonHudModifier.Common.*;
 import static net.justmili.leftforgotten.client.CommonHudModifier.NeoForge.*;
 import static net.justmili.leftforgotten.core.util.ClientUtil.*;
 
@@ -80,7 +78,7 @@ public class HudModifier {
             int full = Mth.ceil((air - 2) * 10.0 / maxAir),
                 partial = Mth.ceil(air * 10.0 / maxAir) - full,
                 rh = minecraft.gui.rightHeight,
-                top = getHeight() - rh - airLvlH - yOffset(),
+                top = getHeight() - rh - airLvlH - yOffset() - extraHealthRowsOffset(),
                 barEnd = getWidth() / 2 + 51;
 
             for (int i = 0; i < full + partial; ++i) {

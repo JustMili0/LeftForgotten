@@ -20,10 +20,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Stack;
 
-import static net.justmili.leftforgotten.client.CommonHudModifier.Common.mirrorX;
-import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedSprite;
+import static net.justmili.leftforgotten.client.CommonHudModifier.Common.*;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Fabric.*;
-import static net.justmili.leftforgotten.core.util.ClientUtil.*;
+import static net.justmili.leftforgotten.core.util.ClientUtil.getPlayer;
+import static net.justmili.leftforgotten.core.util.ClientUtil.getWidth;
 
 @Mixin(value = Gui.class, priority = 2500)
 public abstract class HudModifier {
@@ -85,7 +85,7 @@ public abstract class HudModifier {
 
         TextureAtlasSprite atlasSprite = Minecraft.getInstance().getGuiSprites().getSprite(sprite);
         int x1 = mirrorX(x)+armorW,
-            y1 = y+armorH-yOffset();
+            y1 = y+armorH-yOffset()+extraHealthRowsOffset();
 
         renderFlippedSprite(graphics, atlasSprite, x1, y1, width, height);
     }
@@ -103,7 +103,7 @@ public abstract class HudModifier {
             // Flip the way it goes
             int barEnd = getWidth() / 2+51,
                 mirroredX = 2 * barEnd-9-x;
-            graphics.blitSprite(sprite, mirroredX-airLvlW, y-airLvlH+yOffset(), width, height);
+            graphics.blitSprite(sprite, mirroredX-airLvlW, y-airLvlH+yOffset()-extraHealthRowsOffset(), width, height);
         } else {
             original.call(graphics, sprite, x, y, width, height);
         }
