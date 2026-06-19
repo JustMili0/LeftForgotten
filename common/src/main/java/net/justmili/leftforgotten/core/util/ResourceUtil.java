@@ -11,19 +11,19 @@ public class ResourceUtil {
     public static ResourceLocation asPath(String path) {
         return new ResourceLocation(path);
     }
-    public static ResourceLocation minecraftResource(String path) {
+    public static ResourceLocation asMinecraft(String path) {
         return new ResourceLocation("minecraft", path);
     }
-    public static ResourceLocation fabricResource(String path) {
+    public static ResourceLocation asFabric(String path) {
         return new ResourceLocation("fabric", path);
     }
-    public static ResourceLocation quiltResource(String path) {
+    public static ResourceLocation asQuilt(String path) {
         return new ResourceLocation("quilt", path);
     }
-    public static ResourceLocation forgeResource(String path) {
+    public static ResourceLocation asForge(String path) {
         return new ResourceLocation("forge", path);
     }
-    public static ResourceLocation neoforgeResource(String path) {
+    public static ResourceLocation asNeoForge(String path) {
         return new ResourceLocation("neoforge", path);
     }
 
