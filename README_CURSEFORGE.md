@@ -59,34 +59,46 @@ This is not a horror mod, but rather a adventure and decoration mod. Just plain 
   </div>
 </div>
 
-<details>
-<summary>RECOMMENDS</summary>
+<div class="spoiler-title">
+  <strong>RECOMMENDS</strong>
+</div>
+<div class="spoiler">
+  <div class="spoiler-content">
+    <p>
+      [Polymorph](https://www.curseforge.com/minecraft/mc-mods/polymorph), [LambDynamicLights](https://www.curseforge.com/minecraft/mc-mods/lambdynamiclights)
+    </p>
+  </div>
+</div>
 
-[Polymorph](https://www.curseforge.com/minecraft/mc-mods/polymorph), [LambDynamicLights](https://www.curseforge.com/minecraft/mc-mods/lambdynamiclights)
+<div class="spoiler-title">
+  <strong>BROKEN BUT PLAYABLE</strong>
+</div>
+<div class="spoiler">
+  <div class="spoiler-content">
+    <p>
+      [Big Globe](https://modrinth.com/mod/big-globe)<br>
+      *Entering and leaving works fine. The Brittle Bedrock though? It can't even generate at Big Globe's bedrock layer to give the player easier access to this mod's content.
+    </p>
+  </div>
+</div>
 
-</details>
-
-<details>
-<summary>BROKEN BUT PLAYABLE</summary>
-
-[Big Globe](https://modrinth.com/mod/big-globe)<br>
-*Entering and leaving works fine. The Brittle Bedrock though? It can't even generate at Big Globe's bedrock layer to give the player easier access to this mod's content.
-
-</details>
-
-<details>
-<summary>INCOMPATIBLE</summary>
-
-[True End](https://www.curseforge.com/minecraft/mc-mods/true-end-cf)<br>
-*Due to similar codebases, as both were partially or fully made by JustMili.
-
-</details>
+<div class="spoiler-title">
+  <strong>INCOMPATIBLE</strong>
+</div>
+<div class="spoiler">
+  <div class="spoiler-content">
+    <p>
+      [True End](https://www.curseforge.com/minecraft/mc-mods/true-end-cf)<br>
+      *Due to similar codebases, as both were partially or fully made by JustMili.
+    </p>
+  </div>
+</div>
 
 <hr>
 
 ### When newer Minecraft versions?
 With version 1.1.x Left Forgotten will update from Fabric+Forge 1.20.1 to:
-- 1.21.1 Fabric & NeoForge
+- (DONE) 1.21.1 Fabric & NeoForge
 - (1.21.6-)1.21.8 Fabric & NeoForge
 - 1.21.11 Fabric & NeoForge
 - 26.1.2 and onwards Fabric-Only
