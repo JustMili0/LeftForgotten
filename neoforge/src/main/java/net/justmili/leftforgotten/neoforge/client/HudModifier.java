@@ -71,6 +71,8 @@ public class HudModifier {
         // Air level move left and down, account for AbstractHorse jump bar when saddled
         if (id.equals(VanillaGuiLayers.AIR_LEVEL)) {
             event.setCanceled(true);
+            if (CommonClient.nonSurvivalGamemode()) return;
+
             int air = Math.min(getPlayer().getAirSupply(), getPlayer().getMaxAirSupply()),
                 maxAir = getPlayer().getMaxAirSupply();
             if (!getPlayer().isEyeInFluid(FluidTags.WATER) && air >= maxAir) return;
