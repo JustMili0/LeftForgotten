@@ -14,8 +14,8 @@ import net.minecraft.world.item.Item;
 import java.util.concurrent.CompletableFuture;
 
 public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
-    public static final TagKey<Item> FORGE_COBBLE = TagKey.create(Registries.ITEM, ResourceUtil.forgeResource("cobblestone"));
-    public static final TagKey<Item> FORGE_STONE = TagKey.create(Registries.ITEM, ResourceUtil.forgeResource("stone"));;
+    public static final TagKey<Item> FORGE_COBBLE = TagKey.create(Registries.ITEM, ResourceUtil.asForge("cobblestone"));
+    public static final TagKey<Item> FORGE_STONE = TagKey.create(Registries.ITEM, ResourceUtil.asForge("stone"));;
 
     public LFItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(output, Registries.ITEM, lookupProvider, item -> BuiltInRegistries.ITEM.getResourceKey(item).orElseThrow());

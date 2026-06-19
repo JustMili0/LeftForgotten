@@ -25,11 +25,11 @@ import static net.justmili.leftforgotten.core.util.ClientUtil.*;
 
 @EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {
-    private static final ResourceLocation ARMOR_EMPTY = ResourceUtil.minecraftResource("hud/armor_empty");
-    private static final ResourceLocation ARMOR_HALF = ResourceUtil.minecraftResource("hud/armor_half");
-    private static final ResourceLocation ARMOR_FULL = ResourceUtil.minecraftResource("hud/armor_full");
-    private static final ResourceLocation AIR = ResourceUtil.minecraftResource("hud/air");
-    private static final ResourceLocation AIR_BURST = ResourceUtil.minecraftResource("hud/air_bursting");
+    private static final ResourceLocation ARMOR_EMPTY = ResourceUtil.asMinecraft("hud/armor_empty");
+    private static final ResourceLocation ARMOR_HALF = ResourceUtil.asMinecraft("hud/armor_half");
+    private static final ResourceLocation ARMOR_FULL = ResourceUtil.asMinecraft("hud/armor_full");
+    private static final ResourceLocation AIR = ResourceUtil.asMinecraft("hud/air");
+    private static final ResourceLocation AIR_BURST = ResourceUtil.asMinecraft("hud/air_bursting");
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiLayerEvent.Pre event) {

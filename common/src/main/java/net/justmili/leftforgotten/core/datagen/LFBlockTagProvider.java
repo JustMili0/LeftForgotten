@@ -14,8 +14,8 @@ import net.minecraft.world.level.block.Block;
 import java.util.concurrent.CompletableFuture;
 
 public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
-    public static final TagKey<Block> FORGE_COBBLE = TagKey.create(Registries.BLOCK, ResourceUtil.forgeResource("cobblestone"));
-    public static final TagKey<Block> FORGE_STONE = TagKey.create(Registries.BLOCK, ResourceUtil.forgeResource("stone"));
+    public static final TagKey<Block> FORGE_COBBLE = TagKey.create(Registries.BLOCK, ResourceUtil.asForge("cobblestone"));
+    public static final TagKey<Block> FORGE_STONE = TagKey.create(Registries.BLOCK, ResourceUtil.asForge("stone"));
 
     public LFBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(output, Registries.BLOCK, lookupProvider, block -> BuiltInRegistries.BLOCK.getResourceKey(block).orElseThrow());
