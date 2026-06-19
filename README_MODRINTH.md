@@ -82,7 +82,7 @@ Forge - [Architectury API](https://modrinth.com/mod/architectury-api)
 
 ### When newer Minecraft versions?
 With version 1.1.x Left Forgotten will update from Fabric+Forge 1.20.1 to:
-- 1.21.1 Fabric & NeoForge
+- (DONE) 1.21.1 Fabric & NeoForge
 - (1.21.6-)1.21.8 Fabric & NeoForge
 - 1.21.11 Fabric & NeoForge
 - 26.1.2 and onwards Fabric-Only
