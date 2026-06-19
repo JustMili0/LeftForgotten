@@ -2,6 +2,7 @@ package net.justmili.leftforgotten.neoforge.client;
 
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
+import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.core.util.ResourceUtil;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.DeltaTracker;
@@ -51,7 +52,7 @@ public class HudModifier {
         // Armor move right and down, flip armor sprites
         if (id.equals(VanillaGuiLayers.ARMOR_LEVEL)) {
             event.setCanceled(true);
-            if (nonSurvivalGamemode()) return;
+            if (CommonClient.nonSurvivalGamemode()) return;
 
             int level = getPlayer().getArmorValue();
             for (int i = 1; level > 0 && i < 20; i += 2) {
@@ -91,7 +92,7 @@ public class HudModifier {
         // Mount HP move down, account for AbstractHorse jump bar when saddled and Armor
         if (id.equals(VanillaGuiLayers.VEHICLE_HEALTH)) {
             event.setCanceled(true);
-            if (nonSurvivalGamemode()) return; // Doesn't render in Creative
+            if (CommonClient.nonSurvivalGamemode()) return; // Doesn't render in Creative
 
             if (getPlayer().getArmorValue() > 0) {
                 // Armor on
@@ -122,10 +123,5 @@ public class HudModifier {
         graphics.pose().translate(x, y, 0);
         overlay.render(graphics, partialTick);
         graphics.pose().popPose();
-    }
-
-    private static boolean nonSurvivalGamemode() {
-        if (minecraft.gameMode == null) return false;
-        return !(minecraft.gameMode.canHurtPlayer() && minecraft.getCameraEntity() instanceof Player);
     }
 }

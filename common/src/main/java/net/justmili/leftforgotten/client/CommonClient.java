@@ -8,6 +8,7 @@ import net.justmili.leftforgotten.client.dimension.AlphaMinecraft;
 import net.justmili.leftforgotten.mixin.accessors.DimSpecialEffectsAccessor;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.world.entity.player.Player;
 
 import static net.justmili.leftforgotten.core.util.ClientUtil.*;
 
@@ -33,5 +34,10 @@ public class CommonClient {
     }
     public static boolean notInAlpha() {
         return !inAlpha();
+    }
+
+    public static boolean nonSurvivalGamemode() {
+        if (minecraft.gameMode == null) return false;
+        return !(minecraft.gameMode.canHurtPlayer() && minecraft.getCameraEntity() instanceof Player);
     }
 }

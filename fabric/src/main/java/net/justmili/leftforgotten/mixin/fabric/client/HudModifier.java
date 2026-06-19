@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -28,12 +27,6 @@ import static net.justmili.leftforgotten.core.util.ClientUtil.*;
 
 @Mixin(value = Gui.class, priority = 2500)
 public abstract class HudModifier {
-
-    @Unique
-    private static boolean nonSurvivalGamemode() {
-        if (minecraft.gameMode == null) return false;
-        return !(minecraft.gameMode.canHurtPlayer() && minecraft.getCameraEntity() instanceof Player);
-    }
 
     @Shadow
     protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
@@ -126,7 +119,7 @@ public abstract class HudModifier {
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
     private int moveMountHealthY(int y) {
         if (CommonClient.notInAlpha()) return y;
-        if (nonSurvivalGamemode()) return y;
+        if (CommonClient.nonSurvivalGamemode()) return y;
 
         if (getPlayer().getArmorValue() == 0) {
             return mountHpOffset() + mountHpH_na + mountHpH;
@@ -136,6 +129,6 @@ public abstract class HudModifier {
 
     @Inject(at = @At("HEAD"), method = "renderVehicleHealth", cancellable = true)
     private void mountHealthCreativeCancel(GuiGraphics graphics, CallbackInfo ci) {
-        if (CommonClient.inAlpha() && nonSurvivalGamemode()) ci.cancel();
+        if (CommonClient.inAlpha() && CommonClient.nonSurvivalGamemode()) ci.cancel();
     }
 }
