@@ -53,8 +53,8 @@ This is not a horror mod, but rather a adventure and decoration mod. Just plain 
 <div class="spoiler">
   <div class="spoiler-content">
     <p>
-      Fabric - [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api), [Architectury API](https://www.curseforge.com/minecraft/mc-mods/architectury-api)<br>
-      Forge - [Architectury API](https://www.curseforge.com/minecraft/mc-mods/architectury-api)
+      Fabric - <a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api">Fabric API</a>, <a href="https://www.curseforge.com/minecraft/mc-mods/architectury-api">Architectury API</a><br>
+      Forge - <a href="https://www.curseforge.com/minecraft/mc-mods/architectury-api">Architectury API</a>
     </p>
   </div>
 </div>
@@ -65,7 +65,7 @@ This is not a horror mod, but rather a adventure and decoration mod. Just plain 
 <div class="spoiler">
   <div class="spoiler-content">
     <p>
-      [Polymorph](https://www.curseforge.com/minecraft/mc-mods/polymorph), [LambDynamicLights](https://www.curseforge.com/minecraft/mc-mods/lambdynamiclights)
+      <a href="https://www.curseforge.com/minecraft/mc-mods/polymorph">Polymorph</a>, <a href="https://www.curseforge.com/minecraft/mc-mods/lambdynamiclights">LambDynamicLights</a>
     </p>
   </div>
 </div>
@@ -76,7 +76,7 @@ This is not a horror mod, but rather a adventure and decoration mod. Just plain 
 <div class="spoiler">
   <div class="spoiler-content">
     <p>
-      [Big Globe](https://modrinth.com/mod/big-globe)<br>
+      <a href="https://modrinth.com/mod/big-globe">Big Globe</a><br>
       *Entering and leaving works fine. The Brittle Bedrock though? It can't even generate at Big Globe's bedrock layer to give the player easier access to this mod's content.
     </p>
   </div>
@@ -88,7 +88,7 @@ This is not a horror mod, but rather a adventure and decoration mod. Just plain 
 <div class="spoiler">
   <div class="spoiler-content">
     <p>
-      [True End](https://www.curseforge.com/minecraft/mc-mods/true-end-cf)<br>
+      <a href="https://www.curseforge.com/minecraft/mc-mods/true-end-cf">True End</a><br>
       *Due to similar codebases, as both were partially or fully made by JustMili.
     </p>
   </div>
