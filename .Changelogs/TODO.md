@@ -1,9 +1,5 @@
 # TODO - Code
-- [FABRIC 1.21.1] Account air level and armor level to adjust for status effects that grant additional health
-- [FABRIC 1.20.1] Account air level and armor level to adjust for status effects that grant additional health
-- [NEOFORGE 1.21.1] Account air level to adjust for status effects that grant additional health
-- [FORGE 1.20.1] Account air level to adjust for status effects that grant additional health
-- [NEOFORGE 1.21.1] Fix vegetation patches (flowers, mushrooms, cacti) not getting placed
+- Find out and fix why do leaves on some normally generating trees get all fucked up
 
 # TODO - Testing and publishing
 - Do a long playtest of 1.20.1 Fabric and Forge with many mods
