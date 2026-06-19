@@ -55,7 +55,7 @@ dependencies {
     // NeoForge dependencies go here
     modImplementation("dev.architectury:architectury-neoforge:${libs.versions.arch.api.get()}")
 
-    modImplementation("maven.modrinth:nostalgic-tweaks:${rootProject.property("nt_fabric")}")
+    modImplementation("maven.modrinth:nostalgic-tweaks:${rootProject.property("nt_neoforge")}")
     modImplementation("me.shedaniel.cloth:cloth-config-neoforge:${rootProject.property("cloth_config")}")
 
     // NeoForge mainlines MixinExtras since 20.2.84, still requires MixinSquared tho
