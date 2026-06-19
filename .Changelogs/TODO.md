@@ -1,6 +1,3 @@
-# TODO - Code
-- Find out and fix why do leaves on some normally generating trees get all fucked up
-
 # TODO - Testing and publishing
 - Do a long playtest of 1.20.1 Fabric and Forge with many mods
   - Publish Left Forgotten 1.1.2 for 1.20.1 if everything's good
