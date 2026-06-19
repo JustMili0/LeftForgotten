@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "compat.MTLayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

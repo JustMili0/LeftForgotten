@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "left_forgotten:block/wooden_planks",
-    "side": "left_forgotten:block/bookshelf"
-  }
-}

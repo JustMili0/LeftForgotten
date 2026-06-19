@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "left_forgotten:block/cobblestone",
-    "side": "left_forgotten:block/cobblestone",
-    "top": "left_forgotten:block/cobblestone"
-  }
-}

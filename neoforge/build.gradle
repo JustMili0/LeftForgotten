@@ -3,10 +3,14 @@ plugins {
 }
 
 def generatedResources = file("src/generated")
+def sharedGeneratedResources = file("../fabric/src/main/generated")
 
 sourceSets {
     main {
-        resources.srcDir generatedResources
+        // These data files are platform-independent. Fabric's 1.21 datagen
+        // serializes the current data formats, while NeoForge emits 1.20 paths
+        // and JSON schemas for the same providers.
+        resources.srcDir sharedGeneratedResources
     }
 }
 
