@@ -1,6 +1,5 @@
 package net.justmili.leftforgotten.content.block.dev;
 
-import net.justmili.leftforgotten.content.block.CommonBlock;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
