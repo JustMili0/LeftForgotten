@@ -17,7 +17,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 
 @SuppressWarnings("deprecation")
-@EventBusSubscriber(modid = LeftForgotten.MOD_ID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = LeftForgotten.MODID, value = Dist.CLIENT)
 public class NeoClient {
     @SubscribeEvent
     public static void init(FMLClientSetupEvent event) {

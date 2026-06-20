@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public final class LeftForgotten {
     public static final Logger LOGGER = LoggerFactory.getLogger(LeftForgotten.class);
-    public static final String MOD_ID = "left_forgotten";
+    public static final String MODID = "left_forgotten";
 
     public static void init() {
         TickEvent.SERVER_POST.register(server -> processQueue());
@@ -54,6 +54,6 @@ public final class LeftForgotten {
     }
 
     public static ResourceLocation asResource(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }

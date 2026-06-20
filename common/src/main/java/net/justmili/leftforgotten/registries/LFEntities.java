@@ -9,7 +9,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 
 public class LFEntities {
-    public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID, Registries.ENTITY_TYPE);
+    public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(LeftForgotten.MODID, Registries.ENTITY_TYPE);
 
     public static final RegistrySupplier<EntityType<LFBoatEntity>> BOAT =
         REGISTRY.register("boat", () ->

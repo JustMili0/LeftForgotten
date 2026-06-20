@@ -12,7 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 
 public class LFBlocks {
-    public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID, Registries.BLOCK);
+    public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(LeftForgotten.MODID, Registries.BLOCK);
 
     // In-Overworld
     public static final RegistrySupplier<Block> BRITTLE_BEDROCK = REGISTRY.register("brittle_bedrock", BrittleBedrock::new);

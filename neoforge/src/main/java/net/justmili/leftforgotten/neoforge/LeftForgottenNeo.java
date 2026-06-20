@@ -8,7 +8,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-@Mod(LeftForgotten.MOD_ID)
+@Mod(LeftForgotten.MODID)
 public final class LeftForgottenNeo {
     public LeftForgottenNeo(IEventBus modEventBus) {
         if (Platform.isModLoaded("true_end")) {

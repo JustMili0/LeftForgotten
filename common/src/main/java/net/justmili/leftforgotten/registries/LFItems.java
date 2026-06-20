@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Block;
 import java.util.function.Function;
 
 public class LFItems {
-    public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID, Registries.ITEM);
+    public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(LeftForgotten.MODID, Registries.ITEM);
 
     /// Block Items
     // In-Overworld

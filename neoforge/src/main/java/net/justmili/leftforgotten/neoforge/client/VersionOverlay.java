@@ -11,7 +11,7 @@ import net.neoforged.neoforge.client.event.RenderGuiEvent;
 
 import static net.justmili.leftforgotten.core.util.ClientUtil.minecraft;
 
-@EventBusSubscriber(modid = LeftForgotten.MOD_ID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = LeftForgotten.MODID, value = Dist.CLIENT)
 public class VersionOverlay {
 
     @SubscribeEvent(priority = EventPriority.NORMAL)

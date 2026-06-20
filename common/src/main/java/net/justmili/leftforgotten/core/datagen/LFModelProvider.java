@@ -16,12 +16,12 @@ import static net.justmili.leftforgotten.core.util.DatagenAssetUtil.RotationType
 
 public class LFModelProvider extends ImprovedModelProvider {
     public LFModelProvider(PackOutput output) {
-        super(output, LeftForgotten.MOD_ID);
+        super(output, LeftForgotten.MODID);
     }
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockGen) {
-        var gen = new DatagenAssetUtil(LeftForgotten.MOD_ID, blockGen);
+        var gen = new DatagenAssetUtil(LeftForgotten.MODID, blockGen);
 
         // In-Overworld
         gen.createCubeAll(LFBlocks.BRITTLE_BEDROCK.get());
@@ -130,7 +130,7 @@ public class LFModelProvider extends ImprovedModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerators itemGen) {
-        var gen = new DatagenAssetUtil(LeftForgotten.MOD_ID, itemGen);
+        var gen = new DatagenAssetUtil(LeftForgotten.MODID, itemGen);
 
         gen.createFlatItem(LFItems.CLAY_BALL.get());
         gen.createFlatItem(LFItems.BRICK.get());
