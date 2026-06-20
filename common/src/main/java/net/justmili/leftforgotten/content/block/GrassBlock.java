@@ -48,27 +48,24 @@ public class GrassBlock extends Block {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState blockstate, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        int x = pos.getX();
-        int y = pos.getY();
-        int z = pos.getZ();
         float pitch = 0.9f + world.getRandom().nextFloat() * 0.2f;
 
         if (player.getMainHandItem().is(ItemTags.HOES)) {
-            world.setBlock(BlockPos.containing(x, y, z), LFBlocks.FARMLAND.get().defaultBlockState(), 3);
+            world.setBlock(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ()), LFBlocks.FARMLAND.get().defaultBlockState(), 3);
             world.playSound(null, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0f, pitch);
             player.getMainHandItem().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
-            getSeeds(world, x, y, z, player);
+            getSeeds(world, pos, player);
             return ItemInteractionResult.SUCCESS;
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
-    public static void getSeeds(LevelAccessor world, double x, double y, double z, Player player) {
+    private static void getSeeds(LevelAccessor world, BlockPos pos, Player player) {
         if (player == null) return;
         if (!player.getMainHandItem().is(ItemTags.HOES)) return;
         if (!(Math.random() < 0.125)) return;
         if (world instanceof ServerLevel level) {
-            ItemEntity seedsItem = new ItemEntity(level, x, (y + 1.1), z, new ItemStack(Items.WHEAT_SEEDS));
+            ItemEntity seedsItem = new ItemEntity(level, pos.getX(), (pos.getY() + 1.1), pos.getZ(), new ItemStack(Items.WHEAT_SEEDS));
             seedsItem.setPickUpDelay(15);
             level.addFreshEntity(seedsItem);
         }

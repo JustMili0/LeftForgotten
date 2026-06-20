@@ -4,12 +4,10 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.content.block.*;
-import net.justmili.leftforgotten.content.block.IronDoor;
 import net.justmili.leftforgotten.content.block.dev.FeatureVoid;
 import net.justmili.leftforgotten.content.block.dev.RemodelChest;
 import net.justmili.leftforgotten.content.block.dev.RemodelCraftingTable;
 import net.justmili.leftforgotten.content.block.dev.RemodelFurnace;
-import net.justmili.leftforgotten.content.block.BrittleBedrock;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 
