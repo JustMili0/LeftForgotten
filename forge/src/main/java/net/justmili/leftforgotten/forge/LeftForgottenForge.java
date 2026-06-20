@@ -10,7 +10,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(LeftForgotten.MOD_ID)
+@Mod(LeftForgotten.MODID)
 public final class LeftForgottenForge {
     public static IEventBus EVENT_BUS;
 
@@ -29,7 +29,7 @@ public final class LeftForgottenForge {
         }
 
         EVENT_BUS = modContext.getModEventBus();
-        EventBuses.registerModEventBus(LeftForgotten.MOD_ID, EVENT_BUS);
+        EventBuses.registerModEventBus(LeftForgotten.MODID, EVENT_BUS);
         EVENT_BUS.addListener(LeftForgottenForge::onDatagenSetup);
 
         LeftForgotten.init();

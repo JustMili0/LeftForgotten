@@ -7,7 +7,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
 
 public class LFSounds {
-    public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID,Registries.SOUND_EVENT);
+    public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(LeftForgotten.MODID,Registries.SOUND_EVENT);
 
     public static final RegistrySupplier<SoundEvent> HURT = registerSound("entity.player.hurt");
     public static final RegistrySupplier<SoundEvent> MUSIC_13 = registerSound("music.game.13");
