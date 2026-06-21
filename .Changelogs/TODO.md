@@ -1,5 +1,5 @@
 # TODO
-- Test if everything works properly
+- Test if everything works properly for 1.1.3
 
 # PORT TO:
 - **[INIT]** 1.20.1 Fabric & Forge
