@@ -15,9 +15,4 @@ public class WoodenTrapdoor extends TrapDoorBlock {
     public WoodenTrapdoor() {
         super(BlockSetType.OAK, Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(3f).noOcclusion().isRedstoneConductor(CommonBlock::never).instrument(NoteBlockInstrument.BASS).ignitedByLava());
     }
-
-    @Override
-    public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-        return 0;
-    }
 }

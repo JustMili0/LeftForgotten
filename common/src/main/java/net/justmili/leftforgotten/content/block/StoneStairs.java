@@ -9,15 +9,4 @@ public class StoneStairs extends StairBlock {
 	public StoneStairs() {
 		super(LFBlocks.STONE.get().defaultBlockState(), Properties.ofFullCopy(LFBlocks.STONE.get()));
 	}
-
-	@Override
-	public float getExplosionResistance() {
-		return 3f;
-	}
-
-	@Override
-	public boolean isRandomlyTicking(BlockState state) {
-		return false;
-	}
-
 }

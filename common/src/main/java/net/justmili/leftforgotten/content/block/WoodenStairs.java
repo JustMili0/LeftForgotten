@@ -12,10 +12,4 @@ public class WoodenStairs extends StairBlock {
 	public WoodenStairs() {
 		super(LFBlocks.WOODEN_PLANKS.get().defaultBlockState(), Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2f, 3f).instrument(NoteBlockInstrument.BASS).ignitedByLava());
 	}
-
-	@Override
-	public boolean isRandomlyTicking(BlockState state) {
-		return false;
-	}
-
 }

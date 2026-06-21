@@ -17,9 +17,4 @@ public class IronDoor extends DoorBlock {
             .noOcclusion()
             .pushReaction(PushReaction.DESTROY));
     }
-
-    @Override
-    public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-        return 0;
-    }
 }

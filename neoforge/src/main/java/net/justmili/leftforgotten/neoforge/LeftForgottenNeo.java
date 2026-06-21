@@ -3,6 +3,7 @@ package net.justmili.leftforgotten.neoforge;
 import dev.architectury.platform.Platform;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.core.datagen.*;
+import net.justmili.leftforgotten.core.datagen.neoforge.NeoDatagen;
 import net.minecraft.data.DataProvider;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -24,19 +25,8 @@ public final class LeftForgottenNeo {
                 """);
         }
 
-        modEventBus.addListener(LeftForgottenNeo::onDatagenSetup);
+        modEventBus.addListener(NeoDatagen::onDatagenSetup);
 
         LeftForgotten.init();
-    }
-
-    public static void onDatagenSetup(GatherDataEvent event) {
-        var generator = event.getGenerator();
-        var server = event.includeServer();
-        var client = event.includeClient();
-        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFBlockTagProvider(output, event.getLookupProvider())));
-        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFItemTagProvider(output, event.getLookupProvider())));
-        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFLootTableProvider(output, event.getLookupProvider())));
-        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFRecipeProvider(output, event.getLookupProvider())));
-        generator.addProvider(client, (DataProvider.Factory<? extends DataProvider>) (LFModelProvider::new));
     }
 }

@@ -9,10 +9,4 @@ public class CobblestoneStairs extends StairBlock {
 	public CobblestoneStairs() {
 		super(LFBlocks.COBBLESTONE.get().defaultBlockState(), Properties.ofFullCopy(LFBlocks.COBBLESTONE.get()));
 	}
-
-	@Override
-	public boolean isRandomlyTicking(BlockState state) {
-		return false;
-	}
-
 }

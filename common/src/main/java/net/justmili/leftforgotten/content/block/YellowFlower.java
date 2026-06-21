@@ -19,38 +19,8 @@ import java.util.List;
 
 public class YellowFlower extends FlowerBlock {
     public YellowFlower() {
-        super(MobEffects.SATURATION, 100,
+        super(MobEffects.SATURATION, 7,
             Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.GRASS).instabreak()
                 .noCollission().offsetType(OffsetType.XZ).pushReaction(PushReaction.DESTROY));
-    }
-
-    //@Override
-    //public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
-    //    return 100;
-    //}
-
-    //@Override
-    //public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
-    //    return 60;
-    //}
-
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        List<ItemStack> dropsOriginal = super.getDrops(state, builder);
-        if (!dropsOriginal.isEmpty())
-            return dropsOriginal;
-        return Collections.singletonList(new ItemStack(this));
-    }
-
-    @Override
-    protected boolean mayPlaceOn(BlockState groundState, BlockGetter worldIn, BlockPos pos) {
-        return groundState.is(BlockTags.DIRT);
-    }
-
-    @Override
-    protected boolean canSurvive(BlockState blockstate, LevelReader worldIn, BlockPos pos) {
-        BlockPos blockpos = pos.below();
-        BlockState groundState = worldIn.getBlockState(blockpos);
-        return this.mayPlaceOn(groundState, worldIn, blockpos);
     }
 }

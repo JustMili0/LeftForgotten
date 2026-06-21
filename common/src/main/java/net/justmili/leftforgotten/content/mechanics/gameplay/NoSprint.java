@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.mechanics.gameplay;
+package net.justmili.leftforgotten.content.mechanics.gameplay;
 
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.world.entity.player.Player;

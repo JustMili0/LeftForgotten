@@ -10,13 +10,18 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.function.Supplier;
+
 public class LFTab {
     public static final DeferredRegister<CreativeModeTab> REGISTRY = DeferredRegister.create(LeftForgotten.MODID, Registries.CREATIVE_MODE_TAB);
 
-    public static final DeferredSupplier<CreativeModeTab> LEFT_FORGOTTEN = REGISTRY.register(LFResources.Tabs.creativeTabID, () ->
-        CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).title(Component.translatable(LFResources.Tabs.transKey))
-            .icon(() -> new ItemStack(LFBlocks.GRASS_BLOCK.get())).displayItems((parameters, tabData) -> {
+    public static final DeferredSupplier<CreativeModeTab> LEFT_FORGOTTEN;
+    public static final String TAB_ID = "left_forgotten";
+    public static final String TRANS_KEY = "left_forgotten.tab";
 
+    static {
+        LEFT_FORGOTTEN = register(TAB_ID, TRANS_KEY, () -> new ItemStack(LFBlocks.GRASS_BLOCK.get()),
+            (parameters, tabData) -> {
                 for (RegistrySupplier<Item> item : LFItems.REGISTRY) {
                     if (item == LFItems.FEATURE_VOID // Skip dev blocks
                         || item == LFItems.REMODEL_CRAFTING_TABLE
@@ -24,9 +29,16 @@ public class LFTab {
                         || item == LFItems.REMODEL_CHEST) continue;
                     tabData.accept(item.get());
                 }
+            });
+    }
 
-            }).build());
-    
+    private static DeferredSupplier<CreativeModeTab> register(String tabId, String translationKey, Supplier<ItemStack> icon,
+                                                              CreativeModeTab.DisplayItemsGenerator displayItems) {
+        return REGISTRY.register(tabId, () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
+            .title(Component.translatable(translationKey)).icon(icon)
+            .displayItems(displayItems).build());
+    }
+
     public static void register() {
         REGISTRY.register();
     }

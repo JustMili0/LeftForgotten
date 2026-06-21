@@ -13,9 +13,4 @@ public class Stone extends Block {
 	public Stone() {
 		super(Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).strength(1.5f, 6f).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops());
 	}
-
-	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return 15;
-	}
 }

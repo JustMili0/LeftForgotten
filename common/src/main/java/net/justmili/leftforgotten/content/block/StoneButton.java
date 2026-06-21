@@ -12,9 +12,4 @@ public class StoneButton extends ButtonBlock {
     public StoneButton() {
         super(BlockSetType.STONE, 20, CommonBlock.button());
     }
-
-    @Override
-    public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-        return 0;
-    }
 }

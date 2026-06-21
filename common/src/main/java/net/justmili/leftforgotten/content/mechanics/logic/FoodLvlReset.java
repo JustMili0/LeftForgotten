@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.mechanics.logic;
+package net.justmili.leftforgotten.content.mechanics.logic;
 
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.resources.ResourceKey;

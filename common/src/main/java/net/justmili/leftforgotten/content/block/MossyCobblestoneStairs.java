@@ -9,10 +9,4 @@ public class MossyCobblestoneStairs extends StairBlock {
 	public MossyCobblestoneStairs() {
 		super(LFBlocks.MOSSY_COBBLESTONE.get().defaultBlockState(), Properties.ofFullCopy(LFBlocks.MOSSY_COBBLESTONE.get()));
 	}
-
-	@Override
-	public boolean isRandomlyTicking(BlockState state) {
-		return false;
-	}
-
 }

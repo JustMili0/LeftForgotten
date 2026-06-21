@@ -12,10 +12,4 @@ public class WoodenButton extends ButtonBlock {
     public WoodenButton() {
         super(BlockSetType.OAK, 30, CommonBlock.button());
     }
-
-    @Override
-    public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-        return 0;
-    }
-
 }

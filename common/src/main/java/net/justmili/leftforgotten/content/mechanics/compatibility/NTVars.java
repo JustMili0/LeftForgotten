@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.mechanics.compatibility;
+package net.justmili.leftforgotten.content.mechanics.compatibility;
 
 public class NTVars {
 

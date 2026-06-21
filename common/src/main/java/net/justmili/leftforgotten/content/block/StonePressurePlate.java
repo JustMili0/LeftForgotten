@@ -14,15 +14,4 @@ public class StonePressurePlate extends PressurePlateBlock {
     public StonePressurePlate() {
         super(BlockSetType.STONE, Properties.of().mapColor(MapColor.STONE).forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
     }
-
-    @Override
-    public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-        return 0;
-    }
-
-    @Override
-    public boolean isSignalSource(BlockState state) {
-        return true;
-    }
-
 }

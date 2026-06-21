@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -15,7 +16,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -29,45 +29,49 @@ public class GrassBlock extends Block {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        if (!canStayGrass(world, pos)) {
-            if (!world.isClientSide()) {
-                world.setBlock(pos, LFBlocks.DIRT.get().defaultBlockState(), 3);
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (!canSurvive(level, pos)) {
+            if (!level.isClientSide()) {
+                level.setBlock(pos, LFBlocks.DIRT.get().defaultBlockState(), 3);
             }
         }
     }
 
-    private static boolean canStayGrass(LevelReader world, BlockPos pos) {
-        BlockPos abovePos = pos.above();
-        BlockState aboveState = world.getBlockState(abovePos);
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!player.getMainHandItem().is(ItemTags.HOES)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+        BlockState aboveState = level.getBlockState(pos.above());
+        if (!aboveState.isAir()) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+        level.setBlock(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ()), LFBlocks.FARMLAND.get().defaultBlockState(), 3);
+
+        float pitch = 0.9f + level.getRandom().nextFloat() * 0.2f;
+        level.playSound(null, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0f, pitch);
+        player.getMainHandItem().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
+
+        getSeeds(level, pos, player);
+
+        return ItemInteractionResult.SUCCESS;
+    }
+
+    private static boolean canSurvive(LevelReader level, BlockPos pos) {
+        BlockPos above = pos.above();
+        BlockState aboveState = level.getBlockState(above);
         if (aboveState.is(LFBlocks.LEAVES.get())) {
             return true;
         }
-        return aboveState.getLightBlock(world, abovePos) <= 0;
+        return aboveState.getLightBlock(level, above) <= 0;
     }
 
-    @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState blockstate, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        float pitch = 0.9f + world.getRandom().nextFloat() * 0.2f;
-
-        if (player.getMainHandItem().is(ItemTags.HOES)) {
-            world.setBlock(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ()), LFBlocks.FARMLAND.get().defaultBlockState(), 3);
-            world.playSound(null, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0f, pitch);
-            player.getMainHandItem().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
-            getSeeds(world, pos, player);
-            return ItemInteractionResult.SUCCESS;
-        }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    }
-
-    private static void getSeeds(LevelAccessor world, BlockPos pos, Player player) {
+    private static void getSeeds(LevelReader level, BlockPos pos, Player player) {
         if (player == null) return;
         if (!player.getMainHandItem().is(ItemTags.HOES)) return;
         if (!(Math.random() < 0.125)) return;
-        if (world instanceof ServerLevel level) {
-            ItemEntity seedsItem = new ItemEntity(level, pos.getX(), (pos.getY() + 1.1), pos.getZ(), new ItemStack(Items.WHEAT_SEEDS));
+        if (level instanceof ServerLevel serverLevel) {
+            ItemEntity seedsItem = new ItemEntity(serverLevel, pos.getX(), (pos.getY() + 1.1), pos.getZ(), new ItemStack(Items.WHEAT_SEEDS));
             seedsItem.setPickUpDelay(15);
-            level.addFreshEntity(seedsItem);
+            serverLevel.addFreshEntity(seedsItem);
         }
     }
 }

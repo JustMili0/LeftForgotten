@@ -4,13 +4,13 @@ import dev.architectury.event.events.common.EntityEvent;
 import dev.architectury.event.events.common.InteractionEvent;
 import dev.architectury.event.events.common.PlayerEvent;
 import dev.architectury.event.events.common.TickEvent;
-import net.justmili.leftforgotten.mechanics.compatibility.NostalgicTweaksCompatibiliy;
-import net.justmili.leftforgotten.mechanics.events.MoveToAlpha;
-import net.justmili.leftforgotten.mechanics.gameplay.AlphaFoodSystem;
-import net.justmili.leftforgotten.mechanics.gameplay.NoCooldown;
-import net.justmili.leftforgotten.mechanics.gameplay.NoSprint;
-import net.justmili.leftforgotten.mechanics.gameplay.WoolDrop;
-import net.justmili.leftforgotten.mechanics.logic.FoodLvlReset;
+import net.justmili.leftforgotten.content.mechanics.compatibility.NostalgicTweaksCompatibiliy;
+import net.justmili.leftforgotten.content.mechanics.events.MoveToAlpha;
+import net.justmili.leftforgotten.content.mechanics.gameplay.AlphaFoodSystem;
+import net.justmili.leftforgotten.content.mechanics.gameplay.NoCooldown;
+import net.justmili.leftforgotten.content.mechanics.gameplay.NoSprint;
+import net.justmili.leftforgotten.content.mechanics.gameplay.WoolDrop;
+import net.justmili.leftforgotten.content.mechanics.logic.FoodLvlReset;
 
 public class Events {
     public static void register() {

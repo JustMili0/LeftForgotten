@@ -15,15 +15,4 @@ public class WoodenPressurePlate extends PressurePlateBlock {
     public WoodenPressurePlate() {
         super(BlockSetType.OAK, Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.5f).noOcclusion().isRedstoneConductor(CommonBlock::never).forceSolidOn().instrument(NoteBlockInstrument.BASS).ignitedByLava());
     }
-
-    @Override
-    public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-        return 0;
-    }
-
-    @Override
-    public boolean isSignalSource(BlockState state) {
-        return true;
-    }
-
 }

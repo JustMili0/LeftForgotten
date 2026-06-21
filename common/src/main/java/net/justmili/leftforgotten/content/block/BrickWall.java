@@ -11,9 +11,4 @@ public class BrickWall extends WallBlock {
 	public BrickWall() {
 		super(Properties.ofFullCopy(LFBlocks.BRICKS.get()).forceSolidOn());
 	}
-
-	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return 0;
-	}
 }

@@ -11,9 +11,4 @@ public class CobblestoneWall extends WallBlock {
 	public CobblestoneWall() {
 		super(Properties.ofFullCopy(LFBlocks.COBBLESTONE.get()).forceSolidOn());
 	}
-
-	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return 0;
-	}
 }
