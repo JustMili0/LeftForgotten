@@ -1,0 +1,37 @@
+# Left Forgotten - 1.1.3 Release                                                                                 (WIP)
+***All changes apply for both 1.20.1 and 1.21.1 unless specified otherwise***
+
+### ***VISUAL CHANGES***
+- Player now will appear as Steve (Old skin) in `left_forgotten:alpha_minecraft` dimension
+  - This will be later configurable in update 1.2.x in the mod's config and Sodium options
+
+### ***GAMEPLAY***
+- You can now place `left_forgotten:cactus` on `minecraft:cactus`
+  - Yes, you weren't able to before.
+
+### ***BUG FIXES/TECHNICAL CHANGES***
+- Fixed `left_forgotten:wooden_fence_gate` destroy time being up to 10.5x longer than
+- Fixed being able to till the ground if block above isn't air
+- Fixed effects of Suspicious Stews made from `left_forgotten:red_flower` and `left_forgotten:yellow_flower` no longer last extra long
+
+### ***DEV STUFF***
+- Optimized registry classes (`LFBlocks`, `LFEntities`, `LFItems`, `LFResources`, `LFSounds`, `LFTab`)
+- Moved package `net.justmili.leftforgotten.mechanics` to `net.justmili.leftforgotten.content.mechanics`
+- Split Forge datagen method from `LeftForgottenForge` class into `ForgeDategen` class to copy Fabric
+- Made all block classes extend the appropriate classes for them
+- Removed unnescessary overrides from block classes
+- Optimized *literal grass growing*
+
+<hr>
+
+## Upcoming - 1.2 Release
+- Cave fog
+- Configuration of certain features (Fog, Cave fog, Farlands generation etc.)
+
+## Upcoming - 1.3 Release
+- *"More than Alpha"*
+
+<hr>
+
+***Dev notes***<br>
+So I decided to delay releases for never versions until I'm happy with the codebase- which means also waiting until I can do the 1.2.0 update
