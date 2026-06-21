@@ -1,5 +1,5 @@
 
-package net.justmili.leftforgotten.mechanics.gameplay;
+package net.justmili.leftforgotten.content.mechanics.gameplay;
 
 import dev.architectury.platform.Platform;
 import net.justmili.leftforgotten.registries.LFResources;

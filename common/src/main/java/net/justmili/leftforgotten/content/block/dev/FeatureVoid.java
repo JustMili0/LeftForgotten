@@ -17,7 +17,7 @@ public class FeatureVoid extends Block {
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
+    public boolean propagatesSkylightDown(BlockState state, BlockGetter getter, BlockPos pos) {
         return true;
     }
     @Override
@@ -25,7 +25,7 @@ public class FeatureVoid extends Block {
         return RenderShape.INVISIBLE;
     }
     @Override
-    public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
+    public float getShadeBrightness(BlockState state, BlockGetter getter, BlockPos pos) {
         return 1.0F;
     }
 

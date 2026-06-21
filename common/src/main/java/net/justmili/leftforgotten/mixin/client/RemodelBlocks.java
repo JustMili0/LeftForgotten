@@ -21,8 +21,8 @@ public class RemodelBlocks {
     }, at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;getBlockModel(Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/client/resources/model/BakedModel;"), require = 0)
     private BakedModel lf$swapBatchedModel(BlockRenderDispatcher dispatcher, BlockState state, Operation<BakedModel> original) {
-        Level worldLevel = Minecraft.getInstance().level; // blockView is not necessarily Level
-        if (worldLevel != null && worldLevel.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
+        Level level = Minecraft.getInstance().level; // blockView is not necessarily Level
+        if (level != null && level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
             if (state.is(Blocks.CRAFTING_TABLE)) {
                 return original.call(dispatcher, LFBlocks.REMODEL_CRAFTING_TABLE.get().defaultBlockState());
             }

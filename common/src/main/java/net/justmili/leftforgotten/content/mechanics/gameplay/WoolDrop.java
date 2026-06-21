@@ -1,5 +1,5 @@
 
-package net.justmili.leftforgotten.mechanics.gameplay;
+package net.justmili.leftforgotten.content.mechanics.gameplay;
 
 import dev.architectury.event.EventResult;
 import net.justmili.leftforgotten.registries.LFResources;
@@ -16,8 +16,8 @@ import net.minecraft.world.level.Level;
 public class WoolDrop {
     public static EventResult onEntityHurt(LivingEntity entity, DamageSource source, float amount) {
         if (!(entity instanceof Sheep sheep && (entity.level().dimension()) == LFResources.Levels.ALPHA_MINECRAFT)) return EventResult.pass();
-        Level world = sheep.level();
-        if (world.isClientSide()) return EventResult.pass();
+        Level level = sheep.level();
+        if (level.isClientSide()) return EventResult.pass();
 
         DyeColor color = sheep.getColor();
 
@@ -44,11 +44,11 @@ public class WoolDrop {
             case BLACK -> Items.BLACK_WOOL;
         };
 
-        int count = world.getRandom().nextInt(3) + 1;
+        int count = level.getRandom().nextInt(3) + 1;
         ItemStack stack = new ItemStack(woolItem, count);
-        ItemEntity drop = new ItemEntity(world, sheep.getX(), sheep.getY() + 0.4, sheep.getZ(), stack);
+        ItemEntity drop = new ItemEntity(level, sheep.getX(), sheep.getY() + 0.4, sheep.getZ(), stack);
 
-        world.addFreshEntity(drop);
+        level.addFreshEntity(drop);
         sheep.setSheared(true);
 
         return EventResult.pass();

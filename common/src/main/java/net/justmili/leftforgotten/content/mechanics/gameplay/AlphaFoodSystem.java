@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.mechanics.gameplay;
+package net.justmili.leftforgotten.content.mechanics.gameplay;
 
 import dev.architectury.event.CompoundEventResult;
 import dev.architectury.event.EventResult;

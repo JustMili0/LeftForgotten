@@ -3,9 +3,7 @@ package net.justmili.leftforgotten.forge;
 import dev.architectury.platform.Platform;
 import dev.architectury.platform.forge.EventBuses;
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.core.datagen.*;
-import net.minecraft.data.DataProvider;
-import net.minecraftforge.data.event.GatherDataEvent;
+import net.justmili.leftforgotten.core.datagen.forge.ForgeDatagen;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -30,19 +28,8 @@ public final class LeftForgottenForge {
 
         EVENT_BUS = modContext.getModEventBus();
         EventBuses.registerModEventBus(LeftForgotten.MODID, EVENT_BUS);
-        EVENT_BUS.addListener(LeftForgottenForge::onDatagenSetup);
+        EVENT_BUS.addListener(ForgeDatagen::onDatagenSetup);
 
         LeftForgotten.init();
-    }
-
-    public static void onDatagenSetup(GatherDataEvent event) {
-        var generator = event.getGenerator();
-        var server = event.includeServer();
-        var client = event.includeClient();
-        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFBlockTagProvider(output, event.getLookupProvider())));
-        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFItemTagProvider(output, event.getLookupProvider())));
-        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) (LFLootTableProvider::new));
-        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) (LFRecipeProvider::new));
-        generator.addProvider(client, (DataProvider.Factory<? extends DataProvider>) (LFModelProvider::new));
     }
 }

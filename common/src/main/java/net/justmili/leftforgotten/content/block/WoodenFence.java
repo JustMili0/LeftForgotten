@@ -14,9 +14,4 @@ public class WoodenFence extends FenceBlock {
 	public WoodenFence() {
 		super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2f, 3f).noOcclusion().isRedstoneConductor(CommonBlock::never).forceSolidOn().instrument(NoteBlockInstrument.BASS).ignitedByLava());
 	}
-
-	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return 0;
-	}
 }

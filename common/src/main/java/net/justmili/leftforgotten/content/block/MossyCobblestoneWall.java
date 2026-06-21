@@ -11,9 +11,4 @@ public class MossyCobblestoneWall extends WallBlock {
 	public MossyCobblestoneWall() {
 		super(Properties.copy(LFBlocks.MOSSY_COBBLESTONE.get()).forceSolidOn());
 	}
-
-	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return 0;
-	}
 }

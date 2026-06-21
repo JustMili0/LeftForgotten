@@ -23,8 +23,8 @@ public class ReshapeChests {
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     private void lf$alphaChestShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context,
                                     CallbackInfoReturnable<VoxelShape> cir) {
-        if (!(getter instanceof Level world)) return;
-        if (!world.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (!(getter instanceof Level level)) return;
+        if (!level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
         if ((Object) this != Blocks.CHEST) return;
 
         cir.setReturnValue(FULL_BLOCK);

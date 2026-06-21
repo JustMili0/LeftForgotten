@@ -57,7 +57,7 @@ public class HudModifier {
                     x1 = mirrorX(origX) + armorW,
                     y1 = getHeight() - 39 + armorH - yOffset();
 
-                renderFlippedBlit(graphics, GUI_ICONS_LOCATION, x1, y1, 9, 9, uOffset, 9f);
+                renderFlippedBlit(graphics, GUI_ICONS_LOCATION, x1, y1, 9, 9, uOffset, 9);
             }
         }
         // Player HP move down

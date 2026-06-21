@@ -11,86 +11,104 @@ import net.justmili.leftforgotten.content.block.dev.RemodelFurnace;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 
+import java.util.function.Supplier;
+
 public class LFBlocks {
     public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(LeftForgotten.MODID, Registries.BLOCK);
 
-    // In-Overworld
-    public static final RegistrySupplier<Block> BRITTLE_BEDROCK = REGISTRY.register("brittle_bedrock", BrittleBedrock::new);
+    public static final RegistrySupplier<Block> BRITTLE_BEDROCK,
+        GRASS_BLOCK, DIRT, FARMLAND, GRAVEL, SAND, CLAY,
+        RED_FLOWER, YELLOW_FLOWER, RED_MUSHROOM, BROWN_MUSHROOM, CACTUS, SAPLING, LEAVES,
+        WOOD, WOOD_6_SIDED, WOODEN_PLANKS, WOODEN_STAIRS, WOODEN_SLAB, FENCE, FENCE_GATE, DOOR, TRAPDOOR, PRESSURE_PLATE, BUTTON,
+        COAL_ORE, IRON_ORE, GOLD_ORE, REDSTONE_ORE, DIAMOND_ORE,
+        STONE, STONE_STAIRS, STONE_SLAB, STONE_PRESSURE_PLATE, STONE_BUTTON,
+        COBBLESTONE, COBBLESTONE_STAIRS, COBBLESTONE_SLAB, COBBLESTONE_WALL,
+        MOSSY_COBBLESTONE, MOSSY_COBBLESTONE_STAIRS, MOSSY_COBBLESTONE_SLAB, MOSSY_COBBLESTONE_WALL,
+        BRICKS, BRICK_STAIRS, BRICK_SLAB, BRICK_WALL,
+        OBSIDIAN, IRON_BLOCK, GOLD_BLOCK, DIAMOND_BLOCK,
+        BOOKSHELF, GLASS, GLASS_PANE, TNT, IRON_DOOR,
+        FEATURE_VOID, REMODEL_FURNACE, REMODEL_CRAFTING_TABLE, REMODEL_CHEST;
 
-    // Nature / Ground
-    public static final RegistrySupplier<Block> GRASS_BLOCK = REGISTRY.register("grass_block", GrassBlock::new);
-    public static final RegistrySupplier<Block> DIRT = REGISTRY.register("dirt", Dirt::new);
-    public static final RegistrySupplier<Block> FARMLAND = REGISTRY.register("farmland", Farmland::new);
-    public static final RegistrySupplier<Block> GRAVEL = REGISTRY.register("gravel", Gravel::new);
-    public static final RegistrySupplier<Block> SAND = REGISTRY.register("sand", Sand::new);
-    public static final RegistrySupplier<Block> CLAY = REGISTRY.register("clay", Clay::new);
+    static {
+        // In-Overworld
+        BRITTLE_BEDROCK = registerBlock("brittle_bedrock", BrittleBedrock::new);
 
-    // Nature / Vegetation
-    public static final RegistrySupplier<Block> RED_FLOWER = REGISTRY.register("red_flower", RedFlower::new);
-    public static final RegistrySupplier<Block> YELLOW_FLOWER = REGISTRY.register("yellow_flower", YellowFlower::new);
-    public static final RegistrySupplier<Block> RED_MUSHROOM = REGISTRY.register("red_mushroom", RedMushroom::new);
-    public static final RegistrySupplier<Block> BROWN_MUSHROOM = REGISTRY.register("brown_mushroom", BrownMushroom::new);
-    public static final RegistrySupplier<Block> CACTUS = REGISTRY.register("cactus", Cactus::new);
-    public static final RegistrySupplier<Block> SAPLING = REGISTRY.register("sapling", Sapling::new);
-    public static final RegistrySupplier<Block> LEAVES = REGISTRY.register("leaves", Leaves::new);
+        // Nature / Ground
+        GRASS_BLOCK = registerBlock("grass_block", GrassBlock::new);
+        DIRT = registerBlock("dirt", Dirt::new);
+        FARMLAND = registerBlock("farmland", Farmland::new);
+        GRAVEL = registerBlock("gravel", Gravel::new);
+        SAND = registerBlock("sand", Sand::new);
+        CLAY = registerBlock("clay", Clay::new);
 
-    // Building / Wood
-    public static final RegistrySupplier<Block> WOOD = REGISTRY.register("wood", Wood::new);
-    public static final RegistrySupplier<Block> WOOD_6_SIDED = REGISTRY.register("wood_6_sided", Wood6Sided::new);
-    public static final RegistrySupplier<Block> WOODEN_PLANKS = REGISTRY.register("wooden_planks", WoodenPlanks::new);
-    public static final RegistrySupplier<Block> WOODEN_STAIRS = REGISTRY.register("wooden_stairs", WoodenStairs::new);
-    public static final RegistrySupplier<Block> WOODEN_SLAB = REGISTRY.register("wooden_slab", WoodenSlab::new);
-    public static final RegistrySupplier<Block> FENCE = REGISTRY.register("fence", WoodenFence::new);
-    public static final RegistrySupplier<Block> FENCE_GATE = REGISTRY.register("fence_gate", WoodenFenceGate::new);
-    public static final RegistrySupplier<Block> DOOR = REGISTRY.register("door", WoodenDoor::new);
-    public static final RegistrySupplier<Block> TRAPDOOR = REGISTRY.register("trapdoor", WoodenTrapdoor::new);
-    public static final RegistrySupplier<Block> PRESSURE_PLATE = REGISTRY.register("pressure_plate", WoodenPressurePlate::new);
-    public static final RegistrySupplier<Block> BUTTON = REGISTRY.register("button", WoodenButton::new);
+        // Nature / Vegetation
+        RED_FLOWER = registerBlock("red_flower", RedFlower::new);
+        YELLOW_FLOWER = registerBlock("yellow_flower", YellowFlower::new);
+        RED_MUSHROOM = registerBlock("red_mushroom", RedMushroom::new);
+        BROWN_MUSHROOM = registerBlock("brown_mushroom", BrownMushroom::new);
+        CACTUS = registerBlock("cactus", Cactus::new);
+        SAPLING = registerBlock("sapling", Sapling::new);
+        LEAVES = registerBlock("leaves", Leaves::new);
 
-    // Nature / Underground
-    public static final RegistrySupplier<Block> COAL_ORE = REGISTRY.register("coal_ore", CoalOre::new);
-    public static final RegistrySupplier<Block> IRON_ORE = REGISTRY.register("iron_ore", IronOre::new);
-    public static final RegistrySupplier<Block> GOLD_ORE = REGISTRY.register("gold_ore", GoldOre::new);
-    public static final RegistrySupplier<Block> REDSTONE_ORE = REGISTRY.register("redstone_ore", RedstoneOre::new);
-    public static final RegistrySupplier<Block> DIAMOND_ORE = REGISTRY.register("diamond_ore", DiamondOre::new);
-    public static final RegistrySupplier<Block> STONE = REGISTRY.register("stone", Stone::new);
+        // Building / Wood
+        WOOD = registerBlock("wood", Wood::new);
+        WOOD_6_SIDED = registerBlock("wood_6_sided", Wood6Sided::new);
+        WOODEN_PLANKS = registerBlock("wooden_planks", WoodenPlanks::new);
+        WOODEN_STAIRS = registerBlock("wooden_stairs", WoodenStairs::new);
+        WOODEN_SLAB = registerBlock("wooden_slab", WoodenSlab::new);
+        FENCE = registerBlock("fence", WoodenFence::new);
+        FENCE_GATE = registerBlock("fence_gate", WoodenFenceGate::new);
+        DOOR = registerBlock("door", WoodenDoor::new);
+        TRAPDOOR = registerBlock("trapdoor", WoodenTrapdoor::new);
+        PRESSURE_PLATE = registerBlock("pressure_plate", WoodenPressurePlate::new);
+        BUTTON = registerBlock("button", WoodenButton::new);
 
-    // Building / Stone
-    public static final RegistrySupplier<Block> STONE_STAIRS = REGISTRY.register("stone_stairs", StoneStairs::new);
-    public static final RegistrySupplier<Block> STONE_SLAB = REGISTRY.register("stone_slab", StoneSlab::new);
-    public static final RegistrySupplier<Block> STONE_PRESSURE_PLATE = REGISTRY.register("stone_pressure_plate", StonePressurePlate::new);
-    public static final RegistrySupplier<Block> STONE_BUTTON = REGISTRY.register("stone_button", StoneButton::new);
-    public static final RegistrySupplier<Block> COBBLESTONE = REGISTRY.register("cobblestone", Cobblestone::new);
-    public static final RegistrySupplier<Block> COBBLESTONE_STAIRS = REGISTRY.register("cobblestone_stairs", CobblestoneStairs::new);
-    public static final RegistrySupplier<Block> COBBLESTONE_SLAB = REGISTRY.register("cobblestone_slab", CobblestoneSlab::new);
-    public static final RegistrySupplier<Block> COBBLESTONE_WALL = REGISTRY.register("cobblestone_wall", CobblestoneWall::new);
-    public static final RegistrySupplier<Block> MOSSY_COBBLESTONE = REGISTRY.register("mossy_cobblestone", MossyCobblestone::new);
-    public static final RegistrySupplier<Block> MOSSY_COBBLESTONE_STAIRS = REGISTRY.register("mossy_cobblestone_stairs", MossyCobblestoneStairs::new);
-    public static final RegistrySupplier<Block> MOSSY_COBBLESTONE_SLAB = REGISTRY.register("mossy_cobblestone_slab", MossyCobblestoneSlab::new);
-    public static final RegistrySupplier<Block> MOSSY_COBBLESTONE_WALL = REGISTRY.register("mossy_cobblestone_wall", MossyCobblestoneWall::new);
-    public static final RegistrySupplier<Block> BRICKS = REGISTRY.register("bricks", Bricks::new);
-    public static final RegistrySupplier<Block> BRICK_STAIRS = REGISTRY.register("brick_stairs", BrickStairs::new);
-    public static final RegistrySupplier<Block> BRICK_SLAB = REGISTRY.register("brick_slab", BrickSlab::new);
-    public static final RegistrySupplier<Block> BRICK_WALL = REGISTRY.register("brick_wall", BrickWall::new);
+        // Nature / Underground
+        COAL_ORE = registerBlock("coal_ore", CoalOre::new);
+        IRON_ORE = registerBlock("iron_ore", IronOre::new);
+        GOLD_ORE = registerBlock("gold_ore", GoldOre::new);
+        REDSTONE_ORE = registerBlock("redstone_ore", RedstoneOre::new);
+        DIAMOND_ORE = registerBlock("diamond_ore", DiamondOre::new);
+        STONE = registerBlock("stone", Stone::new);
 
-    // Building / Deco
-    public static final RegistrySupplier<Block> OBSIDIAN = REGISTRY.register("obsidian", Obsidian::new);
-    public static final RegistrySupplier<Block> IRON_BLOCK = REGISTRY.register("iron_block", IronBlock::new);
-    public static final RegistrySupplier<Block> GOLD_BLOCK = REGISTRY.register("gold_block", GoldBlock::new);
-    public static final RegistrySupplier<Block> DIAMOND_BLOCK = REGISTRY.register("diamond_block", DiamondBlock::new);
-    public static final RegistrySupplier<Block> BOOKSHELF = REGISTRY.register("bookshelf", Bookshelf::new);
-    public static final RegistrySupplier<Block> GLASS = REGISTRY.register("glass", Glass::new);
-    public static final RegistrySupplier<Block> GLASS_PANE = REGISTRY.register("glass_pane", GlassPane::new);
-    public static final RegistrySupplier<Block> TNT = REGISTRY.register("tnt", Tnt::new);
+        // Building / Stone
+        STONE_STAIRS = registerBlock("stone_stairs", StoneStairs::new);
+        STONE_SLAB = registerBlock("stone_slab", StoneSlab::new);
+        STONE_PRESSURE_PLATE = registerBlock("stone_pressure_plate", StonePressurePlate::new);
+        STONE_BUTTON = registerBlock("stone_button", StoneButton::new);
+        COBBLESTONE = registerBlock("cobblestone", Cobblestone::new);
+        COBBLESTONE_STAIRS = registerBlock("cobblestone_stairs", CobblestoneStairs::new);
+        COBBLESTONE_SLAB = registerBlock("cobblestone_slab", CobblestoneSlab::new);
+        COBBLESTONE_WALL = registerBlock("cobblestone_wall", CobblestoneWall::new);
+        MOSSY_COBBLESTONE = registerBlock("mossy_cobblestone", MossyCobblestone::new);
+        MOSSY_COBBLESTONE_STAIRS = registerBlock("mossy_cobblestone_stairs", MossyCobblestoneStairs::new);
+        MOSSY_COBBLESTONE_SLAB = registerBlock("mossy_cobblestone_slab", MossyCobblestoneSlab::new);
+        MOSSY_COBBLESTONE_WALL = registerBlock("mossy_cobblestone_wall", MossyCobblestoneWall::new);
+        BRICKS = registerBlock("bricks", Bricks::new);
+        BRICK_STAIRS = registerBlock("brick_stairs", BrickStairs::new);
+        BRICK_SLAB = registerBlock("brick_slab", BrickSlab::new);
+        BRICK_WALL = registerBlock("brick_wall", BrickWall::new);
 
-    // Building / Iron
-    public static final RegistrySupplier<Block> IRON_DOOR = REGISTRY.register("iron_door", IronDoor::new);
+        // Building / Deco
+        OBSIDIAN = registerBlock("obsidian", Obsidian::new);
+        IRON_BLOCK = registerBlock("iron_block", IronBlock::new);
+        GOLD_BLOCK = registerBlock("gold_block", GoldBlock::new);
+        DIAMOND_BLOCK = registerBlock("diamond_block", DiamondBlock::new);
+        BOOKSHELF = registerBlock("bookshelf", Bookshelf::new);
+        GLASS = registerBlock("glass", Glass::new);
+        GLASS_PANE = registerBlock("glass_pane", GlassPane::new);
+        TNT = registerBlock("tnt", Tnt::new);
 
-    // Dev
-    public static final RegistrySupplier<Block> FEATURE_VOID = REGISTRY.register("feature_void", FeatureVoid::new);
-    public static final RegistrySupplier<Block> REMODEL_FURNACE = REGISTRY.register("remodel_furnace", RemodelFurnace::new);
-    public static final RegistrySupplier<Block> REMODEL_CRAFTING_TABLE = REGISTRY.register("remodel_crafting_table", RemodelCraftingTable::new);
-    public static final RegistrySupplier<Block> REMODEL_CHEST = REGISTRY.register("remodel_chest", RemodelChest::new);
+        IRON_DOOR = registerBlock("iron_door", IronDoor::new);
+        FEATURE_VOID = registerBlock("feature_void", FeatureVoid::new);
+        REMODEL_FURNACE = registerBlock("remodel_furnace", RemodelFurnace::new);
+        REMODEL_CRAFTING_TABLE = registerBlock("remodel_crafting_table", RemodelCraftingTable::new);
+        REMODEL_CHEST = registerBlock("remodel_chest", RemodelChest::new);
+    }
+
+    private static RegistrySupplier<Block> registerBlock(String key, Supplier<Block> block) {
+        return REGISTRY.register(key, block);
+    }
 
     public static void register() {
         REGISTRY.register();

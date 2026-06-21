@@ -13,9 +13,4 @@ public class Gravel extends FallingBlock {
 	public Gravel() {
 		super(Properties.of().mapColor(MapColor.STONE).sound(SoundType.GRAVEL).strength(0.6f).instrument(NoteBlockInstrument.SNARE));
 	}
-
-	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return 15;
-	}
 }

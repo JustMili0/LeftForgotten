@@ -1,7 +1,7 @@
-package net.justmili.leftforgotten.mechanics.compatibility.forge;
+package net.justmili.leftforgotten.content.mechanics.compatibility.fabric;
 
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
-import net.justmili.leftforgotten.mechanics.compatibility.NTVars;
+import net.justmili.leftforgotten.content.mechanics.compatibility.NTVars;
 
 public class NostalgicTweaksCompatibiliyImpl {
     public static NTVars ntVars;

@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.mechanics.events;
+package net.justmili.leftforgotten.content.mechanics.events;
 
 import dev.architectury.event.EventResult;
 import dev.architectury.platform.Platform;

@@ -11,24 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 
 public class Sapling extends SaplingBlock {
-
     public Sapling() {
-        super(
-                new TreeGrower(),
-                Properties.copy(Blocks.OAK_SAPLING)
-                        .mapColor(MapColor.COLOR_LIGHT_GREEN)
-        );
-    }
-
-    @Override
-    public boolean mayPlaceOn(BlockState groundState, BlockGetter worldIn, BlockPos pos) {
-        return groundState.is(BlockTags.DIRT);
-    }
-
-    @Override
-    public boolean canSurvive(BlockState blockstate, LevelReader worldIn, BlockPos pos) {
-        BlockPos blockpos = pos.below();
-        BlockState groundState = worldIn.getBlockState(blockpos);
-        return this.mayPlaceOn(groundState, worldIn, blockpos);
+        super(new TreeGrower(), Properties.copy(Blocks.OAK_SAPLING).mapColor(MapColor.COLOR_LIGHT_GREEN));
     }
 }

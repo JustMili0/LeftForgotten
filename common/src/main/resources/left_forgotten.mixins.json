@@ -6,6 +6,7 @@
   "client": [
     "accessors.DimSpecialEffectsAccessor",
     "client.BlockyLighting",
+    "client.ForcedSteve",
     "client.MusicPlayerMixin",
     "client.RemodelBlocks",
     "client.RemodelChests",

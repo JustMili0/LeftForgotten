@@ -17,101 +17,119 @@ import java.util.function.Function;
 public class LFItems {
     public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(LeftForgotten.MODID, Registries.ITEM);
 
-    /// Block Items
-    // In-Overworld
-    public static final RegistrySupplier<Item> BRITTLE_BEDROCK = block(LFBlocks.BRITTLE_BEDROCK);
+    public static final RegistrySupplier<Item> BRITTLE_BEDROCK,
+        GRASS_BLOCK, DIRT, FARMLAND, GRAVEL, SAND, CLAY,
+        RED_FLOWER, YELLOW_FLOWER, RED_MUSHROOM, BROWN_MUSHROOM, CACTUS, SAPLING, LEAVES,
+        WOOD, WOOD_6_SIDED, WOODEN_PLANKS, WOODEN_STAIRS, WOODEN_SLAB, FENCE, FENCE_GATE, DOOR, TRAPDOOR, PRESSURE_PLATE, BUTTON,
+        COAL_ORE, IRON_ORE, GOLD_ORE, REDSTONE_ORE, DIAMOND_ORE,
+        STONE, STONE_STAIRS, STONE_SLAB, STONE_PRESSURE_PLATE, STONE_BUTTON,
+        COBBLESTONE, COBBLESTONE_STAIRS, COBBLESTONE_SLAB, COBBLESTONE_WALL,
+        MOSSY_COBBLESTONE, MOSSY_COBBLESTONE_STAIRS, MOSSY_COBBLESTONE_SLAB, MOSSY_COBBLESTONE_WALL,
+        BRICKS, BRICK_STAIRS, BRICK_SLAB, BRICK_WALL,
+        OBSIDIAN, IRON_BLOCK, GOLD_BLOCK, DIAMOND_BLOCK,
+        BOOKSHELF, GLASS, GLASS_PANE, TNT, IRON_DOOR,
+        FEATURE_VOID, REMODEL_FURNACE, REMODEL_CRAFTING_TABLE, REMODEL_CHEST;
 
-    // Nature / Ground
-    public static final RegistrySupplier<Item> GRASS_BLOCK = block(LFBlocks.GRASS_BLOCK);
-    public static final RegistrySupplier<Item> DIRT = block(LFBlocks.DIRT);
-    public static final RegistrySupplier<Item> FARMLAND = block(LFBlocks.FARMLAND);
-    public static final RegistrySupplier<Item> GRAVEL = block(LFBlocks.GRAVEL);
-    public static final RegistrySupplier<Item> SAND = block(LFBlocks.SAND);
-    public static final RegistrySupplier<Item> CLAY = block(LFBlocks.CLAY);
+    public static final RegistrySupplier<Item> CLAY_BALL, BRICK, BOAT;
 
-    // Nature / Vegetation
-    public static final RegistrySupplier<Item> RED_FLOWER = block(LFBlocks.RED_FLOWER);
-    public static final RegistrySupplier<Item> YELLOW_FLOWER = block(LFBlocks.YELLOW_FLOWER);
-    public static final RegistrySupplier<Item> RED_MUSHROOM = block(LFBlocks.RED_MUSHROOM);
-    public static final RegistrySupplier<Item> BROWN_MUSHROOM = block(LFBlocks.BROWN_MUSHROOM);
-    public static final RegistrySupplier<Item> CACTUS = block(LFBlocks.CACTUS);
-    public static final RegistrySupplier<Item> SAPLING = block(LFBlocks.SAPLING);
-    public static final RegistrySupplier<Item> LEAVES = block(LFBlocks.LEAVES);
+    static {
+        /// Block Items
+        // In-Overworld
+        BRITTLE_BEDROCK = registerBlock(LFBlocks.BRITTLE_BEDROCK);
 
-    // Building / Wood
-    public static final RegistrySupplier<Item> WOOD = block(LFBlocks.WOOD);
-    public static final RegistrySupplier<Item> WOOD_6_SIDED = block(LFBlocks.WOOD_6_SIDED);
-    public static final RegistrySupplier<Item> WOODEN_PLANKS = block(LFBlocks.WOODEN_PLANKS);
-    public static final RegistrySupplier<Item> WOODEN_STAIRS = block(LFBlocks.WOODEN_STAIRS);
-    public static final RegistrySupplier<Item> WOODEN_SLAB = block(LFBlocks.WOODEN_SLAB);
-    public static final RegistrySupplier<Item> FENCE = block(LFBlocks.FENCE);
-    public static final RegistrySupplier<Item> FENCE_GATE = block(LFBlocks.FENCE_GATE);
-    public static final RegistrySupplier<Item> DOOR = doubleBlock(LFBlocks.DOOR);
-    public static final RegistrySupplier<Item> TRAPDOOR = block(LFBlocks.TRAPDOOR);
-    public static final RegistrySupplier<Item> PRESSURE_PLATE = block(LFBlocks.PRESSURE_PLATE);
-    public static final RegistrySupplier<Item> BUTTON = block(LFBlocks.BUTTON);
+        // Nature / Ground
+        GRASS_BLOCK = registerBlock(LFBlocks.GRASS_BLOCK);
+        DIRT = registerBlock(LFBlocks.DIRT);
+        FARMLAND = registerBlock(LFBlocks.FARMLAND);
+        GRAVEL = registerBlock(LFBlocks.GRAVEL);
+        SAND = registerBlock(LFBlocks.SAND);
+        CLAY = registerBlock(LFBlocks.CLAY);
 
-    // Nature / Underground
-    public static final RegistrySupplier<Item> COAL_ORE = block(LFBlocks.COAL_ORE);
-    public static final RegistrySupplier<Item> IRON_ORE = block(LFBlocks.IRON_ORE);
-    public static final RegistrySupplier<Item> GOLD_ORE = block(LFBlocks.GOLD_ORE);
-    public static final RegistrySupplier<Item> REDSTONE_ORE = block(LFBlocks.REDSTONE_ORE);
-    public static final RegistrySupplier<Item> DIAMOND_ORE = block(LFBlocks.DIAMOND_ORE);
-    public static final RegistrySupplier<Item> STONE = block(LFBlocks.STONE);
+        // Nature / Vegetation
+        RED_FLOWER = registerBlock(LFBlocks.RED_FLOWER);
+        YELLOW_FLOWER = registerBlock(LFBlocks.YELLOW_FLOWER);
+        RED_MUSHROOM = registerBlock(LFBlocks.RED_MUSHROOM);
+        BROWN_MUSHROOM = registerBlock(LFBlocks.BROWN_MUSHROOM);
+        CACTUS = registerBlock(LFBlocks.CACTUS);
+        SAPLING = registerBlock(LFBlocks.SAPLING);
+        LEAVES = registerBlock(LFBlocks.LEAVES);
 
-    // Building / Stone
-    public static final RegistrySupplier<Item> STONE_STAIRS = block(LFBlocks.STONE_STAIRS);
-    public static final RegistrySupplier<Item> STONE_SLAB = block(LFBlocks.STONE_SLAB);
-    public static final RegistrySupplier<Item> STONE_PRESSURE_PLATE = block(LFBlocks.STONE_PRESSURE_PLATE);
-    public static final RegistrySupplier<Item> STONE_BUTTON = block(LFBlocks.STONE_BUTTON);
-    public static final RegistrySupplier<Item> COBBLESTONE = block(LFBlocks.COBBLESTONE);
-    public static final RegistrySupplier<Item> COBBLESTONE_STAIRS = block(LFBlocks.COBBLESTONE_STAIRS);
-    public static final RegistrySupplier<Item> COBBLESTONE_SLAB = block(LFBlocks.COBBLESTONE_SLAB);
-    public static final RegistrySupplier<Item> COBBLESTONE_WALL = block(LFBlocks.COBBLESTONE_WALL);
-    public static final RegistrySupplier<Item> MOSSY_COBBLESTONE = block(LFBlocks.MOSSY_COBBLESTONE);
-    public static final RegistrySupplier<Item> MOSSY_COBBLESTONE_STAIRS = block(LFBlocks.MOSSY_COBBLESTONE_STAIRS);
-    public static final RegistrySupplier<Item> MOSSY_COBBLESTONE_SLAB = block(LFBlocks.MOSSY_COBBLESTONE_SLAB);
-    public static final RegistrySupplier<Item> MOSSY_COBBLESTONE_WALL = block(LFBlocks.MOSSY_COBBLESTONE_WALL);
-    public static final RegistrySupplier<Item> BRICKS = block(LFBlocks.BRICKS);
-    public static final RegistrySupplier<Item> BRICK_STAIRS = block(LFBlocks.BRICK_STAIRS);
-    public static final RegistrySupplier<Item> BRICK_SLAB = block(LFBlocks.BRICK_SLAB);
-    public static final RegistrySupplier<Item> BRICK_WALL = block(LFBlocks.BRICK_WALL);
+        // Building / Wood
+        WOOD = registerBlock(LFBlocks.WOOD);
+        WOOD_6_SIDED = registerBlock(LFBlocks.WOOD_6_SIDED);
+        WOODEN_PLANKS = registerBlock(LFBlocks.WOODEN_PLANKS);
+        WOODEN_STAIRS = registerBlock(LFBlocks.WOODEN_STAIRS);
+        WOODEN_SLAB = registerBlock(LFBlocks.WOODEN_SLAB);
+        FENCE = registerBlock(LFBlocks.FENCE);
+        FENCE_GATE = registerBlock(LFBlocks.FENCE_GATE);
+        DOOR = registerDoubleBlock(LFBlocks.DOOR);
+        TRAPDOOR = registerBlock(LFBlocks.TRAPDOOR);
+        PRESSURE_PLATE = registerBlock(LFBlocks.PRESSURE_PLATE);
+        BUTTON = registerBlock(LFBlocks.BUTTON);
 
-    // Building / Deco
-    public static final RegistrySupplier<Item> OBSIDIAN = block(LFBlocks.OBSIDIAN);
-    public static final RegistrySupplier<Item> IRON_BLOCK = block(LFBlocks.IRON_BLOCK);
-    public static final RegistrySupplier<Item> GOLD_BLOCK = block(LFBlocks.GOLD_BLOCK);
-    public static final RegistrySupplier<Item> DIAMOND_BLOCK = block(LFBlocks.DIAMOND_BLOCK);
-    public static final RegistrySupplier<Item> BOOKSHELF = block(LFBlocks.BOOKSHELF);
-    public static final RegistrySupplier<Item> GLASS = block(LFBlocks.GLASS);
-    public static final RegistrySupplier<Item> GLASS_PANE = block(LFBlocks.GLASS_PANE);
-    public static final RegistrySupplier<Item> TNT = block(LFBlocks.TNT);
+        // Nature / Underground
+        COAL_ORE = registerBlock(LFBlocks.COAL_ORE);
+        IRON_ORE = registerBlock(LFBlocks.IRON_ORE);
+        GOLD_ORE = registerBlock(LFBlocks.GOLD_ORE);
+        REDSTONE_ORE = registerBlock(LFBlocks.REDSTONE_ORE);
+        DIAMOND_ORE = registerBlock(LFBlocks.DIAMOND_ORE);
+        STONE = registerBlock(LFBlocks.STONE);
 
-    // Building / Iron
-    public static final RegistrySupplier<Item> IRON_DOOR = doubleBlock(LFBlocks.IRON_DOOR);
+        // Building / Stone
+        STONE_STAIRS = registerBlock(LFBlocks.STONE_STAIRS);
+        STONE_SLAB = registerBlock(LFBlocks.STONE_SLAB);
+        STONE_PRESSURE_PLATE = registerBlock(LFBlocks.STONE_PRESSURE_PLATE);
+        STONE_BUTTON = registerBlock(LFBlocks.STONE_BUTTON);
+        COBBLESTONE = registerBlock(LFBlocks.COBBLESTONE);
+        COBBLESTONE_STAIRS = registerBlock(LFBlocks.COBBLESTONE_STAIRS);
+        COBBLESTONE_SLAB = registerBlock(LFBlocks.COBBLESTONE_SLAB);
+        COBBLESTONE_WALL = registerBlock(LFBlocks.COBBLESTONE_WALL);
+        MOSSY_COBBLESTONE = registerBlock(LFBlocks.MOSSY_COBBLESTONE);
+        MOSSY_COBBLESTONE_STAIRS = registerBlock(LFBlocks.MOSSY_COBBLESTONE_STAIRS);
+        MOSSY_COBBLESTONE_SLAB = registerBlock(LFBlocks.MOSSY_COBBLESTONE_SLAB);
+        MOSSY_COBBLESTONE_WALL = registerBlock(LFBlocks.MOSSY_COBBLESTONE_WALL);
+        BRICKS = registerBlock(LFBlocks.BRICKS);
+        BRICK_STAIRS = registerBlock(LFBlocks.BRICK_STAIRS);
+        BRICK_SLAB = registerBlock(LFBlocks.BRICK_SLAB);
+        BRICK_WALL = registerBlock(LFBlocks.BRICK_WALL);
 
-    // Dev
-    public static final RegistrySupplier<Item> FEATURE_VOID = block(LFBlocks.FEATURE_VOID);
-    public static final RegistrySupplier<Item> REMODEL_CRAFTING_TABLE = block(LFBlocks.REMODEL_CRAFTING_TABLE);
-    public static final RegistrySupplier<Item> REMODEL_FURNACE = block(LFBlocks.REMODEL_FURNACE);
-    public static final RegistrySupplier<Item> REMODEL_CHEST = block(LFBlocks.REMODEL_CHEST);
+        // Building / Deco
+        OBSIDIAN = registerBlock(LFBlocks.OBSIDIAN);
+        IRON_BLOCK = registerBlock(LFBlocks.IRON_BLOCK);
+        GOLD_BLOCK = registerBlock(LFBlocks.GOLD_BLOCK);
+        DIAMOND_BLOCK = registerBlock(LFBlocks.DIAMOND_BLOCK);
+        BOOKSHELF = registerBlock(LFBlocks.BOOKSHELF);
+        GLASS = registerBlock(LFBlocks.GLASS);
+        GLASS_PANE = registerBlock(LFBlocks.GLASS_PANE);
+        TNT = registerBlock(LFBlocks.TNT);
 
-    /// Items
-    // Misc
-    public static final RegistrySupplier<Item> CLAY_BALL = register("clay_ball", ClayBall::new);
-    public static final RegistrySupplier<Item> BRICK = register("brick", Brick::new);
-    public static final RegistrySupplier<Item> BOAT = register("boat", properties -> new Boat());
+        // Building / Iron
+        IRON_DOOR = registerDoubleBlock(LFBlocks.IRON_DOOR);
 
-    private static <T extends Item> RegistrySupplier<T> register(String name, Function<Item.Properties, T> itemBuilder) {
-        //var key = ResourceKey.create(Registries.ITEM, LeftForgotten.asResource(name)); // not needed right now
+        // Dev
+        FEATURE_VOID = registerBlock(LFBlocks.FEATURE_VOID);
+        REMODEL_CRAFTING_TABLE = registerBlock(LFBlocks.REMODEL_CRAFTING_TABLE);
+        REMODEL_FURNACE = registerBlock(LFBlocks.REMODEL_FURNACE);
+        REMODEL_CHEST = registerBlock(LFBlocks.REMODEL_CHEST);
+
+        /// Items
+        // Misc
+        CLAY_BALL = registerItem("clay_ball", ClayBall::new);
+        BRICK = registerItem("brick", Brick::new);
+        BOAT = registerItem("boat", properties -> new Boat());
+    }
+
+    private static <T extends Item> RegistrySupplier<T> registerItem(String name, Function<Item.Properties, T> itemBuilder) {
+        //var key = ResourceKey.create(Registries.ITEM, LeftForgotten.asResource(name)); // not needed right now but keep for later
         return REGISTRY.register(name, () -> itemBuilder.apply(new Item.Properties()));
     }
-    private static RegistrySupplier<Item> block(RegistrySupplier<Block> block) {
+    private static RegistrySupplier<Item> registerBlock(RegistrySupplier<Block> block) {
         return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));
     }
-    private static RegistrySupplier<Item> doubleBlock(RegistrySupplier<Block> block) {
+    private static RegistrySupplier<Item> registerDoubleBlock(RegistrySupplier<Block> block) {
         return REGISTRY.register(block.getId().getPath(), () -> new DoubleHighBlockItem(block.get(), new Item.Properties()));
     }
+
     public static void register() {
         REGISTRY.register();
     }

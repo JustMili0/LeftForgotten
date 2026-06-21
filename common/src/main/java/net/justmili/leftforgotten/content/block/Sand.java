@@ -13,9 +13,4 @@ public class Sand extends FallingBlock {
 	public Sand() {
 		super(Properties.of().mapColor(MapColor.SAND).sound(SoundType.SAND).strength(0.5f).instrument(NoteBlockInstrument.SNARE));
 	}
-
-	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return 15;
-	}
 }

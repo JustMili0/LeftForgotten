@@ -19,9 +19,4 @@ public class WoodenDoor extends DoorBlock {
             .ignitedByLava()
             .pushReaction(PushReaction.DESTROY), BlockSetType.OAK);
     }
-
-    @Override
-    public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-        return 0;
-    }
 }

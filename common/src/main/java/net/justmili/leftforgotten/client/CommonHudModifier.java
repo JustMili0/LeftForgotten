@@ -24,7 +24,7 @@ public class CommonHudModifier {
         }
 
         public static void renderFlippedBlit(GuiGraphics graphics, ResourceLocation texture,
-                                             int x1, int y1, int width, int height, int uOffset, float vOffset) {
+                                             int x1, int y1, int width, int height, int uOffset, int vOffset) {
             int x2 = x1+width,
                 y2 = y1+height,
                 blitOffset = 0;

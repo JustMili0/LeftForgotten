@@ -20,19 +20,19 @@ public class CommonBlock {
         return (blockState) -> (Boolean)blockState.getValue(BlockStateProperties.LIT) ? lightValue : 0;
     }
 
-    public static Boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entity) {
+    public static Boolean never(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entity) {
         return false;
     }
 
-    public static Boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entity) {
+    public static Boolean always(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entity) {
         return true;
     }
 
-    public static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+    public static boolean always(BlockState state, BlockGetter getter, BlockPos pos) {
         return true;
     }
 
-    public static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+    public static boolean never(BlockState state, BlockGetter getter, BlockPos pos) {
         return false;
     }
 
@@ -81,7 +81,7 @@ public class CommonBlock {
         return properties;
     }
 
-    private static Boolean ocelotOrParrot(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entity) {
+    private static Boolean ocelotOrParrot(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entity) {
         return entity == EntityType.OCELOT || entity == EntityType.PARROT;
     }
 }
