@@ -1,5 +1,5 @@
 # TODO
-- Figure out what the fuck is going on with the farmland to dirt conversion and why is it sometimes Minecraft dirt and sometimes LF dirt
+- Test if everything works properly
 
 PLANNED FOR 1.1:
 - Support for:
