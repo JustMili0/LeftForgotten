@@ -1,8 +1,5 @@
-# TODO - Testing and publishing
-- Do a long playtest of 1.20.1 Fabric and Forge with many mods
-  - Publish Left Forgotten 1.1.2 for 1.20.1 if everything's good
-- Do a long playtest of 1.21.1 Fabric and Neo with many mods
-  - Publish Left Forgotten 1.1.2 for 1.21.1 if everything's good
+# TODO
+- Figure out what the fuck is going on with the farmland to dirt conversion and why is it sometimes Minecraft dirt and sometimes LF dirt
 
 PLANNED FOR 1.1:
 - Support for:
