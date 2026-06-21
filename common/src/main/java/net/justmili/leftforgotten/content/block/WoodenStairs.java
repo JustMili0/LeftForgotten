@@ -4,7 +4,6 @@ package net.justmili.leftforgotten.content.block;
 import net.justmili.leftforgotten.registries.LFBlocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 

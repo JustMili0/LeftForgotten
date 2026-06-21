@@ -15,7 +15,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -64,7 +63,7 @@ public class Farmland extends FarmBlock {
 			&& entity.getBbWidth() * entity.getBbWidth() * entity.getBbHeight() > 0.512F) {
 			turnToOldDirt(entity, state, level, pos);
 		}
-		super.fallOn(level, state, pos, entity, fallDistance);
+		entity.causeFallDamage(fallDistance, 1.0F, entity.damageSources().fall());
 	}
 
 	private static void turnToOldDirt(@Nullable Entity entity, BlockState state, Level level, BlockPos pos) {
