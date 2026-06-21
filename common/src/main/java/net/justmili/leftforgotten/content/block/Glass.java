@@ -2,7 +2,6 @@
 package net.justmili.leftforgotten.content.block;
 
 import net.justmili.leftforgotten.content.block.dev.CommonBlock;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.TransparentBlock;
 import net.minecraft.world.level.material.MapColor;

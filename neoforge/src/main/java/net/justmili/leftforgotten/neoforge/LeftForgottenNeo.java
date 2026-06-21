@@ -2,12 +2,9 @@ package net.justmili.leftforgotten.neoforge;
 
 import dev.architectury.platform.Platform;
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.core.datagen.*;
 import net.justmili.leftforgotten.core.datagen.neoforge.NeoDatagen;
-import net.minecraft.data.DataProvider;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 @Mod(LeftForgotten.MODID)
 public final class LeftForgottenNeo {
