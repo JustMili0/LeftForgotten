@@ -19,7 +19,7 @@
     "issues": "https://github.com/JustMili0/LeftForgotten/issues"
   },
   "license": "${mod_license}",
-  "icon": "icon.png",
+  "icon": "icon_32px.png",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -47,5 +47,16 @@
   },
   "breaks": {
     "true_end": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.modrinth": "https://modrinth.com/mod/left-forgotten",
+        "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/left-forgotten",
+        "modmenu.discord": "https://discord.gg/jEGF5fb",
+        "modmenu.kofi": "https://ko-fi.com/justmilivt",
+        "modmenu.twitter": "https://x.com/JustMiliVT"
+      }
+    }
   }
 }
