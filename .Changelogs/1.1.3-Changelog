@@ -1,9 +1,14 @@
-# Left Forgotten - 1.1.3 Release                                                                                 (WIP)
+# Left Forgotten - 1.1.3 Release
 ***All changes apply for both 1.20.1 and 1.21.1 unless specified otherwise***
+
+### ***GENERAL***
+- Updated mod icon
+- Added custom Mod Menu links to `fabric.mod.json`
 
 ### ***VISUAL CHANGES***
 - Player now will appear as Steve (Old skin) in `left_forgotten:alpha_minecraft` dimension
   - This will be later configurable in update 1.2.x in the mod's config and Sodium options
+  - This will be disabled by default when made configurable
 
 ### ***GAMEPLAY***
 - You can now place `left_forgotten:cactus` on `minecraft:cactus`
