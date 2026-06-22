@@ -10,7 +10,7 @@ displayName = "${mod_name}"
 description = "${mod_description}"
 authors = "JustMili"
 credits = "BluSpring, NBSurprise, Eetgeenappels, Cyber-Sammy"
-logoFile = "icon.png"
+logoFile = "forge_banner.png"
 
 [[dependencies.${mod_id}]]
 modId = "neoforge"
