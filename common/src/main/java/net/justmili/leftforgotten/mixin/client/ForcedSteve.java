@@ -25,7 +25,7 @@ public abstract class ForcedSteve {
         for (ResourceKey<Level> dimension : List.of(LFResources.Levels.ALPHA_MINECRAFT,
             LFResources.Levels.INFDEV_MINECRAFT, LFResources.Levels.INDEV_MINECRAFT,
             LFResources.Levels.CLASSIC_MINECRAFT, LFResources.Levels.PRECLASSIC_MINECRAFT)) {
-            if (!ClientUtil.inDimension(dimension)) return false;
+            if (ClientUtil.inDimension(dimension)) return false;
         }
         return true;
     }
