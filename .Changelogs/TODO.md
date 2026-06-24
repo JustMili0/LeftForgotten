@@ -1,5 +1,38 @@
 # TODO
-- Test if everything works properly for 1.1.3
+- Fix chest remodeling, issues caused by multiple different block entity optimization mods
+
+```
+Fabric 1.20.1
+- EBE - Chest Z-fights
+- OBE - Chest remodel breaks completely
+
+Forge 1.20.1
+- EBE - All good (surprisingly)
+- OBE - Chest remodel breaks completely
+
+Fabric 1.21.1
+- EBE - Chest Z-fights
+- BBE - Chest remodel breaks completely
+- OBE - Chest remodel breaks completely
+
+NeoForge 1.21.1
+- EBE - Chest Z-fights
+- OBE - Chest remodel breaks completely
+
+Tested mods
+- Enhanced Block Entities - Fabric 1.20.1
+- Optimized Block Entities - Fabric 1.20.1
+
+- EnlightenedBlockEntities - Forge 1.20.1
+- Optimized Block Entities - Forge 1.20.1
+
+- Enhanced Block Entities - Fabric 1.21.1
+- Better Block Entities - Fabric 1.21.1
+- Optimized Block Entities - Fabric 1.21.1
+
+- Enhanced Block Entities NEOFORGED - NeoForge 1.21.1
+- Optimized Block Entities - NeoForge 1.21.1
+```
 
 # PORT TO:
 - **[INIT]** 1.20.1 Fabric & Forge
