@@ -22,8 +22,8 @@ import java.util.Stack;
 
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.*;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Fabric.*;
-import static net.justmili.leftforgotten.core.util.ClientUtil.getPlayer;
-import static net.justmili.leftforgotten.core.util.ClientUtil.getWidth;
+import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.getPlayer;
+import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.getWidth;
 
 @Mixin(value = Gui.class, priority = 2500)
 public abstract class HudModifier {

@@ -2,6 +2,7 @@ package net.justmili.leftforgotten.mixin.client;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.registries.LFBlocks;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.Minecraft;
@@ -24,9 +25,11 @@ public class RemodelBlocks {
         Level level = Minecraft.getInstance().level; // blockView is not necessarily Level
         if (level != null && level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
             if (state.is(Blocks.CRAFTING_TABLE)) {
+                if (!Config.remodelCraftingTable.get()) return original.call(dispatcher, state);
                 return original.call(dispatcher, LFBlocks.REMODEL_CRAFTING_TABLE.get().defaultBlockState());
             }
             if (state.is(Blocks.FURNACE)) {
+                if (!Config.remodelFurnace.get()) return original.call(dispatcher, state);
                 return original.call(dispatcher, LFBlocks.REMODEL_FURNACE.get().defaultBlockState());
             }
         }

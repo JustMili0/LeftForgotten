@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "left_forgotten:wood_6_sided"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "left_forgotten:wooden_planks"
+  }
+}

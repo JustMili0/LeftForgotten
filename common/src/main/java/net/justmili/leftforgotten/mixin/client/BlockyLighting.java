@@ -1,6 +1,8 @@
 package net.justmili.leftforgotten.mixin.client;
 
+import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.registries.LFResources;
+import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,8 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BlockyLighting {
     @Inject(method = "useAmbientOcclusion", at = @At("HEAD"), cancellable = true)
     private static void blockyLighting(CallbackInfoReturnable<Boolean> cir) {
-        Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.level != null && minecraft.level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
+        if (!Config.forceBlockyLighting.get()) return;
+
+        if (ClientUtil.getLevel() != null && ClientUtil.inDimension(LFResources.Levels.ALPHA_MINECRAFT)) {
             cir.setReturnValue(false);
         }
     }

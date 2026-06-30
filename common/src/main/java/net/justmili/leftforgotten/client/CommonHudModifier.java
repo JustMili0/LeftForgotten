@@ -10,7 +10,7 @@ import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import org.joml.Matrix4f;
 
-import static net.justmili.leftforgotten.core.util.ClientUtil.*;
+import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.*;
 
 public class CommonHudModifier {
     public static class Common {

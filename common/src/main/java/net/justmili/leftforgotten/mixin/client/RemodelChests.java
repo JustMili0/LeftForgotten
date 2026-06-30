@@ -1,8 +1,10 @@
 package net.justmili.leftforgotten.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.registries.LFBlocks;
 import net.justmili.leftforgotten.registries.LFResources;
+import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -27,7 +29,8 @@ public class RemodelChests {
                                                                               CallbackInfo ci) {
         Level level = blockEntity.getLevel();
         if (level == null) return;
-        if (!level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (!Config.remodelChests.get()) return;
+        if (!ClientUtil.inDimension(LFResources.Levels.ALPHA_MINECRAFT)) return;
         if (!blockEntity.getBlockState().is(Blocks.CHEST)) return;
 
         ci.cancel();

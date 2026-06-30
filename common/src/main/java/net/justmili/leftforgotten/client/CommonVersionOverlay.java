@@ -9,8 +9,8 @@ import net.minecraft.network.chat.Component;
 
 import java.util.Random;
 
-import static net.justmili.leftforgotten.core.util.ClientUtil.getLevel;
-import static net.justmili.leftforgotten.core.util.ClientUtil.inDimension;
+import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.getLevel;
+import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.inDimension;
 
 @Environment(EnvType.CLIENT)
 public class CommonVersionOverlay {

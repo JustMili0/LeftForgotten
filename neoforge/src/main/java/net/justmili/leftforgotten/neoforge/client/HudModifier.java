@@ -3,7 +3,6 @@ package net.justmili.leftforgotten.neoforge.client;
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
 import net.justmili.leftforgotten.client.CommonClient;
-import net.justmili.leftforgotten.core.util.ResourceUtil;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;

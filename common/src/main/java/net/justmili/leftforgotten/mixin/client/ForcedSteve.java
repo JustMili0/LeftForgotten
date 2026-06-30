@@ -1,8 +1,9 @@
 package net.justmili.leftforgotten.mixin.client;
 
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.core.util.ClientUtil;
+import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.registries.LFResources;
+import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.resources.ResourceKey;
@@ -33,7 +34,7 @@ public abstract class ForcedSteve {
 
     @Inject(method = "getSkin", at = @At("RETURN"), cancellable = true)
     private void forceSteveSkin(CallbackInfoReturnable<PlayerSkin> cir) {
-        if (customSkinsExisted()) return;
+        if (customSkinsExisted() || !Config.forceSteveSkin.get()) return;
         PlayerSkin original = cir.getReturnValue();
         cir.setReturnValue(new PlayerSkin(
             STEVE_SKIN,

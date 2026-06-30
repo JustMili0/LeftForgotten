@@ -2,6 +2,8 @@ package net.justmili.leftforgotten.mixin.client;
 
 import net.justmili.leftforgotten.registries.LFResources;
 import net.justmili.leftforgotten.registries.LFSounds;
+import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
+import net.justmili.leftforgotten.libs.v1.utils.MathUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -20,7 +22,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
-import java.util.Random;
 
 @Mixin(MusicManager.class)
 public class MusicPlayerMixin {
@@ -28,11 +29,6 @@ public class MusicPlayerMixin {
     @Shadow @Nullable private SoundInstance currentMusic;
     @Shadow private int nextSongDelay;
 
-    @Shadow
-    @Final
-    private RandomSource random;
-    @Unique
-    private static final Random RANDOM = new Random();
     @Unique
     private static List<SoundEvent> ALPHA_TRACKS = null;
     @Unique
@@ -61,15 +57,15 @@ public class MusicPlayerMixin {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void onTick(CallbackInfo ci) {
-        if (minecraft.level == null) return;
-        if (!minecraft.level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (ClientUtil.getLevel() == null) return;
+        if (!ClientUtil.inDimension(LFResources.Levels.ALPHA_MINECRAFT)) return;
 
         ci.cancel();
 
         if (this.currentMusic != null) {
             if (!this.minecraft.getSoundManager().isActive(this.currentMusic)) {
                 this.currentMusic = null;
-                this.nextSongDelay = Math.min(this.nextSongDelay, Mth.nextInt(this.random, 6000, 24000));
+                this.nextSongDelay = Math.min(this.nextSongDelay, Mth.nextInt(RandomSource.create(), 6000, 24000));
             }
         }
 
@@ -85,12 +81,13 @@ public class MusicPlayerMixin {
         }
     }
 
+    @Unique
     private SoundEvent pickTrack() {
         List<SoundEvent> tracks = getTracks();
         while (true) {
-            SoundEvent track = tracks.get(RANDOM.nextInt(tracks.size()));
-            if (track == LFSounds.MUSIC_13.get() && RANDOM.nextFloat() >= 0.02f) continue;
-            if (track == LFSounds.MUSIC_DROOPY_LIKES_YOUR_FACE.get() && RANDOM.nextFloat() >= 0.20f) continue;
+            SoundEvent track = tracks.get(MathUtil.random.nextInt(tracks.size()));
+            if (track == LFSounds.MUSIC_13.get() && MathUtil.chance(0.02)) continue;
+            if (track == LFSounds.MUSIC_DROOPY_LIKES_YOUR_FACE.get() && MathUtil.chance(0.2)) continue;
             return track;
         }
     }
