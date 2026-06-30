@@ -5,13 +5,7 @@
 ### ***GENERAL***
 - New dependency: `Millie's Core Libraries`
 - [?] Removed dependency: `Architectury API`
-- Added configuration to the mod. Now configurable:
-  - Forced Steve Skin (Now disabled by default)
-  - Forced no ambient occlusion (Blocky lighting)
-  - Block remodel (Chests, Crafting Table, Furance)
-  - Border fog
-  - Cave fog
-  - Farlands generation
+- Config now has a UI
 
 ### ***BUG FIXES/TECHNICAL CHANGES***
 - ???
