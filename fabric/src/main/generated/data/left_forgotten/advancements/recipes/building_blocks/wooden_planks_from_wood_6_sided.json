@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "left_forgotten:wooden_planks_from_wood_6_sided"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wood_6_sided": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "left_forgotten:wood_6_sided"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wood_6_sided",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "left_forgotten:wooden_planks_from_wood_6_sided"
+    ]
+  },
+  "sends_telemetry_event": false
+}

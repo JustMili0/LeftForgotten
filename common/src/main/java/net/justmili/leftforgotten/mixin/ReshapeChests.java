@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.mixin;
 
+import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -25,6 +26,7 @@ public class ReshapeChests {
                                     CallbackInfoReturnable<VoxelShape> cir) {
         if (!(getter instanceof Level level)) return;
         if (!level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (Config.remodelChests.isNull() || !Config.remodelChests.get()) return;
         if ((Object) this != Blocks.CHEST) return;
 
         cir.setReturnValue(FULL_BLOCK);

@@ -1,7 +1,8 @@
 package net.justmili.leftforgotten.mixin.client;
 
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.core.util.ClientUtil;
+import net.justmili.leftforgotten.config.Config;
+import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.resources.ResourceKey;
@@ -32,13 +33,13 @@ public abstract class ForcedSteve {
 
     @Inject(method = "getSkinLocation", at = @At("RETURN"), cancellable = true)
     private void forceSteveTexture(CallbackInfoReturnable<ResourceLocation> cir) {
-        if (customSkinsExisted()) return;
+        if (customSkinsExisted() || !Config.forceSteveSkin.get()) return;
         cir.setReturnValue(STEVE_SKIN);
     }
 
     @Inject(method = "getModelName", at = @At("RETURN"), cancellable = true)
     private void forceSteveModel(CallbackInfoReturnable<String> cir) {
-        if (customSkinsExisted()) return;
+        if (customSkinsExisted() || !Config.forceSteveSkin.get()) return;
         cir.setReturnValue("default");
     }
 }

@@ -5,17 +5,20 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.client.dimension.AlphaMinecraft;
+import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.mixin.accessors.DimSpecialEffectsAccessor;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-import static net.justmili.leftforgotten.core.util.ClientUtil.*;
+import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.*;
 
 @Environment(EnvType.CLIENT)
 public class CommonClient {
     public static void register() {
+        Config.client();
+
         ClientTickEvent.CLIENT_POST.register(CommonVersionOverlay::onClientTick);
 
         DimSpecialEffectsAccessor.getEffects().put(LeftForgotten.asResource("alpha_minecraft"), new AlphaMinecraft());

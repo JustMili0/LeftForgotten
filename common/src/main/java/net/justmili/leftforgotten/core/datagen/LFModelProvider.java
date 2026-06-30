@@ -1,8 +1,9 @@
 package net.justmili.leftforgotten.core.datagen;
 
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.core.datagen.impl.ImprovedModelProvider;
-import net.justmili.leftforgotten.core.util.DatagenAssetUtil;
+import net.justmili.leftforgotten.core.util.DatagenAssetUtilAddition;
+import net.justmili.leftforgotten.libs.v1.utils.DatagenAssetUtil;
+import net.justmili.leftforgotten.libs.v1.utils.datagen.impl.ImprovedModelProvider;
 import net.justmili.leftforgotten.registries.LFBlocks;
 import net.justmili.leftforgotten.registries.LFItems;
 import net.minecraft.data.PackOutput;
@@ -12,7 +13,7 @@ import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
 
-import static net.justmili.leftforgotten.core.util.DatagenAssetUtil.RotationType;
+import static net.justmili.leftforgotten.libs.v1.utils.DatagenAssetUtil.RotationType;
 
 public class LFModelProvider extends ImprovedModelProvider {
     public LFModelProvider(PackOutput output) {
@@ -124,7 +125,7 @@ public class LFModelProvider extends ImprovedModelProvider {
         // Dev
         gen.createCubeAll(LFBlocks.FEATURE_VOID.get());
         gen.createCraftingTable(LFBlocks.REMODEL_CRAFTING_TABLE.get(), LFBlocks.WOODEN_PLANKS.get());
-        gen.createFurnaceCUSTOM(LFBlocks.REMODEL_FURNACE.get(), LFBlocks.STONE.get());
+        DatagenAssetUtilAddition.createFurnaceCUSTOM(blockGen, LFBlocks.REMODEL_FURNACE.get(), LFBlocks.STONE.get());
         gen.createChest(LFBlocks.REMODEL_CHEST.get());
     }
 

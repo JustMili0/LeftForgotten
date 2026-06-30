@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.client.dimension;
 
+import net.justmili.leftforgotten.config.Config;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -15,6 +16,6 @@ public class AlphaMinecraft extends DimensionSpecialEffects {
 
     @Override
     public boolean isFoggyAt(int x, int y) {
-        return false;
+        return Config.enableFog.get();
     }
 }

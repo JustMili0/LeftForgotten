@@ -3,7 +3,7 @@ package net.justmili.leftforgotten.forge.client;
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
 import net.justmili.leftforgotten.client.CommonClient;
-import net.justmili.leftforgotten.core.util.ResourceUtil;
+import net.justmili.leftforgotten.libs.v1.utils.ResourceUtil;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.Mod;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.mirrorX;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedBlit;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Forge.*;
-import static net.justmili.leftforgotten.core.util.ClientUtil.*;
+import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.*;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {

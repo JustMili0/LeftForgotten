@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.mixin.fabric;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import net.justmili.leftforgotten.core.datagen.extensions.KnownBlocksLootProvider;
+import net.justmili.leftforgotten.libs.v1.utils.datagen.extensions.KnownBlocksLootProvider;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.level.block.Block;
 import org.spongepowered.asm.mixin.Mixin;

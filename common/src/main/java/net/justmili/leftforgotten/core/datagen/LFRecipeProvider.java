@@ -1,8 +1,9 @@
 package net.justmili.leftforgotten.core.datagen;
 
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.core.util.DatagenDataUtil;
+import net.justmili.leftforgotten.libs.v1.utils.DatagenDataUtil;
 import net.justmili.leftforgotten.registries.LFItems;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -10,6 +11,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class LFRecipeProvider extends RecipeProvider {
@@ -20,9 +22,10 @@ public class LFRecipeProvider extends RecipeProvider {
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> writer) {
         var gen = new DatagenDataUtil(LeftForgotten.MODID, writer);
-        
+
         // Wood & Planks
-        gen.planks(LFItems.WOOD.get(), LFItems.WOODEN_PLANKS.get());
+        gen.planksFromLogs(LFItems.WOOD.get(), LFItems.WOODEN_PLANKS.get());
+        gen.planksFromWood(LFItems.WOOD_6_SIDED.get(), LFItems.WOODEN_PLANKS.get());
         gen.stairs(LFItems.WOODEN_PLANKS.get(), LFItems.WOODEN_STAIRS.get());
         gen.slab(LFItems.WOODEN_PLANKS.get(), LFItems.WOODEN_SLAB.get());
         gen.fence(LFItems.WOODEN_PLANKS.get(), LFItems.FENCE.get());
@@ -70,7 +73,7 @@ public class LFRecipeProvider extends RecipeProvider {
         gen.cut(LFItems.MOSSY_COBBLESTONE.get(), LFItems.MOSSY_COBBLESTONE_WALL.get());
 
         // Bricks
-        gen.shaped2x2(RecipeCategory.BUILDING_BLOCKS, LFItems.BRICKS.get(), LFItems.BRICK.get(), 1);
+        gen.shaped2x2(RecipeCategory.BUILDING_BLOCKS, LFItems.BRICK.get(), LFItems.BRICKS.get(), 1);
         gen.stairs(LFItems.BRICKS.get(), LFItems.BRICK_STAIRS.get());
         gen.slab(LFItems.BRICKS.get(), LFItems.BRICK_SLAB.get());
         gen.wall(LFItems.BRICKS.get(), LFItems.BRICK_WALL.get());
@@ -79,7 +82,7 @@ public class LFRecipeProvider extends RecipeProvider {
         gen.cut(LFItems.BRICKS.get(), LFItems.BRICK_WALL.get());
 
         // Clay & Brick item
-        gen.shaped2x2(RecipeCategory.BUILDING_BLOCKS, LFItems.CLAY.get(), LFItems.CLAY_BALL.get(), 1);
+        gen.shaped2x2(RecipeCategory.BUILDING_BLOCKS, LFItems.CLAY_BALL.get(), LFItems.CLAY.get(), 1);
         gen.smelt(LFItems.CLAY_BALL.get(), LFItems.BRICK.get(), 0.3f);
 
         // Glass
@@ -109,9 +112,9 @@ public class LFRecipeProvider extends RecipeProvider {
             .save(writer, LeftForgotten.asResource("furnace"));
 
         // Resource Blocks
-        gen.shaped3x3(RecipeCategory.BUILDING_BLOCKS, LFItems.IRON_BLOCK.get(), Items.IRON_INGOT, 1);
-        gen.shaped3x3(RecipeCategory.BUILDING_BLOCKS, LFItems.GOLD_BLOCK.get(), Items.GOLD_INGOT, 1);
-        gen.shaped3x3(RecipeCategory.BUILDING_BLOCKS, LFItems.DIAMOND_BLOCK.get(), Items.DIAMOND, 1);
+        gen.shaped3x3(RecipeCategory.BUILDING_BLOCKS, Items.IRON_INGOT, LFItems.IRON_BLOCK.get(), 1);
+        gen.shaped3x3(RecipeCategory.BUILDING_BLOCKS, Items.GOLD_INGOT, LFItems.GOLD_BLOCK.get(), 1);
+        gen.shaped3x3(RecipeCategory.BUILDING_BLOCKS, Items.DIAMOND, LFItems.DIAMOND_BLOCK.get(), 1);
         gen.shapeless(RecipeCategory.MISC, Items.IRON_INGOT, 9, LFItems.IRON_BLOCK.get());
         gen.shapeless(RecipeCategory.MISC, Items.GOLD_INGOT, 9, LFItems.GOLD_BLOCK.get());
         gen.shapeless(RecipeCategory.MISC, Items.DIAMOND, 9, LFItems.DIAMOND_BLOCK.get());

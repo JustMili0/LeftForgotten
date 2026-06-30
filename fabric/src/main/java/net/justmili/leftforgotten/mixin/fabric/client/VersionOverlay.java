@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.justmili.leftforgotten.core.util.ClientUtil.minecraft;
+import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.minecraft;
 
 @Mixin(Gui.class)
 public abstract class VersionOverlay {
