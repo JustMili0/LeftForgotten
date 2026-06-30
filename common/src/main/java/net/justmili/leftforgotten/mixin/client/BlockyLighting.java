@@ -1,8 +1,8 @@
 package net.justmili.leftforgotten.mixin.client;
 
 import net.justmili.leftforgotten.config.Config;
-import net.justmili.leftforgotten.registries.LFResources;
 import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
+import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

@@ -5,7 +5,9 @@ import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.player.Player;
 import org.joml.Matrix4f;
 
 import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.*;
@@ -43,6 +45,19 @@ public class CommonHudModifier {
             bufferBuilder.vertex(matrix4f, x2, y2, blitOffset).uv(maxU, maxV).endVertex();
             bufferBuilder.vertex(matrix4f, x2, y1, blitOffset).uv(maxU, minV).endVertex();
             BufferUploader.drawWithShader(bufferBuilder.end());
+        }
+
+        public static int extraHealthRowsOffset() {
+            Player player = getPlayer();
+            if (player == null) return 0;
+
+            float maxHealth = Math.max(player.getMaxHealth(), player.getHealth());
+            int absorption = Mth.ceil(player.getAbsorptionAmount());
+            int rows = Mth.ceil((maxHealth + absorption) / 2.0F / 10.0F);
+            if (rows <= 1) return 0;
+
+            int rowHeight = Math.max(10 - (rows - 2), 3);
+            return (rows - 1) * rowHeight;
         }
     }
 

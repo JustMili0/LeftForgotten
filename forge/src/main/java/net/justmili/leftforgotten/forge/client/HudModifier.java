@@ -18,8 +18,7 @@ import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import static net.justmili.leftforgotten.client.CommonHudModifier.Common.mirrorX;
-import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedBlit;
+import static net.justmili.leftforgotten.client.CommonHudModifier.Common.*;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Forge.*;
 import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.*;
 
@@ -77,7 +76,7 @@ public class HudModifier {
             int full = Mth.ceil((air - 2) * 10.0 / maxAir),
                 partial = Mth.ceil(air * 10.0 / maxAir) - full,
                 rh = ((ForgeGui) minecraft.gui).rightHeight,
-                top = getHeight() - rh - airLvlH - yOffset(),
+                top = getHeight() - rh - airLvlH - yOffset() - extraHealthRowsOffset(),
                 barEnd = getWidth() / 2 + 51;
 
             for (int i = 0; i < full + partial; ++i) {

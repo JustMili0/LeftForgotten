@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Stack;
 
+import static net.justmili.leftforgotten.client.CommonHudModifier.Common.extraHealthRowsOffset;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedBlit;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Fabric.*;
 import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.getPlayer;
@@ -82,14 +83,14 @@ public abstract class HudModifier {
             int barStart = getWidth() / 2-91,
                 mirroredX = 2 * barStart+72-x,
                 x1 = mirroredX+armorW,
-                y1 = y+armorH-yOffset();
+                y1 = y+armorH-yOffset()+extraHealthRowsOffset();
 
             renderFlippedBlit(graphics, atlasLocation, x1, y1, uWidth, vHeight, uOffset, vOffset);
 
         } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
             int barEnd = getWidth() / 2+51,
                 mirroredX = 2 * barEnd-9-x;
-            graphics.blit(atlasLocation, mirroredX-airLvlW, y-airLvlH+yOffset(), uOffset, vOffset, uWidth, vHeight);
+            graphics.blit(atlasLocation, mirroredX-airLvlW, y-airLvlH+yOffset()-extraHealthRowsOffset(), uOffset, vOffset, uWidth, vHeight);
         } else {
             original.call(graphics, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
         }
