@@ -18,7 +18,7 @@ public class ClientUtil {
     }
 
     public static boolean isDebugScreenOn() {
-        return minecraft.options.hideGui;
+        return minecraft.getDebugOverlay().showDebugScreen();
     }
 
     public static int getWidth() {
@@ -36,7 +36,7 @@ public class ClientUtil {
     }
 
     public static ResourceKey<Level> getDimension() {
-        return getPlayer().level().dimension();
+        return getLevel().dimension();
     }
 
     public static boolean inDimension(ResourceKey<Level> dimension) {

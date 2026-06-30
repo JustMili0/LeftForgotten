@@ -3,6 +3,7 @@ package net.justmili.leftforgotten.neoforge.client;
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
 import net.justmili.leftforgotten.client.CommonClient;
+import net.justmili.leftforgotten.libs.v1.utils.ResourceUtil;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -20,7 +21,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.*;
 import static net.justmili.leftforgotten.client.CommonHudModifier.NeoForge.*;
-import static net.justmili.leftforgotten.core.util.ClientUtil.*;
+import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.*;
 
 @EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {
