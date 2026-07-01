@@ -221,9 +221,9 @@ public class AlphaFoodSystem {
         var sound = item == Items.HONEY_BOTTLE ? SoundEvents.HONEY_DRINK : SoundEvents.GENERIC_EAT;
         if (world instanceof Level level) {
             if (!level.isClientSide()) {
-                level.playSound(null, x, y, z, sound, SoundSource.NEUTRAL, 1.0f, pitch);
+                level.playSound(null, x, y, z, sound, SoundSource.PLAYERS, 1.0f, pitch);
             } else {
-                level.playLocalSound(x, y, z, sound, SoundSource.NEUTRAL, 1.0f, pitch, false);
+                level.playLocalSound(x, y, z, sound, SoundSource.PLAYERS, 1.0f, pitch, false);
             }
         }
     }
