@@ -2,8 +2,8 @@ package net.justmili.leftforgotten.mixin.client;
 
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.config.Config;
-import net.justmili.leftforgotten.registries.LFResources;
 import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
+import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.resources.ResourceKey;

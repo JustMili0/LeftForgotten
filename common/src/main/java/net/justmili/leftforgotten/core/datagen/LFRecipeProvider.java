@@ -1,8 +1,8 @@
 package net.justmili.leftforgotten.core.datagen;
 
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.registries.LFItems;
 import net.justmili.leftforgotten.libs.v1.utils.DatagenDataUtil;
+import net.justmili.leftforgotten.registries.LFItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;

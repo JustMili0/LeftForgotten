@@ -2,7 +2,6 @@ package net.justmili.leftforgotten.mixin;
 
 import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.registries.LFResources;
-import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;

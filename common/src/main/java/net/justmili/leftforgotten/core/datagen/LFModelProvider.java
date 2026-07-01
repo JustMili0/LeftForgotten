@@ -2,10 +2,10 @@ package net.justmili.leftforgotten.core.datagen;
 
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.core.util.DatagenAssetUtilAddition;
-import net.justmili.leftforgotten.registries.LFBlocks;
-import net.justmili.leftforgotten.registries.LFItems;
 import net.justmili.leftforgotten.libs.v1.utils.DatagenAssetUtil;
 import net.justmili.leftforgotten.libs.v1.utils.datagen.impl.ImprovedModelProvider;
+import net.justmili.leftforgotten.registries.LFBlocks;
+import net.justmili.leftforgotten.registries.LFItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;

@@ -2,9 +2,9 @@ package net.justmili.leftforgotten.core.datagen;
 
 import com.google.common.collect.Streams;
 import net.justmili.leftforgotten.LeftForgotten;
+import net.justmili.leftforgotten.libs.v1.utils.datagen.extensions.KnownBlocksLootProvider;
 import net.justmili.leftforgotten.registries.LFBlocks;
 import net.justmili.leftforgotten.registries.LFItems;
-import net.justmili.leftforgotten.libs.v1.utils.datagen.extensions.KnownBlocksLootProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;

@@ -2,8 +2,8 @@ package net.justmili.leftforgotten.content.mechanics.events;
 
 import dev.architectury.event.EventResult;
 import dev.architectury.platform.Platform;
-import net.justmili.leftforgotten.registries.LFResources;
 import net.justmili.leftforgotten.libs.v1.utils.TickUtil;
+import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;

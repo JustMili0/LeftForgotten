@@ -2,9 +2,9 @@ package net.justmili.leftforgotten.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.justmili.leftforgotten.config.Config;
+import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
 import net.justmili.leftforgotten.registries.LFBlocks;
 import net.justmili.leftforgotten.registries.LFResources;
-import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
