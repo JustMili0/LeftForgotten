@@ -101,6 +101,7 @@ public abstract class HudModifier {
     private void renderExperienceBar(CallbackInfo ci) {
         if (CommonClient.inAlpha()) ci.cancel();
     }
+    // EXP level renders with EXP bar on 1.20.1
 
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)

@@ -1,5 +1,7 @@
 {
   "left_forgotten.tab": "Left Forgotten",
+  "biome.left_forgotten.plains": "Meadow",
+  "biome.left_forgotten.forest": "Forest",
   "block.left_forgotten.brittle_bedrock": "Brittle Bedrock",
   "block.left_forgotten.grass_block": "Grass Block",
   "block.left_forgotten.dirt": "Dirt",
@@ -26,7 +28,7 @@
   "block.left_forgotten.pressure_plate": "Pressure Plate",
   "block.left_forgotten.button": "Button",
   "block.left_forgotten.coal_ore": "Coal Ore",
-  "block.left_forgotten.iron_ore": "iron Ore",
+  "block.left_forgotten.iron_ore": "Iron Ore",
   "block.left_forgotten.gold_ore": "Gold Ore",
   "block.left_forgotten.redstone_ore": "Redstone Ore",
   "block.left_forgotten.diamond_ore": "Diamonds Ore",

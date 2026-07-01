@@ -42,6 +42,7 @@ public class HudModifier {
         if (id.equals(VanillaGuiOverlay.FOOD_LEVEL.id())) event.setCanceled(true);
         // Experience disable
         if (id.equals(VanillaGuiOverlay.EXPERIENCE_BAR.id())) event.setCanceled(true);
+        // EXP level renders with EXP bar on 1.20.1
 
         // Armor move right and down, flip armor sprites
         if (id.equals(VanillaGuiOverlay.ARMOR_LEVEL.id())) {
