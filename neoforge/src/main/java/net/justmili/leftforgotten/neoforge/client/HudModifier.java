@@ -46,6 +46,7 @@ public class HudModifier {
         if (id.equals(VanillaGuiLayers.FOOD_LEVEL)) event.setCanceled(true);
         // Experience disable
         if (id.equals(VanillaGuiLayers.EXPERIENCE_BAR)) event.setCanceled(true);
+        if (id.equals(VanillaGuiLayers.EXPERIENCE_LEVEL)) event.setCanceled(true);
 
         // Armor move right and down, flip armor sprites
         if (id.equals(VanillaGuiLayers.ARMOR_LEVEL)) {

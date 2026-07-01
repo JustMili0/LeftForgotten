@@ -114,6 +114,10 @@ public abstract class HudModifier {
     private void renderExperienceBar(CallbackInfo ci) {
         if (CommonClient.inAlpha()) ci.cancel();
     }
+    @Inject(at = @At("HEAD"), method = "renderExperienceLevel", cancellable = true)
+    private void renderExperienceLevel(CallbackInfo ci) {
+        if (CommonClient.inAlpha()) ci.cancel();
+    }
 
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
