@@ -8,6 +8,6 @@
 
 ## Contributors
 - BluSpring - Datagen help, block remodel rendering
-- NBSurprise - Built all the (unused) structures for the mod
+- NBSurprise - Built all the (unused) structures for the mod & playtesting
 - Eetgeenappels - Helped with armor sprite flipping on Fabric
 - Cyber_Sammy - Helped port to 1.21.1
