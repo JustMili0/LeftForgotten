@@ -58,7 +58,7 @@ public class MusicPlayerMixin {
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void onTick(CallbackInfo ci) {
         if (ClientUtil.getLevel() == null) return;
-        if (!ClientUtil.inDimension(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
 
         ci.cancel();
 

@@ -15,15 +15,13 @@ public class LFResources {
         return Streams.stream(LFBlocks.REGISTRY).filter(Objects::nonNull).map(Supplier::get).toArray(Block[]::new);
     }
 
-    public static final class Levels {
-        public static final ResourceKey<Level> // Version Overlay main texts (and versions I'll be recreating)
-            BETA_MINECRAFT = newKey("beta_minecraft"),        // Minecraft Beta 1.8.1
-            ALPHA_MINECRAFT = newKey("alpha_minecraft"),       // Minecraft Alpha v1.1.2_01
-            INFDEV_MINECRAFT = newKey("infdev_minecraft"),      // Infdev v20100227
-            INDEV_MINECRAFT = newKey("indev_minecraft"),         // 0.31 20100110 (only displays "0.31")
-            CLASSIC_MINECRAFT = newKey("classic_minecraft"),      // 0.30_01 (only displays "0.30")
-            PRECLASSIC_MINECRAFT = newKey("preclassic_minecraft"); // rd-132211 (no overlay)
-    }
+    public static final ResourceKey<Level> // Version Overlay main texts (and versions I'll be recreating)
+        BETA_MINECRAFT = newKey("beta_minecraft"),        // Minecraft Beta 1.8.1
+        ALPHA_MINECRAFT = newKey("alpha_minecraft"),       // Minecraft Alpha v1.1.2_01
+        INFDEV_MINECRAFT = newKey("infdev_minecraft"),      // Infdev v20100227
+        INDEV_MINECRAFT = newKey("indev_minecraft"),         // 0.31 20100110 (only displays "0.31")
+        CLASSIC_MINECRAFT = newKey("classic_minecraft"),      // 0.30_01 (only displays "0.30")
+        PRECLASSIC_MINECRAFT = newKey("preclassic_minecraft"); // rd-132211 (no overlay)
 
     private static ResourceKey<Level> newKey(String key) {
         return ResourceKey.create(Registries.DIMENSION, LeftForgotten.asResource(key));

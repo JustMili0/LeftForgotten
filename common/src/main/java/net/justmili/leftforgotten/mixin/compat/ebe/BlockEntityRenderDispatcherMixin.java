@@ -20,7 +20,7 @@ public abstract class BlockEntityRenderDispatcherMixin {
     @TargetHandler(mixin = "foundationgames.enhancedblockentities.mixin.BlockEntityRenderDispatcherMixin", name = "enhanced_bes$renderOverrides", prefix = "handler")
     @Inject(method = "@MixinSquared:Handler", at = @At("HEAD"), require = 0, cancellable = true)
     private static void avoidRenderOverrideIfChest(CallbackInfo ci, @Local(argsOnly = true) BlockEntity blockEntity) {
-        if (blockEntity.getType() == BlockEntityType.CHEST && blockEntity.hasLevel() && blockEntity.getLevel().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
+        if (blockEntity.getType() == BlockEntityType.CHEST && blockEntity.hasLevel() && blockEntity.getLevel().dimension().equals(LFResources.ALPHA_MINECRAFT)) {
             ci.cancel();
         }
     }

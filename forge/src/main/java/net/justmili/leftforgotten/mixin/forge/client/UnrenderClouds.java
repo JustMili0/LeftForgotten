@@ -17,7 +17,7 @@ public class UnrenderClouds {
     @Inject(method = "renderClouds", at = @At("HEAD"), cancellable = true)
     private void unrenderClouds(PoseStack poseStack, Matrix4f projectionMatrix, float partialTick,
                                 double camX, double camY, double camZ, CallbackInfo ci) {
-        if (!ClientUtil.inDimension(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
         ci.cancel();
     }
 }

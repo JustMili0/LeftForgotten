@@ -95,7 +95,7 @@ public class AlphaFoodSystem {
     }
 
     public static CompoundEventResult<ItemStack> onRightClickItem(Player player, InteractionHand hand) {
-        if (player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) return CompoundEventResult.pass();
+        if (player.level().dimension() != LFResources.ALPHA_MINECRAFT) return CompoundEventResult.pass();
         if (hand != InteractionHand.MAIN_HAND) return CompoundEventResult.interruptTrue(player.getItemInHand(hand));
         ItemStack stack = player.getItemInHand(hand);
 
@@ -126,7 +126,7 @@ public class AlphaFoodSystem {
 
     public static EventResult onRightClickBlock(Player player, InteractionHand hand, BlockPos pos, Direction face) {
         if (hand != InteractionHand.MAIN_HAND) return EventResult.pass();
-        if (player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) return EventResult.pass();
+        if (player.level().dimension() != LFResources.ALPHA_MINECRAFT) return EventResult.pass();
         ItemStack stack = player.getItemInHand(hand);
 
         if (FOOD_HEALTH.containsKey(stack.getItem())) return EventResult.pass();

@@ -36,7 +36,7 @@ public class HudModifier {
         GuiGraphics graphics = event.getGuiGraphics();
         float partTick = event.getPartialTick();
 
-        if (!inDimension(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (!inDimension(LFResources.ALPHA_MINECRAFT)) return;
 
         // Food disable
         if (id.equals(VanillaGuiOverlay.FOOD_LEVEL.id())) event.setCanceled(true);
@@ -102,7 +102,7 @@ public class HudModifier {
 
         // Get rid of NT's version overlay and stamina bar when in dimension
         if (Platform.isModLoaded("nostalgic_tweaks")) {
-            if (inDimension(LFResources.Levels.ALPHA_MINECRAFT)) {
+            if (inDimension(LFResources.ALPHA_MINECRAFT)) {
                 String ns = id.getNamespace(),
                     path = id.getPath().toLowerCase();
                 if (!("nostalgic_tweaks".equals(ns))) return;

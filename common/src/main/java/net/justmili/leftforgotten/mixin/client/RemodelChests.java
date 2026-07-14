@@ -29,9 +29,9 @@ public class RemodelChests {
                                                                               CallbackInfo ci) {
         Level level = blockEntity.getLevel();
         if (level == null) return;
-        if (!level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (!level.dimension().equals(LFResources.ALPHA_MINECRAFT)) return;
         if (!Config.remodelChests.get()) return;
-        if (!ClientUtil.inDimension(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
         if (!blockEntity.getBlockState().is(Blocks.CHEST)) return;
 
         ci.cancel();

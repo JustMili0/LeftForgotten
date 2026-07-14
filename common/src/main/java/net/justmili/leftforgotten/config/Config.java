@@ -12,7 +12,9 @@ public class Config {
     public static ConfigEntry<Boolean>
         enableFog, enableCaveFog,
         forceBlockyLighting, remodelCraftingTable, remodelFurnace,
-        forceSteveSkin;
+        forceSteveSkin, forceOldPack;
+    public static ConfigEntry<String>
+        overrideOldPack;
     public static ConfigEntry<Boolean>
         remodelChests,
         generateFarlands;
@@ -22,15 +24,24 @@ public class Config {
 
         enableFog = client.comment("Should it be very foggy in versions under the bedrock?")
             .define("enableFog", false);
+
         forceBlockyLighting = client.comment("Should lighting in versions under the bedrock be blocky? (No Ambient Occlusion)")
             .define("forceBlockyLighting", true);
+
         client.comment("To edit remodelChests go to common.properties");
         remodelCraftingTable = client.comment("Should Client remodel the Crafting Table to look like pre-1.8?")
             .define("remodelCraftingTable", true);
         remodelFurnace = client.comment("Should Client remodel the Furnace to look like pre-1.8?")
             .define("remodelFurnace", true);
+
         forceSteveSkin = client.comment("Should versions that didn't have proper \"custom skins\" force a Steve skin instead of your own?")
             .define("forceSteveSkin", false);
+
+        forceOldPack = client.comment("Should a (Vanilla or custom) resource pack be loaded upon entering any versions below the bedrock?")
+            .define("forceOldPack", true);
+        overrideOldPack = client.comment("What other resource pack should the client use when entering any versions below the bedrock?")
+            .comment("Leave empty for default (Programmer Art)")
+            .define("overrideOldPackId", "");
 
         client.build();
     }

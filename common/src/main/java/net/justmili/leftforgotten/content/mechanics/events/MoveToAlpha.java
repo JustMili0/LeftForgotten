@@ -15,21 +15,22 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Set;
+
 public class MoveToAlpha {
     private static int returnY() {
         return !Platform.isModLoaded("bigglobe")? -88 : -1049;
     }
 
     public static EventResult onEntityHurt(LivingEntity entity, DamageSource source, float v) {
-        if (!(entity instanceof ServerPlayer player)) return EventResult.pass();
         if (source == null) return EventResult.pass();
-        if (!player.level().dimension().equals(Level.OVERWORLD)) return EventResult.pass();
+        if (!entity.level().dimension().equals(Level.OVERWORLD)) return EventResult.pass();
         if (!source.is(DamageTypes.FELL_OUT_OF_WORLD)) return EventResult.pass();
 
-        ServerLevel newLevel = player.getServer().getLevel(LFResources.Levels.ALPHA_MINECRAFT);
+        ServerLevel newLevel = entity.getServer().getLevel(LFResources.ALPHA_MINECRAFT);
         if (newLevel == null) return EventResult.pass();
 
-        player.teleportTo(newLevel, player.getX(), 156, player.getZ(), player.getYRot(), player.getXRot());
+        entity.teleportTo(newLevel, entity.getX(), 156, entity.getZ(), Set.of(), entity.getYRot(), entity.getXRot());
 
         return EventResult.interruptFalse();
     }
@@ -37,7 +38,7 @@ public class MoveToAlpha {
     public static EventResult onHurtByDimensionEntry(LivingEntity entity, DamageSource source, float v) {
         if (!(entity instanceof ServerPlayer player)) return EventResult.pass();
         if (source == null) return EventResult.pass();
-        if (!player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return EventResult.pass();
+        if (!player.level().dimension().equals(LFResources.ALPHA_MINECRAFT)) return EventResult.pass();
         if (!source.is(DamageTypes.FALL)) return EventResult.pass(); // Filter only for fall aka for entry
         if (v > 512f) return EventResult.pass(); // Cancel the damage
         if (player.getHealth() - v > 0) return EventResult.pass();
@@ -50,7 +51,7 @@ public class MoveToAlpha {
 
     public static void onPlayerTick(Player ticking) {
         if (!(ticking instanceof ServerPlayer player)) return;
-        if (!player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (!player.level().dimension().equals(LFResources.ALPHA_MINECRAFT)) return;
         if (player.getY() < 196) return;
 
         ServerLevel overworld = player.getServer().getLevel(Level.OVERWORLD);

@@ -47,4 +47,25 @@ public class ClientUtil {
         if (getPlayer() == null) return;
         getPlayer().playSound(sound, volume, pitch);
     }
+
+    public static boolean isPackLoaded(String pack) {
+        return minecraft.getResourcePackRepository().isAvailable(pack);
+    }
+    public static boolean arePackLoaded(String... packs) {
+        for (String pack : packs) {
+            if (isPackLoaded(pack)) return true;
+        }
+        return false;
+    }
+    public static boolean addPackAndTell(String pack) {
+        // Add resource pack and tell if it was loaded or not
+        return minecraft.getResourcePackRepository().addPack(pack);
+    }
+    public static void removePack(String pack) {
+        minecraft.getResourcePackRepository().removePack(pack);
+        reloadPacks();
+    }
+    public static void reloadPacks() {
+        minecraft.reloadResourcePacks();
+    }
 }

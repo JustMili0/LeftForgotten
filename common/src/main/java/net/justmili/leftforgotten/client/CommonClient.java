@@ -35,7 +35,7 @@ public class CommonClient {
     }
 
     public static boolean inAlpha() {
-        return getLevel() != null && getPlayer() != null && inDimension(LFResources.Levels.ALPHA_MINECRAFT);
+        return getLevel() != null && getPlayer() != null && inDimension(LFResources.ALPHA_MINECRAFT);
     }
     public static boolean notInAlpha() {
         return !inAlpha();

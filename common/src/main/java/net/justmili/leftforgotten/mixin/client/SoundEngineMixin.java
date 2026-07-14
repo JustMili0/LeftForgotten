@@ -30,7 +30,7 @@ public class SoundEngineMixin {
     private void onPlay(SoundInstance sound, CallbackInfo ci) {
         Minecraft minecraft = Minecraft.getInstance();
         if (sound == null || minecraft.level == null) return;
-        if (!minecraft.level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (!minecraft.level.dimension().equals(LFResources.ALPHA_MINECRAFT)) return;
 
         ResourceLocation soundPath = sound.getLocation();
 

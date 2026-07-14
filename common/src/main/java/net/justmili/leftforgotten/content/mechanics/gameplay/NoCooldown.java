@@ -20,8 +20,8 @@ public class NoCooldown {
     private static final AttributeModifier baseModifier = new AttributeModifier(MODIFIER_UUID, "left_forgotten.noCooldown",200.0, AttributeModifier.Operation.ADDITION);
     private static final AttributeModifier bcModifier = new AttributeModifier(MODIFIER_UUID, "left_forgotten.noCooldown",2.0, AttributeModifier.Operation.ADDITION);
 
-    public static void onChangedDimension(ServerPlayer player, ResourceKey<Level> fromDimension, ResourceKey<Level> toDimension) {
-        applyCooldown(player, toDimension);
+    public static void onChangeDimension(ServerPlayer player, ResourceKey<Level> fromLevel, ResourceKey<Level> toLevel) {
+        applyCooldown(player, toLevel);
     }
 
     public static void onPlayerRespawn(ServerPlayer player, boolean bl) {
@@ -51,7 +51,7 @@ public class NoCooldown {
 
         // then add the modifier to the player
         AttributeModifier modifier = Platform.isModLoaded("bettercombat") ? bcModifier : baseModifier;
-        if (toDim.equals(LFResources.Levels.ALPHA_MINECRAFT)) {
+        if (toDim.equals(LFResources.ALPHA_MINECRAFT)) {
             attackSpeedAttr.addTransientModifier(modifier);
         } else {
             attackSpeedAttr.removeModifier(modifier);
