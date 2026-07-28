@@ -10,7 +10,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 
-import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.minecraft;
+import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.client;
 
 @EventBusSubscriber(modid = LeftForgotten.MODID, value = Dist.CLIENT)
 public class VersionOverlay {
@@ -20,6 +20,6 @@ public class VersionOverlay {
         if (ClientUtil.isDebugScreenOn()) return;
         if (CommonClient.notInAlpha()) return;
 
-        CommonVersionOverlay.render(minecraft, event.getGuiGraphics());
+        CommonVersionOverlay.render(client, event.getGuiGraphics());
     }
 }

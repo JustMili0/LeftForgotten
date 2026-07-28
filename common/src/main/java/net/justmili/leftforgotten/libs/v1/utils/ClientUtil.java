@@ -11,14 +11,14 @@ import net.minecraft.world.level.Level;
 
 @Environment(EnvType.CLIENT)
 public class ClientUtil {
-    public static Minecraft minecraft = Minecraft.getInstance();
+    public static Minecraft client = Minecraft.getInstance();
 
     public static Window getWindow() {
-        return minecraft.getWindow();
+        return client.getWindow();
     }
 
     public static boolean isDebugScreenOn() {
-        return minecraft.getDebugOverlay().showDebugScreen();
+        return client.getDebugOverlay().showDebugScreen();
     }
 
     public static int getWidth() {
@@ -32,18 +32,18 @@ public class ClientUtil {
         return isNotSurvival() || shouldHideGui();
     }
     public static boolean isNotSurvival() {
-        if (minecraft.gameMode == null) return false;
-        return !(minecraft.gameMode.canHurtPlayer() && minecraft.getCameraEntity() instanceof Player);
+        if (client.gameMode == null) return false;
+        return !(client.gameMode.canHurtPlayer() && client.getCameraEntity() instanceof Player);
     }
     public static boolean shouldHideGui() {
-        return minecraft.options.hideGui;
+        return client.options.hideGui;
     }
 
     public static Player getPlayer() {
-        return minecraft.player;
+        return client.player;
     }
     public static Level getLevel() {
-        return minecraft.level;
+        return client.level;
     }
 
     public static ResourceKey<Level> getDimension() {
@@ -60,7 +60,7 @@ public class ClientUtil {
     }
 
     public static boolean isPackLoaded(String pack) {
-        return minecraft.getResourcePackRepository().isAvailable(pack);
+        return client.getResourcePackRepository().isAvailable(pack);
     }
     public static boolean arePackLoaded(String... packs) {
         for (String pack : packs) {
@@ -70,13 +70,13 @@ public class ClientUtil {
     }
     public static boolean addPackAndTell(String pack) {
         // Add resource pack and tell if it was loaded or not
-        return minecraft.getResourcePackRepository().addPack(pack);
+        return client.getResourcePackRepository().addPack(pack);
     }
     public static void removePack(String pack) {
-        minecraft.getResourcePackRepository().removePack(pack);
+        client.getResourcePackRepository().removePack(pack);
         reloadPacks();
     }
     public static void reloadPacks() {
-        minecraft.reloadResourcePacks();
+        client.reloadResourcePacks();
     }
 }

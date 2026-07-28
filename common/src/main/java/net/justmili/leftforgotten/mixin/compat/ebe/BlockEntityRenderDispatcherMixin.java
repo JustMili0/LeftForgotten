@@ -30,7 +30,9 @@ public abstract class BlockEntityRenderDispatcherMixin {
     }
 
     @Unique
-    private static boolean blockEntityInDimension(BlockEntity blockEntity, ResourceKey<Level> level) {
-        return blockEntity.getLevel().dimension().equals(level);
+    private static boolean blockEntityInDimension(BlockEntity blockEntity, ResourceKey<Level> dimension) {
+        Level level = blockEntity.getLevel();
+        if (level == null) return false;
+        return level.dimension().equals(dimension);
     }
 }

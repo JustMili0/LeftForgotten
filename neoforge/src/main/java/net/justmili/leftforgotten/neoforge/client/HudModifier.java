@@ -9,11 +9,9 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -33,18 +31,17 @@ public class HudModifier {
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiLayerEvent.Pre event) {
-
-        Player player = ClientUtil.getPlayer();
+        if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
+        var minecraft = ClientUtil.client;
+        var player = ClientUtil.getPlayer();
         if (player == null) return;
 
-        LayeredDraw.Layer overlay = event.getLayer();
-        ResourceLocation id = event.getName();
-        GuiGraphics graphics = event.getGuiGraphics();
-        DeltaTracker partTick = event.getPartialTick();
-
         int width = ClientUtil.getWidth(), height = ClientUtil.getHeight();
-
-        if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
+        var overlay = event.getLayer();
+        var id = event.getName();
+        var graphics = event.getGuiGraphics();
+        var gui = minecraft.gui;
+        var partTick = event.getPartialTick(); // NeoForge I swear to god-
 
         // Food disable
         if (id.equals(VanillaGuiLayers.FOOD_LEVEL)) event.setCanceled(true);
@@ -57,10 +54,10 @@ public class HudModifier {
             event.setCanceled(true);
             if (ClientUtil.notSurvivalOrHideGui()) return;
 
-            int level = player.getArmorValue();
-            for (int i = 1; level > 0 && i < 20; i += 2) {
-                ResourceLocation sprite = i < level? ARMOR_FULL : i == level? ARMOR_HALF : ARMOR_EMPTY;
-                TextureAtlasSprite atlasSprite = Minecraft.getInstance().getGuiSprites().getSprite(sprite);
+            int armorValue = player.getArmorValue();
+            for (int i = 1; armorValue > 0 && i < 20; i += 2) {
+                var sprite = i < armorValue? ARMOR_FULL : i == armorValue? ARMOR_HALF : ARMOR_EMPTY;
+                var atlasSprite = minecraft.getGuiSprites().getSprite(sprite);
                 int origX = width / 2 - 91 + ((i - 1) / 2) * 8,
                     x1 = mirrorX(origX) + armorW,
                     y1 = height - 39 + armorH - yOffset();
@@ -84,8 +81,7 @@ public class HudModifier {
 
             int full = Mth.ceil((air - 2) * 10.0 / maxAir),
                 partial = Mth.ceil(air * 10.0 / maxAir) - full,
-                rh = ClientUtil.minecraft.gui.rightHeight,
-                top = height - rh - airLvlH - yOffset() - extraHealthRowsOffset(),
+                top = height - gui.rightHeight - airLvlH - yOffset() - extraHealthRowsOffset(),
                 barEnd = width / 2 + 51;
 
             for (int i = 0; i < full + partial; ++i) {
@@ -111,9 +107,9 @@ public class HudModifier {
         // Get rid of NT's version overlay and stamina bar when in dimension
         if (Platform.isModLoaded("nostalgic_tweaks")) {
             if (ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) {
-                String ns = id.getNamespace(),
-                    path = id.getPath().toLowerCase();
-                if (!("nostalgic_tweaks".equals(ns))) return; // "Is it from NT?"
+                var namespace = id.getNamespace();
+                var path = id.getPath().toLowerCase();
+                if (!(namespace.equals("nostalgic_tweaks"))) return; // "Is it from NT?"
                 if (path.contains("stamina")) event.setCanceled(true); // Get rid of the stamina bar
                 // Get rid of NT's version overlay
                 if (CandyTweak.OLD_VERSION_OVERLAY.get()) CandyTweak.OLD_VERSION_OVERLAY.setCacheAndDiskThenSave(false);
