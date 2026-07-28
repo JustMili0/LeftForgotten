@@ -48,9 +48,9 @@ public class HudModifier {
 
             if (ClientUtil.notSurvivalOrHideGui()) return;
 
-            int level = player.getArmorValue();
-            for (int i = 1; level > 0 && i < 20; i += 2) {
-                int uOffset = i < level? 34 : i == level? 25 : 16,
+            int armorValue = player.getArmorValue();
+            for (int i = 1; armorValue > 0 && i < 20; i += 2) {
+                int uOffset = i < armorValue? 34 : i == armorValue? 25 : 16,
                     origX = width / 2 - 91 + ((i - 1) / 2) * 8,
                     x1 = mirrorX(origX) + armorW,
                     y1 = height - 39 + armorH - yOffset();
@@ -74,8 +74,7 @@ public class HudModifier {
 
             int full = Mth.ceil((air - 2) * 10.0 / maxAir),
                 partial = Mth.ceil(air * 10.0 / maxAir) - full,
-                rh = gui.rightHeight,
-                top = height - rh - airLvlH - yOffset() - extraHealthRowsOffset(),
+                top = height - gui.rightHeight - airLvlH - yOffset() - extraHealthRowsOffset(),
                 barEnd = width / 2 + 51;
 
             for (int i = 0; i < full + partial; ++i) {
