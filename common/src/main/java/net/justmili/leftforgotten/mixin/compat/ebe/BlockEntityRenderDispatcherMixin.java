@@ -3,7 +3,6 @@ package net.justmili.leftforgotten.mixin.compat.ebe;
 import com.bawnorton.mixinsquared.TargetHandler;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.justmili.leftforgotten.registries.LFResources;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;

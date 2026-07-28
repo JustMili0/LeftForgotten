@@ -6,7 +6,6 @@ import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.ResourceUtil;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.resources.ResourceLocation;
