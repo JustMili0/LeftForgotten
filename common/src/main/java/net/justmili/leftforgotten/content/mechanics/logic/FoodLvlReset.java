@@ -7,7 +7,7 @@ import net.minecraft.world.level.Level;
 
 public class FoodLvlReset {
     public static void onChangeDimension(ServerPlayer player, ResourceKey<Level> fromLevel, ResourceKey<Level> toLevel) {
-        if (fromLevel == LFResources.ALPHA_MINECRAFT && toLevel == Level.OVERWORLD) {
+        if (fromLevel == LFResources.ALPHA_MINECRAFT) {
             player.getFoodData().setFoodLevel(20);
             player.getFoodData().setSaturation(10.0f);
         }

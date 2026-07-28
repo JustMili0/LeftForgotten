@@ -27,9 +27,6 @@ public class RemodelChests {
     private <T extends BlockEntity & LidBlockEntity> void lf$renderAlphaChest(T blockEntity, float partialTick, PoseStack poseStack,
                                                                               MultiBufferSource buffer, int packedLight, int packedOverlay,
                                                                               CallbackInfo ci) {
-        Level level = blockEntity.getLevel();
-        if (level == null) return;
-        if (!level.dimension().equals(LFResources.ALPHA_MINECRAFT)) return;
         if (!Config.remodelChests.get()) return;
         if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
         if (!blockEntity.getBlockState().is(Blocks.CHEST)) return;

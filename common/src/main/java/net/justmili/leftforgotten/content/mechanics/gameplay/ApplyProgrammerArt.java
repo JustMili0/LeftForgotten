@@ -13,24 +13,17 @@ public class ApplyProgrammerArt {
 
     public static void onChangeDimension(ServerPlayer player, ResourceKey<Level> fromLevel, ResourceKey<Level> toLevel) {
         if (!Config.forceOldPack.get()) return;
-        if (!resourcePack.contains("golden_days") && ClientUtil.arePackLoaded("golden_days", "golden_days_alpha")) return;
-        if (toLevel == LFResources.ALPHA_MINECRAFT) {
-            setupProgrammerArt();
-        }
-        if (fromLevel == LFResources.ALPHA_MINECRAFT) {
-            clearProgrammerArt();
-        }
+        if (!resourcePack.contains("golden_days") && ClientUtil.arePackLoaded("golden_days", "golden_days_alpha", "golden_days_beta")) return;
+
+        if (toLevel == LFResources.ALPHA_MINECRAFT) setupProgrammerArt();
+        if (fromLevel == LFResources.ALPHA_MINECRAFT) clearProgrammerArt();
     }
     public static void onPlayerJoin(ServerPlayer player) {
-        if (player.level().dimension().equals(LFResources.ALPHA_MINECRAFT)) {
-            shouldResetProgrammerArt = true;
-        }
+        if (player.level().dimension().equals(LFResources.ALPHA_MINECRAFT)) shouldResetProgrammerArt = true;
     }
 
     private static String getPack() {
-        if (!Config.overrideOldPack.get().isEmpty()) {
-            return Config.overrideOldPack.get();
-        }
+        if (!Config.overrideOldPack.get().isEmpty()) return Config.overrideOldPack.get();
         return "programmer_art";
     }
 
@@ -43,8 +36,6 @@ public class ApplyProgrammerArt {
         }
     }
     private static void clearProgrammerArt() {
-        if (shouldResetProgrammerArt) {
-            ClientUtil.removePack(resourcePack);
-        }
+        if (shouldResetProgrammerArt) ClientUtil.removePack(resourcePack);
     }
 }

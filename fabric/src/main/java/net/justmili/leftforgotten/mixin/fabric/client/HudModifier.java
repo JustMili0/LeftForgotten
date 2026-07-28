@@ -3,6 +3,7 @@ package net.justmili.leftforgotten.mixin.fabric.client;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.justmili.leftforgotten.client.CommonClient;
+import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -21,8 +22,6 @@ import java.util.Stack;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.extraHealthRowsOffset;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedBlit;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Fabric.*;
-import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.getPlayer;
-import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.getWidth;
 
 @Mixin(value = Gui.class, priority = 2500)
 public abstract class HudModifier {
@@ -80,7 +79,7 @@ public abstract class HudModifier {
         }
 
         if (this.currentProfiler.peek().equals("armor")) { // Armor move right and down
-            int barStart = getWidth() / 2-91,
+            int barStart = ClientUtil.getWidth() / 2-91,
                 mirroredX = 2 * barStart+72-x,
                 x1 = mirroredX+armorW,
                 y1 = y+armorH-yOffset()+extraHealthRowsOffset();
@@ -88,7 +87,7 @@ public abstract class HudModifier {
             renderFlippedBlit(graphics, atlasLocation, x1, y1, uWidth, vHeight, uOffset, vOffset);
 
         } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
-            int barEnd = getWidth() / 2+51,
+            int barEnd = ClientUtil.getWidth() / 2+51,
                 mirroredX = 2 * barEnd-9-x;
             graphics.blit(atlasLocation, mirroredX-airLvlW, y-airLvlH+yOffset()-extraHealthRowsOffset(), uOffset, vOffset, uWidth, vHeight);
         } else {
@@ -107,9 +106,9 @@ public abstract class HudModifier {
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
     private int moveMountHealthY(int y) {
         if (CommonClient.notInAlpha()) return y;
-        if (CommonClient.nonSurvivalGamemode()) return y;
+        if (ClientUtil.notSurvivalOrHideGui()) return y;
 
-        if (getPlayer().getArmorValue() == 0) {
+        if (ClientUtil.getPlayer().getArmorValue() == 0) {
             return mountHpOffset() + mountHpH_na + mountHpH;
         }
         return mountHpOffset();
@@ -117,6 +116,6 @@ public abstract class HudModifier {
 
     @Inject(at = @At("HEAD"), method = "renderVehicleHealth", cancellable = true)
     private void mountHealthCreativeCancel(GuiGraphics graphics, CallbackInfo ci) {
-        if (CommonClient.inAlpha() && CommonClient.nonSurvivalGamemode()) ci.cancel();
+        if (CommonClient.inAlpha() && ClientUtil.notSurvivalOrHideGui()) ci.cancel();
     }
 }

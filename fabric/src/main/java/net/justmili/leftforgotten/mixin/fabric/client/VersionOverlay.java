@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.minecraft;
+import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.client;
 
 @Mixin(Gui.class)
 public abstract class VersionOverlay {
@@ -18,6 +18,6 @@ public abstract class VersionOverlay {
     public void render(GuiGraphics graphics, float partialTick, CallbackInfo ci) {
         if (CommonClient.notInAlpha()) return;
 
-        CommonVersionOverlay.render(minecraft, graphics);
+        CommonVersionOverlay.render(client, graphics);
     }
 }
