@@ -11,7 +11,7 @@ public class NostalgicTweaksCompatibiliy {
     public static void onPlayerTick(Player player) {
         // check for client side
         if (!Platform.isModLoaded("nostalgic_tweaks")) return;
-        if (player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT) {
+        if (player.level().dimension() == LFResources.ALPHA_MINECRAFT) {
             loadVars();
             justOut = true;
         } else {

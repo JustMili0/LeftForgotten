@@ -2,7 +2,7 @@ package net.justmili.leftforgotten.content.mechanics.gameplay;
 
 import dev.architectury.event.CompoundEventResult;
 import dev.architectury.event.EventResult;
-import net.justmili.leftforgotten.client.CommonClient;
+import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -93,7 +93,7 @@ public class AlphaFoodSystem {
     }
 
     public static CompoundEventResult<ItemStack> onRightClickItem(Player player, InteractionHand hand) {
-        if (player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) return CompoundEventResult.pass();
+        if (player.level().dimension() != LFResources.ALPHA_MINECRAFT) return CompoundEventResult.pass();
         if (hand != InteractionHand.MAIN_HAND) return CompoundEventResult.interruptTrue(player.getItemInHand(hand));
         ItemStack stack = player.getItemInHand(hand);
 
@@ -102,7 +102,7 @@ public class AlphaFoodSystem {
             Item item = stack.getItem();
             boolean canEat = !healthCheck(player) || entry.hasAction(FoodAction.ALWAYS_EDIBLE);
             if (canEat) {
-                if (!CommonClient.nonSurvivalGamemode()) {
+                if (!ClientUtil.notSurvivalOrHideGui()) {
                     stack.shrink(1);
                     player.getInventory().setChanged();
                     player.setHealth(Math.min(player.getHealth() + entry.health(), player.getMaxHealth()));
@@ -124,7 +124,7 @@ public class AlphaFoodSystem {
 
     public static EventResult onRightClickBlock(Player player, InteractionHand hand, BlockPos pos, Direction face) {
         if (hand != InteractionHand.MAIN_HAND) return EventResult.pass();
-        if (player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) return EventResult.pass();
+        if (player.level().dimension() != LFResources.ALPHA_MINECRAFT) return EventResult.pass();
         ItemStack stack = player.getItemInHand(hand);
 
         if (FOOD_HEALTH.containsKey(stack.getItem())) return EventResult.pass();

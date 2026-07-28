@@ -9,7 +9,6 @@ import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.mixin.accessors.DimSpecialEffectsAccessor;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.world.entity.player.Player;
 
 import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.*;
 
@@ -33,14 +32,9 @@ public class CommonClient {
     }
 
     public static boolean inAlpha() {
-        return getLevel() != null && getPlayer() != null && inDimension(LFResources.Levels.ALPHA_MINECRAFT);
+        return getLevel() != null && getPlayer() != null && inDimension(LFResources.ALPHA_MINECRAFT);
     }
     public static boolean notInAlpha() {
         return !inAlpha();
-    }
-
-    public static boolean nonSurvivalGamemode() {
-        if (minecraft.gameMode == null) return false;
-        return !(minecraft.gameMode.canHurtPlayer() && minecraft.getCameraEntity() instanceof Player);
     }
 }

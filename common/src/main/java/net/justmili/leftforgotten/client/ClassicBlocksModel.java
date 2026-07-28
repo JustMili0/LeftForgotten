@@ -26,7 +26,7 @@ public abstract class ClassicBlocksModel implements BakedModel {
 
     protected @Nullable BakedModel getBakedModel(BlockState state) {
         Level level = Minecraft.getInstance().level;
-        if (state != null && level != null && level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
+        if (state != null && level != null && level.dimension().equals(LFResources.ALPHA_MINECRAFT)) {
             if (state.is(Blocks.CRAFTING_TABLE)) {
                 state = LFBlocks.REMODEL_CRAFTING_TABLE.get().defaultBlockState();
 

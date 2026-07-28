@@ -24,9 +24,9 @@ public abstract class ForcedSteve {
 
     @Unique
     private static boolean customSkinsExisted() {
-        for (ResourceKey<Level> dimension : List.of(LFResources.Levels.ALPHA_MINECRAFT,
-            LFResources.Levels.INFDEV_MINECRAFT, LFResources.Levels.INDEV_MINECRAFT,
-            LFResources.Levels.CLASSIC_MINECRAFT, LFResources.Levels.PRECLASSIC_MINECRAFT)) {
+        for (ResourceKey<Level> dimension : List.of(LFResources.ALPHA_MINECRAFT,
+            LFResources.INFDEV_MINECRAFT, LFResources.INDEV_MINECRAFT,
+            LFResources.CLASSIC_MINECRAFT, LFResources.PRECLASSIC_MINECRAFT)) {
             if (ClientUtil.inDimension(dimension)) return false;
         }
         return true;

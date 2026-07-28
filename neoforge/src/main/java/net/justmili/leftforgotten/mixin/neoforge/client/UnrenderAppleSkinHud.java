@@ -15,7 +15,7 @@ public class UnrenderAppleSkinHud {
     @Inject(method = "render(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V",
         at = @At("HEAD"), cancellable = true, require = 0)
     private void unrenderAppleSkinHud(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-        if (!ClientUtil.inDimension(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
         ci.cancel();
     }
 }

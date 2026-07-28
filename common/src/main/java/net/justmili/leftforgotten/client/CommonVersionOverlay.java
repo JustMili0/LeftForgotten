@@ -56,7 +56,7 @@ public class CommonVersionOverlay {
     public static final Random random = new Random();
 
     public static void onClientTick(Minecraft minecraft) {
-        if (getLevel() == null || !inDimension(LFResources.Levels.ALPHA_MINECRAFT)) {
+        if (getLevel() == null || !inDimension(LFResources.ALPHA_MINECRAFT)) {
             currentText = BASE_TEXT;
             flashTicks = 0;
             return;

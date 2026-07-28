@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 
 public class WoolDrop {
     public static EventResult onEntityHurt(LivingEntity entity, DamageSource source, float amount) {
-        if (!(entity instanceof Sheep sheep && (entity.level().dimension()) == LFResources.Levels.ALPHA_MINECRAFT)) return EventResult.pass();
+        if (!(entity instanceof Sheep sheep && (entity.level().dimension()) == LFResources.ALPHA_MINECRAFT)) return EventResult.pass();
         Level world = sheep.level();
         if (world.isClientSide()) return EventResult.pass();
 

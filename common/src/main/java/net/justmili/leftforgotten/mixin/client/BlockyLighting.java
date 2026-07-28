@@ -16,7 +16,7 @@ public abstract class BlockyLighting {
     private static void blockyLighting(CallbackInfoReturnable<Boolean> cir) {
         if (Config.forceBlockyLighting.isNull() || !Config.forceBlockyLighting.get()) return;
 
-        if (ClientUtil.getLevel() != null && ClientUtil.inDimension(LFResources.Levels.ALPHA_MINECRAFT)) {
+        if (ClientUtil.getLevel() != null && ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) {
             cir.setReturnValue(false);
         }
     }

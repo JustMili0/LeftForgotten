@@ -3,12 +3,16 @@ package net.justmili.leftforgotten.mixin.compat.ebe;
 import com.bawnorton.mixinsquared.TargetHandler;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.justmili.leftforgotten.registries.LFResources;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -20,8 +24,13 @@ public abstract class BlockEntityRenderDispatcherMixin {
     @TargetHandler(mixin = "foundationgames.enhancedblockentities.mixin.BlockEntityRenderDispatcherMixin", name = "enhanced_bes$renderOverrides", prefix = "handler")
     @Inject(method = "@MixinSquared:Handler", at = @At("HEAD"), require = 0, cancellable = true)
     private static void avoidRenderOverrideIfChest(CallbackInfo ci, @Local(argsOnly = true) BlockEntity blockEntity) {
-        if (blockEntity.getType() == BlockEntityType.CHEST && blockEntity.hasLevel() && blockEntity.getLevel().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
+        if (blockEntity.getType() == BlockEntityType.CHEST && blockEntity.hasLevel() && blockEntityInDimension(blockEntity, LFResources.ALPHA_MINECRAFT)) {
             ci.cancel();
         }
+    }
+
+    @Unique
+    private static boolean blockEntityInDimension(BlockEntity blockEntity, ResourceKey<Level> level) {
+        return blockEntity.getLevel().dimension().equals(level);
     }
 }

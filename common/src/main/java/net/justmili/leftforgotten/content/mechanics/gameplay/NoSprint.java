@@ -5,7 +5,7 @@ import net.minecraft.world.entity.player.Player;
 
 public class NoSprint {
     public static void onPlayerTick(Player player) {
-        if (player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT) {
+        if (player.level().dimension() == LFResources.ALPHA_MINECRAFT) {
             player.getFoodData().setFoodLevel(4);
             player.getFoodData().setSaturation(0.0F);
         }

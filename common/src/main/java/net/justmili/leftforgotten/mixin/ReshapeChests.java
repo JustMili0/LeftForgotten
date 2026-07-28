@@ -25,7 +25,7 @@ public class ReshapeChests {
     private void lf$alphaChestShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context,
                                     CallbackInfoReturnable<VoxelShape> cir) {
         if (!(getter instanceof Level level)) return;
-        if (!level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (!level.dimension().equals(LFResources.ALPHA_MINECRAFT)) return;
         if (Config.remodelChests.isNull() || !Config.remodelChests.get()) return;
         if ((Object) this != Blocks.CHEST) return;
 

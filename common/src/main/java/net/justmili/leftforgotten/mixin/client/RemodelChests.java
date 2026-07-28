@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.LidBlockEntity;
@@ -25,12 +24,10 @@ public class RemodelChests {
         "FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
         at = @At("HEAD"), cancellable = true)
     private <T extends BlockEntity & LidBlockEntity> void lf$renderAlphaChest(T blockEntity, float partialTick, PoseStack poseStack,
-                                                                              MultiBufferSource buffer, int packedLight, int packedOverlay,
+                                                                              MultiBufferSource bufferSource, int packedLight, int packedOverlay,
                                                                               CallbackInfo ci) {
-        Level level = blockEntity.getLevel();
-        if (level == null) return;
         if (!Config.remodelChests.get()) return;
-        if (!ClientUtil.inDimension(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
         if (!blockEntity.getBlockState().is(Blocks.CHEST)) return;
 
         ci.cancel();
@@ -42,7 +39,7 @@ public class RemodelChests {
         poseStack.pushPose();
         dispatcher.getModelRenderer().renderModel(
             poseStack.last(),
-            buffer.getBuffer(RenderType.solid()),
+            bufferSource.getBuffer(RenderType.solid()),
             state,
             model,
             1f, 1f, 1f,
