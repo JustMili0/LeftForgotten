@@ -1,4 +1,6 @@
 # TODO
+- Update package layout (1.21.1 first, then 1.20.1 in sync)
+- Update integrated Core Libs layout to current (1.21.1 first, then 1.20.1 in sync)
 - Fix chest remodeling, issues caused by multiple different block entity optimization mods
 
 ```
