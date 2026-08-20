@@ -3,7 +3,7 @@ minecraft = "1.21.1"
 parchment = "2024.11.17"
 
 # -- insert architectury docs link --
-arch_loom = "1.14-SNAPSHOT"
+arch_loom = "1.13-SNAPSHOT"
 arch_plugin = "3.4-SNAPSHOT"
 arch_api = "13.0.8"
 
@@ -29,6 +29,6 @@ fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fab
 neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 
 [plugins]
-arch_loom = { id = "dev.architectury.loom-remap", version.ref = "arch_loom" }
+arch_loom = { id = "dev.architectury.loom", version.ref = "arch_loom" }
 arch_plugin = { id = "architectury-plugin", version.ref = "arch_plugin" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
