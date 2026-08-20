@@ -11,4 +11,5 @@ pluginManagement {
 
 include("common", "fabric", "neoforge")
 
-rootProject.name = "Left Forgotten"
+includeBuild("build-logic")
+rootProject.name = "Left Forgotten (1.21.1)"
