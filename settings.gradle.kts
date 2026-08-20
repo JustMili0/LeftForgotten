@@ -9,6 +9,7 @@ pluginManagement {
     }
 }
 
+includeBuild("build-logic")
 include("common", "fabric", "forge")
 
-rootProject.name = "Left Forgotten"
+rootProject.name = "Left Forgotten (1.20.1)"

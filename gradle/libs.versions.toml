@@ -3,7 +3,7 @@ minecraft = "1.20.1"
 parchment = "2023.09.03"
 
 # -- insert architectury docs link --
-arch_loom = "1.14-SNAPSHOT"
+arch_loom = "1.13-SNAPSHOT"
 arch_plugin = "3.4-SNAPSHOT"
 arch_api = "9.2.14"
 
@@ -18,6 +18,9 @@ fabric_api = "0.92.8+1.20.1"
 # https://github.com/GradleUp/shadow/releases
 shadow = "8.3.6"
 
+# https://github.com/modmuss50/mod-publish-plugin
+publish = "2.2.0"
+
 # https://github.com/LlamaLad7/MixinExtras/releases
 mixinextras = "0.5.4"
 # https://github.com/Bawnorton/MixinSquared/releases
@@ -27,9 +30,10 @@ mixinsquared = "0.3.3"
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
 fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
-forge_loader = { module = "net.minecraftforge:forge", version.ref = "forge_loader" }
+forge = { module = "net.minecraftforge:forge", version.ref = "forge_loader" }
 
 [plugins]
-arch_loom = { id = "dev.architectury.loom-remap", version.ref = "arch_loom" }
+arch_loom = { id = "dev.architectury.loom", version.ref = "arch_loom" }
 arch_plugin = { id = "architectury-plugin", version.ref = "arch_plugin" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+publish = { id = "me.modmuss50.mod-publish-plugin", version.ref = "publish" }
