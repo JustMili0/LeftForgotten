@@ -16,7 +16,7 @@ sourceSets {
 loom {
     forge {
         mixinConfig(
-            //"${modId}.mixins.json",
+            "${modId}.mixins.json",
             "${modId}-forge.mixins.json"
         )
     }
