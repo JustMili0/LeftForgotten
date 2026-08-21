@@ -55,7 +55,7 @@ public abstract class HudModifier {
     // Player HP - move down, account for AbstractHorse jump bar when saddled
     @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private int moveHeartsDown(int y) {
-        if (!CommonClient.inAlpha()) return y;
+        if (CommonClient.notInAlpha()) return y;
 
         return y+playerHpH-yOffset();
     }
@@ -73,7 +73,7 @@ public abstract class HudModifier {
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V"))
     private void redirectBlit(GuiGraphics graphics, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, Operation<Void> original) {
-        if (!CommonClient.inAlpha()) {
+        if (CommonClient.notInAlpha()) {
             original.call(graphics, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
             return;
         }

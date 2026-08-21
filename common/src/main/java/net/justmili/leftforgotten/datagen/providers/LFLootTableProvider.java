@@ -2,9 +2,9 @@ package net.justmili.leftforgotten.datagen.providers;
 
 import com.google.common.collect.Streams;
 import net.justmili.leftforgotten.LeftForgotten;
+import net.justmili.leftforgotten.libs.v1.utils.common.datagen.extensions.KnownBlocksLootProvider;
 import net.justmili.leftforgotten.registries.BlockRegistry;
 import net.justmili.leftforgotten.registries.ItemRegistry;
-import net.justmili.leftforgotten.libs.v1.utils.common.datagen.extensions.KnownBlocksLootProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;

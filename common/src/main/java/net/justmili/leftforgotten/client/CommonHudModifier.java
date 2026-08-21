@@ -10,6 +10,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import org.joml.Matrix4f;
 
+import static net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil.*;
+
 public class CommonHudModifier {
     public static class Common {
         static boolean hasSaddle() {

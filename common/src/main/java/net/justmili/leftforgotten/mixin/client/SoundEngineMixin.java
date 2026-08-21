@@ -1,9 +1,8 @@
 package net.justmili.leftforgotten.mixin.client;
 
-import net.justmili.leftforgotten.registries.SoundRegistry;
-import net.justmili.leftforgotten.registries.extra.LFResources;
-import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
+import net.justmili.leftforgotten.registries.SoundRegistry;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundEngine;
@@ -28,10 +27,8 @@ public class SoundEngineMixin {
 
     @Inject(method = "play", at = @At("HEAD"), cancellable = true)
     private void onPlay(SoundInstance sound, CallbackInfo ci) {
-        if (sound == null) return;
-        if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
-
-        ResourceLocation soundPath = sound.getLocation();
+        if (sound == null || CommonClient.notInAlpha()) return;
+        var soundPath = sound.getLocation();
 
         // Cancel stomach growl and chest opening/closing sounds as they didn't exist
         if (STOMACH_GROWL.equals(soundPath) || CHEST_OPEN.equals(soundPath) || CHEST_CLOSE.equals(soundPath)) {

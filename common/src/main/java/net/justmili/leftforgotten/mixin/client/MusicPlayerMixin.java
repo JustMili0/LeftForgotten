@@ -1,9 +1,9 @@
 package net.justmili.leftforgotten.mixin.client;
 
-import net.justmili.leftforgotten.registries.SoundRegistry;
-import net.justmili.leftforgotten.registries.extra.LFResources;
+import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.common.MathUtil;
+import net.justmili.leftforgotten.registries.SoundRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -57,8 +57,7 @@ public class MusicPlayerMixin {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void onTick(CallbackInfo ci) {
-        if (ClientUtil.level() == null) return;
-        if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
+        if (ClientUtil.level() == null || CommonClient.notInAlpha()) return;
 
         ci.cancel();
 

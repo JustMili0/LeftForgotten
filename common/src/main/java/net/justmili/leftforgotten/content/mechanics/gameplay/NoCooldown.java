@@ -3,8 +3,8 @@ package net.justmili.leftforgotten.content.mechanics.gameplay;
 
 import dev.architectury.platform.Platform;
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.justmili.leftforgotten.libs.v1.utils.common.AttributeUtil;
+import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;

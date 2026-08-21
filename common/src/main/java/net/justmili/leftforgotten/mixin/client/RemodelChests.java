@@ -1,10 +1,9 @@
 package net.justmili.leftforgotten.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.registries.BlockRegistry;
-import net.justmili.leftforgotten.registries.extra.LFResources;
-import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -27,7 +26,7 @@ public class RemodelChests {
                                                                               MultiBufferSource buffer, int packedLight, int packedOverlay,
                                                                               CallbackInfo ci) {
         if (!Config.remodelChests.get()) return;
-        if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
+        if (CommonClient.notInAlpha()) return;
         if (!blockEntity.getBlockState().is(Blocks.CHEST)) return;
 
         ci.cancel();

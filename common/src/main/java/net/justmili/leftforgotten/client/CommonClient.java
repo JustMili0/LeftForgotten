@@ -6,6 +6,7 @@ import net.fabricmc.api.Environment;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.client.dimension.AlphaMinecraft;
 import net.justmili.leftforgotten.config.Config;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.mixin.accessors.DimSpecialEffectsAccessor;
 import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -32,7 +33,7 @@ public class CommonClient {
     }
 
     public static boolean inAlpha() {
-        return level() != null && player() != null && inDimension(LFResources.ALPHA_MINECRAFT);
+        return ClientUtil.level() != null && ClientUtil.player() != null && ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT);
     }
     public static boolean notInAlpha() {
         return !inAlpha();

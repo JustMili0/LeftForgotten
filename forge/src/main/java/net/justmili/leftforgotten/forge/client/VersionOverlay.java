@@ -15,8 +15,7 @@ public class VersionOverlay {
 
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void render(RenderGuiEvent.Post event) {
-        if (ClientUtil.isDebugScreenOn()) return;
-        if (CommonClient.notInAlpha()) return;
+        if (ClientUtil.isDebugScreenOn() || CommonClient.notInAlpha()) return;
 
         CommonVersionOverlay.render(event.getGuiGraphics());
     }
