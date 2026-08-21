@@ -21,7 +21,7 @@ public record OldBoatImpactPacket(int entityId) implements CustomPacketPayload {
         NetworkManager.sendToServer(new OldBoatImpactPacket(entityId));
     }
 
-    private static void handle(OldBoatImpactPacket packet, NetworkManager.PacketContext context) {
+    static void handle(OldBoatImpactPacket packet, NetworkManager.PacketContext context) {
         context.queue(() -> {
             var entity = context.getPlayer().level().getEntity(packet.entityId());
             if (entity instanceof OldBoatEntity boat) boat.breakOnImpactOnServer();

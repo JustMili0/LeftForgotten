@@ -57,8 +57,7 @@ public class MusicPlayerMixin {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void onTick(CallbackInfo ci) {
-        if (ClientUtil.level() == null) return;
-        if (CommonClient.notInAlpha()) return;
+        if (ClientUtil.level() == null || CommonClient.notInAlpha()) return;
 
         ci.cancel();
 

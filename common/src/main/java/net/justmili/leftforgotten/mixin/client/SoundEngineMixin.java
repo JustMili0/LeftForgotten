@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.mixin.client;
 
+import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
 import net.justmili.leftforgotten.registries.SoundRegistry;
@@ -17,21 +18,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SoundEngine.class)
 public class SoundEngineMixin {
-    @Unique private static final ResourceLocation STOMACH_GROWL = ResourceUtil.asPath("subtle_effects:entity.player.stomach_growl");
-    @Unique private static final ResourceLocation CHEST_OPEN = ResourceUtil.asPath("minecraft:block.chest.open");
-    @Unique private static final ResourceLocation CHEST_CLOSE = ResourceUtil.asPath("minecraft:block.chest.close");
-    @Unique private static final ResourceLocation HURT_VANILLA = SoundEvents.PLAYER_HURT.getLocation();
-    @Unique private static final ResourceLocation HURT_FREEZE_VANILLA = SoundEvents.PLAYER_HURT_FREEZE.getLocation();
-    @Unique private static final ResourceLocation HURT_FIRE_VANILLA = SoundEvents.PLAYER_HURT_ON_FIRE.getLocation();
-    @Unique private static final ResourceLocation HURT_DROWN_VANILLA = SoundEvents.PLAYER_HURT_DROWN.getLocation();
-    @Unique private static final ResourceLocation HURT_BERRY_VANILLA = SoundEvents.PLAYER_HURT_SWEET_BERRY_BUSH.getLocation();
+    @Unique
+    private static final ResourceLocation
+        STOMACH_GROWL = ResourceUtil.asPath("subtle_effects:entity.player.stomach_growl"),
+        CHEST_OPEN = SoundEvents.CHEST_OPEN.getLocation(),
+        CHEST_CLOSE = SoundEvents.CHEST_CLOSE.getLocation(),
+        PLAYER_HURT = SoundEvents.PLAYER_HURT.getLocation(),
+        HURT_FREEZE = SoundEvents.PLAYER_HURT_FREEZE.getLocation(),
+        HURT_FIRE = SoundEvents.PLAYER_HURT_ON_FIRE.getLocation(),
+        HURT_DROWN = SoundEvents.PLAYER_HURT_DROWN.getLocation(),
+        HURT_BERRY = SoundEvents.PLAYER_HURT_SWEET_BERRY_BUSH.getLocation();
 
     @Inject(method = "play", at = @At("HEAD"), cancellable = true)
     private void onPlay(SoundInstance sound, CallbackInfo ci) {
-        if (sound == null) return;
-        if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
-
-        ResourceLocation soundPath = sound.getLocation();
+        if (sound == null || CommonClient.notInAlpha()) return;
+        var soundPath = sound.getLocation();
 
         // Cancel stomach growl and chest opening/closing sounds as they didn't exist
         if (STOMACH_GROWL.equals(soundPath) || CHEST_OPEN.equals(soundPath) || CHEST_CLOSE.equals(soundPath)) {
@@ -40,17 +41,17 @@ public class SoundEngineMixin {
         }
 
         // Replace vanilla hurt with alpha hurt
-        if (HURT_VANILLA.equals(soundPath)) {
+        if (PLAYER_HURT.equals(soundPath)) {
             ci.cancel();
-            ((SoundEngine)(Object)this).play(SimpleSoundInstance.forUI(SoundRegistry.HURT.get(), 1.0f));
+            ((SoundEngine) (Object) this).play(SimpleSoundInstance.forUI(SoundRegistry.HURT.get(), 1.0f));
             return;
         }
         // Play alpha hurt on top of other hurt sounds
-        if (HURT_FREEZE_VANILLA.equals(soundPath)
-            || HURT_FIRE_VANILLA.equals(soundPath)
-            || HURT_DROWN_VANILLA.equals(soundPath)
-            || HURT_BERRY_VANILLA.equals(soundPath)) {
-            ((SoundEngine)(Object)this).play(SimpleSoundInstance.forUI(SoundRegistry.HURT.get(), 1.0f));
+        if (HURT_FREEZE.equals(soundPath)
+            || HURT_FIRE.equals(soundPath)
+            || HURT_DROWN.equals(soundPath)
+            || HURT_BERRY.equals(soundPath)) {
+            ((SoundEngine) (Object) this).play(SimpleSoundInstance.forUI(SoundRegistry.HURT.get(), 1.0f));
             // Don't cancel original sound
         }
     }

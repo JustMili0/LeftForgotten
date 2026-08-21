@@ -2,6 +2,7 @@ package net.justmili.leftforgotten.neoforge.client;
 
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
+import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
 import net.justmili.leftforgotten.registries.extra.LFResources;
@@ -31,7 +32,7 @@ public class HudModifier {
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiLayerEvent.Pre event) {
-        if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
+        if (CommonClient.notInAlpha()) return;
         var minecraft = ClientUtil.client();
         var player = ClientUtil.player();
         if (player == null) return;
@@ -106,7 +107,7 @@ public class HudModifier {
 
         // Get rid of NT's version overlay and stamina bar when in dimension
         if (Platform.isModLoaded("nostalgic_tweaks")) {
-            if (ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) {
+            if (CommonClient.inAlpha()) {
                 var namespace = id.getNamespace();
                 var path = id.getPath().toLowerCase();
                 if (!(namespace.equals("nostalgic_tweaks"))) return; // "Is it from NT?"
@@ -119,7 +120,7 @@ public class HudModifier {
         }
     }
 
-    private static void render(GuiGraphics graphics, LayeredDraw.Layer overlay, DeltaTracker partialTick, int x, int y) {
+    static void render(GuiGraphics graphics, LayeredDraw.Layer overlay, DeltaTracker partialTick, int x, int y) {
         graphics.pose().pushPose();
         graphics.pose().translate(x, y, 0);
         overlay.render(graphics, partialTick);
