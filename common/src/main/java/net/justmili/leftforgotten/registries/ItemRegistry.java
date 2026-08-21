@@ -120,7 +120,7 @@ public class ItemRegistry {
     }
 
     private static <T extends Item> RegistrySupplier<T> registerItem(String name, Function<Item.Properties, T> itemBuilder) {
-        //var key = ResourceKey.create(Registries.ITEM, LeftForgotten.asResource(name)); // not needed right now but keep for later
+        //var key = ResourceKey.create(Registries.ITEM, LeftForgotten.asId(name)); // not needed right now but keep for later
         return REGISTRY.register(name, () -> itemBuilder.apply(new Item.Properties()));
     }
     private static RegistrySupplier<Item> registerBlock(RegistrySupplier<Block> block) {

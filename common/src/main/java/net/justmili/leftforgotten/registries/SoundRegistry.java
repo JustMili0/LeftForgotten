@@ -35,7 +35,7 @@ public class SoundRegistry {
     }
 
     private static RegistrySupplier<SoundEvent> register(String name) {
-        return REGISTRY.register(name, () -> SoundEvent.createVariableRangeEvent(LeftForgotten.asResource(name)));
+        return REGISTRY.register(name, () -> SoundEvent.createVariableRangeEvent(LeftForgotten.asId(name)));
     }
 
     public static void register() {

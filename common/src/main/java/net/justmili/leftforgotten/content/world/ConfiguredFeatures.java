@@ -12,7 +12,7 @@ public class ConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE = registerKey("tree"), FANCY_TREE = registerKey("fancy_tree");
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, LeftForgotten.asResource(name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, LeftForgotten.asId(name));
     }
 
     private static <FC extends FeatureConfiguration, F extends Feature<FC>>

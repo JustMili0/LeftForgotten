@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Axis;
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.content.entity.LFBoatEntity;
+import net.justmili.leftforgotten.content.entity.OldBoatEntity;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ListModel;
 import net.minecraft.client.model.WaterPatchModel;
@@ -22,11 +22,11 @@ import org.joml.Quaternionf;
 
 import java.util.Map;
 
-public class LFBoatRenderer extends EntityRenderer<LFBoatEntity> {
-    static final ResourceLocation TEXTURE = LeftForgotten.asResource("textures/entity/boat/boat.png");
+public class OldBoatRenderer extends EntityRenderer<OldBoatEntity> {
+    static final ResourceLocation TEXTURE = LeftForgotten.asId("textures/entity/boat/boat.png");
     final Map<Boat.Type, Pair<ResourceLocation, ListModel<Boat>>> boatResources;
 
-    public LFBoatRenderer(EntityRendererProvider.Context context) {
+    public OldBoatRenderer(EntityRendererProvider.Context context) {
         super(context);
         this.shadowRadius = 0.8F;
         this.boatResources = ImmutableMap.of(
@@ -38,7 +38,7 @@ public class LFBoatRenderer extends EntityRenderer<LFBoatEntity> {
     }
 
     @Override
-    public void render(LFBoatEntity entity, float entityYaw, float partialTick,
+    public void render(OldBoatEntity entity, float entityYaw, float partialTick,
                        PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
         poseStack.translate(0.0F, 0.375F, 0.0F);
@@ -79,7 +79,7 @@ public class LFBoatRenderer extends EntityRenderer<LFBoatEntity> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(LFBoatEntity entity) {
+    public ResourceLocation getTextureLocation(OldBoatEntity entity) {
         return TEXTURE;
     }
 }

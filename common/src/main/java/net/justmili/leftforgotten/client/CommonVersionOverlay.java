@@ -83,19 +83,12 @@ public class CommonVersionOverlay {
         float targetHeight = 8f;
         float userScale = (float) Math.round(targetHeight / font.lineHeight);
 
-        int x = 2;
-        int y = 2;
-        int textColor = 0xFFFFFF;
-        int textShadowColor = 0xFF3F3F3F;
-        int drawX = Math.round(x / userScale);
-        int drawY = Math.round(y / userScale);
+        int x = Math.round(2 / userScale);
+        int y = Math.round(2 / userScale);
 
         graphics.pose().pushPose();
         graphics.pose().scale((int) userScale, (int) userScale, 1f);
-
-        graphics.drawString(font, Component.literal(currentText), drawX+1, drawY+1, textShadowColor, false);
-        graphics.drawString(font, Component.literal(currentText), drawX, drawY, textColor, false);
-
+        graphics.drawString(font, Component.literal(currentText), x, y, 0xFFFFFF, true);
         graphics.pose().popPose();
     }
 }

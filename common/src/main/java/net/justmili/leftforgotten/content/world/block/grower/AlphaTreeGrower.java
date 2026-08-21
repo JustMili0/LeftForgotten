@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import org.jetbrains.annotations.Nullable;
 
-public class TreeGrower extends AbstractTreeGrower {
+public class AlphaTreeGrower extends AbstractTreeGrower {
     @Override
     protected @Nullable ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean hasFlowers) {
         if (MathUtil.chance(0.9f)) {

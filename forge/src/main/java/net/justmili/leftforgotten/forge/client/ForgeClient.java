@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.forge.client;
 
 import net.justmili.leftforgotten.client.CommonClient;
-import net.justmili.leftforgotten.content.entity.renderer.LFBoatRenderer;
+import net.justmili.leftforgotten.content.entity.renderer.OldBoatRenderer;
 import net.justmili.leftforgotten.registries.EntityRegistry;
 import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -28,15 +28,16 @@ public class ForgeClient {
 
     @SubscribeEvent
     public static void wrapModelsForRemodelBlocks(ModelEvent.ModifyBakingResult event) {
-        for (ResourceLocation id : event.getModels().keySet()) {
+        var models = event.getModels();
+        for (ResourceLocation id : models.keySet()) {
             if (CommonClient.shouldReplaceBakedModel(id)) {
-                event.getModels().put(id, new ClassicBlocksModelForge(event.getModels().get(id)));
+                models.put(id, new ClassicBlocksModelForge(models.get(id)));
             }
         }
     }
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(EntityRegistry.BOAT.get(), LFBoatRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.BOAT.get(), OldBoatRenderer::new);
     }
 }

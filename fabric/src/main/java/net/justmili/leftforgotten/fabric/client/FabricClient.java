@@ -5,7 +5,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.justmili.leftforgotten.client.CommonClient;
-import net.justmili.leftforgotten.content.entity.renderer.LFBoatRenderer;
+import net.justmili.leftforgotten.content.entity.renderer.OldBoatRenderer;
 import net.justmili.leftforgotten.registries.EntityRegistry;
 import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.renderer.RenderType;
@@ -18,7 +18,7 @@ public final class FabricClient implements ClientModInitializer {
             BlockRenderLayerMap.INSTANCE.putBlock(block, RenderType.cutout());
         }
 
-        EntityRendererRegistry.register(EntityRegistry.BOAT, LFBoatRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.BOAT, OldBoatRenderer::new);
 
         CommonClient.register();
 

@@ -13,8 +13,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class NoCooldown {
-    static final AttributeModifier baseModifier = AttributeUtil.create(LeftForgotten.asResource("no_cooldown_base"), 200, AttributeModifier.Operation.ADDITION);
-    static final AttributeModifier bcModifier = AttributeUtil.create(LeftForgotten.asResource("no_cooldown_bc"), 2, AttributeModifier.Operation.ADDITION);
+    static final AttributeModifier baseModifier = AttributeUtil.create(LeftForgotten.asId("no_cooldown_base"), 200, AttributeModifier.Operation.ADDITION);
+    static final AttributeModifier bcModifier = AttributeUtil.create(LeftForgotten.asId("no_cooldown_bc"), 2, AttributeModifier.Operation.ADDITION);
 
     public static void onChangeDimension(ServerPlayer player, ResourceKey<Level> fromLevel, ResourceKey<Level> toLevel) {
         applyCooldown(player, toLevel);

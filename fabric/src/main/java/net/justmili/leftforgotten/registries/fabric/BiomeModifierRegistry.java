@@ -9,7 +9,7 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class BiomeModifierRegistry {
-    static final ResourceKey<PlacedFeature> BRITTLE_BEDROCK = ResourceKey.create(Registries.PLACED_FEATURE, LeftForgotten.asResource("brittle_bedrock"));
+    static final ResourceKey<PlacedFeature> BRITTLE_BEDROCK = ResourceKey.create(Registries.PLACED_FEATURE, LeftForgotten.asId("brittle_bedrock"));
 
     public static void register() {
         BiomeModifications.addFeature(

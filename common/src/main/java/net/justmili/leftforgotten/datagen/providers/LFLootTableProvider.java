@@ -143,7 +143,7 @@ public class LFLootTableProvider extends LootTableProvider {
 
         @Override
         public void generate(BiConsumer<ResourceLocation, LootTable.Builder> output) {
-            output.accept(LeftForgotten.asResource("chests/house"), LootTable.lootTable()
+            output.accept(LeftForgotten.asId("chests/house"), LootTable.lootTable()
                 // Broken wooden pickaxe
                 .withPool(LootPool.lootPool()
                     .setRolls(ConstantValue.exactly(1))

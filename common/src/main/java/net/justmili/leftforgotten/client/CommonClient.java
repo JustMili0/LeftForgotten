@@ -19,7 +19,7 @@ public class CommonClient {
 
         ClientTickEvent.CLIENT_POST.register(CommonVersionOverlay::onClientTick);
 
-        DimSpecialEffectsAccessor.getEffects().put(LeftForgotten.asResource("alpha_minecraft"), new AlphaMinecraft());
+        DimSpecialEffectsAccessor.getEffects().put(LeftForgotten.asId("alpha_minecraft"), new AlphaMinecraft());
     }
 
     public static boolean shouldReplaceBakedModel(ResourceLocation modelLocation) {

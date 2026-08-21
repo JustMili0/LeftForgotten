@@ -107,7 +107,7 @@ public class LFRecipeProvider extends RecipeProvider {
             .pattern("# #")
             .pattern("###")
             .unlockedBy(getHasName(ItemRegistry.COBBLESTONE.get()), has(ItemRegistry.COBBLESTONE.get()))
-            .save(writer, LeftForgotten.asResource("furnace"));
+            .save(writer, LeftForgotten.asId("furnace"));
 
         // Resource Blocks
         gen.shaped3x3(RecipeCategory.BUILDING_BLOCKS, Items.IRON_INGOT, ItemRegistry.IRON_BLOCK.get(), 1);
@@ -126,6 +126,6 @@ public class LFRecipeProvider extends RecipeProvider {
             .pattern("# #")
             .pattern("###")
             .unlockedBy(getHasName(ItemRegistry.WOODEN_PLANKS.get()), has(ItemRegistry.WOODEN_PLANKS.get()))
-            .save(writer, LeftForgotten.asResource("boat"));
+            .save(writer, LeftForgotten.asId("boat"));
     }
 }

@@ -1,6 +1,6 @@
 package net.justmili.leftforgotten.content.item;
 
-import net.justmili.leftforgotten.content.entity.LFBoatEntity;
+import net.justmili.leftforgotten.content.entity.OldBoatEntity;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -27,7 +27,7 @@ public class Boat extends Item {
             var pos = hitResult.getBlockPos();
             var face = hitResult.getDirection();
 
-            var boat = new LFBoatEntity(level, pos.getX() + 0.5, pos.getY() + face.getStepY() + 0.375, pos.getZ() + 0.5);
+            var boat = new OldBoatEntity(level, pos.getX() + 0.5, pos.getY() + face.getStepY() + 0.375, pos.getZ() + 0.5);
             boat.setYRot(player.getYRot());
 
             if (!level.noCollision(boat, boat.getBoundingBox())) return InteractionResultHolder.fail(stack);

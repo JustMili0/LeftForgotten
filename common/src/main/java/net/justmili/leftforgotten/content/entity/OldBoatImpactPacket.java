@@ -6,11 +6,11 @@ import net.justmili.leftforgotten.LeftForgotten;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
-public class BoatImpactPacket {
-    public static final ResourceLocation ID = LeftForgotten.asResource("boat_impact");
+public class OldBoatImpactPacket {
+    public static final ResourceLocation ID = LeftForgotten.asId("boat_impact");
 
     public static void register() {
-        NetworkManager.registerReceiver(NetworkManager.Side.C2S, ID, BoatImpactPacket::handle);
+        NetworkManager.registerReceiver(NetworkManager.Side.C2S, ID, OldBoatImpactPacket::handle);
     }
 
     public static void send(int entityId) {
@@ -23,7 +23,7 @@ public class BoatImpactPacket {
         int entityId = buf.readInt();
         context.queue(() -> {
             var entity = context.getPlayer().level().getEntity(entityId);
-            if (entity instanceof LFBoatEntity boat) boat.breakOnImpactOnServer();
+            if (entity instanceof OldBoatEntity boat) boat.breakOnImpactOnServer();
         });
     }
 }

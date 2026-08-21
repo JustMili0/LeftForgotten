@@ -7,7 +7,6 @@ import net.justmili.leftforgotten.registries.BlockRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -19,8 +18,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ChestRenderer.class)
 public class RemodelChests {
-    @Inject(method = "render(Lnet/minecraft/world/level/block/entity/BlockEntity;" +
-        "FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
+    @Inject(method = "render(Lnet/minecraft/world/level/block/entity/BlockEntity;FL" +
+        "com/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
         at = @At("HEAD"), cancellable = true)
     private <T extends BlockEntity & LidBlockEntity> void lf$renderAlphaChest(T blockEntity, float partialTick, PoseStack poseStack,
                                                                               MultiBufferSource buffer, int packedLight, int packedOverlay,
@@ -31,7 +30,7 @@ public class RemodelChests {
 
         ci.cancel();
 
-        BlockRenderDispatcher dispatcher = Minecraft.getInstance().getBlockRenderer();
+        var dispatcher = Minecraft.getInstance().getBlockRenderer();
         var state = BlockRegistry.REMODEL_CHEST.get().withPropertiesOf(blockEntity.getBlockState());
         var model = dispatcher.getBlockModel(state);
 

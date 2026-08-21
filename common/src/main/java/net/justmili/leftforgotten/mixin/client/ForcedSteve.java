@@ -19,7 +19,7 @@ import java.util.List;
 @Mixin(PlayerInfo.class)
 public abstract class ForcedSteve {
     @Unique
-    private static final ResourceLocation STEVE_SKIN = LeftForgotten.asResource("textures/entity/player/steve.png");
+    private static final ResourceLocation STEVE_SKIN = LeftForgotten.asId("textures/entity/player/steve.png");
 
     @Unique
     private static boolean customSkinsExisted() {

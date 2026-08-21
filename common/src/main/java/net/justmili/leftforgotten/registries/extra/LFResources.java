@@ -25,6 +25,6 @@ public class LFResources {
         PRECLASSIC_MINECRAFT = newKey("preclassic_minecraft"); // rd-132211 (no overlay)
 
     private static ResourceKey<Level> newKey(String key) {
-        return ResourceKey.create(Registries.DIMENSION, LeftForgotten.asResource(key));
+        return ResourceKey.create(Registries.DIMENSION, LeftForgotten.asId(key));
     }
 }

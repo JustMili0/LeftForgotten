@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten;
 
 import net.justmili.leftforgotten.config.Config;
-import net.justmili.leftforgotten.content.entity.BoatImpactPacket;
+import net.justmili.leftforgotten.content.entity.OldBoatImpactPacket;
 import net.justmili.leftforgotten.libs.CoreLibs;
 import net.justmili.leftforgotten.registries.*;
 import net.minecraft.resources.ResourceLocation;
@@ -22,11 +22,11 @@ public final class LeftForgotten {
         EntityRegistry.register();
         SoundRegistry.register();
 
-        BoatImpactPacket.register();
+        OldBoatImpactPacket.register();
         EventRegistry.register();
     }
 
-    public static ResourceLocation asResource(String path) {
+    public static ResourceLocation asId(String path) {
         return new ResourceLocation(MODID, path);
     }
 }

@@ -12,16 +12,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
-public class LFBoatEntity extends Boat {
+public class OldBoatEntity extends Boat {
     static final double BREAK_SPEED_THRESHOLD = 0.2;
     static final float MAX_HEALTH = 4.0F;
     public float health = MAX_HEALTH;
 
-    public LFBoatEntity(EntityType<? extends Boat> type, Level level) {
+    public OldBoatEntity(EntityType<? extends Boat> type, Level level) {
         super(type, level);
     }
 
-    public LFBoatEntity(Level level, double x, double y, double z) {
+    public OldBoatEntity(Level level, double x, double y, double z) {
         this(EntityRegistry.BOAT.get(), level);
         setPos(x, y, z);
         xo = x;
@@ -57,7 +57,7 @@ public class LFBoatEntity extends Boat {
         var newDelta = getDeltaMovement();
         double speedAfter = Math.sqrt(newDelta.x * newDelta.x + newDelta.z * newDelta.z);
         if (speedBefore > BREAK_SPEED_THRESHOLD && speedAfter < speedBefore * 0.4) {
-            if (level().isClientSide) BoatImpactPacket.send(getId());
+            if (level().isClientSide) OldBoatImpactPacket.send(getId());
         }
     }
 
@@ -65,7 +65,7 @@ public class LFBoatEntity extends Boat {
     public boolean hurt(DamageSource source, float amount) {
         if (isInvulnerableTo(source)) return false;
         if (!level().isClientSide) {
-            boolean isCreative = source.getEntity() instanceof Player player && player.isCreative();
+            boolean isCreative = source.getEntity() instanceof Player player && player.getAbilities().instabuild;
             if (isCreative) {
                 discard();
                 return true;
