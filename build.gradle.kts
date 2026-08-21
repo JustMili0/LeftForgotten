@@ -1,7 +1,10 @@
+import multiloader.baseName
+import multiloader.mcVersion
+import multiloader.modVersion
+import multiloader.root
 import net.fabricmc.loom.api.LoomGradleExtensionAPI
 import net.fabricmc.loom.api.fabricapi.FabricApiExtension
 import org.gradle.accessors.dm.LibrariesForLibs
-import multiloader.*
 
 plugins {
     java

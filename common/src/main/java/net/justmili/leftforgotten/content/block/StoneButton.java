@@ -1,12 +1,12 @@
 
 package net.justmili.leftforgotten.content.block;
 
-import net.justmili.leftforgotten.content.block.dev.CommonBlock;
+import net.justmili.leftforgotten.libs.v1.utils.common.BlockBehaviorUtil;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 
 public class StoneButton extends ButtonBlock {
     public StoneButton() {
-        super(BlockSetType.STONE, 20, CommonBlock.button());
+        super(BlockSetType.STONE, 20, BlockBehaviorUtil.button());
     }
 }

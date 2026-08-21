@@ -3,14 +3,12 @@ package net.justmili.leftforgotten.neoforge.client;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.client.CommonVersionOverlay;
-import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
-
-import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.client;
 
 @EventBusSubscriber(modid = LeftForgotten.MODID, value = Dist.CLIENT)
 public class VersionOverlay {
@@ -20,6 +18,6 @@ public class VersionOverlay {
         if (ClientUtil.isDebugScreenOn()) return;
         if (CommonClient.notInAlpha()) return;
 
-        CommonVersionOverlay.render(client, event.getGuiGraphics());
+        CommonVersionOverlay.render(event.getGuiGraphics());
     }
 }

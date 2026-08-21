@@ -1,9 +1,9 @@
 package net.justmili.leftforgotten.mixin.client;
 
-import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
-import net.justmili.leftforgotten.libs.v1.utils.ResourceUtil;
-import net.justmili.leftforgotten.registries.LFResources;
-import net.justmili.leftforgotten.registries.LFSounds;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
+import net.justmili.leftforgotten.registries.SoundRegistry;
+import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundEngine;
@@ -42,7 +42,7 @@ public class SoundEngineMixin {
         // Replace vanilla hurt with alpha hurt
         if (HURT_VANILLA.equals(soundPath)) {
             ci.cancel();
-            ((SoundEngine)(Object)this).play(SimpleSoundInstance.forUI(LFSounds.HURT.get(), 1.0f));
+            ((SoundEngine)(Object)this).play(SimpleSoundInstance.forUI(SoundRegistry.HURT.get(), 1.0f));
             return;
         }
         // Play alpha hurt on top of other hurt sounds
@@ -50,7 +50,7 @@ public class SoundEngineMixin {
             || HURT_FIRE_VANILLA.equals(soundPath)
             || HURT_DROWN_VANILLA.equals(soundPath)
             || HURT_BERRY_VANILLA.equals(soundPath)) {
-            ((SoundEngine)(Object)this).play(SimpleSoundInstance.forUI(LFSounds.HURT.get(), 1.0f));
+            ((SoundEngine)(Object)this).play(SimpleSoundInstance.forUI(SoundRegistry.HURT.get(), 1.0f));
             // Don't cancel original sound
         }
     }

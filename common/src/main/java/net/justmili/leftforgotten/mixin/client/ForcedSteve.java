@@ -2,8 +2,8 @@ package net.justmili.leftforgotten.mixin.client;
 
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.config.Config;
-import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
-import net.justmili.leftforgotten.registries.LFResources;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.resources.ResourceKey;
@@ -20,7 +20,7 @@ import java.util.List;
 @Mixin(PlayerInfo.class)
 public abstract class ForcedSteve {
     @Unique
-    private static final ResourceLocation STEVE_SKIN = LeftForgotten.asResource("textures/entity/player/steve.png");
+    private static final ResourceLocation STEVE_SKIN = LeftForgotten.asId("textures/entity/player/steve.png");
 
     @Unique
     private static boolean customSkinsExisted() {

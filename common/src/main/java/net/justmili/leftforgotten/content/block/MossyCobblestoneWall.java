@@ -1,11 +1,11 @@
 
 package net.justmili.leftforgotten.content.block;
 
-import net.justmili.leftforgotten.registries.LFBlocks;
+import net.justmili.leftforgotten.registries.BlockRegistry;
 import net.minecraft.world.level.block.WallBlock;
 
 public class MossyCobblestoneWall extends WallBlock {
 	public MossyCobblestoneWall() {
-		super(Properties.ofFullCopy(LFBlocks.MOSSY_COBBLESTONE.get()).forceSolidOn());
+		super(Properties.ofFullCopy(BlockRegistry.MOSSY_COBBLESTONE.get()).forceSolidOn());
 	}
 }

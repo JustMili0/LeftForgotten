@@ -2,8 +2,9 @@ package net.justmili.leftforgotten.content.mechanics.gameplay;
 
 import dev.architectury.event.CompoundEventResult;
 import dev.architectury.event.EventResult;
-import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
-import net.justmili.leftforgotten.registries.LFResources;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.MathUtil;
+import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -35,12 +36,12 @@ public class AlphaFoodSystem {
      * - None, I'm not debugging that BS
      *       ~ Millie
      */
-    private record FoodEntry(float health, FoodAction... actions) {
+    record FoodEntry(float health, FoodAction... actions) {
         boolean hasAction(FoodAction action) {
             return Arrays.asList(actions).contains(action);
         }
     }
-    private static final Map<Item, FoodEntry> FOOD_HEALTH = Map.ofEntries(
+    static final Map<Item, FoodEntry> FOOD_HEALTH = Map.ofEntries(
         Map.entry(Items.PORKCHOP, new FoodEntry(1.5F)),
         Map.entry(Items.COOKED_PORKCHOP, new FoodEntry(4.0F)),
         Map.entry(Items.BEEF, new FoodEntry(1.5F)),
@@ -83,7 +84,7 @@ public class AlphaFoodSystem {
         Map.entry(Items.HONEY_BOTTLE, new FoodEntry(1.5F, FoodAction.CURES_POISON, FoodAction.RESULT_BOTTLE, FoodAction.ALWAYS_EDIBLE)),
         Map.entry(Items.DRIED_KELP, new FoodEntry(0.5F))
     );
-    private enum FoodAction {
+    enum FoodAction {
         RESULT_BOWL, RESULT_BOTTLE,
         TELEPORTS, ALWAYS_EDIBLE,
         CURES_POISON, POISONS_WITH_CHANCE, POISONS,
@@ -95,11 +96,11 @@ public class AlphaFoodSystem {
     public static CompoundEventResult<ItemStack> onRightClickItem(Player player, InteractionHand hand) {
         if (player.level().dimension() != LFResources.ALPHA_MINECRAFT) return CompoundEventResult.pass();
         if (hand != InteractionHand.MAIN_HAND) return CompoundEventResult.interruptTrue(player.getItemInHand(hand));
-        ItemStack stack = player.getItemInHand(hand);
+        var stack = player.getItemInHand(hand);
 
-        FoodEntry entry = FOOD_HEALTH.get(stack.getItem());
+        var entry = FOOD_HEALTH.get(stack.getItem());
         if (entry != null) {
-            Item item = stack.getItem();
+            var item = stack.getItem();
             boolean canEat = !healthCheck(player) || entry.hasAction(FoodAction.ALWAYS_EDIBLE);
             if (canEat) {
                 if (!ClientUtil.notSurvivalOrHideGui()) {
@@ -125,7 +126,7 @@ public class AlphaFoodSystem {
     public static EventResult onRightClickBlock(Player player, InteractionHand hand, BlockPos pos, Direction face) {
         if (hand != InteractionHand.MAIN_HAND) return EventResult.pass();
         if (player.level().dimension() != LFResources.ALPHA_MINECRAFT) return EventResult.pass();
-        ItemStack stack = player.getItemInHand(hand);
+        var stack = player.getItemInHand(hand);
 
         if (FOOD_HEALTH.containsKey(stack.getItem())) return EventResult.pass();
         if (stack.has(DataComponents.FOOD)) return EventResult.interruptTrue();
@@ -133,7 +134,7 @@ public class AlphaFoodSystem {
         return EventResult.pass();
     }
 
-    private static void applyAction(FoodAction action, Player player, ItemStack stack, Item item) {
+    static void applyAction(FoodAction action, Player player, ItemStack stack, Item item) {
         switch (action) {
             case RESULT_BOWL -> giveResultItem(player, Items.BOWL);
             case RESULT_BOTTLE -> giveResultItem(player, Items.GLASS_BOTTLE);
@@ -148,46 +149,46 @@ public class AlphaFoodSystem {
             default -> {}
         }
     }
-    private static void giveResultItem(Player player, Item resultItem) {
-        ItemStack result = new ItemStack(resultItem);
+    static void giveResultItem(Player player, Item resultItem) {
+        var result = new ItemStack(resultItem);
         if (!player.getInventory().add(result)) {
             player.drop(result, false);
         }
     }
-    private static void applyPoisonWithChance(Player player) {
-        if (player.level().random.nextFloat() < 0.6F) {
+    static void applyPoisonWithChance(Player player) {
+        if (MathUtil.chance(0.6f)) {
             player.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0));
         }
     }
-    private static void applyPoison(Player player, Item item) {
+    static void applyPoison(Player player, Item item) {
         if (item == Items.SPIDER_EYE) {
             player.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0));
         } else if (item == Items.PUFFERFISH) {
             player.addEffect(new MobEffectInstance(MobEffects.POISON, 1200, 1));
         }
     }
-    private static void applyHungerWithChance(Player player, Item item) {
-        if (item == Items.ROTTEN_FLESH && player.level().random.nextFloat() < 0.8F) {
+    static void applyHungerWithChance(Player player, Item item) {
+        if (item == Items.ROTTEN_FLESH && MathUtil.chance(0.8f)) {
             player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 600, 0));
-        } else if (item == Items.CHICKEN && player.level().random.nextFloat() < 0.3F) {
+        } else if (item == Items.CHICKEN && MathUtil.chance(0.3f)) {
             player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 600, 0));
         }
     }
 
-    private static void applySuspiciousStewEffect(Player player, ItemStack stack) {
+    static void applySuspiciousStewEffect(Player player, ItemStack stack) {
         var effects = stack.get(DataComponents.SUSPICIOUS_STEW_EFFECTS);
         if (effects == null) return;
         for (var entry : effects.effects()) {
             player.addEffect(entry.createEffectInstance());
         }
     }
-    private static void applyChorusTeleport(Player player) {
-        Level level = player.level();
+    static void applyChorusTeleport(Player player) {
+        var level = player.level();
         for (int attempt = 0; attempt < 16; attempt++) {
             double x = player.getX() + (level.random.nextDouble() - 0.5D) * 16.0D;
             double y = player.getY() + (level.random.nextInt(16) - 8);
             double z = player.getZ() + (level.random.nextDouble() - 0.5D) * 16.0D;
-            y = Math.max(level.getMinBuildHeight(), Math.min(level.getMaxBuildHeight() - 1, y));
+            y = Math.clamp(y, level.getMinBuildHeight(), level.getMaxBuildHeight() - 1);
             double groundY = findGroundY(level, x, y, z);
             if (groundY >= 0) {
                 player.teleportTo(x, groundY, z);
@@ -195,12 +196,12 @@ public class AlphaFoodSystem {
             }
         }
     }
-    private static double findGroundY(Level level, double x, double startY, double z) {
-        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos((int) x, (int) startY, (int) z);
+    static double findGroundY(Level level, double x, double startY, double z) {
+        var pos = new BlockPos.MutableBlockPos((int) x, (int) startY, (int) z);
         while (pos.getY() > level.getMinBuildHeight()) {
             if (level.getBlockState(pos).isSolid()) {
-                BlockPos landing = pos.above();
-                BlockPos head = landing.above();
+                var landing = pos.above();
+                var head = landing.above();
                 if (!level.getBlockState(landing).isSolid() && !level.getBlockState(head).isSolid()) {
                     return landing.getY();
                 }
@@ -210,7 +211,7 @@ public class AlphaFoodSystem {
         return -1;
     }
 
-    private static void playConsumptionSound(LevelAccessor world, double x, double y, double z, Item item) {
+    static void playConsumptionSound(LevelAccessor world, double x, double y, double z, Item item) {
         float pitch = (float) (0.8 + Math.random() * 0.4);
         var sound = item == Items.HONEY_BOTTLE ? SoundEvents.HONEY_DRINK : SoundEvents.GENERIC_EAT;
         if (world instanceof Level level) {
@@ -221,7 +222,7 @@ public class AlphaFoodSystem {
             }
         }
     }
-    private static boolean healthCheck(Player player) {
+    static boolean healthCheck(Player player) {
         return player.getHealth() >= player.getMaxHealth();
     }
 }

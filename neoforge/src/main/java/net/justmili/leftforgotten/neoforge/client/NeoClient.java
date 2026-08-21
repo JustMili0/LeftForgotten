@@ -2,9 +2,9 @@ package net.justmili.leftforgotten.neoforge.client;
 
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.client.CommonClient;
-import net.justmili.leftforgotten.content.entity.renderer.LFBoatRenderer;
-import net.justmili.leftforgotten.registries.LFEntities;
-import net.justmili.leftforgotten.registries.LFResources;
+import net.justmili.leftforgotten.content.entity.renderer.OldBoatRenderer;
+import net.justmili.leftforgotten.registries.EntityRegistry;
+import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -30,15 +30,16 @@ public class NeoClient {
 
     @SubscribeEvent
     public static void wrapModelsForRemodelBlocks(ModelEvent.ModifyBakingResult event) {
-        for (ModelResourceLocation modelLocation : event.getModels().keySet()) {
+        var models = event.getModels();
+        for (ModelResourceLocation modelLocation : models.keySet()) {
             if (CommonClient.shouldReplaceBakedModel(modelLocation)) {
-                event.getModels().put(modelLocation, new ClassicBlocksModelNeo(event.getModels().get(modelLocation)));
+                models.put(modelLocation, new ClassicBlocksModelNeo(models.get(modelLocation)));
             }
         }
     }
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(LFEntities.BOAT.get(), LFBoatRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.BOAT.get(), OldBoatRenderer::new);
     }
 }

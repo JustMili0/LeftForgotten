@@ -2,7 +2,7 @@ package net.justmili.leftforgotten.neoforge;
 
 import dev.architectury.platform.Platform;
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.core.datagen.neoforge.NeoDatagen;
+import net.justmili.leftforgotten.datagen.NeoDatagen;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 

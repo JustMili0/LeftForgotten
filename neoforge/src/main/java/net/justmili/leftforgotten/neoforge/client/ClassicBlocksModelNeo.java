@@ -29,10 +29,8 @@ public class ClassicBlocksModelNeo extends ClassicBlocksModel implements IBakedM
 
     @Override
     public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData data, @Nullable RenderType renderType) {
-        BakedModel replacedModel = this.getBakedModel(state);
-        if (replacedModel != null) {
-            return replacedModel.getQuads(state, side, rand, data, renderType);
-        }
+        var replacedModel = this.getBakedModel(state);
+        if (replacedModel != null) return replacedModel.getQuads(state, side, rand, data, renderType);
 
         return List.of();
     }

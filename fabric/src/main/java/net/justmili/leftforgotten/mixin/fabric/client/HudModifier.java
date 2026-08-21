@@ -3,11 +3,9 @@ package net.justmili.leftforgotten.mixin.fabric.client;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.justmili.leftforgotten.client.CommonClient;
-import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
-import net.minecraft.client.Minecraft;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.LivingEntity;
@@ -61,7 +59,7 @@ public abstract class HudModifier {
     private int moveHeartsDown(int y) {
         if (CommonClient.notInAlpha()) return y;
 
-        return y+playerHpH-yOffset();
+        return y + playerHpH - yOffset();
     }
 
     // Food disable
@@ -82,9 +80,9 @@ public abstract class HudModifier {
             return;
         }
 
-        TextureAtlasSprite atlasSprite = Minecraft.getInstance().getGuiSprites().getSprite(sprite);
-        int x1 = mirrorX(x)+armorW,
-            y1 = y+armorH-yOffset()+extraHealthRowsOffset();
+        var atlasSprite = ClientUtil.client().getGuiSprites().getSprite(sprite);
+        int x1 = mirrorX(x) + armorW;
+        int y1 = y + armorH - yOffset() + extraHealthRowsOffset();
 
         renderFlippedSprite(graphics, atlasSprite, x1, y1, width, height);
     }
@@ -100,9 +98,10 @@ public abstract class HudModifier {
 
         if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
             // Flip the way it goes
-            int barEnd = ClientUtil.getWidth() / 2+51,
-                mirroredX = 2 * barEnd-9-x;
-            graphics.blitSprite(sprite, mirroredX-airLvlW, y-airLvlH+yOffset()-extraHealthRowsOffset(), width, height);
+            int barEnd = ClientUtil.width() / 2 + 51;
+            int mirroredX = 2 * barEnd - 9 - x;
+
+            graphics.blitSprite(sprite, mirroredX - airLvlW, y - airLvlH + yOffset() - extraHealthRowsOffset(), width, height);
         } else {
             original.call(graphics, sprite, x, y, width, height);
         }
@@ -113,6 +112,7 @@ public abstract class HudModifier {
     private void renderExperienceBar(CallbackInfo ci) {
         if (CommonClient.inAlpha()) ci.cancel();
     }
+
     @Inject(at = @At("HEAD"), method = "renderExperienceLevel", cancellable = true)
     private void renderExperienceLevel(CallbackInfo ci) {
         if (CommonClient.inAlpha()) ci.cancel();
@@ -121,12 +121,9 @@ public abstract class HudModifier {
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
     private int moveMountHealthY(int y) {
-        if (CommonClient.notInAlpha()) return y;
-        if (ClientUtil.notSurvivalOrHideGui()) return y;
+        if (CommonClient.notInAlpha() || ClientUtil.notSurvivalOrHideGui()) return y;
 
-        if (ClientUtil.getPlayer().getArmorValue() == 0) {
-            return mountHpOffset() + mountHpH_na + mountHpH;
-        }
+        if (ClientUtil.player().getArmorValue() == 0) return mountHpOffset() + mountHpH_na + mountHpH;
         return mountHpOffset();
     }
 

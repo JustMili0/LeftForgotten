@@ -2,15 +2,16 @@ package net.justmili.leftforgotten.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.justmili.leftforgotten.registries.LFResources;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
 import java.util.Random;
 
-import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.getLevel;
-import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.inDimension;
+import static net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil.inDimension;
+import static net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil.level;
 
 @Environment(EnvType.CLIENT)
 public class CommonVersionOverlay {
@@ -51,12 +52,13 @@ public class CommonVersionOverlay {
         "Minecraft 26.2" // Chaos Cubed
     };
 
-    public static String currentText = BASE_TEXT;
-    public static int flashTicks = 4;
-    public static final Random random = new Random();
+    static String currentText = BASE_TEXT;
+    static int flashTicks = 4;
+    static final Random random = new Random();
 
+    // Common tick text
     public static void onClientTick(Minecraft minecraft) {
-        if (getLevel() == null || !inDimension(LFResources.ALPHA_MINECRAFT)) {
+        if (level() == null || !inDimension(LFResources.ALPHA_MINECRAFT)) {
             currentText = BASE_TEXT;
             flashTicks = 0;
             return;
@@ -64,34 +66,35 @@ public class CommonVersionOverlay {
 
         if (flashTicks > 0) {
             flashTicks--;
-            if (flashTicks == 0) {
-                currentText = BASE_TEXT;
-            }
+            if (flashTicks == 0) currentText = BASE_TEXT;
+
             // Dynamic String Change
             // 6000 - ticks between each random "glitch"
-            // "//2-6 ticks" - "glitch" string show time
+            // "// 2-6 ticks" - "glitch" string show time
         } else if (random.nextInt(6000) == 0) {
             currentText = VERSIONS[random.nextInt(VERSIONS.length)];
             flashTicks = 2 + random.nextInt(5); // 2–4 ticks
         }
     }
 
-    public static void render(Minecraft minecraft, GuiGraphics graphics) {
-        float targetHeight = 8f,
-            userScale = (float) Math.round(targetHeight / minecraft.font.lineHeight);
+    // Fabric/Forger render
+    public static void render(GuiGraphics graphics) {
+        var font = ClientUtil.font();
+        float targetHeight = 8f;
+        float userScale = (float) Math.round(targetHeight / font.lineHeight);
 
-        int x = 2,
-            y = 2,
-            textColor = 0xFFFFFF,
-            textShadowColor = 0xFF3F3F3F,
-            drawX = Math.round(x / userScale),
-            drawY = Math.round(y / userScale);
+        int x = 2;
+        int y = 2;
+        int textColor = 0xFFFFFF;
+        //int textShadowColor = 0xFF3F3F3F;
+        int drawX = Math.round(x / userScale);
+        int drawY = Math.round(y / userScale);
 
         graphics.pose().pushPose();
         graphics.pose().scale((int) userScale, (int) userScale, 1f);
 
-        graphics.drawString(minecraft.font, Component.literal(currentText), drawX+1, drawY+1, textShadowColor, false);
-        graphics.drawString(minecraft.font, Component.literal(currentText), drawX, drawY, textColor, false);
+        //graphics.drawString(font, Component.literal(currentText), drawX+1, drawY+1, textShadowColor, false);
+        graphics.drawString(font, Component.literal(currentText), drawX, drawY, textColor, true);
 
         graphics.pose().popPose();
     }

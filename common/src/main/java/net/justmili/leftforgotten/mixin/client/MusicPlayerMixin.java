@@ -1,9 +1,9 @@
 package net.justmili.leftforgotten.mixin.client;
 
-import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
-import net.justmili.leftforgotten.libs.v1.utils.MathUtil;
-import net.justmili.leftforgotten.registries.LFResources;
-import net.justmili.leftforgotten.registries.LFSounds;
+import net.justmili.leftforgotten.client.CommonClient;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.MathUtil;
+import net.justmili.leftforgotten.registries.SoundRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -35,21 +35,21 @@ public class MusicPlayerMixin {
     private static List<SoundEvent> getTracks() {
         if (ALPHA_TRACKS == null) {
             ALPHA_TRACKS = List.of(
-                LFSounds.MUSIC_13.get(),
-                LFSounds.MUSIC_BOO.get(),
-                LFSounds.MUSIC_CALM1.get(),
-                LFSounds.MUSIC_CALM2.get(),
-                LFSounds.MUSIC_CALM3.get(),
-                LFSounds.MUSIC_HAL1.get(),
-                LFSounds.MUSIC_HAL2.get(),
-                LFSounds.MUSIC_HAL3.get(),
-                LFSounds.MUSIC_HAL4.get(),
-                LFSounds.MUSIC_NUANCE1.get(),
-                LFSounds.MUSIC_NUANCE2.get(),
-                LFSounds.MUSIC_PIANO1.get(),
-                LFSounds.MUSIC_PIANO2.get(),
-                LFSounds.MUSIC_PIANO3.get(),
-                LFSounds.MUSIC_DROOPY_LIKES_YOUR_FACE.get()
+                SoundRegistry.MUSIC_13.get(),
+                SoundRegistry.MUSIC_BOO.get(),
+                SoundRegistry.MUSIC_CALM1.get(),
+                SoundRegistry.MUSIC_CALM2.get(),
+                SoundRegistry.MUSIC_CALM3.get(),
+                SoundRegistry.MUSIC_HAL1.get(),
+                SoundRegistry.MUSIC_HAL2.get(),
+                SoundRegistry.MUSIC_HAL3.get(),
+                SoundRegistry.MUSIC_HAL4.get(),
+                SoundRegistry.MUSIC_NUANCE1.get(),
+                SoundRegistry.MUSIC_NUANCE2.get(),
+                SoundRegistry.MUSIC_PIANO1.get(),
+                SoundRegistry.MUSIC_PIANO2.get(),
+                SoundRegistry.MUSIC_PIANO3.get(),
+                SoundRegistry.MUSIC_DROOPY_LIKES_YOUR_FACE.get()
             );
         }
         return ALPHA_TRACKS;
@@ -57,24 +57,27 @@ public class MusicPlayerMixin {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void onTick(CallbackInfo ci) {
-        if (ClientUtil.getLevel() == null) return;
-        if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
+        if (ClientUtil.level() == null) return;
+        if (CommonClient.notInAlpha()) return;
 
         ci.cancel();
 
-        if (this.currentMusic != null) {
-            if (!this.minecraft.getSoundManager().isActive(this.currentMusic)) {
-                this.currentMusic = null;
-                this.nextSongDelay = Math.min(this.nextSongDelay, Mth.nextInt(RandomSource.create(), 6000, 24000));
+        var music = this.currentMusic;
+        int nextDelay = this.nextSongDelay;
+
+        if (music != null) {
+            if (!minecraft.getSoundManager().isActive(music)) {
+                music = null;
+                nextDelay = Math.min(nextDelay, Mth.nextInt(RandomSource.create(), 6000, 24000));
             }
         }
 
-        this.nextSongDelay = Math.min(this.nextSongDelay, 24000);
-        if (this.currentMusic == null && this.nextSongDelay-- <= 0) {
-            SoundEvent track = pickTrack();
-            SoundInstance instance = SimpleSoundInstance.forMusic(track);
-            this.currentMusic = instance;
-            if (this.currentMusic.getSound() != SoundManager.EMPTY_SOUND) {
+        this.nextSongDelay = Math.min(nextDelay, 24000);
+        if (music == null && this.nextSongDelay-- <= 0) {
+            var track = pickTrack();
+            var instance = SimpleSoundInstance.forMusic(track);
+            music = instance;
+            if (music.getSound() != SoundManager.EMPTY_SOUND) {
                 minecraft.getSoundManager().play(instance);
             }
             this.nextSongDelay = Integer.MAX_VALUE;
@@ -83,11 +86,11 @@ public class MusicPlayerMixin {
 
     @Unique
     private SoundEvent pickTrack() {
-        List<SoundEvent> tracks = getTracks();
+        var tracks = getTracks();
         while (true) {
-            SoundEvent track = tracks.get(MathUtil.random.nextInt(tracks.size()));
-            if (track == LFSounds.MUSIC_13.get() && MathUtil.chance(0.02)) continue;
-            if (track == LFSounds.MUSIC_DROOPY_LIKES_YOUR_FACE.get() && MathUtil.chance(0.2)) continue;
+            var track = tracks.get(MathUtil.random.nextInt(tracks.size()));
+            if (track == SoundRegistry.MUSIC_13.get() && MathUtil.chance(0.02f)) continue;
+            if (track == SoundRegistry.MUSIC_DROOPY_LIKES_YOUR_FACE.get() && MathUtil.chance(0.2f)) continue;
             return track;
         }
     }

@@ -2,9 +2,9 @@ package net.justmili.leftforgotten.neoforge.client;
 
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
-import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
-import net.justmili.leftforgotten.libs.v1.utils.ResourceUtil;
-import net.justmili.leftforgotten.registries.LFResources;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
+import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
@@ -22,24 +22,25 @@ import static net.justmili.leftforgotten.client.CommonHudModifier.NeoForge.*;
 
 @EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {
-    private static final ResourceLocation ARMOR_EMPTY = ResourceUtil.asMinecraft("hud/armor_empty");
-    private static final ResourceLocation ARMOR_HALF = ResourceUtil.asMinecraft("hud/armor_half");
-    private static final ResourceLocation ARMOR_FULL = ResourceUtil.asMinecraft("hud/armor_full");
-    private static final ResourceLocation AIR = ResourceUtil.asMinecraft("hud/air");
-    private static final ResourceLocation AIR_BURST = ResourceUtil.asMinecraft("hud/air_bursting");
+    static final ResourceLocation
+        ARMOR_EMPTY = ResourceUtil.asMinecraft("hud/armor_empty"),
+        ARMOR_HALF = ResourceUtil.asMinecraft("hud/armor_half"),
+        ARMOR_FULL = ResourceUtil.asMinecraft("hud/armor_full"),
+        AIR = ResourceUtil.asMinecraft("hud/air"),
+        AIR_BURST = ResourceUtil.asMinecraft("hud/air_bursting");
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiLayerEvent.Pre event) {
         if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
-        var minecraft = ClientUtil.client;
-        var player = ClientUtil.getPlayer();
+        var minecraft = ClientUtil.client();
+        var player = ClientUtil.player();
         if (player == null) return;
 
-        int width = ClientUtil.getWidth(), height = ClientUtil.getHeight();
+        int width = ClientUtil.width(), height = ClientUtil.height();
         var overlay = event.getLayer();
         var id = event.getName();
         var graphics = event.getGuiGraphics();
-        var gui = minecraft.gui;
+        var gui = ClientUtil.gui();
         var partTick = event.getPartialTick(); // NeoForge I swear to god-
 
         // Food disable
@@ -57,9 +58,9 @@ public class HudModifier {
             for (int i = 1; armorValue > 0 && i < 20; i += 2) {
                 var sprite = i < armorValue? ARMOR_FULL : i == armorValue? ARMOR_HALF : ARMOR_EMPTY;
                 var atlasSprite = minecraft.getGuiSprites().getSprite(sprite);
-                int origX = width / 2 - 91 + ((i - 1) / 2) * 8,
-                    x1 = mirrorX(origX) + armorW,
-                    y1 = height - 39 + armorH - yOffset();
+                int origX = width / 2 - 91 + ((i - 1) / 2) * 8;
+                int x1 = mirrorX(origX) + armorW;
+                int y1 = height - 39 + armorH - yOffset();
 
                 renderFlippedSprite(graphics, atlasSprite, x1, y1, 9, 9);
             }
@@ -74,18 +75,18 @@ public class HudModifier {
             event.setCanceled(true);
             if (ClientUtil.notSurvivalOrHideGui()) return;
 
-            int air = Math.min(player.getAirSupply(), player.getMaxAirSupply()),
-                maxAir = player.getMaxAirSupply();
+            int air = Math.min(player.getAirSupply(), player.getMaxAirSupply());
+            int maxAir = player.getMaxAirSupply();
             if (!player.isEyeInFluid(FluidTags.WATER) && air >= maxAir) return;
 
-            int full = Mth.ceil((air - 2) * 10.0 / maxAir),
-                partial = Mth.ceil(air * 10.0 / maxAir) - full,
-                top = height - gui.rightHeight - airLvlH - yOffset() - extraHealthRowsOffset(),
-                barEnd = width / 2 + 51;
+            int full = Mth.ceil((air - 2) * 10.0 / maxAir);
+            int partial = Mth.ceil(air * 10.0 / maxAir) - full;
+            int top = height - gui.rightHeight - airLvlH - yOffset() - extraHealthRowsOffset();
+            int barEnd = width / 2 + 51;
 
             for (int i = 0; i < full + partial; ++i) {
-                int origX = width / 2 - 9 - i * 8 - 9,
-                    mirroredX = 2 * barEnd - 9 - origX - airLvlW;
+                int origX = width / 2 - 9 - i * 8 - 9;
+                int mirroredX = 2 * barEnd - 9 - origX - airLvlW;
                 graphics.blitSprite(i < full? AIR : AIR_BURST, mirroredX, top, 9, 9);
             }
         }

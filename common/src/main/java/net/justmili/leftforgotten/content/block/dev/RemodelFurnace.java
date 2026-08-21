@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.content.block.dev;
 
+import net.justmili.leftforgotten.libs.v1.utils.common.BlockBehaviorUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class RemodelFurnace extends FurnaceBlock {
     public RemodelFurnace() {
-        super(Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.5F).lightLevel(CommonBlock.litBlockEmission(13)));
+        super(Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.5F).lightLevel(BlockBehaviorUtil.litBlockEmission(13)));
     }
 
     @Override

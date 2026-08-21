@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(value = PerlinNoise.class, priority = 2000)
 public class Farlands {
     @ModifyReturnValue(method = "wrap", at = @At("RETURN"))
-    private static double replaceWrapReturn(double originalReturn, double value) {
-        if (!Config.generateFarlands.get()) return originalReturn;
+    private static double replaceWrapReturn(double original, double value) {
+        if (!Config.generateFarlands.get()) return original;
         return value;
     }
 }

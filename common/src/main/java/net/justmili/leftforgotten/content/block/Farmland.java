@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.content.block;
 
-import net.justmili.leftforgotten.content.block.dev.CommonBlock;
-import net.justmili.leftforgotten.registries.LFBlocks;
+import net.justmili.leftforgotten.libs.v1.utils.common.BlockBehaviorUtil;
+import net.justmili.leftforgotten.registries.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -26,13 +26,13 @@ import org.jetbrains.annotations.Nullable;
 public class Farmland extends FarmBlock {
 	public Farmland() {
 		super(Properties.of().mapColor(MapColor.DIRT).sound(SoundType.GRAVEL).strength(1.5f, 6f)
-			.isViewBlocking(CommonBlock::always).isSuffocating(CommonBlock::always).randomTicks());
+			.isViewBlocking(BlockBehaviorUtil::no).isSuffocating(BlockBehaviorUtil::no).randomTicks());
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return !this.defaultBlockState().canSurvive(context.getLevel(), context.getClickedPos()) ?
-			LFBlocks.DIRT.get().defaultBlockState() : super.getStateForPlacement(context);
+			BlockRegistry.DIRT.get().defaultBlockState() : super.getStateForPlacement(context);
 	}
 
 	@Override
@@ -66,17 +66,17 @@ public class Farmland extends FarmBlock {
 		entity.causeFallDamage(fallDistance, 1.0F, entity.damageSources().fall());
 	}
 
-	private static void turnToOldDirt(@Nullable Entity entity, BlockState state, Level level, BlockPos pos) {
-		BlockState newState = pushEntitiesUp(state, LFBlocks.DIRT.get().defaultBlockState(), level, pos);
+	static void turnToOldDirt(@Nullable Entity entity, BlockState state, Level level, BlockPos pos) {
+		var newState = pushEntitiesUp(state, BlockRegistry.DIRT.get().defaultBlockState(), level, pos);
 		level.setBlockAndUpdate(pos, newState);
 		level.gameEvent(GameEvent.BLOCK_CHANGE, pos, Context.of(entity, newState));
 	}
 
-	private static boolean shouldMaintainFarmland(BlockGetter getter, BlockPos pos) {
+	static boolean shouldMaintainFarmland(BlockGetter getter, BlockPos pos) {
 		return getter.getBlockState(pos.above()).is(BlockTags.MAINTAINS_FARMLAND);
 	}
 
-	private static boolean isNearWater(LevelReader level, BlockPos pos) {
+	static boolean isNearWater(LevelReader level, BlockPos pos) {
 		for (BlockPos blockPos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4))) {
 			if (level.getFluidState(blockPos).is(FluidTags.WATER)) return true;
 		}

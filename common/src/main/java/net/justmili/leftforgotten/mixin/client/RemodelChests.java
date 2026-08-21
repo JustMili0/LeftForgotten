@@ -2,9 +2,9 @@ package net.justmili.leftforgotten.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.justmili.leftforgotten.config.Config;
-import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
-import net.justmili.leftforgotten.registries.LFBlocks;
-import net.justmili.leftforgotten.registries.LFResources;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.registries.BlockRegistry;
+import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -33,7 +33,7 @@ public class RemodelChests {
         ci.cancel();
 
         BlockRenderDispatcher dispatcher = Minecraft.getInstance().getBlockRenderer();
-        var state = LFBlocks.REMODEL_CHEST.get().withPropertiesOf(blockEntity.getBlockState());
+        var state = BlockRegistry.REMODEL_CHEST.get().withPropertiesOf(blockEntity.getBlockState());
         var model = dispatcher.getBlockModel(state);
 
         poseStack.pushPose();
