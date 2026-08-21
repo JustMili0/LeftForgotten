@@ -2,53 +2,53 @@ package net.justmili.leftforgotten.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import net.minecraft.world.entity.player.Player;
 import org.joml.Matrix4f;
-
-import static net.justmili.leftforgotten.libs.v1.utils.ClientUtil.*;
 
 public class CommonHudModifier {
     public static class Common {
-        private static boolean hasSaddle() {
-            return getPlayer().getVehicle() instanceof AbstractHorse horse && horse.isSaddled();
-        }
-        private static boolean inCreative() {
-            return getPlayer().isCreative();
+        static boolean hasSaddle() {
+            return player().getVehicle() instanceof AbstractHorse horse && horse.isSaddled();
         }
 
         public static int mirrorX(int x) {
-            return 2 * (getWidth() / 2-91)+72-x;
+            return 2 * (width() / 2-91)+72-x;
         }
 
         public static void renderFlippedBlit(GuiGraphics graphics, ResourceLocation texture,
                                              int x1, int y1, int width, int height, int uOffset, int vOffset) {
-            int x2 = x1+width,
-                y2 = y1+height,
-                blitOffset = 0;
-            float minU = (uOffset+width) / 256f,
-                maxU = (uOffset+0.0f) / 256f,
-                minV = vOffset / 256f,
-                maxV = (vOffset+height) / 256f;
+            int x2 = x1+width;
+            int y2 = y1+height;
+            float minU = (uOffset+width) / 256f;
+            float maxU = (uOffset+0.0f) / 256f;
+            float minV = vOffset / 256f;
+            float maxV = (vOffset+height) / 256f;
 
             RenderSystem.setShaderTexture(0, texture);
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            Matrix4f matrix4f = graphics.pose().last().pose();
-            BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-            bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-            bufferBuilder.vertex(matrix4f, x1, y1, blitOffset).uv(minU, minV).endVertex();
-            bufferBuilder.vertex(matrix4f, x1, y2, blitOffset).uv(minU, maxV).endVertex();
-            bufferBuilder.vertex(matrix4f, x2, y2, blitOffset).uv(maxU, maxV).endVertex();
-            bufferBuilder.vertex(matrix4f, x2, y1, blitOffset).uv(maxU, minV).endVertex();
-            BufferUploader.drawWithShader(bufferBuilder.end());
+
+            var matrix4f = graphics.pose().last().pose();
+            var builder = Tesselator.getInstance().getBuilder();
+            builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+            vertex(matrix4f, builder, x1, y1, minU, minV);
+            vertex(matrix4f, builder, x1, y2, minU, maxV);
+            vertex(matrix4f, builder, x2, y2, maxU, maxV);
+            vertex(matrix4f, builder, x2, y1, maxU, minV);
+
+            BufferUploader.drawWithShader(builder.end());
+        }
+
+        static void vertex(Matrix4f matrix4f, BufferBuilder builder, int x, int y, float u, float v) {
+            builder.vertex(matrix4f, x, y, 0).uv(u, v).endVertex();
         }
 
         public static int extraHealthRowsOffset() {
-            Player player = getPlayer();
+            var player = player();
             if (player == null) return 0;
 
             float maxHealth = Math.max(player.getMaxHealth(), player.getHealth());
@@ -73,11 +73,11 @@ public class CommonHudModifier {
             mountHpH_na = 7;  // Mount HP Y offset without Armor
 
         public static int yOffset() { // Account for horse bar and Creative, Fabric doesn't need to account for fullscreen
-            int creativeOffset = Common.inCreative()? -9 : 0;
+            int creativeOffset = ClientUtil.isCreative()? -9 : 0;
             return Common.hasSaddle()? horseBar + creativeOffset : creativeOffset;
         }
         public static int mountHpOffset() {
-            return getHeight() - 39 - yOffset() - mountHpH;
+            return height() - 39 - yOffset() - mountHpH;
         }
     }
 

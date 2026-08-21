@@ -3,8 +3,7 @@ package net.justmili.leftforgotten.forge.client;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.client.CommonVersionOverlay;
-import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
-import net.minecraft.client.Minecraft;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -19,6 +18,6 @@ public class VersionOverlay {
         if (ClientUtil.isDebugScreenOn()) return;
         if (CommonClient.notInAlpha()) return;
 
-        CommonVersionOverlay.render(Minecraft.getInstance(), event.getGuiGraphics());
+        CommonVersionOverlay.render(event.getGuiGraphics());
     }
 }

@@ -3,7 +3,7 @@ package net.justmili.leftforgotten.mixin;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.justmili.leftforgotten.registries.LFBlocks;
+import net.justmili.leftforgotten.registries.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.EatBlockGoal;
@@ -25,7 +25,7 @@ public class SheepEatGrass {
     @ModifyReturnValue(method = "canUse", at = @At("RETURN"))
     public boolean canUse(boolean original) {
         BlockPos blockPos = this.mob.blockPosition();
-        if (this.level.getBlockState(blockPos.below()).is(LFBlocks.GRASS_BLOCK.get())) {
+        if (this.level.getBlockState(blockPos.below()).is(BlockRegistry.GRASS_BLOCK.get())) {
             return true;
         } else {
             return original;
@@ -41,7 +41,7 @@ public class SheepEatGrass {
 
         BlockPos blockPos = this.mob.blockPosition();
         BlockPos blockPos2 = blockPos.below();
-        if (state.is(LFBlocks.GRASS_BLOCK.get())) {
+        if (state.is(BlockRegistry.GRASS_BLOCK.get())) {
 
             if (this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
                 this.level.levelEvent(2001, blockPos.below(), Block.getId(Blocks.GRASS_BLOCK.defaultBlockState()));

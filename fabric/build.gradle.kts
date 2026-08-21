@@ -41,8 +41,8 @@ dependencies {
     modImplementation("dev.architectury:architectury-fabric:${libs.versions.arch.api.get()}")
 
     // Other
-    modImplementation("maven.modrinth:nostalgic-tweaks:${rootProject.property("nt_fabric")}")
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${rootProject.property("cloth_config")}") {
+    modImplementation("maven.modrinth:nostalgic-tweaks:${root.property("nt_fabric")}")
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${root.property("cloth_config")}") {
         exclude("net.fabricmc.fabric-api")
     }
     modImplementation("com.terraformersmc:modmenu:${root.property("mod_menu")}")

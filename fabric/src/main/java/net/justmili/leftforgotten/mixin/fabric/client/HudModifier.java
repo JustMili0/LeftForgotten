@@ -3,7 +3,7 @@ package net.justmili.leftforgotten.mixin.fabric.client;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.justmili.leftforgotten.client.CommonClient;
-import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -79,16 +79,17 @@ public abstract class HudModifier {
         }
 
         if (this.currentProfiler.peek().equals("armor")) { // Armor move right and down
-            int barStart = ClientUtil.getWidth() / 2-91,
-                mirroredX = 2 * barStart+72-x,
-                x1 = mirroredX+armorW,
-                y1 = y+armorH-yOffset()+extraHealthRowsOffset();
+            int barStart = ClientUtil.width() / 2-91;
+            int mirroredX = 2 * barStart+72-x;
+            int x1 = mirroredX+armorW;
+            int y1 = y+armorH-yOffset()+extraHealthRowsOffset();
 
             renderFlippedBlit(graphics, atlasLocation, x1, y1, uWidth, vHeight, uOffset, vOffset);
 
         } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
-            int barEnd = ClientUtil.getWidth() / 2+51,
-                mirroredX = 2 * barEnd-9-x;
+            int barEnd = ClientUtil.width() / 2+51;
+            int mirroredX = 2 * barEnd-9-x;
+
             graphics.blit(atlasLocation, mirroredX-airLvlW, y-airLvlH+yOffset()-extraHealthRowsOffset(), uOffset, vOffset, uWidth, vHeight);
         } else {
             original.call(graphics, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
@@ -105,12 +106,9 @@ public abstract class HudModifier {
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
     private int moveMountHealthY(int y) {
-        if (CommonClient.notInAlpha()) return y;
-        if (ClientUtil.notSurvivalOrHideGui()) return y;
+        if (CommonClient.notInAlpha() || ClientUtil.notSurvivalOrHideGui()) return y;
 
-        if (ClientUtil.getPlayer().getArmorValue() == 0) {
-            return mountHpOffset() + mountHpH_na + mountHpH;
-        }
+        if (ClientUtil.player().getArmorValue() == 0) return mountHpOffset() + mountHpH_na + mountHpH;
         return mountHpOffset();
     }
 

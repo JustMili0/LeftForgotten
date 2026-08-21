@@ -60,8 +60,8 @@ dependencies {
     modImplementation("dev.architectury:architectury-forge:${libs.versions.arch.api.get()}")
 
     // Other
-    modImplementation("maven.modrinth:nostalgic-tweaks:${rootProject.property("nt_fabric")}")
-    modImplementation("me.shedaniel.cloth:cloth-config-forge:${rootProject.property("cloth_config")}")
+    modImplementation("maven.modrinth:nostalgic-tweaks:${root.property("nt_fabric")}")
+    modImplementation("me.shedaniel.cloth:cloth-config-forge:${root.property("cloth_config")}")
 
     // Forge doesn't mainline MixinExtras until 1.21.11, so here we need it
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${libs.versions.mixinextras.get()}")!!)

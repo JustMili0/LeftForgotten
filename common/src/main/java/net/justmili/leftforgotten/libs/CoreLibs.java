@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.libs;
 
-import net.justmili.leftforgotten.libs.v1.utils.ResourceUtil;
-import net.justmili.leftforgotten.libs.v1.utils.TickUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.TickUtil;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

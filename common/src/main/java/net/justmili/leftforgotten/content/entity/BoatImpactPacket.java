@@ -5,7 +5,6 @@ import io.netty.buffer.Unpooled;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 
 public class BoatImpactPacket {
     public static final ResourceLocation ID = LeftForgotten.asResource("boat_impact");
@@ -15,18 +14,16 @@ public class BoatImpactPacket {
     }
 
     public static void send(int entityId) {
-        FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+        var buf = new FriendlyByteBuf(Unpooled.buffer());
         buf.writeInt(entityId);
         NetworkManager.sendToServer(ID, buf);
     }
 
-    private static void handle(FriendlyByteBuf buf, NetworkManager.PacketContext context) {
+    static void handle(FriendlyByteBuf buf, NetworkManager.PacketContext context) {
         int entityId = buf.readInt();
         context.queue(() -> {
-            Entity entity = context.getPlayer().level().getEntity(entityId);
-            if (entity instanceof LFBoatEntity boat) {
-                boat.breakOnImpactOnServer();
-            }
+            var entity = context.getPlayer().level().getEntity(entityId);
+            if (entity instanceof LFBoatEntity boat) boat.breakOnImpactOnServer();
         });
     }
 }

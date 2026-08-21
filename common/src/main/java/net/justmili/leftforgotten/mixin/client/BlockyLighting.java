@@ -1,8 +1,8 @@
 package net.justmili.leftforgotten.mixin.client;
 
+import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.config.Config;
-import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
-import net.justmili.leftforgotten.registries.LFResources;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,7 +16,7 @@ public abstract class BlockyLighting {
     private static void blockyLighting(CallbackInfoReturnable<Boolean> cir) {
         if (Config.forceBlockyLighting.isNull() || !Config.forceBlockyLighting.get()) return;
 
-        if (ClientUtil.getLevel() != null && ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) {
+        if (ClientUtil.level() != null && CommonClient.inAlpha()) {
             cir.setReturnValue(false);
         }
     }

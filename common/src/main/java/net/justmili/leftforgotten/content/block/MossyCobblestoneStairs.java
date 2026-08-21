@@ -1,11 +1,11 @@
 
 package net.justmili.leftforgotten.content.block;
 
-import net.justmili.leftforgotten.registries.LFBlocks;
+import net.justmili.leftforgotten.registries.BlockRegistry;
 import net.minecraft.world.level.block.StairBlock;
 
 public class MossyCobblestoneStairs extends StairBlock {
 	public MossyCobblestoneStairs() {
-		super(LFBlocks.MOSSY_COBBLESTONE.get().defaultBlockState(), Properties.copy(LFBlocks.MOSSY_COBBLESTONE.get()));
+		super(BlockRegistry.MOSSY_COBBLESTONE.get().defaultBlockState(), Properties.copy(BlockRegistry.MOSSY_COBBLESTONE.get()));
 	}
 }

@@ -1,6 +1,6 @@
 package net.justmili.leftforgotten.content.block;
 
-import net.justmili.leftforgotten.registries.LFBlocks;
+import net.justmili.leftforgotten.registries.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -30,39 +30,40 @@ public class GrassBlock extends Block {
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!canSurvive(level, pos)) {
             if (!level.isClientSide()) {
-                level.setBlock(pos, LFBlocks.DIRT.get().defaultBlockState(), 3);
+                level.setBlock(pos, BlockRegistry.DIRT.get().defaultBlockState(), 3);
             }
         }
     }
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!player.getMainHandItem().is(ItemTags.HOES)) return InteractionResult.FAIL;
+        var held = player.getMainHandItem();
+        if (!held.is(ItemTags.HOES)) return InteractionResult.FAIL;
 
-        BlockState aboveState = level.getBlockState(pos.above());
+        var aboveState = level.getBlockState(pos.above());
         if (!aboveState.isAir()) return InteractionResult.FAIL;
 
-        level.setBlock(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ()), LFBlocks.FARMLAND.get().defaultBlockState(), 3);
+        level.setBlock(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ()), BlockRegistry.FARMLAND.get().defaultBlockState(), 3);
 
         float pitch = 0.9f + level.getRandom().nextFloat() * 0.2f;
         level.playSound(null, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0f, pitch);
-        player.getMainHandItem().hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+        held.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
 
         getSeeds(level, pos, player);
 
         return InteractionResult.SUCCESS;
     }
 
-    private static boolean canSurvive(LevelReader level, BlockPos pos) {
-        BlockPos above = pos.above();
-        BlockState aboveState = level.getBlockState(above);
-        if (aboveState.is(LFBlocks.LEAVES.get())) {
+    static boolean canSurvive(LevelReader level, BlockPos pos) {
+        var above = pos.above();
+        var aboveState = level.getBlockState(above);
+        if (aboveState.is(BlockRegistry.LEAVES.get())) {
             return true;
         }
         return aboveState.getLightBlock(level, above) <= 0;
     }
 
-    private static void getSeeds(LevelReader level, BlockPos pos, Player player) {
+    static void getSeeds(LevelReader level, BlockPos pos, Player player) {
         if (player == null) return;
         if (!player.getMainHandItem().is(ItemTags.HOES)) return;
         if (!(Math.random() < 0.125)) return;

@@ -2,7 +2,6 @@ package net.justmili.leftforgotten.content.entity.renderer;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Axis;
 import net.justmili.leftforgotten.LeftForgotten;
@@ -24,8 +23,8 @@ import org.joml.Quaternionf;
 import java.util.Map;
 
 public class LFBoatRenderer extends EntityRenderer<LFBoatEntity> {
-    private static final ResourceLocation TEXTURE = LeftForgotten.asResource("textures/entity/boat/boat.png");
-    private final Map<Boat.Type, Pair<ResourceLocation, ListModel<Boat>>> boatResources;
+    static final ResourceLocation TEXTURE = LeftForgotten.asResource("textures/entity/boat/boat.png");
+    final Map<Boat.Type, Pair<ResourceLocation, ListModel<Boat>>> boatResources;
 
     public LFBoatRenderer(EntityRendererProvider.Context context) {
         super(context);
@@ -49,11 +48,7 @@ public class LFBoatRenderer extends EntityRenderer<LFBoatEntity> {
         float damage = entity.getDamage() - partialTick;
         if (damage < 0.0F) damage = 0.0F;
 
-        if (hurtTime > 0.0F) {
-            poseStack.mulPose(Axis.XP.rotationDegrees(
-                Mth.sin(hurtTime) * hurtTime * damage / 10.0F * entity.getHurtDir()
-            ));
-        }
+        if (hurtTime > 0.0F) poseStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(hurtTime) * hurtTime * damage / 10.0F * entity.getHurtDir()));
 
         float bubbleAngle = entity.getBubbleAngle(partialTick);
         if (!Mth.equal(bubbleAngle, 0.0F)) {
@@ -63,22 +58,20 @@ public class LFBoatRenderer extends EntityRenderer<LFBoatEntity> {
             ));
         }
 
-        Pair<ResourceLocation, ListModel<Boat>> pair = boatResources.get(Boat.Type.OAK);
-        ResourceLocation texture = pair.getFirst();
-        ListModel<Boat> model = pair.getSecond();
+        var pair = boatResources.get(Boat.Type.OAK);
+        var texture = pair.getFirst();
+        var model = pair.getSecond();
 
         poseStack.scale(-1.0F, -1.0F, 1.0F);
         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
         model.setupAnim(entity, partialTick, 0.0F, -0.1F, 0.0F, 0.0F);
-        VertexConsumer consumer = buffer.getBuffer(model.renderType(texture));
-        model.renderToBuffer(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY,
-            1.0F, 1.0F, 1.0F, 1.0F);
+
+        var consumer = buffer.getBuffer(model.renderType(texture));
+        model.renderToBuffer(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 
         if (!entity.isUnderWater()) {
-            VertexConsumer waterMask = buffer.getBuffer(RenderType.waterMask());
-            if (model instanceof WaterPatchModel wpm) {
-                wpm.waterPatch().render(poseStack, waterMask, packedLight, OverlayTexture.NO_OVERLAY);
-            }
+            var waterMask = buffer.getBuffer(RenderType.waterMask());
+            if (model instanceof WaterPatchModel wpm) wpm.waterPatch().render(poseStack, waterMask, packedLight, OverlayTexture.NO_OVERLAY);
         }
 
         poseStack.popPose();

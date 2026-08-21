@@ -2,9 +2,9 @@ package net.justmili.leftforgotten.forge.client;
 
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
-import net.justmili.leftforgotten.libs.v1.utils.ClientUtil;
-import net.justmili.leftforgotten.libs.v1.utils.ResourceUtil;
-import net.justmili.leftforgotten.registries.LFResources;
+import net.justmili.leftforgotten.registries.extra.LFResources;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
@@ -20,20 +20,20 @@ import static net.justmili.leftforgotten.client.CommonHudModifier.Forge.*;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {
-    private static final ResourceLocation GUI_ICONS_LOCATION = ResourceUtil.asPath("textures/gui/icons.png");
+    static final ResourceLocation GUI_ICONS_LOCATION = ResourceUtil.asPath("textures/gui/icons.png");
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiOverlayEvent.Pre event) {
         if (!ClientUtil.inDimension(LFResources.ALPHA_MINECRAFT)) return;
-        var player = ClientUtil.getPlayer();
+        var player = ClientUtil.player();
         if (player == null) return;
 
-        int width = ClientUtil.getWidth(), height = ClientUtil.getHeight();
+        int width = ClientUtil.width(), height = ClientUtil.height();
         var getOverlay = event.getOverlay();
         var overlay = getOverlay.overlay();
         var id = getOverlay.id();
         var graphics = event.getGuiGraphics();
-        var gui = (ForgeGui) ClientUtil.client.gui; // Forge, I fucking hate you :3
+        var gui = (ForgeGui) ClientUtil.gui(); // Forge, I fucking hate you :3
         float partTick = event.getPartialTick();
 
         // Food disable
@@ -50,10 +50,10 @@ public class HudModifier {
 
             int armorValue = player.getArmorValue();
             for (int i = 1; armorValue > 0 && i < 20; i += 2) {
-                int uOffset = i < armorValue? 34 : i == armorValue? 25 : 16,
-                    origX = width / 2 - 91 + ((i - 1) / 2) * 8,
-                    x1 = mirrorX(origX) + armorW,
-                    y1 = height - 39 + armorH - yOffset();
+                int uOffset = i < armorValue? 34 : i == armorValue? 25 : 16;
+                int origX = width / 2 - 91 + ((i - 1) / 2) * 8;
+                int x1 = mirrorX(origX) + armorW;
+                int y1 = height - 39 + armorH - yOffset();
 
                 renderFlippedBlit(graphics, GUI_ICONS_LOCATION, x1, y1, 9, 9, uOffset, 9);
             }
@@ -68,18 +68,18 @@ public class HudModifier {
             event.setCanceled(true);
             if (ClientUtil.notSurvivalOrHideGui()) return;
 
-            int air = Math.min(player.getAirSupply(), player.getMaxAirSupply()),
-                maxAir = player.getMaxAirSupply();
+            int air = Math.min(player.getAirSupply(), player.getMaxAirSupply());
+            int maxAir = player.getMaxAirSupply();
             if (!player.isEyeInFluid(FluidTags.WATER) && air >= maxAir) return;
 
-            int full = Mth.ceil((air - 2) * 10.0 / maxAir),
-                partial = Mth.ceil(air * 10.0 / maxAir) - full,
-                top = height - gui.rightHeight - airLvlH - yOffset() - extraHealthRowsOffset(),
-                barEnd = width / 2 + 51;
+            int full = Mth.ceil((air - 2) * 10.0 / maxAir);
+            int partial = Mth.ceil(air * 10.0 / maxAir) - full;
+            int top = height - gui.rightHeight - airLvlH - yOffset() - extraHealthRowsOffset();
+            int barEnd = width / 2 + 51;
 
             for (int i = 0; i < full + partial; ++i) {
-                int origX = width / 2 - 9 - i * 8 - 9,
-                    mirroredX = 2 * barEnd - 9 - origX - airLvlW;
+                int origX = width / 2 - 9 - i * 8 - 9;
+                int mirroredX = 2 * barEnd - 9 - origX - airLvlW;
                 graphics.blit(GUI_ICONS_LOCATION, mirroredX, top, (i < full? 16 : 25), 18, 9, 9);
             }
         }

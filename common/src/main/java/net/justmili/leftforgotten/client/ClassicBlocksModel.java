@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.client;
 
-import net.justmili.leftforgotten.registries.LFBlocks;
-import net.justmili.leftforgotten.registries.LFResources;
+import net.justmili.leftforgotten.registries.BlockRegistry;
+import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -25,14 +24,14 @@ public abstract class ClassicBlocksModel implements BakedModel {
     }
 
     protected @Nullable BakedModel getBakedModel(BlockState state) {
-        Level level = Minecraft.getInstance().level;
+        var level = Minecraft.getInstance().level;
         if (state != null && level != null && level.dimension().equals(LFResources.ALPHA_MINECRAFT)) {
             if (state.is(Blocks.CRAFTING_TABLE)) {
-                state = LFBlocks.REMODEL_CRAFTING_TABLE.get().defaultBlockState();
+                state = BlockRegistry.REMODEL_CRAFTING_TABLE.get().defaultBlockState();
 
                 return Minecraft.getInstance().getBlockRenderer().getBlockModel(state);
             } else if (state.is(Blocks.FURNACE)) {
-                state = LFBlocks.REMODEL_FURNACE.get().withPropertiesOf(state);
+                state = BlockRegistry.REMODEL_FURNACE.get().withPropertiesOf(state);
 
                 return Minecraft.getInstance().getBlockRenderer().getBlockModel(state);
             } else if (state.is(Blocks.CHEST)) {
@@ -45,7 +44,7 @@ public abstract class ClassicBlocksModel implements BakedModel {
 
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction direction, RandomSource random) {
-        BakedModel replacedModel = this.getBakedModel(state);
+        var replacedModel = this.getBakedModel(state);
 
         if (replacedModel != null) {
             return replacedModel.getQuads(state, direction, random);

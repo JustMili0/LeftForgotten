@@ -1,11 +1,11 @@
 
 package net.justmili.leftforgotten.content.block;
 
-import net.justmili.leftforgotten.registries.LFBlocks;
+import net.justmili.leftforgotten.registries.BlockRegistry;
 import net.minecraft.world.level.block.WallBlock;
 
 public class CobblestoneWall extends WallBlock {
 	public CobblestoneWall() {
-		super(Properties.copy(LFBlocks.COBBLESTONE.get()).forceSolidOn());
+		super(Properties.copy(BlockRegistry.COBBLESTONE.get()).forceSolidOn());
 	}
 }

@@ -2,8 +2,8 @@ package net.justmili.leftforgotten.forge.client;
 
 import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.content.entity.renderer.LFBoatRenderer;
-import net.justmili.leftforgotten.registries.LFEntities;
-import net.justmili.leftforgotten.registries.LFResources;
+import net.justmili.leftforgotten.registries.EntityRegistry;
+import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -37,6 +37,6 @@ public class ForgeClient {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(LFEntities.BOAT.get(), LFBoatRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.BOAT.get(), LFBoatRenderer::new);
     }
 }

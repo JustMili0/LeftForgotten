@@ -1,8 +1,8 @@
 package net.justmili.leftforgotten.content.entity;
 
 import dev.architectury.platform.Platform;
-import net.justmili.leftforgotten.registries.LFEntities;
-import net.justmili.leftforgotten.registries.LFItems;
+import net.justmili.leftforgotten.registries.EntityRegistry;
+import net.justmili.leftforgotten.registries.ItemRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -11,25 +11,27 @@ import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
 public class LFBoatEntity extends Boat {
-    private static final double BREAK_SPEED_THRESHOLD = 0.2;
-    private static final float MAX_HEALTH = 4.0F;
-    private float health = MAX_HEALTH;
+    static final double BREAK_SPEED_THRESHOLD = 0.2;
+    static final float MAX_HEALTH = 4.0F;
+    public float health = MAX_HEALTH;
 
     public LFBoatEntity(EntityType<? extends Boat> type, Level level) {
         super(type, level);
     }
+
     public LFBoatEntity(Level level, double x, double y, double z) {
-        this(LFEntities.BOAT.get(), level);
+        this(EntityRegistry.BOAT.get(), level);
         setPos(x, y, z);
-        xo = x; yo = y; zo = z;
+        xo = x;
+        yo = y;
+        zo = z;
     }
 
     @Override
     public ItemStack getPickResult() {
-        return new ItemStack(LFItems.BOAT.get());
+        return new ItemStack(ItemRegistry.BOAT.get());
     }
 
     @Override
@@ -39,41 +41,45 @@ public class LFBoatEntity extends Boat {
 
     public void breakOnImpactOnServer() {
         if (!level().isClientSide && !isRemoved()) {
-            spawnAtLocation(new ItemStack(LFItems.WOODEN_PLANKS.get(), 3));
+            spawnAtLocation(new ItemStack(ItemRegistry.WOODEN_PLANKS.get(), 3));
             spawnAtLocation(new ItemStack(Items.STICK, 2));
             discard();
         }
     }
+
     @Override
     public void tick() {
-        Vec3 vel = getDeltaMovement();
-        double speedBefore = Math.sqrt(vel.x * vel.x + vel.z * vel.z);
+        var delta = getDeltaMovement();
+        double speedBefore = Math.sqrt(delta.x * delta.x + delta.z * delta.z);
 
         super.tick();
 
-        Vec3 newVel = getDeltaMovement();
-        double speedAfter = Math.sqrt(newVel.x * newVel.x + newVel.z * newVel.z);
+        var newDelta = getDeltaMovement();
+        double speedAfter = Math.sqrt(newDelta.x * newDelta.x + newDelta.z * newDelta.z);
         if (speedBefore > BREAK_SPEED_THRESHOLD && speedAfter < speedBefore * 0.4) {
-            if (level().isClientSide) {
-                BoatImpactPacket.send(getId());
-            }
+            if (level().isClientSide) BoatImpactPacket.send(getId());
         }
     }
+
     @Override
     public boolean hurt(DamageSource source, float amount) {
         if (isInvulnerableTo(source)) return false;
         if (!level().isClientSide) {
-            boolean isCreative = source.getEntity() instanceof Player player && player.getAbilities().instabuild;
-            if (isCreative) { discard(); return true; }
+            boolean isCreative = source.getEntity() instanceof Player player && player.isCreative();
+            if (isCreative) {
+                discard();
+                return true;
+            }
             health -= amount;
             if (health <= 0.0F && !isRemoved()) {
-                spawnAtLocation(new ItemStack(LFItems.WOODEN_PLANKS.get(), 3));
+                spawnAtLocation(new ItemStack(ItemRegistry.WOODEN_PLANKS.get(), 3));
                 spawnAtLocation(new ItemStack(Items.STICK, 2));
                 discard();
             }
         }
         return true;
     }
+
     @Override
     public boolean isControlledByLocalInstance() {
         if (Platform.isModLoaded("wurst") ||
@@ -96,9 +102,10 @@ public class LFBoatEntity extends Boat {
         super.addAdditionalSaveData(tag);
         tag.putFloat("Health", health);
     }
+
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        health = tag.contains("Health") ? tag.getFloat("Health") : MAX_HEALTH;
+        health = tag.contains("Health")? tag.getFloat("Health") : MAX_HEALTH;
     }
 }

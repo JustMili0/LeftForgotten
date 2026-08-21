@@ -1,4 +1,5 @@
-import multiloader.*
+import multiloader.modId
+import multiloader.root
 
 architectury {
     common(root.property("enabled_platforms").toString().split(","))

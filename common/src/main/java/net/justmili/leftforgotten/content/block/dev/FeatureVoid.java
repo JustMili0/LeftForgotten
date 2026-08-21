@@ -1,6 +1,6 @@
 package net.justmili.leftforgotten.content.block.dev;
 
-import net.justmili.leftforgotten.registries.LFBlocks;
+import net.justmili.leftforgotten.registries.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
@@ -47,7 +47,7 @@ public class FeatureVoid extends Block {
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         BlockState above = level.getBlockState(pos.above());
-        boolean hasLeavesAbove = above.is(LFBlocks.LEAVES.get());
+        boolean hasLeavesAbove = above.is(BlockRegistry.LEAVES.get());
 
         if (!hasLeavesAbove) {
             clearAtAndBelow(level, pos);
@@ -58,13 +58,13 @@ public class FeatureVoid extends Block {
 
         int roll = random.nextInt(100);
         if (roll < 1) {
-            level.setBlock(pos, LFBlocks.WOOD.get().defaultBlockState(), 3);
-            level.setBlock(pos.below(), LFBlocks.WOOD.get().defaultBlockState(), 3);
+            level.setBlock(pos, BlockRegistry.WOOD.get().defaultBlockState(), 3);
+            level.setBlock(pos.below(), BlockRegistry.WOOD.get().defaultBlockState(), 3);
         } else if (roll < 13) {
-            level.setBlock(pos, LFBlocks.WOOD.get().defaultBlockState(), 3);
-            level.setBlock(pos.below(), LFBlocks.WOOD.get().defaultBlockState(), 3);
+            level.setBlock(pos, BlockRegistry.WOOD.get().defaultBlockState(), 3);
+            level.setBlock(pos.below(), BlockRegistry.WOOD.get().defaultBlockState(), 3);
         } else if (roll < 38) {
-            level.setBlock(pos, LFBlocks.WOOD.get().defaultBlockState(), 3);
+            level.setBlock(pos, BlockRegistry.WOOD.get().defaultBlockState(), 3);
         }
     }
 
@@ -72,7 +72,7 @@ public class FeatureVoid extends Block {
         BlockPos current = pos;
         while (true) {
             BlockState state = level.getBlockState(current);
-            if (state.is(LFBlocks.DIRT.get()) || state.is(LFBlocks.GRASS_BLOCK.get())) break;
+            if (state.is(BlockRegistry.DIRT.get()) || state.is(BlockRegistry.GRASS_BLOCK.get())) break;
             if (state.isAir()) break;
             if (state.is(this)) {
                 level.setBlock(current, Blocks.AIR.defaultBlockState(), 3);

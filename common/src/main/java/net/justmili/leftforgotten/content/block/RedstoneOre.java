@@ -1,6 +1,5 @@
 package net.justmili.leftforgotten.content.block;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RedStoneOreBlock;
@@ -26,7 +25,7 @@ public class RedstoneOre extends RedStoneOreBlock {
 
 	@Override // Purposefully added extra functionality
 	public void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
-		BlockPos pos = hit.getBlockPos();
+		var pos = hit.getBlockPos();
 		if (!state.getValue(LIT)) {
 			level.setBlock(pos, state.setValue(LIT, true), 3);
 		}
