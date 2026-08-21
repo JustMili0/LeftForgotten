@@ -6,7 +6,6 @@ import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.registries.BlockRegistry;
-import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.level.block.Blocks;

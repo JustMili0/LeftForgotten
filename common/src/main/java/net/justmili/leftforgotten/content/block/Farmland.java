@@ -47,12 +47,12 @@ public class Farmland extends FarmBlock {
 		int i = state.getValue(MOISTURE);
 		if (!isNearWater(level, pos) && !level.isRainingAt(pos.above())) {
 			if (i > 0) {
-				level.setBlock(pos, state.setValue(MOISTURE, i - 1), 2);
+				level.setBlock(pos, state.setValue(MOISTURE, i - 1), UPDATE_CLIENTS);
 			} else if (!shouldMaintainFarmland(level, pos)) {
 				turnToOldDirt(null, state, level, pos);
 			}
 		} else if (i < 7) {
-			level.setBlock(pos, state.setValue(MOISTURE, 7), 2);
+			level.setBlock(pos, state.setValue(MOISTURE, 7), UPDATE_CLIENTS);
 		}
 	}
 

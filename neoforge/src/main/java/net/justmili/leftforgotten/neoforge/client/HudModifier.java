@@ -5,7 +5,6 @@ import mod.adrenix.nostalgic.tweak.config.CandyTweak;
 import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
-import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;

@@ -8,8 +8,8 @@ import net.minecraft.world.level.material.MapColor;
 
 public class Glass extends TransparentBlock {
 	public Glass() {
-		super(Properties
-			.of().mapColor(MapColor.NONE)
+		super(Properties.of()
+			.mapColor(MapColor.NONE)
 			.sound(SoundType.GLASS)
 			.strength(0.3f)
 			.noOcclusion()

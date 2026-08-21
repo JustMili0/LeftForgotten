@@ -1,10 +1,8 @@
 package net.justmili.leftforgotten.mixin.client;
 
 import net.justmili.leftforgotten.client.CommonClient;
-import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
 import net.justmili.leftforgotten.registries.SoundRegistry;
-import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundEngine;

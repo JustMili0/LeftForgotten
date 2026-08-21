@@ -11,8 +11,6 @@ import net.justmili.leftforgotten.mixin.accessors.DimSpecialEffectsAccessor;
 import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 
-import static net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil.*;
-
 @Environment(EnvType.CLIENT)
 public class CommonClient {
     public static void register() {

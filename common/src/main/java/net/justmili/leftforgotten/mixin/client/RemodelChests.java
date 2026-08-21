@@ -3,13 +3,10 @@ package net.justmili.leftforgotten.mixin.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.config.Config;
-import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.registries.BlockRegistry;
-import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -21,8 +18,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ChestRenderer.class)
 public class RemodelChests {
-    @Inject(method = "render(Lnet/minecraft/world/level/block/entity/BlockEntity;" +
-        "FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
+    @Inject(method = "render(Lnet/minecraft/world/level/block/entity/BlockEntity;FL" +
+        "com/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
         at = @At("HEAD"), cancellable = true)
     private <T extends BlockEntity & LidBlockEntity> void lf$renderAlphaChest(T blockEntity, float partialTick, PoseStack poseStack,
                                                                               MultiBufferSource bufferSource, int packedLight, int packedOverlay,
