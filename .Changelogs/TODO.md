@@ -1,6 +1,6 @@
 # TODO
-- Update integrated Core Libs package layout and classes and Left Forgotten's own package layout (port 1.20.1 -> 1.21.1)
-- Update READMEs
+- Compare file by file 1.20.1 and 1.21.1 branches, optimize everywhere
+- Update READMEs and changelog for 1.2.0
 - Fix chest remodeling, issues caused by multiple different block entity optimization mods
 
 ```
