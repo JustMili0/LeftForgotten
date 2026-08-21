@@ -36,6 +36,7 @@ Tested mods
 - Enhanced Block Entities NEOFORGED - NeoForge 1.21.1
 - Optimized Block Entities - NeoForge 1.21.1
 ```
+- Properly account for all tags from Forge/Neo and Fabric
 
 # PORT TO:
 - **[INIT]** 1.20.1 Fabric & Forge
