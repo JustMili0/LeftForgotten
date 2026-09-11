@@ -15,10 +15,11 @@
 - Fixed Redstone Ore not generating due to a typo ([#5](https://github.com/JustMili0/LeftForgotten/issues/5))
 - Going back and forth between `left_forgotten:alpha_minecraft` and the Overworld no longer resets player's hunger
 - [TODO] Fully accounted for every block and item tag for every and item block added
+- Fixed.. something in `PreHungerHealing` class (previously `AlphaFoodSystem`)
 
 ### ***DEV STUFF***
 - Renamed mixin classes to match what they're actually mixin into
-- [TODO] Moved all core pakcages and classes to `net.justmili.leftforgotten.core`
+- Moved all core pakcages and classes to `net.justmili.leftforgotten.core`
 - Replaced CommonClient's `inAlpha` and `notInAlpha` boolean functions with checks via new class `Versions` for future updates
 - [TODO] Moved most block classes to just sit in `BlockRegistry`
 
