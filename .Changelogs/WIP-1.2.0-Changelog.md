@@ -7,16 +7,20 @@
 
 ### ***ADDED***
 - [TODO] Config now has a UI. Accessible on Fabric via Mod Menu or through the mod list screen on Forge/Neo
-- [WIP] Items now render as billboards while on-ground
+- Items now render as billboards while on-ground
 
 
 ### ***BUG FIXES/TECHNICAL CHANGES***
+- [TODO] Fixed Chest remodels breaking with block entity optimization mods
 - Fixed Redstone Ore not generating due to a typo ([#5](https://github.com/JustMili0/LeftForgotten/issues/5))
 - Going back and forth between `left_forgotten:alpha_minecraft` and the Overworld no longer resets player's hunger
+- [TODO] Fully accounted for every block and item tag for every and item block added
 
 ### ***DEV STUFF***
 - Renamed mixin classes to match what they're actually mixin into
 - [TODO] Moved all core pakcages and classes to `net.justmili.leftforgotten.core`
+- Replaced CommonClient's `inAlpha` and `notInAlpha` boolean functions with checks via new class `Versions` for future updates
+- [TODO] Moved most block classes to just sit in `BlockRegistry`
 
 <hr>
 
