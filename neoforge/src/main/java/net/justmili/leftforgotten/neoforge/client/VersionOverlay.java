@@ -3,7 +3,7 @@ package net.justmili.leftforgotten.neoforge.client;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.client.CommonVersionOverlay;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
-import net.justmili.leftforgotten.util.Versions;
+import net.justmili.leftforgotten.core.util.Versions;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;

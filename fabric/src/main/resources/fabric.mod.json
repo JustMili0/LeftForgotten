@@ -29,10 +29,10 @@
       "net.justmili.leftforgotten.fabric.client.FabricClient"
     ],
     "fabric-datagen": [
-      "net.justmili.leftforgotten.datagen.FabricDatagen"
+      "net.justmili.leftforgotten.core.datagen.FabricDatagen"
     ],
     "mixinsquared": [
-      "net.justmili.leftforgotten.mixinsquared.fabric.CancelPerlinNoiseOverwrite"
+      "net.justmili.leftforgotten.core.mixinsquared.fabric.CancelPerlinNoiseOverwrite"
     ]
   },
   "mixins": [

@@ -2,8 +2,8 @@ package net.justmili.leftforgotten;
 
 import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.content.entity.OldBoatImpactPacket;
+import net.justmili.leftforgotten.core.registries.*;
 import net.justmili.leftforgotten.libs.CoreLibs;
-import net.justmili.leftforgotten.registries.*;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

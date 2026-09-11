@@ -3,7 +3,7 @@ package net.justmili.leftforgotten.client;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
-import net.justmili.leftforgotten.registries.LevelRegistry;
+import net.justmili.leftforgotten.core.registries.LevelRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;

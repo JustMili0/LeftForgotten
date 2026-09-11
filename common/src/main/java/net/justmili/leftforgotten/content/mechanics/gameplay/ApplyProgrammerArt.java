@@ -2,8 +2,8 @@ package net.justmili.leftforgotten.content.mechanics.gameplay;
 
 import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
-import net.justmili.leftforgotten.registries.LevelRegistry;
-import net.justmili.leftforgotten.util.Versions;
+import net.justmili.leftforgotten.core.registries.LevelRegistry;
+import net.justmili.leftforgotten.core.util.Versions;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
