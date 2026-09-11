@@ -2,7 +2,7 @@
 package net.justmili.leftforgotten.content.mechanics.gameplay;
 
 import dev.architectury.event.EventResult;
-import net.justmili.leftforgotten.registries.extra.LFResources;
+import net.justmili.leftforgotten.util.Versions;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Sheep;
@@ -11,8 +11,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 public class WoolDrop {
-    public static EventResult onEntityHurt(LivingEntity entity, DamageSource source, float amount) {
-        if (!(entity instanceof Sheep sheep && (entity.level().dimension()) == LFResources.ALPHA_MINECRAFT)) return EventResult.pass();
+    public static EventResult onEntityHurt(LivingEntity entity, DamageSource source, float value) {
+        if (!(entity instanceof Sheep sheep) || !Versions.upToAlpha(entity.level().dimension())) return EventResult.pass();
         var level = sheep.level();
         if (level.isClientSide()) return EventResult.pass();
         if (sheep.isSheared()) return EventResult.pass();

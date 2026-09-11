@@ -73,6 +73,26 @@ public class MathUtil {
         return roundHalfUp(hours, 2);
     }
 
+    public static boolean isEven(int value) {
+        return value % 2 == 0;
+    }
+
+    public static boolean isOdd(int value) {
+        return !isEven(value);
+    }
+
+    public static float center(int startPos, int size, int maxSize) {
+        return startPos + Math.abs((size / 2.0f) - (maxSize / 2.0f));
+    }
+
+    public static float sign(float input) {
+        return input < 0.0f ? -1.0f : 1.0f;
+    }
+
+    public static double sign(double input) {
+        return input < 0.0 ? -1.0 : 1.0;
+    }
+
     public static float roundHalfUp(double value, int pastDecimal) {
         return BigDecimal.valueOf(value).setScale(pastDecimal, RoundingMode.HALF_UP).floatValue();
     }

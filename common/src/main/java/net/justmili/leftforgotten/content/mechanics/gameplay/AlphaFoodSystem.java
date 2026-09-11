@@ -4,7 +4,7 @@ import dev.architectury.event.CompoundEventResult;
 import dev.architectury.event.EventResult;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.common.MathUtil;
-import net.justmili.leftforgotten.registries.extra.LFResources;
+import net.justmili.leftforgotten.util.Versions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -94,7 +94,7 @@ public class AlphaFoodSystem {
     }
 
     public static CompoundEventResult<ItemStack> onRightClickItem(Player player, InteractionHand hand) {
-        if (player.level().dimension() != LFResources.ALPHA_MINECRAFT) return CompoundEventResult.pass();
+        if (!Versions.hadNoHunger(player.level().dimension())) return CompoundEventResult.pass();
         if (hand != InteractionHand.MAIN_HAND) return CompoundEventResult.interruptTrue(player.getItemInHand(hand));
         var stack = player.getItemInHand(hand);
 
@@ -125,7 +125,7 @@ public class AlphaFoodSystem {
 
     public static EventResult onRightClickBlock(Player player, InteractionHand hand, BlockPos pos, Direction face) {
         if (hand != InteractionHand.MAIN_HAND) return EventResult.pass();
-        if (player.level().dimension() != LFResources.ALPHA_MINECRAFT) return EventResult.pass();
+        if (!Versions.hadNoHunger(player.level().dimension())) return EventResult.pass();
         var stack = player.getItemInHand(hand);
 
         if (FOOD_HEALTH.containsKey(stack.getItem())) return EventResult.pass();
@@ -151,14 +151,10 @@ public class AlphaFoodSystem {
     }
     static void giveResultItem(Player player, Item resultItem) {
         var result = new ItemStack(resultItem);
-        if (!player.getInventory().add(result)) {
-            player.drop(result, false);
-        }
+        if (!player.getInventory().add(result)) player.drop(result, false);
     }
     static void applyPoisonWithChance(Player player) {
-        if (MathUtil.chance(0.6f)) {
-            player.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0));
-        }
+        if (MathUtil.chance(0.6f)) player.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0));
     }
     static void applyPoison(Player player, Item item) {
         if (item == Items.SPIDER_EYE) {
@@ -206,9 +202,7 @@ public class AlphaFoodSystem {
             if (level.getBlockState(pos).isSolid()) {
                 var landing = pos.above();
                 var head = landing.above();
-                if (!level.getBlockState(landing).isSolid() && !level.getBlockState(head).isSolid()) {
-                    return landing.getY();
-                }
+                if (!level.getBlockState(landing).isSolid() && !level.getBlockState(head).isSolid()) return landing.getY();
             }
             pos.move(0, -1, 0);
         }

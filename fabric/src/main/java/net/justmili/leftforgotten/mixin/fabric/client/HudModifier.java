@@ -2,8 +2,8 @@ package net.justmili.leftforgotten.mixin.fabric.client;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.util.Versions;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -31,31 +31,31 @@ public abstract class HudModifier {
 
     // Draw identifier for renderPlayerHealth's redirectBlit profiler section
     @Unique
-    private Stack<String> currentProfiler = new Stack<>();
+    private Stack<String> lf$currentProfiler = new Stack<>();
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"))
-    private void logProfilePushes(ProfilerFiller filler, String name, Operation<Void> original) {
-        currentProfiler.push(name);
+    private void lf$logProfilePushes(ProfilerFiller filler, String name, Operation<Void> original) {
+        lf$currentProfiler.push(name);
         original.call(filler, name);
     }
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V"))
-    private void logProfilePopPushes(ProfilerFiller filler, String name, Operation<Void> original) {
-        currentProfiler.pop();
-        currentProfiler.push(name);
+    private void lf$logProfilePopPushes(ProfilerFiller filler, String name, Operation<Void> original) {
+        lf$currentProfiler.pop();
+        lf$currentProfiler.push(name);
         original.call(filler, name);
     }
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V"))
-    private void logProfilePops(ProfilerFiller filler, Operation<Void> original) {
-        currentProfiler.pop();
+    private void lf$logProfilePops(ProfilerFiller filler, Operation<Void> original) {
+        lf$currentProfiler.pop();
         original.call(filler);
     }
 
     // Player HP - move down, account for AbstractHorse jump bar when saddled
     @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
-    private int moveHeartsDown(int y) {
-        if (CommonClient.notInAlpha()) return y;
+    private int lf$moveHeartsDown(int y) {
+        if (!Versions.hadOldHUD(ClientUtil.dimension())) return y;
 
         return y+playerHpH-yOffset();
     }
@@ -63,8 +63,8 @@ public abstract class HudModifier {
     // Food disable
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/Gui;getVehicleMaxHearts(Lnet/minecraft/world/entity/LivingEntity;)I"))
-    private int disableFoodBar(Gui gui, LivingEntity vehicle, Operation<Integer> original) {
-        if (CommonClient.inAlpha()) return -1;
+    private int lf$disableFoodBar(Gui gui, LivingEntity vehicle, Operation<Integer> original) {
+        if (Versions.hadOldHUD(ClientUtil.dimension())) return -1;
 
         return this.getVehicleMaxHearts(vehicle);
     }
@@ -72,13 +72,13 @@ public abstract class HudModifier {
     // Armor and Air Level, flip armor sprites, account for AbstractHorse jump bar when saddled
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V"))
-    private void redirectBlit(GuiGraphics graphics, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, Operation<Void> original) {
-        if (CommonClient.notInAlpha()) {
+    private void lf$redirectBlit(GuiGraphics graphics, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, Operation<Void> original) {
+        if (!Versions.hadOldHUD(ClientUtil.dimension())) {
             original.call(graphics, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
             return;
         }
 
-        if (this.currentProfiler.peek().equals("armor")) { // Armor move right and down
+        if (this.lf$currentProfiler.peek().equals("armor")) { // Armor move right and down
             int barStart = ClientUtil.width() / 2-91;
             int mirroredX = 2 * barStart+72-x;
             int x1 = mirroredX+armorW;
@@ -86,7 +86,7 @@ public abstract class HudModifier {
 
             renderFlippedBlit(graphics, atlasLocation, x1, y1, uWidth, vHeight, uOffset, vOffset);
 
-        } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
+        } else if (this.lf$currentProfiler.peek().equals("air")) { // Air level move left and down
             int barEnd = ClientUtil.width() / 2+51;
             int mirroredX = 2 * barEnd-9-x;
 
@@ -98,22 +98,22 @@ public abstract class HudModifier {
 
     // EXP bar disable
     @Inject(at = @At("HEAD"), method = "renderExperienceBar", cancellable = true)
-    private void renderExperienceBar(CallbackInfo ci) {
-        if (CommonClient.inAlpha()) ci.cancel();
+    private void lf$renderExperienceBar(CallbackInfo ci) {
+        if (Versions.hadOldHUD(ClientUtil.dimension())) ci.cancel();
     }
     // EXP level renders with EXP bar on 1.20.1
 
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
-    private int moveMountHealthY(int y) {
-        if (CommonClient.notInAlpha() || ClientUtil.notSurvivalOrHideGui()) return y;
+    private int lf$moveMountHealthY(int y) {
+        if (!Versions.hadOldHUD(ClientUtil.dimension()) || ClientUtil.notSurvivalOrHideGui()) return y;
 
         if (ClientUtil.player().getArmorValue() == 0) return mountHpOffset() + mountHpH_na + mountHpH;
         return mountHpOffset();
     }
 
     @Inject(at = @At("HEAD"), method = "renderVehicleHealth", cancellable = true)
-    private void mountHealthCreativeCancel(GuiGraphics graphics, CallbackInfo ci) {
-        if (CommonClient.inAlpha() && ClientUtil.notSurvivalOrHideGui()) ci.cancel();
+    private void lf$mountHealthCreativeCancel(GuiGraphics graphics, CallbackInfo ci) {
+        if (Versions.hadOldHUD(ClientUtil.dimension()) && ClientUtil.notSurvivalOrHideGui()) ci.cancel();
     }
 }

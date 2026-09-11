@@ -6,17 +6,17 @@ import dev.architectury.event.events.common.PlayerEvent;
 import dev.architectury.event.events.common.TickEvent;
 import net.justmili.leftforgotten.content.mechanics.compatibility.NostalgicTweaksCompatibiliy;
 import net.justmili.leftforgotten.content.mechanics.events.MoveToAlpha;
-import net.justmili.leftforgotten.content.mechanics.gameplay.*;
-import net.justmili.leftforgotten.content.mechanics.logic.FoodLvlReset;
+import net.justmili.leftforgotten.content.mechanics.gameplay.AlphaFoodSystem;
+import net.justmili.leftforgotten.content.mechanics.gameplay.ApplyProgrammerArt;
+import net.justmili.leftforgotten.content.mechanics.gameplay.NoCooldown;
+import net.justmili.leftforgotten.content.mechanics.gameplay.WoolDrop;
 
 public class EventRegistry {
     public static void register() {
         TickEvent.PLAYER_POST.register(MoveToAlpha::onPlayerTick);
-        TickEvent.PLAYER_POST.register(NoSprint::onPlayerTick);
         TickEvent.PLAYER_POST.register(NostalgicTweaksCompatibiliy::onPlayerTick);
 
         PlayerEvent.CHANGE_DIMENSION.register(ApplyProgrammerArt::onChangeDimension);
-        PlayerEvent.CHANGE_DIMENSION.register(FoodLvlReset::onChangeDimension);
         PlayerEvent.CHANGE_DIMENSION.register(NoCooldown::onChangeDimension);
 
         PlayerEvent.PLAYER_JOIN.register(ApplyProgrammerArt::onPlayerJoin);

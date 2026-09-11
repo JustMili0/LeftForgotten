@@ -6,7 +6,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
-public class AttributeUtil {
+public class AttribUtil {
     public static AttributeModifier create(ResourceLocation id, double value, AttributeModifier.Operation operation) {
         return new AttributeModifier(id.toString(), value, operation);
     }

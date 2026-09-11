@@ -2,8 +2,8 @@ package net.justmili.leftforgotten.forge.client;
 
 import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.content.entity.renderer.OldBoatRenderer;
+import net.justmili.leftforgotten.registries.BlockRegistry;
 import net.justmili.leftforgotten.registries.EntityRegistry;
-import net.justmili.leftforgotten.registries.extra.LFResources;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +20,7 @@ public class ForgeClient {
     @SubscribeEvent
     public static void init(FMLClientSetupEvent event) {
         /// DEV NOTE: DEPRECATED API USAGE
-        for (Block block : LFResources.getBlocksFromRegistry()) {
+        for (Block block : BlockRegistry.getBlocksFromRegistry()) {
             ItemBlockRenderTypes.setRenderLayer(block, RenderType.cutout());
         }
         CommonClient.register();
@@ -31,7 +31,7 @@ public class ForgeClient {
         var models = event.getModels();
         for (ResourceLocation id : models.keySet()) {
             if (CommonClient.shouldReplaceBakedModel(id)) {
-                models.put(id, new ClassicBlocksModelForge(models.get(id)));
+                models.put(id, new ClassicBlockModelsForge(models.get(id)));
             }
         }
     }

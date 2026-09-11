@@ -12,7 +12,7 @@ import java.util.Iterator;
 @Mixin(BlockLootSubProvider.class)
 public abstract class BlockLootSubProviderMixin {
     @ModifyExpressionValue(method = "generate(Ljava/util/function/BiConsumer;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/DefaultedRegistry;iterator()Ljava/util/Iterator;"))
-    private Iterator<Block> useKnownBlocks(Iterator<Block> original) {
+    private Iterator<Block> lf$useKnownBlocks(Iterator<Block> original) {
         if (this instanceof KnownBlocksLootProvider provider) {
             return provider.getKnownBlocks().iterator();
         }

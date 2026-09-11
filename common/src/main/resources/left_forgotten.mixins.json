@@ -5,18 +5,23 @@
   "minVersion": "0.8",
   "client": [
     "accessors.DimSpecialEffectsAccessor",
-    "client.BlockyLighting",
-    "client.ForcedSteve",
+    "client.BlockRenderDispatcherMixin",
+    "client.ChestRendererMixin",
+    "client.ItemEntityRendererMixin",
+    "client.ItemRendererMixin",
+    "client.LocalPlayerMixin",
+    "client.MinecraftMixin",
     "client.MusicPlayerMixin",
-    "client.RemodelBlocks",
-    "client.RemodelChests",
+    "client.PlayerInfoMixin",
     "client.SoundEngineMixin",
     "compat.ebe.BlockEntityRenderDispatcherMixin"
   ],
   "mixins": [
-    "Farlands",
-    "ReshapeChests",
-    "SheepEatGrass"
+    "ChestBlockMixin",
+    "EatBlockGoalMixin",
+    "FoodDataMixin",
+    "PerlinNoiseMixin",
+    "PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

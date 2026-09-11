@@ -124,7 +124,7 @@ public class LFLootTableProvider extends LootTableProvider {
 
             // Deb
             dropSelf(BlockRegistry.REMODEL_CRAFTING_TABLE.get());
-            dropSelf(BlockRegistry.REMODEL_FURNACE.get());
+            dropSelf(BlockRegistry.REMODEL_FURNACE_STONE.get());
             dropSelf(BlockRegistry.REMODEL_CHEST.get());
         }
 

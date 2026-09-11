@@ -54,7 +54,6 @@ configurations {
 
 dependencies {
     forge(libs.forge.get())
-    modImplementation(libs.forge.get())
 
     // Forge dependencies go here
     modImplementation("dev.architectury:architectury-forge:${libs.versions.arch.api.get()}")
@@ -83,7 +82,7 @@ tasks.processResources {
             "mod_authors" to modAuthor,
             "mod_license" to modLicense,
             "forge_version" to libs.versions.forge.asProvider().get(),
-            "minecraft_version_constraint" to root.property("minecraft_version_constraint_forge"),
+            "minecraft_version_constraint" to root.property("minecraft_version_constraint_forge")!!,
             "architectury_api" to libs.versions.arch.api.get()
         )
     }

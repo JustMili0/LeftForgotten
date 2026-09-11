@@ -2,9 +2,9 @@ package net.justmili.leftforgotten.forge.client;
 
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
-import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
+import net.justmili.leftforgotten.util.Versions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
@@ -24,7 +24,7 @@ public class HudModifier {
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiOverlayEvent.Pre event) {
-        if (CommonClient.notInAlpha()) return;
+        if (!Versions.hadOldHUD(ClientUtil.dimension())) return;
         var player = ClientUtil.player();
         if (player == null) return;
 
@@ -99,7 +99,7 @@ public class HudModifier {
 
         // Get rid of NT's version overlay and stamina bar when in dimension
         if (Platform.isModLoaded("nostalgic_tweaks")) {
-            if (CommonClient.inAlpha()) {
+            if (Versions.hadVersionOverlay(ClientUtil.dimension())) {
                 var namespace = id.getNamespace();
                 var path = id.getPath().toLowerCase();
                 if (!(namespace.equals("nostalgic_tweaks"))) return;

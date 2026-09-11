@@ -17,12 +17,18 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(EatBlockGoal.class)
-public class SheepEatGrass {
-    @Shadow @Final private Mob mob;
-    @Shadow @Final private Level level;
+public class EatBlockGoalMixin {
+
+    @Shadow
+    @Final
+    private Mob mob;
+
+    @Shadow
+    @Final
+    private Level level;
 
     @ModifyReturnValue(method = "canUse", at = @At("RETURN"))
-    public boolean canUse(boolean original) {
+    public boolean lf$canUse(boolean original) {
         var below = mob.blockPosition().below();
         if (level.getBlockState(below).is(BlockRegistry.GRASS_BLOCK.get())) {
             return true;
@@ -32,7 +38,7 @@ public class SheepEatGrass {
     }
 
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
-    private boolean redirectGrassCheck(BlockState state, Block block, Operation<Boolean> original) {
+    private boolean lf$redirectGrassCheck(BlockState state, Block block, Operation<Boolean> original) {
         // vanilla check
         if (state.is(block)) return true;
 

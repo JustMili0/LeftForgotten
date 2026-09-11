@@ -65,7 +65,7 @@ tasks.processResources {
             "mod_license" to modLicense,
             "fabric_loader_version" to libs.versions.fabric.loader.get(),
             "fabric_api_version" to libs.versions.fabric.api.get(),
-            "minecraft_version_constraint" to root.property("minecraft_version_constraint_fabric"),
+            "minecraft_version_constraint" to root.property("minecraft_version_constraint_fabric")!!,
             "architectury_api" to libs.versions.arch.api.get()
         )
     }

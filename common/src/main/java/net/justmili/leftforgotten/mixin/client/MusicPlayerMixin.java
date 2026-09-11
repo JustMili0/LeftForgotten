@@ -1,9 +1,9 @@
 package net.justmili.leftforgotten.mixin.client;
 
-import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.common.MathUtil;
 import net.justmili.leftforgotten.registries.SoundRegistry;
+import net.justmili.leftforgotten.util.Versions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -25,16 +25,25 @@ import java.util.List;
 
 @Mixin(MusicManager.class)
 public class MusicPlayerMixin {
-    @Shadow @Final private Minecraft minecraft;
-    @Shadow @Nullable private SoundInstance currentMusic;
-    @Shadow private int nextSongDelay;
+
+    @Shadow
+    @Final
+    private Minecraft minecraft;
+
+    @Shadow
+    @Nullable
+    private SoundInstance currentMusic;
+
+    @Shadow
+    private int nextSongDelay;
 
     @Unique
-    private static List<SoundEvent> ALPHA_TRACKS = null;
+    private static List<SoundEvent> lf$ALPHA_TRACKS = null;
+
     @Unique
-    private static List<SoundEvent> getTracks() {
-        if (ALPHA_TRACKS == null) {
-            ALPHA_TRACKS = List.of(
+    private static List<SoundEvent> lf$getTracks() {
+        if (lf$ALPHA_TRACKS == null) {
+            lf$ALPHA_TRACKS = List.of(
                 SoundRegistry.MUSIC_13.get(),
                 SoundRegistry.MUSIC_BOO.get(),
                 SoundRegistry.MUSIC_CALM1.get(),
@@ -52,12 +61,12 @@ public class MusicPlayerMixin {
                 SoundRegistry.MUSIC_DROOPY_LIKES_YOUR_FACE.get()
             );
         }
-        return ALPHA_TRACKS;
+        return lf$ALPHA_TRACKS;
     }
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
-    private void onTick(CallbackInfo ci) {
-        if (ClientUtil.level() == null || CommonClient.notInAlpha()) return;
+    private void lf$onTick(CallbackInfo ci) {
+        if (ClientUtil.level() == null || Versions.isOldVersion(ClientUtil.dimension())) return;
 
         ci.cancel();
 
@@ -73,7 +82,7 @@ public class MusicPlayerMixin {
 
         this.nextSongDelay = Math.min(nextDelay, 24000);
         if (music == null && this.nextSongDelay-- <= 0) {
-            var track = pickTrack();
+            var track = lf$pickTrack();
             var instance = SimpleSoundInstance.forMusic(track);
             music = instance;
             if (music.getSound() != SoundManager.EMPTY_SOUND) {
@@ -84,8 +93,8 @@ public class MusicPlayerMixin {
     }
 
     @Unique
-    private SoundEvent pickTrack() {
-        var tracks = getTracks();
+    private SoundEvent lf$pickTrack() {
+        var tracks = lf$getTracks();
         while (true) {
             var track = tracks.get(MathUtil.random.nextInt(tracks.size()));
             if (track == SoundRegistry.MUSIC_13.get() && MathUtil.chance(0.02f)) continue;
