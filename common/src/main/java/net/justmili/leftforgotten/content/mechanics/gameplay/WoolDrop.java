@@ -2,7 +2,7 @@
 package net.justmili.leftforgotten.content.mechanics.gameplay;
 
 import dev.architectury.event.EventResult;
-import net.justmili.leftforgotten.util.Versions;
+import net.justmili.leftforgotten.core.util.Versions;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Sheep;

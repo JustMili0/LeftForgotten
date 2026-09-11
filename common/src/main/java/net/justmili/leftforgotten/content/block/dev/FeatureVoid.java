@@ -1,6 +1,6 @@
 package net.justmili.leftforgotten.content.block.dev;
 
-import net.justmili.leftforgotten.registries.BlockRegistry;
+import net.justmili.leftforgotten.core.registries.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;

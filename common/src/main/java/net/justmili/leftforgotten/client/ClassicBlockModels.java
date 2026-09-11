@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.client;
 
-import net.justmili.leftforgotten.registries.BlockRegistry;
-import net.justmili.leftforgotten.registries.LevelRegistry;
+import net.justmili.leftforgotten.core.registries.BlockRegistry;
+import net.justmili.leftforgotten.core.registries.LevelRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;

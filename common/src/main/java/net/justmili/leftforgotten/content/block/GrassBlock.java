@@ -1,6 +1,6 @@
 package net.justmili.leftforgotten.content.block;
 
-import net.justmili.leftforgotten.registries.BlockRegistry;
+import net.justmili.leftforgotten.core.registries.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;

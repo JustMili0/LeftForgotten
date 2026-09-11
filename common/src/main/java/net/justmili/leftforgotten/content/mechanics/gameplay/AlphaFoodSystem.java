@@ -2,9 +2,9 @@ package net.justmili.leftforgotten.content.mechanics.gameplay;
 
 import dev.architectury.event.CompoundEventResult;
 import dev.architectury.event.EventResult;
+import net.justmili.leftforgotten.core.util.Versions;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.common.MathUtil;
-import net.justmili.leftforgotten.util.Versions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;

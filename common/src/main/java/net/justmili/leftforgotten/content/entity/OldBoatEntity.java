@@ -1,8 +1,8 @@
 package net.justmili.leftforgotten.content.entity;
 
 import dev.architectury.platform.Platform;
-import net.justmili.leftforgotten.registries.EntityRegistry;
-import net.justmili.leftforgotten.registries.ItemRegistry;
+import net.justmili.leftforgotten.core.registries.EntityRegistry;
+import net.justmili.leftforgotten.core.registries.ItemRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
