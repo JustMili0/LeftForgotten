@@ -1,8 +1,9 @@
 package net.justmili.leftforgotten.mixin.client;
 
-import net.justmili.leftforgotten.client.CommonClient;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
 import net.justmili.leftforgotten.registries.SoundRegistry;
+import net.justmili.leftforgotten.util.Versions;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundEngine;
@@ -16,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SoundEngine.class)
 public class SoundEngineMixin {
+
     @Unique
     private static final ResourceLocation
         STOMACH_GROWL = ResourceUtil.asPath("subtle_effects:entity.player.stomach_growl"),
@@ -28,8 +30,8 @@ public class SoundEngineMixin {
         HURT_BERRY = SoundEvents.PLAYER_HURT_SWEET_BERRY_BUSH.getLocation();
 
     @Inject(method = "play", at = @At("HEAD"), cancellable = true)
-    private void onPlay(SoundInstance sound, CallbackInfo ci) {
-        if (sound == null || CommonClient.notInAlpha()) return;
+    private void lf$onPlay(SoundInstance sound, CallbackInfo ci) {
+        if (sound == null || Versions.isOldVersion(ClientUtil.dimension())) return;
         var soundPath = sound.getLocation();
 
         // Cancel stomach growl and chest opening/closing sounds as they didn't exist
@@ -41,7 +43,7 @@ public class SoundEngineMixin {
         // Replace vanilla hurt with alpha hurt
         if (PLAYER_HURT.equals(soundPath)) {
             ci.cancel();
-            ((SoundEngine) (Object) this).play(SimpleSoundInstance.forUI(SoundRegistry.HURT.get(), 1.0f));
+            ((SoundEngine)(Object)this).play(SimpleSoundInstance.forUI(SoundRegistry.HURT.get(), 1.0f));
             return;
         }
         // Play alpha hurt on top of other hurt sounds
@@ -49,7 +51,7 @@ public class SoundEngineMixin {
             || HURT_FIRE.equals(soundPath)
             || HURT_DROWN.equals(soundPath)
             || HURT_BERRY.equals(soundPath)) {
-            ((SoundEngine) (Object) this).play(SimpleSoundInstance.forUI(SoundRegistry.HURT.get(), 1.0f));
+            ((SoundEngine)(Object)this).play(SimpleSoundInstance.forUI(SoundRegistry.HURT.get(), 1.0f));
             // Don't cancel original sound
         }
     }

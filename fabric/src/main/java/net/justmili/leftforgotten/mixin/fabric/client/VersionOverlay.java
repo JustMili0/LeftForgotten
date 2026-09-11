@@ -1,8 +1,8 @@
 package net.justmili.leftforgotten.mixin.fabric.client;
 
-import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.client.CommonVersionOverlay;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.util.Versions;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -15,9 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class VersionOverlay {
 
     @Inject(at = @At("TAIL"), method = "render")
-    public void render(GuiGraphics graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-        if (ClientUtil.isDebugScreenOn() || CommonClient.notInAlpha()) return;
-
-        CommonVersionOverlay.render(graphics);
+    public void lf$render(GuiGraphics graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+        if (!ClientUtil.isDebugScreenOn() && Versions.hadVersionOverlay(ClientUtil.dimension())) CommonVersionOverlay.render(graphics);
     }
 }

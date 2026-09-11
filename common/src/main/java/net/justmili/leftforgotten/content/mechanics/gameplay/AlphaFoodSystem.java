@@ -2,9 +2,10 @@ package net.justmili.leftforgotten.content.mechanics.gameplay;
 
 import dev.architectury.event.CompoundEventResult;
 import dev.architectury.event.EventResult;
+import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.common.MathUtil;
-import net.justmili.leftforgotten.registries.extra.LFResources;
+import net.justmili.leftforgotten.util.Versions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -42,47 +43,47 @@ public class AlphaFoodSystem {
         }
     }
     static final Map<Item, FoodEntry> FOOD_HEALTH = Map.ofEntries(
-        Map.entry(Items.PORKCHOP, new FoodEntry(1.5F)),
-        Map.entry(Items.COOKED_PORKCHOP, new FoodEntry(4.0F)),
-        Map.entry(Items.BEEF, new FoodEntry(1.5F)),
-        Map.entry(Items.COOKED_BEEF, new FoodEntry(4.0F)),
-        Map.entry(Items.MUTTON, new FoodEntry(1.0F)),
-        Map.entry(Items.COOKED_MUTTON, new FoodEntry(3.0F)),
-        Map.entry(Items.CHICKEN, new FoodEntry(1.0F, FoodAction.HUNGERS_WITH_CHANCE)),
-        Map.entry(Items.COOKED_CHICKEN, new FoodEntry(3.0F)),
-        Map.entry(Items.COD, new FoodEntry(1.0F)),
-        Map.entry(Items.COOKED_COD, new FoodEntry(2.5F)),
-        Map.entry(Items.SALMON, new FoodEntry(1.0F)),
-        Map.entry(Items.COOKED_SALMON, new FoodEntry(3.0F)),
-        Map.entry(Items.TROPICAL_FISH, new FoodEntry(0.5F)),
+        Map.entry(Items.PORKCHOP, new FoodEntry(1.5f)),
+        Map.entry(Items.COOKED_PORKCHOP, new FoodEntry(4f)),
+        Map.entry(Items.BEEF, new FoodEntry(1.5f)),
+        Map.entry(Items.COOKED_BEEF, new FoodEntry(4f)),
+        Map.entry(Items.MUTTON, new FoodEntry(1f)),
+        Map.entry(Items.COOKED_MUTTON, new FoodEntry(3f)),
+        Map.entry(Items.CHICKEN, new FoodEntry(1f, FoodAction.HUNGERS_WITH_CHANCE)),
+        Map.entry(Items.COOKED_CHICKEN, new FoodEntry(3f)),
+        Map.entry(Items.COD, new FoodEntry(1f)),
+        Map.entry(Items.COOKED_COD, new FoodEntry(2.5f)),
+        Map.entry(Items.SALMON, new FoodEntry(1f)),
+        Map.entry(Items.COOKED_SALMON, new FoodEntry(3f)),
+        Map.entry(Items.TROPICAL_FISH, new FoodEntry(0.5f)),
         Map.entry(Items.PUFFERFISH, new FoodEntry(0.5F, FoodAction.POISONS, FoodAction.HUNGERS, FoodAction.CAUSES_NAUSEA)),
-        Map.entry(Items.RABBIT, new FoodEntry(1.5F)),
-        Map.entry(Items.COOKED_RABBIT, new FoodEntry(2.5F)),
-        Map.entry(Items.RABBIT_STEW, new FoodEntry(5.0F, FoodAction.RESULT_BOWL)),
-        Map.entry(Items.BREAD, new FoodEntry(2.5F)),
-        Map.entry(Items.COOKIE, new FoodEntry(0.5F)),
-        Map.entry(Items.PUMPKIN_PIE, new FoodEntry(4.0F)),
-        Map.entry(Items.CAKE, new FoodEntry(0.5F)),
-        Map.entry(Items.APPLE, new FoodEntry(2.0F)),
-        Map.entry(Items.GOLDEN_APPLE, new FoodEntry(10.0F)),
-        Map.entry(Items.ENCHANTED_GOLDEN_APPLE, new FoodEntry(10.0F)),
-        Map.entry(Items.CARROT, new FoodEntry(1.5F)),
-        Map.entry(Items.GOLDEN_CARROT, new FoodEntry(6.0F)),
-        Map.entry(Items.BAKED_POTATO, new FoodEntry(2.5F)),
-        Map.entry(Items.POTATO, new FoodEntry(0.5F)),
-        Map.entry(Items.POISONOUS_POTATO, new FoodEntry(1.0F, FoodAction.POISONS_WITH_CHANCE)),
-        Map.entry(Items.BEETROOT, new FoodEntry(0.5F)),
-        Map.entry(Items.BEETROOT_SOUP, new FoodEntry(3.0F, FoodAction.RESULT_BOWL)),
-        Map.entry(Items.MELON_SLICE, new FoodEntry(1.0F)),
-        Map.entry(Items.SWEET_BERRIES, new FoodEntry(0.5F)),
-        Map.entry(Items.GLOW_BERRIES, new FoodEntry(0.5F)),
-        Map.entry(Items.CHORUS_FRUIT, new FoodEntry(2.0F, FoodAction.TELEPORTS)),
+        Map.entry(Items.RABBIT, new FoodEntry(1.5f)),
+        Map.entry(Items.COOKED_RABBIT, new FoodEntry(2.5f)),
+        Map.entry(Items.RABBIT_STEW, new FoodEntry(5f, FoodAction.RESULT_BOWL)),
+        Map.entry(Items.BREAD, new FoodEntry(2.5f)),
+        Map.entry(Items.COOKIE, new FoodEntry(0.5f)),
+        Map.entry(Items.PUMPKIN_PIE, new FoodEntry(4f)),
+        Map.entry(Items.CAKE, new FoodEntry(0.5f)),
+        Map.entry(Items.APPLE, new FoodEntry(2f)),
+        Map.entry(Items.GOLDEN_APPLE, new FoodEntry(10f)),
+        Map.entry(Items.ENCHANTED_GOLDEN_APPLE, new FoodEntry(10f)),
+        Map.entry(Items.CARROT, new FoodEntry(1.5f)),
+        Map.entry(Items.GOLDEN_CARROT, new FoodEntry(6f)),
+        Map.entry(Items.BAKED_POTATO, new FoodEntry(2.5f)),
+        Map.entry(Items.POTATO, new FoodEntry(0.5f)),
+        Map.entry(Items.POISONOUS_POTATO, new FoodEntry(1f, FoodAction.POISONS_WITH_CHANCE)),
+        Map.entry(Items.BEETROOT, new FoodEntry(0.5f)),
+        Map.entry(Items.BEETROOT_SOUP, new FoodEntry(3f, FoodAction.RESULT_BOWL)),
+        Map.entry(Items.MELON_SLICE, new FoodEntry(1f)),
+        Map.entry(Items.SWEET_BERRIES, new FoodEntry(0.5f)),
+        Map.entry(Items.GLOW_BERRIES, new FoodEntry(0.5f)),
+        Map.entry(Items.CHORUS_FRUIT, new FoodEntry(2f, FoodAction.TELEPORTS)),
         Map.entry(Items.MUSHROOM_STEW, new FoodEntry(4.5F, FoodAction.RESULT_BOWL)),
-        Map.entry(Items.SUSPICIOUS_STEW, new FoodEntry(3.0F, FoodAction.RESULT_BOWL, FoodAction.GIVES_EFFECT_FROM_TYPE)),
-        Map.entry(Items.ROTTEN_FLESH, new FoodEntry(2.0F, FoodAction.HUNGERS_WITH_CHANCE)),
-        Map.entry(Items.SPIDER_EYE, new FoodEntry(1.0F, FoodAction.POISONS)),
+        Map.entry(Items.SUSPICIOUS_STEW, new FoodEntry(3f, FoodAction.RESULT_BOWL, FoodAction.GIVES_EFFECT_FROM_TYPE)),
+        Map.entry(Items.ROTTEN_FLESH, new FoodEntry(2f, FoodAction.HUNGERS_WITH_CHANCE)),
+        Map.entry(Items.SPIDER_EYE, new FoodEntry(1f, FoodAction.POISONS)),
         Map.entry(Items.HONEY_BOTTLE, new FoodEntry(1.5F, FoodAction.CURES_POISON, FoodAction.RESULT_BOTTLE, FoodAction.ALWAYS_EDIBLE)),
-        Map.entry(Items.DRIED_KELP, new FoodEntry(0.5F))
+        Map.entry(Items.DRIED_KELP, new FoodEntry(0.5f))
     );
     enum FoodAction {
         RESULT_BOWL, RESULT_BOTTLE,
@@ -94,7 +95,7 @@ public class AlphaFoodSystem {
     }
 
     public static CompoundEventResult<ItemStack> onRightClickItem(Player player, InteractionHand hand) {
-        if (player.level().dimension() != LFResources.ALPHA_MINECRAFT) return CompoundEventResult.pass();
+        if (!Versions.hadNoHunger(player.level().dimension())) return CompoundEventResult.pass();
         if (hand != InteractionHand.MAIN_HAND) return CompoundEventResult.interruptTrue(player.getItemInHand(hand));
         var stack = player.getItemInHand(hand);
 
@@ -125,7 +126,7 @@ public class AlphaFoodSystem {
 
     public static EventResult onRightClickBlock(Player player, InteractionHand hand, BlockPos pos, Direction face) {
         if (hand != InteractionHand.MAIN_HAND) return EventResult.pass();
-        if (player.level().dimension() != LFResources.ALPHA_MINECRAFT) return EventResult.pass();
+        if (!Versions.hadNoHunger(player.level().dimension())) return EventResult.pass();
         var stack = player.getItemInHand(hand);
 
         if (FOOD_HEALTH.containsKey(stack.getItem())) return EventResult.pass();
@@ -151,14 +152,10 @@ public class AlphaFoodSystem {
     }
     static void giveResultItem(Player player, Item resultItem) {
         var result = new ItemStack(resultItem);
-        if (!player.getInventory().add(result)) {
-            player.drop(result, false);
-        }
+        if (!player.getInventory().add(result)) player.drop(result, false);
     }
     static void applyPoisonWithChance(Player player) {
-        if (MathUtil.chance(0.6f)) {
-            player.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0));
-        }
+        if (MathUtil.chance(0.6f)) player.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0));
     }
     static void applyPoison(Player player, Item item) {
         if (item == Items.SPIDER_EYE) {
@@ -177,7 +174,10 @@ public class AlphaFoodSystem {
 
     static void applySuspiciousStewEffect(Player player, ItemStack stack) {
         var effects = stack.get(DataComponents.SUSPICIOUS_STEW_EFFECTS);
-        if (effects == null) return;
+        if (effects == null) {
+            LeftForgotten.LOGGER.info("Effect was null");
+            return;
+        }
         for (var entry : effects.effects()) {
             player.addEffect(entry.createEffectInstance());
         }
@@ -185,9 +185,9 @@ public class AlphaFoodSystem {
     static void applyChorusTeleport(Player player) {
         var level = player.level();
         for (int attempt = 0; attempt < 16; attempt++) {
-            double x = player.getX() + (level.random.nextDouble() - 0.5D) * 16.0D;
+            double x = player.getX() + (level.random.nextDouble() - 0.5) * 16;
             double y = player.getY() + (level.random.nextInt(16) - 8);
-            double z = player.getZ() + (level.random.nextDouble() - 0.5D) * 16.0D;
+            double z = player.getZ() + (level.random.nextDouble() - 0.5) * 16;
             y = Math.clamp(y, level.getMinBuildHeight(), level.getMaxBuildHeight() - 1);
             double groundY = findGroundY(level, x, y, z);
             if (groundY >= 0) {
@@ -202,9 +202,7 @@ public class AlphaFoodSystem {
             if (level.getBlockState(pos).isSolid()) {
                 var landing = pos.above();
                 var head = landing.above();
-                if (!level.getBlockState(landing).isSolid() && !level.getBlockState(head).isSolid()) {
-                    return landing.getY();
-                }
+                if (!level.getBlockState(landing).isSolid() && !level.getBlockState(head).isSolid()) return landing.getY();
             }
             pos.move(0, -1, 0);
         }
@@ -216,9 +214,9 @@ public class AlphaFoodSystem {
         var sound = item == Items.HONEY_BOTTLE ? SoundEvents.HONEY_DRINK : SoundEvents.GENERIC_EAT;
         if (world instanceof Level level) {
             if (!level.isClientSide()) {
-                level.playSound(null, x, y, z, sound, SoundSource.PLAYERS, 1.0f, pitch);
+                level.playSound(null, x, y, z, sound, SoundSource.PLAYERS, 1f, pitch);
             } else {
-                level.playLocalSound(x, y, z, sound, SoundSource.PLAYERS, 1.0f, pitch, false);
+                level.playLocalSound(x, y, z, sound, SoundSource.PLAYERS, 1f, pitch, false);
             }
         }
     }

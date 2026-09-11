@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.neoforge.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.justmili.leftforgotten.client.ClassicBlocksModel;
+import net.justmili.leftforgotten.client.ClassicBlockModels;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -22,8 +22,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ClassicBlocksModelNeo extends ClassicBlocksModel implements IBakedModelExtension {
-    public ClassicBlocksModelNeo(BakedModel wrapped) {
+public class ClassicBlockModelsNeo extends ClassicBlockModels implements IBakedModelExtension {
+    public ClassicBlockModelsNeo(BakedModel wrapped) {
         super(wrapped);
     }
 

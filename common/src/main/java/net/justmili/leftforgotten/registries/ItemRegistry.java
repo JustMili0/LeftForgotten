@@ -109,7 +109,7 @@ public class ItemRegistry {
         // Dev
         FEATURE_VOID = registerBlock(BlockRegistry.FEATURE_VOID);
         REMODEL_CRAFTING_TABLE = registerBlock(BlockRegistry.REMODEL_CRAFTING_TABLE);
-        REMODEL_FURNACE = registerBlock(BlockRegistry.REMODEL_FURNACE);
+        REMODEL_FURNACE = registerBlock(BlockRegistry.REMODEL_FURNACE_STONE);
         REMODEL_CHEST = registerBlock(BlockRegistry.REMODEL_CHEST);
 
         /// Items

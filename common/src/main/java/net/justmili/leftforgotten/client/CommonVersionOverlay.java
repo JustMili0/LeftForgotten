@@ -3,11 +3,14 @@ package net.justmili.leftforgotten.client;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.registries.LevelRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
 import java.util.Random;
+
+import static net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil.inDimension;
 
 @Environment(EnvType.CLIENT)
 public class CommonVersionOverlay {
@@ -54,7 +57,7 @@ public class CommonVersionOverlay {
 
     // Common tick text
     public static void onClientTick(Minecraft minecraft) {
-        if (ClientUtil.level() == null || CommonClient.notInAlpha()) {
+        if (ClientUtil.level() == null || !inDimension(LevelRegistry.ALPHA)) {
             currentText = BASE_TEXT;
             flashTicks = 0;
             return;

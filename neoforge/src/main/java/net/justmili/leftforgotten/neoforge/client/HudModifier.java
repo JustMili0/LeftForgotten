@@ -2,9 +2,9 @@ package net.justmili.leftforgotten.neoforge.client;
 
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
-import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
+import net.justmili.leftforgotten.util.Versions;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
@@ -31,8 +31,8 @@ public class HudModifier {
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiLayerEvent.Pre event) {
-        if (CommonClient.notInAlpha()) return;
-        var minecraft = ClientUtil.client();
+        if (!Versions.hadOldHUD(ClientUtil.dimension())) return;
+        var client = ClientUtil.client();
         var player = ClientUtil.player();
         if (player == null) return;
 
@@ -57,7 +57,7 @@ public class HudModifier {
             int armorValue = player.getArmorValue();
             for (int i = 1; armorValue > 0 && i < 20; i += 2) {
                 var sprite = i < armorValue? ARMOR_FULL : i == armorValue? ARMOR_HALF : ARMOR_EMPTY;
-                var atlasSprite = minecraft.getGuiSprites().getSprite(sprite);
+                var atlasSprite = client.getGuiSprites().getSprite(sprite);
                 int origX = width / 2 - 91 + ((i - 1) / 2) * 8;
                 int x1 = mirrorX(origX) + armorW;
                 int y1 = height - 39 + armorH - yOffset();
@@ -106,7 +106,7 @@ public class HudModifier {
 
         // Get rid of NT's version overlay and stamina bar when in dimension
         if (Platform.isModLoaded("nostalgic_tweaks")) {
-            if (CommonClient.inAlpha()) {
+            if (Versions.hadVersionOverlay(ClientUtil.dimension())) {
                 var namespace = id.getNamespace();
                 var path = id.getPath().toLowerCase();
                 if (!(namespace.equals("nostalgic_tweaks"))) return; // "Is it from NT?"
@@ -120,9 +120,10 @@ public class HudModifier {
     }
 
     static void render(GuiGraphics graphics, LayeredDraw.Layer overlay, DeltaTracker partialTick, int x, int y) {
-        graphics.pose().pushPose();
-        graphics.pose().translate(x, y, 0);
+        var pose = graphics.pose();
+        pose.pushPose();
+        pose.translate(x, y, 0);
         overlay.render(graphics, partialTick);
-        graphics.pose().popPose();
+        pose.popPose();
     }
 }

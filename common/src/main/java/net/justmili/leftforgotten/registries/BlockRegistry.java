@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.registries;
 
+import com.google.common.collect.Streams;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.justmili.leftforgotten.LeftForgotten;
@@ -11,6 +12,7 @@ import net.justmili.leftforgotten.content.block.dev.RemodelFurnace;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class BlockRegistry {
@@ -27,7 +29,7 @@ public class BlockRegistry {
         BRICKS, BRICK_STAIRS, BRICK_SLAB, BRICK_WALL,
         OBSIDIAN, IRON_BLOCK, GOLD_BLOCK, DIAMOND_BLOCK,
         BOOKSHELF, GLASS, GLASS_PANE, TNT, IRON_DOOR,
-        FEATURE_VOID, REMODEL_FURNACE, REMODEL_CRAFTING_TABLE, REMODEL_CHEST;
+        FEATURE_VOID, REMODEL_FURNACE_STONE, REMODEL_FURNACE, REMODEL_CRAFTING_TABLE, REMODEL_CHEST;
 
     static {
         // In-Overworld
@@ -101,7 +103,8 @@ public class BlockRegistry {
 
         IRON_DOOR = registerBlock("iron_door", IronDoor::new);
         FEATURE_VOID = registerBlock("feature_void", FeatureVoid::new);
-        REMODEL_FURNACE = registerBlock("remodel_furnace", RemodelFurnace::new);
+        REMODEL_FURNACE_STONE = registerBlock("furnace_pre_beta", RemodelFurnace::new);
+        REMODEL_FURNACE = registerBlock("furnace_post_beta", RemodelFurnace::new); // TODO: Make own class & datagen
         REMODEL_CRAFTING_TABLE = registerBlock("remodel_crafting_table", RemodelCraftingTable::new);
         REMODEL_CHEST = registerBlock("remodel_chest", RemodelChest::new);
     }
@@ -112,5 +115,9 @@ public class BlockRegistry {
 
     public static void register() {
         REGISTRY.register();
+    }
+
+    public static Block[] getBlocksFromRegistry() {
+        return Streams.stream(BlockRegistry.REGISTRY).filter(Objects::nonNull).map(Supplier::get).toArray(Block[]::new);
     }
 }
