@@ -22,7 +22,7 @@
 
 ### ***DEV STUFF***
 - Package renames and class renames happened
-- [WIP] Reworked the mod to use new class `Versions` for feature checks instead of `CommonClient.inAlpha() / .notInAlpha()` for future versions
+- Reworked the mod to use new class `Versions` for feature checks instead of `CommonClient.inAlpha() / .notInAlpha()` for future versions
 - [TODO] Reworked BlockRegistry and ItemRegistry to contain most of the blocks and items within themselves instead of each block and item being an individual class
 
 <hr>
