@@ -4,9 +4,13 @@
 
 ### ***GENERAL***
 - [API WIP] Mod no longer depends on Architectury API and now includes Millie's Core Libraries within itself temporarely until full release of it
+- New changelog format (But no more dev stuff listed)
 
-### ***ADDED***
+### ***CONFIGURATION***
 - [TODO] Config now has a UI. Accessible on Fabric via Mod Menu or through the mod list screen on Forge/Neo
+- [TODO] Merged config keys `remodelCraftingTable` and `remodelFurnace` into `remodelWorkstations`
+
+### ***NEW CONTENT***
 - Items now render as billboards while on-ground
 - [WIP] Made the Chest, Crafting Table and Furnace also remodel in GUI
 - Updated textures for [TODO] Brittle Bedrock and Feature Void
@@ -19,11 +23,6 @@
 - [TODO] Fixed Chest remodels breaking with block entity optimization mods
 - Reworked the Music Player, now any issues it could've had should be gone
 - [TODO] Fully accounted for every block and item tag for every and item block added
-
-### ***DEV STUFF***
-- Package renames and class renames happened
-- Reworked the mod to use new class `Versions` for feature checks instead of `CommonClient.inAlpha() / .notInAlpha()` for future versions
-- [TODO] Reworked BlockRegistry and ItemRegistry to contain most of the blocks and items within themselves instead of each block and item being an individual class
 
 <hr>
 
