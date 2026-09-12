@@ -12,7 +12,7 @@
 - Updated textures for [TODO] Brittle Bedrock and Feature Void
 
 ### ***BUG FIXES/TECHNICAL CHANGES***
-- Now going back
+- Now going back between `left_forgotten:alpha_minecraft` and any other dimension doesn't reset player's hunger, it just pauses as it is and resumes when you're out
 - Fixed effects not applying from eaten Suspicious Stews
 - Fixed possible crashes on dedicated servers when attempting to eat something in `left_forgotten:alpha_minecraft`
 - Fixed Redstone Ore not generating due to a typo ([#5](https://github.com/JustMili0/LeftForgotten/issues/5))
