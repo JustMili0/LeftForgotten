@@ -31,7 +31,7 @@
 - Fixed Redstone Ore not generating due to a typo ([#5](https://github.com/JustMili0/LeftForgotten/issues/5))
 - [TODO] Fixed Chest remodels breaking with block entity optimization mods
 - Reworked the Music Player, now any issues it could've had should be gone
-- [TODO] Fully accounted for every block and item tag for every and item block added
+- [TODO] Fully accounted for every block and item tag for every item and block added
 
 <hr>
 
