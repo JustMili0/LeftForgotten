@@ -78,7 +78,7 @@ subprojects {
 
     val detectedPlatform = when {
         project.name.contains("fabric", true) -> "Fabric"
-        project.name.contains("forge", true) -> "Forge"
+        project.name.contains("neoforge", true) -> "NeoForge"
         else -> "Common"
     }
     project.version = "${modVersion}+mc${mcVersion}-${detectedPlatform}"
