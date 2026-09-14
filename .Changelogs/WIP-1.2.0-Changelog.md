@@ -24,6 +24,7 @@
 ### ***CHANGES***
 - Now going back between `left_forgotten:alpha_minecraft` and any other dimension doesn't reset player's hunger, it just pauses as it is and resumes when you're out
 - Players using Better Combat are no longer granted a attack speed boost in `left_forgotten:alpha_minecraft`
+- Mount health is no longer hidden when player is in creative, matching vanilla
 
 ### ***BUG FIXES/TECHNICAL CHANGES***
 - Fixed effects not applying from eaten Suspicious Stews
