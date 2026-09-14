@@ -37,7 +37,7 @@ public class MoveToAlpha {
     public static EventResult onHurtByDimensionEntry(LivingEntity entity, DamageSource source, float value) {
         if (!(entity instanceof ServerPlayer player)) return EventResult.pass();
         if (source == null) return EventResult.pass();
-        if (!Versions.isHighestLayer(player.level().dimension())) return EventResult.pass();
+        if (!Versions.isHighestLayer(player.level())) return EventResult.pass();
         if (!source.is(DamageTypes.FALL)) return EventResult.pass(); // Filter only for fall aka for entry
         if (value > 512f) return EventResult.pass(); // Cancel the damage
         if (player.getHealth() - value > 0) return EventResult.pass();
@@ -50,7 +50,7 @@ public class MoveToAlpha {
 
     public static void onPlayerTick(Player ticking) {
         if (!(ticking instanceof ServerPlayer player)) return;
-        if (!Versions.isHighestLayer(player.level().dimension())) return;
+        if (!Versions.isHighestLayer(player.level())) return;
         if (player.getY() < 196) return;
 
         var overworld = player.getServer().getLevel(Level.OVERWORLD);

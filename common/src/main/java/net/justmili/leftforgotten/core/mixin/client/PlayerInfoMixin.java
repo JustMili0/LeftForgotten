@@ -19,14 +19,14 @@ public abstract class PlayerInfoMixin {
     private static final ResourceLocation lf$STEVE_SKIN = LeftForgotten.asId("textures/entity/player/steve.png");
 
     @Inject(method = "getSkinLocation", at = @At("RETURN"), cancellable = true)
-    private void lf$forceSteveTexture(CallbackInfoReturnable<ResourceLocation> cir) {
-        if (Versions.hadNoSkins(ClientUtil.dimension()) || !Config.forceSteveSkin.get()) return;
+    private void lf$tryForceSteveSkin(CallbackInfoReturnable<ResourceLocation> cir) {
+        if (!Versions.hadNoSkins(ClientUtil.level()) || !Config.steveSkin.get()) return;
         cir.setReturnValue(lf$STEVE_SKIN);
     }
 
     @Inject(method = "getModelName", at = @At("RETURN"), cancellable = true)
-    private void lf$forceSteveModel(CallbackInfoReturnable<String> cir) {
-        if (Versions.hadNoSkins(ClientUtil.dimension()) || !Config.forceSteveSkin.get()) return;
+    private void lf$tryForceSteveModel(CallbackInfoReturnable<String> cir) {
+        if (!Versions.hadNoSkins(ClientUtil.level()) || !Config.steveSkin.get()) return;
         cir.setReturnValue("default");
     }
 }

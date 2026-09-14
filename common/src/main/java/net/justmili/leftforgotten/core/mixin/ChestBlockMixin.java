@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.core.mixin;
 
 import net.justmili.leftforgotten.config.Config;
-import net.justmili.leftforgotten.core.registries.LevelRegistry;
+import net.justmili.leftforgotten.core.util.Versions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -24,11 +24,11 @@ public class ChestBlockMixin {
     private static final VoxelShape FULL_BLOCK = Block.box(0, 0, 0, 16, 16, 16);
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
-    private void lf$alphaChestShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context,
+    private void lf$tryReshapeChest(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context,
                                     CallbackInfoReturnable<VoxelShape> cir) {
         if (!(getter instanceof Level level)) return;
-        if (!level.dimension().equals(LevelRegistry.ALPHA)) return;
-        if (Config.remodelChests.isNull() || !Config.remodelChests.get()) return;
+        if (!Versions.hadBlockyChests(level)) return;
+        if (Config.chestRemodel.isNull() || !Config.chestRemodel.get()) return;
         if ((Object) this != Blocks.CHEST) return;
 
         cir.setReturnValue(FULL_BLOCK);

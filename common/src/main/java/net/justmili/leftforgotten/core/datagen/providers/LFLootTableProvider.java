@@ -122,8 +122,9 @@ public class LFLootTableProvider extends LootTableProvider {
             // Building / Iron
             add(BlockRegistry.IRON_DOOR.get(), createDoorTable(BlockRegistry.IRON_DOOR.get()));
 
-            // Deb
+            // Dev
             dropSelf(BlockRegistry.REMODEL_CRAFTING_TABLE.get());
+            dropSelf(BlockRegistry.REMODEL_FURNACE.get());
             dropSelf(BlockRegistry.REMODEL_FURNACE_STONE.get());
             dropSelf(BlockRegistry.REMODEL_CHEST.get());
         }

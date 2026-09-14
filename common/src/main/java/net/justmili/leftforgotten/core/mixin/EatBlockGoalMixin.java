@@ -10,6 +10,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -28,7 +29,7 @@ public class EatBlockGoalMixin {
     private Level level;
 
     @ModifyReturnValue(method = "canUse", at = @At("RETURN"))
-    public boolean lf$canUse(boolean original) {
+    public boolean lf$makeBlockEdible(boolean original) {
         var below = mob.blockPosition().below();
         if (level.getBlockState(below).is(BlockRegistry.GRASS_BLOCK.get())) {
             return true;
@@ -46,7 +47,7 @@ public class EatBlockGoalMixin {
         if (state.is(BlockRegistry.GRASS_BLOCK.get())) {
 
             if (level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
-                level.levelEvent(2001, below, Block.getId(Blocks.GRASS_BLOCK.defaultBlockState()));
+                level.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, below, Block.getId(Blocks.GRASS_BLOCK.defaultBlockState()));
                 level.setBlock(below, Blocks.DIRT.defaultBlockState(), 2);
             }
 

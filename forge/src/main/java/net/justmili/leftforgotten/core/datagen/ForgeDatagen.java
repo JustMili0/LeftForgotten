@@ -1,10 +1,10 @@
 package net.justmili.leftforgotten.core.datagen;
 
-import net.justmili.leftforgotten.datagen.providers.LFLootTableProvider;
-import net.justmili.leftforgotten.datagen.providers.LFModelProvider;
-import net.justmili.leftforgotten.datagen.providers.LFRecipeProvider;
-import net.justmili.leftforgotten.datagen.providers.tags.LFBlockTagProvider;
-import net.justmili.leftforgotten.datagen.providers.tags.LFItemTagProvider;
+import net.justmili.leftforgotten.core.datagen.providers.LFLootTableProvider;
+import net.justmili.leftforgotten.core.datagen.providers.LFModelProvider;
+import net.justmili.leftforgotten.core.datagen.providers.LFRecipeProvider;
+import net.justmili.leftforgotten.core.datagen.providers.tags.LFBlockTagProvider;
+import net.justmili.leftforgotten.core.datagen.providers.tags.LFItemTagProvider;
 import net.minecraft.data.DataProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
 

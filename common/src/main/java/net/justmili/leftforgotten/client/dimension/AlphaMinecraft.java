@@ -9,6 +9,7 @@ public class AlphaMinecraft extends DimensionSpecialEffects {
     public AlphaMinecraft() {
         super(Float.NaN, true, SkyType.NORMAL, false, false);
     }
+
     @Override
     public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 color, float sunHeight) {
         return color;
@@ -16,6 +17,6 @@ public class AlphaMinecraft extends DimensionSpecialEffects {
 
     @Override
     public boolean isFoggyAt(int x, int y) {
-        return Config.enableFog.get();
+        return Config.fog.get();
     }
 }

@@ -13,6 +13,6 @@ public class LocalPlayerMixin {
 
     @Inject(method = "canStartSprinting", at = @At("RETURN"), cancellable = true)
     private void lf$preventSprinting(CallbackInfoReturnable<Boolean> cir) {
-        if (Versions.hadNoSprint(ClientUtil.dimension())) cir.setReturnValue(false);
+        if (Versions.hadNoSprint(ClientUtil.level()) && !ClientUtil.isNotSurvival()) cir.setReturnValue(false);
     }
 }

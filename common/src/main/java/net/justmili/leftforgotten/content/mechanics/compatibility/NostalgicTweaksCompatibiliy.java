@@ -11,7 +11,7 @@ public class NostalgicTweaksCompatibiliy {
     public static void onPlayerTick(Player player) {
         // check for client side
         if (!Platform.isModLoaded("nostalgic_tweaks")) return;
-        if (Versions.hadVersionOverlay(player.level().dimension())) {
+        if (Versions.hadVersionOverlay(player.level())) {
             loadVars();
             justOut = true;
         } else {

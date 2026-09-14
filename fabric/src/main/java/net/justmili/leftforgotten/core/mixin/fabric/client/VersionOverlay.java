@@ -15,6 +15,6 @@ public abstract class VersionOverlay {
 
     @Inject(at = @At("TAIL"), method = "render")
     public void lf$render(GuiGraphics graphics, float partialTick, CallbackInfo ci) {
-        if (!ClientUtil.isDebugScreenOn() && Versions.hadVersionOverlay(ClientUtil.dimension())) CommonVersionOverlay.render(graphics);
+        if (!ClientUtil.isDebugScreenOn() && Versions.hadVersionOverlay(ClientUtil.level())) CommonVersionOverlay.render(graphics);
     }
 }

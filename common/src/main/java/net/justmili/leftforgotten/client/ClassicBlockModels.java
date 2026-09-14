@@ -1,8 +1,9 @@
 package net.justmili.leftforgotten.client;
 
 import net.justmili.leftforgotten.core.registries.BlockRegistry;
-import net.justmili.leftforgotten.core.registries.LevelRegistry;
-import net.minecraft.client.Minecraft;
+import net.justmili.leftforgotten.core.util.Versions;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.libs.v1.utils.client.RenderingUtil;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -24,16 +25,18 @@ public abstract class ClassicBlockModels implements BakedModel {
     }
 
     protected @Nullable BakedModel getBakedModel(BlockState state) {
-        var level = Minecraft.getInstance().level;
-        if (state != null && level != null && level.dimension().equals(LevelRegistry.ALPHA)) {
+        var level = ClientUtil.level();
+        if (state != null && Versions.isOldVersion(level)) {
             if (state.is(Blocks.CRAFTING_TABLE)) {
                 state = BlockRegistry.REMODEL_CRAFTING_TABLE.get().defaultBlockState();
 
-                return Minecraft.getInstance().getBlockRenderer().getBlockModel(state);
+                return RenderingUtil.getBlockModel(state);
             } else if (state.is(Blocks.FURNACE)) {
-                state = BlockRegistry.REMODEL_FURNACE_STONE.get().withPropertiesOf(state);
+                state = Versions.upToAlpha(level)
+                    ? BlockRegistry.REMODEL_FURNACE_STONE.get().withPropertiesOf(state)
+                    : BlockRegistry.REMODEL_FURNACE.get().withPropertiesOf(state);
 
-                return Minecraft.getInstance().getBlockRenderer().getBlockModel(state);
+                return RenderingUtil.getBlockModel(state);
             } else if (state.is(Blocks.CHEST)) {
                 return null; // only exists purely for EBE purposes really
             }

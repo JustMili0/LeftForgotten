@@ -29,4 +29,6 @@ public class CommonClient {
             && (modelLocation.getPath().equals("furnace")
             || modelLocation.getPath().equals("crafting_table"));
     }
+
+
 }

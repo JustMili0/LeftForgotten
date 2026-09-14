@@ -32,21 +32,21 @@ public abstract class HudModifier {
     // Draw identifier for renderPlayerHealth's redirectBlit profiler section
     @Unique
     private Stack<String> lf$currentProfiler = new Stack<>();
-    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
-        target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"))
+
+    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"))
     private void lf$logProfilePushes(ProfilerFiller filler, String name, Operation<Void> original) {
         lf$currentProfiler.push(name);
         original.call(filler, name);
     }
-    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
-        target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V"))
+
+    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V"))
     private void lf$logProfilePopPushes(ProfilerFiller filler, String name, Operation<Void> original) {
         lf$currentProfiler.pop();
         lf$currentProfiler.push(name);
         original.call(filler, name);
     }
-    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
-        target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V"))
+
+    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V"))
     private void lf$logProfilePops(ProfilerFiller filler, Operation<Void> original) {
         lf$currentProfiler.pop();
         original.call(filler);
@@ -54,66 +54,59 @@ public abstract class HudModifier {
 
     // Player HP - move down, account for AbstractHorse jump bar when saddled
     @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
-    private int lf$moveHeartsDown(int y) {
-        if (!Versions.hadOldHUD(ClientUtil.dimension())) return y;
+    private int lf$modifyHealthY(int y) {
+        if (!Versions.hadOldHUD(ClientUtil.level())) return y;
 
-        return y+playerHpH-yOffset();
+        return y + playerHpH - yOffset();
     }
 
     // Food disable
-    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
-        target = "Lnet/minecraft/client/gui/Gui;getVehicleMaxHearts(Lnet/minecraft/world/entity/LivingEntity;)I"))
+    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;getVehicleMaxHearts(Lnet/minecraft/world/entity/LivingEntity;)I"))
     private int lf$disableFoodBar(Gui gui, LivingEntity vehicle, Operation<Integer> original) {
-        if (Versions.hadOldHUD(ClientUtil.dimension())) return -1;
+        if (Versions.hadOldHUD(ClientUtil.level())) return -1;
 
         return this.getVehicleMaxHearts(vehicle);
     }
 
     // Armor and Air Level, flip armor sprites, account for AbstractHorse jump bar when saddled
-    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
-        target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V"))
-    private void lf$redirectBlit(GuiGraphics graphics, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, Operation<Void> original) {
-        if (!Versions.hadOldHUD(ClientUtil.dimension())) {
+    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V"))
+    private void lf$modifyArmorAndAirXY(GuiGraphics graphics, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, Operation<Void> original) {
+        if (!Versions.hadOldHUD(ClientUtil.level())) {
             original.call(graphics, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
             return;
         }
 
         if (this.lf$currentProfiler.peek().equals("armor")) { // Armor move right and down
-            int barStart = ClientUtil.width() / 2-91;
-            int mirroredX = 2 * barStart+72-x;
-            int x1 = mirroredX+armorW;
-            int y1 = y+armorH-yOffset()+extraHealthRowsOffset();
+            int barStart = ClientUtil.width() / 2 - 91;
+            int mirroredX = 2 * barStart + 72 - x;
+            int x1 = mirroredX + armorW;
+            int y1 = y + armorH - yOffset() + extraHealthRowsOffset();
 
             renderFlippedBlit(graphics, atlasLocation, x1, y1, uWidth, vHeight, uOffset, vOffset);
 
         } else if (this.lf$currentProfiler.peek().equals("air")) { // Air level move left and down
-            int barEnd = ClientUtil.width() / 2+51;
-            int mirroredX = 2 * barEnd-9-x;
+            int barEnd = ClientUtil.width() / 2 + 51;
+            int mirroredX = 2 * barEnd - 9 - x;
 
-            graphics.blit(atlasLocation, mirroredX-airLvlW, y-airLvlH+yOffset()-extraHealthRowsOffset(), uOffset, vOffset, uWidth, vHeight);
+            graphics.blit(atlasLocation, mirroredX - airLvlW, y - airLvlH + yOffset() - extraHealthRowsOffset(), uOffset, vOffset, uWidth, vHeight);
         } else {
             original.call(graphics, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
         }
     }
 
     // EXP bar disable
-    @Inject(at = @At("HEAD"), method = "renderExperienceBar", cancellable = true)
-    private void lf$renderExperienceBar(CallbackInfo ci) {
-        if (Versions.hadOldHUD(ClientUtil.dimension())) ci.cancel();
+    @Inject(method = "renderExperienceBar", at = @At("HEAD"), cancellable = true)
+    private void lf$disableExperienceBar(CallbackInfo ci) {
+        if (Versions.hadOldHUD(ClientUtil.level())) ci.cancel();
     }
     // EXP level renders with EXP bar on 1.20.1
 
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
-    private int lf$moveMountHealthY(int y) {
-        if (!Versions.hadOldHUD(ClientUtil.dimension()) || ClientUtil.notSurvivalOrHideGui()) return y;
+    private int lf$modifyMountHealthY(int y) {
+        if (!Versions.hadOldHUD(ClientUtil.level()) || ClientUtil.notSurvivalOrHideGui()) return y;
 
         if (ClientUtil.player().getArmorValue() == 0) return mountHpOffset() + mountHpH_na + mountHpH;
         return mountHpOffset();
-    }
-
-    @Inject(at = @At("HEAD"), method = "renderVehicleHealth", cancellable = true)
-    private void lf$mountHealthCreativeCancel(GuiGraphics graphics, CallbackInfo ci) {
-        if (Versions.hadOldHUD(ClientUtil.dimension()) && ClientUtil.notSurvivalOrHideGui()) ci.cancel();
     }
 }

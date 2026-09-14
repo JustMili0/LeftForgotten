@@ -8,6 +8,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class RenderingUtil {
 
@@ -34,4 +35,12 @@ public class RenderingUtil {
     public static BakedModel getItemModel(ItemStack stack) {
         return getItemRenderer().getModel(stack, null, null, 0);
     }
+
+    public static BakedModel getBlockModel(BlockState state) {
+        return getBlockRenderer().getBlockModel(state);
+    }
+    
+//    public static BakedModel getGuiSprites(BlockState state) {
+//        return ClientUtil.client().getGuiSprites();
+//    }
 }

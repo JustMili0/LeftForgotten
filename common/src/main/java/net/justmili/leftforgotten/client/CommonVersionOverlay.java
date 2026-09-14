@@ -2,15 +2,13 @@ package net.justmili.leftforgotten.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.justmili.leftforgotten.core.registries.LevelRegistry;
-import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.core.util.Versions;
+import net.justmili.leftforgotten.libs.v1.utils.common.MathUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
-import java.util.Random;
-
-import static net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil.inDimension;
+import static net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil.font;
 import static net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil.level;
 
 @Environment(EnvType.CLIENT)
@@ -49,16 +47,16 @@ public class CommonVersionOverlay {
         "Minecraft 1.21.11", // Mounts of Mayhem
         "Minecraft 26.1", // Tiny Takeover
         "Minecraft 26.1.2",
-        "Minecraft 26.2" // Chaos Cubed
+        "Minecraft 26.2", // Chaos Cubed
+        "Minecraft 26.3" // Wilderness Bound
     };
 
     static String currentText = BASE_TEXT;
-    static int flashTicks = 4;
-    static final Random random = new Random();
+    static int flashTicks = 6;
 
     // Common tick text
-    public static void onClientTick(Minecraft minecraft) {
-        if (level() == null || !inDimension(LevelRegistry.ALPHA)) {
+    public static void onClientTick(Minecraft client) {
+        if (level() == null || !Versions.hadVersionOverlay(level())) {
             currentText = BASE_TEXT;
             flashTicks = 0;
             return;
@@ -70,16 +68,16 @@ public class CommonVersionOverlay {
 
             // Dynamic String Change
             // 6000 - ticks between each random "glitch"
-            // "// 2-6 ticks" - "glitch" string show time
-        } else if (random.nextInt(6000) == 0) {
-            currentText = VERSIONS[random.nextInt(VERSIONS.length)];
-            flashTicks = 2 + random.nextInt(5); // 2–4 ticks
+            // "// 2-8 ticks" - "glitch" string show time
+        } else if (MathUtil.random.nextInt(6000) == 0) {
+            currentText = VERSIONS[MathUtil.random.nextInt(VERSIONS.length)];
+            flashTicks = 2 + MathUtil.random.nextInt(6); // 2–8 ticks
         }
     }
 
     // Fabric/Forger render
     public static void render(GuiGraphics graphics) {
-        var font = ClientUtil.font();
+        var font = font();
         float targetHeight = 8f;
         float userScale = (float) Math.round(targetHeight / font.lineHeight);
 

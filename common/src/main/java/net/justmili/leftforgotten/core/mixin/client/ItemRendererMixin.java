@@ -32,7 +32,7 @@ public abstract class ItemRendererMixin {
     private void lf$tryRenderAsBillboards(ItemRenderer instance, BakedModel model, ItemStack stack, int light, int overlay, PoseStack pose, VertexConsumer consumer,
                                           Operation<Void> original, @Local(argsOnly = true) ItemDisplayContext context) {
 
-        if (context != ItemDisplayContext.GROUND || !Versions.hadBillboardItems(ClientUtil.dimension()) || model.isGui3d()) {
+        if (context != ItemDisplayContext.GROUND || !Versions.hadBillboardItems(ClientUtil.level()) || model.isGui3d()) {
             original.call(instance, model, stack, light, overlay, pose, consumer);
             return;
         }

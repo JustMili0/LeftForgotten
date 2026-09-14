@@ -1,7 +1,6 @@
 package net.justmili.leftforgotten.content.mechanics.gameplay;
 
 import net.justmili.leftforgotten.config.Config;
-import net.justmili.leftforgotten.core.registries.LevelRegistry;
 import net.justmili.leftforgotten.core.util.Versions;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.minecraft.resources.ResourceKey;
@@ -10,22 +9,18 @@ import net.minecraft.world.level.Level;
 
 public class ApplyProgrammerArt {
     static boolean shouldResetProgrammerArt = false;
-    static String resourcePack = getPack();
+    static String resourcePack = "programmer_art";
 
     public static void onChangeDimension(ServerPlayer player, ResourceKey<Level> fromLevel, ResourceKey<Level> toLevel) {
-        if (!Config.forceOldPack.get()) return;
-        if (!resourcePack.contains("golden_days") && ClientUtil.arePackLoaded("golden_days", "golden_days_alpha", "golden_days_beta")) return;
+        if (!Config.applyOldResourcepacks.get()) return;
+        if (!ClientUtil.arePackLoaded("golden_days", "golden_days_alpha", "golden_days_beta")) return;
 
-        if (toLevel == LevelRegistry.ALPHA) setupProgrammerArt();
-        if (fromLevel == LevelRegistry.ALPHA) clearProgrammerArt();
+        if (Versions.isOldVersion(Versions.get(player, toLevel))) setupProgrammerArt();
+        if (Versions.isOldVersion(Versions.get(player, fromLevel))) clearProgrammerArt();
     }
+
     public static void onPlayerJoin(ServerPlayer player) {
-        if (Versions.isOldVersion(player.level().dimension())) shouldResetProgrammerArt = true;
-    }
-
-    static String getPack() {
-        if (!Config.overrideOldPack.get().isEmpty()) return Config.overrideOldPack.get();
-        return "programmer_art";
+        if (Versions.isOldVersion(player.level())) shouldResetProgrammerArt = true;
     }
 
     static void setupProgrammerArt() {
@@ -36,6 +31,7 @@ public class ApplyProgrammerArt {
             shouldResetProgrammerArt = false;
         }
     }
+
     static void clearProgrammerArt() {
         if (shouldResetProgrammerArt) ClientUtil.removePack(resourcePack);
     }

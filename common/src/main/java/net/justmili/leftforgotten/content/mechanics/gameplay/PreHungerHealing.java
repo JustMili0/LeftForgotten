@@ -95,7 +95,7 @@ public class PreHungerHealing {
     }
 
     public static CompoundEventResult<ItemStack> onRightClickItem(Player player, InteractionHand hand) {
-        if (!Versions.hadNoHunger(player.level().dimension())) return CompoundEventResult.pass();
+        if (!Versions.hadNoHunger(player.level())) return CompoundEventResult.pass();
         if (hand != InteractionHand.MAIN_HAND) return CompoundEventResult.interruptTrue(player.getItemInHand(hand));
         var stack = player.getItemInHand(hand);
 
@@ -128,7 +128,7 @@ public class PreHungerHealing {
 
     public static EventResult onRightClickBlock(Player player, InteractionHand hand, BlockPos pos, Direction face) {
         if (hand != InteractionHand.MAIN_HAND) return EventResult.pass();
-        if (!Versions.hadNoHunger(player.level().dimension())) return EventResult.pass();
+        if (!Versions.hadNoHunger(player.level())) return EventResult.pass();
         var stack = player.getItemInHand(hand);
 
         if (FOOD_HEALTH.containsKey(stack.getItem())) return EventResult.pass();
@@ -192,9 +192,9 @@ public class PreHungerHealing {
     static void applyChorusTeleport(Player player) {
         var level = player.level();
         for (int attempt = 0; attempt < 16; attempt++) {
-            double x = player.getX() + (level.random.nextDouble() - 0.5D) * 16.0D;
+            double x = player.getX() + (level.random.nextDouble() - 0.5) * 16;
             double y = player.getY() + (level.random.nextInt(16) - 8);
-            double z = player.getZ() + (level.random.nextDouble() - 0.5D) * 16.0D;
+            double z = player.getZ() + (level.random.nextDouble() - 0.D) * 16;
             y = Math.max(level.getMinBuildHeight(), Math.min(level.getMaxBuildHeight() - 1, y));
             double groundY = findGroundY(level, x, y, z);
             if (groundY >= 0) {

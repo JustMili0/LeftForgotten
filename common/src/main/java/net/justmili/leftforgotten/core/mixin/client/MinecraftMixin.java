@@ -14,9 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MinecraftMixin {
 
     @Inject(method = "useAmbientOcclusion", at = @At("HEAD"), cancellable = true)
-    private static void lf$blockyLighting(CallbackInfoReturnable<Boolean> cir) {
-        if (Config.forceBlockyLighting.isNull() || !Config.forceBlockyLighting.get()) return;
+    private static void lf$setNoAO(CallbackInfoReturnable<Boolean> cir) {
+        if (Config.blockyLighting.isNull() || !Config.blockyLighting.get()) return;
 
-        if (ClientUtil.level() != null && Versions.hadBlockyLighting(ClientUtil.dimension())) cir.setReturnValue(false);
+        if (ClientUtil.level() != null && Versions.hadBlockyLighting(ClientUtil.level())) cir.setReturnValue(false);
     }
 }

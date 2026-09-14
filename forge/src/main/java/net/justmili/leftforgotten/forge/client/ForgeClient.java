@@ -2,8 +2,8 @@ package net.justmili.leftforgotten.forge.client;
 
 import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.content.entity.renderer.OldBoatRenderer;
-import net.justmili.leftforgotten.registries.BlockRegistry;
-import net.justmili.leftforgotten.registries.EntityRegistry;
+import net.justmili.leftforgotten.core.registries.BlockRegistry;
+import net.justmili.leftforgotten.core.registries.EntityRegistry;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
