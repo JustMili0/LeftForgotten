@@ -2,8 +2,8 @@ package net.justmili.leftforgotten.content.mechanics.gameplay;
 
 import dev.architectury.event.CompoundEventResult;
 import dev.architectury.event.EventResult;
-import net.justmili.leftforgotten.libs.v1.utils.common.MathUtil;
 import net.justmili.leftforgotten.core.util.Versions;
+import net.justmili.leftforgotten.libs.v1.utils.common.MathUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -55,7 +55,7 @@ public class PreHungerHealing {
         Map.entry(Items.SALMON, new FoodEntry(1f)),
         Map.entry(Items.COOKED_SALMON, new FoodEntry(3f)),
         Map.entry(Items.TROPICAL_FISH, new FoodEntry(0.5f)),
-        Map.entry(Items.PUFFERFISH, new FoodEntry(0.5F, FoodAction.POISONS, FoodAction.HUNGERS, FoodAction.CAUSES_NAUSEA)),
+        Map.entry(Items.PUFFERFISH, new FoodEntry(0.5f, FoodAction.POISONS, FoodAction.HUNGERS, FoodAction.CAUSES_NAUSEA)),
         Map.entry(Items.RABBIT, new FoodEntry(1.5f)),
         Map.entry(Items.COOKED_RABBIT, new FoodEntry(2.5f)),
         Map.entry(Items.RABBIT_STEW, new FoodEntry(5f, FoodAction.RESULT_BOWL)),
@@ -77,11 +77,11 @@ public class PreHungerHealing {
         Map.entry(Items.SWEET_BERRIES, new FoodEntry(0.5f)),
         Map.entry(Items.GLOW_BERRIES, new FoodEntry(0.5f)),
         Map.entry(Items.CHORUS_FRUIT, new FoodEntry(2f, FoodAction.TELEPORTS)),
-        Map.entry(Items.MUSHROOM_STEW, new FoodEntry(4.5F, FoodAction.RESULT_BOWL)),
+        Map.entry(Items.MUSHROOM_STEW, new FoodEntry(4.5f, FoodAction.RESULT_BOWL)),
         Map.entry(Items.SUSPICIOUS_STEW, new FoodEntry(3f, FoodAction.RESULT_BOWL, FoodAction.GIVES_EFFECT_FROM_TYPE)),
         Map.entry(Items.ROTTEN_FLESH, new FoodEntry(2f, FoodAction.HUNGERS_WITH_CHANCE)),
         Map.entry(Items.SPIDER_EYE, new FoodEntry(1f, FoodAction.POISONS)),
-        Map.entry(Items.HONEY_BOTTLE, new FoodEntry(1.5F, FoodAction.CURES_POISON, FoodAction.RESULT_BOTTLE, FoodAction.ALWAYS_EDIBLE)),
+        Map.entry(Items.HONEY_BOTTLE, new FoodEntry(1.5f, FoodAction.CURES_POISON, FoodAction.RESULT_BOTTLE, FoodAction.ALWAYS_EDIBLE)),
         Map.entry(Items.DRIED_KELP, new FoodEntry(0.5f))
     );
 
@@ -95,11 +95,11 @@ public class PreHungerHealing {
     }
 
     public static CompoundEventResult<ItemStack> onRightClickItem(Player player, InteractionHand hand) {
-        if (!Versions.hadNoHunger(player.level().dimension())) return CompoundEventResult.pass();
+        if (!Versions.hadNoHunger(player.level())) return CompoundEventResult.pass();
         if (hand != InteractionHand.MAIN_HAND) return CompoundEventResult.interruptTrue(player.getItemInHand(hand));
         var stack = player.getItemInHand(hand);
-
         var entry = FOOD_HEALTH.get(stack.getItem());
+
         if (entry != null) {
             var item = stack.getItem();
             boolean canEat = !healthCheck(player) || entry.hasAction(FoodAction.ALWAYS_EDIBLE);
@@ -127,7 +127,7 @@ public class PreHungerHealing {
 
     public static EventResult onRightClickBlock(Player player, InteractionHand hand, BlockPos pos, Direction face) {
         if (hand != InteractionHand.MAIN_HAND) return EventResult.pass();
-        if (!Versions.hadNoHunger(player.level().dimension())) return EventResult.pass();
+        if (!Versions.hadNoHunger(player.level())) return EventResult.pass();
         var stack = player.getItemInHand(hand);
 
         if (FOOD_HEALTH.containsKey(stack.getItem())) return EventResult.pass();
@@ -189,7 +189,7 @@ public class PreHungerHealing {
         for (int attempt = 0; attempt < 16; attempt++) {
             double x = player.getX() + (level.random.nextDouble() - 0.5) * 16;
             double y = player.getY() + (level.random.nextInt(16) - 8);
-            double z = player.getZ() + (level.random.nextDouble() - 0.5) * 16;
+            double z = player.getZ() + (level.random.nextDouble() - 0.D) * 16;
             y = Math.clamp(y, level.getMinBuildHeight(), level.getMaxBuildHeight() - 1);
             double groundY = findGroundY(level, x, y, z);
             if (groundY >= 0) {

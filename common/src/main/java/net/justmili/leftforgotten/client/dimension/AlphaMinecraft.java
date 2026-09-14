@@ -16,6 +16,6 @@ public class AlphaMinecraft extends DimensionSpecialEffects {
 
     @Override
     public boolean isFoggyAt(int x, int y) {
-        return Config.enableFog.get();
+        return Config.fog.get();
     }
 }

@@ -2,9 +2,9 @@ package net.justmili.leftforgotten.core.datagen.providers;
 
 import com.google.common.collect.Streams;
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.libs.v1.utils.common.datagen.extensions.KnownBlocksLootProvider;
 import net.justmili.leftforgotten.core.registries.BlockRegistry;
 import net.justmili.leftforgotten.core.registries.ItemRegistry;
+import net.justmili.leftforgotten.libs.v1.utils.common.datagen.extensions.KnownBlocksLootProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -126,8 +126,9 @@ public class LFLootTableProvider extends LootTableProvider {
             // Building / Iron
             add(BlockRegistry.IRON_DOOR.get(), createDoorTable(BlockRegistry.IRON_DOOR.get()));
 
-            // Deb
+            // Dev
             dropSelf(BlockRegistry.REMODEL_CRAFTING_TABLE.get());
+            dropSelf(BlockRegistry.REMODEL_FURNACE.get());
             dropSelf(BlockRegistry.REMODEL_FURNACE_STONE.get());
             dropSelf(BlockRegistry.REMODEL_CHEST.get());
         }

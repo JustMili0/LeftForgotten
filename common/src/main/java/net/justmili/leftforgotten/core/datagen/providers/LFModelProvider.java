@@ -2,10 +2,10 @@ package net.justmili.leftforgotten.core.datagen.providers;
 
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.core.datagen.extra.DatagenAssetUtilExtra;
-import net.justmili.leftforgotten.libs.v1.utils.common.datagen.DatagenAssetUtil;
-import net.justmili.leftforgotten.libs.v1.utils.common.datagen.impl.ImprovedModelProvider;
 import net.justmili.leftforgotten.core.registries.BlockRegistry;
 import net.justmili.leftforgotten.core.registries.ItemRegistry;
+import net.justmili.leftforgotten.libs.v1.utils.common.datagen.DatagenAssetUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.datagen.impl.ImprovedModelProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
@@ -126,6 +126,7 @@ public class LFModelProvider extends ImprovedModelProvider {
         // Dev
         gen.createCube(BlockRegistry.FEATURE_VOID.get(), noRot);
         gen.createCraftingTable(BlockRegistry.REMODEL_CRAFTING_TABLE.get(), BlockRegistry.WOODEN_PLANKS.get());
+        gen.createFurnace(BlockRegistry.REMODEL_FURNACE.get());
         DatagenAssetUtilExtra.createOldFurnace(blockGen, BlockRegistry.REMODEL_FURNACE_STONE.get(), BlockRegistry.STONE.get());
         DatagenAssetUtilExtra.createOldChest(blockGen, BlockRegistry.REMODEL_CHEST.get());
     }

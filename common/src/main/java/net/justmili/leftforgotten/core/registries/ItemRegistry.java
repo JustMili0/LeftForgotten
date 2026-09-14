@@ -3,9 +3,7 @@ package net.justmili.leftforgotten.core.registries;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.content.item.Boat;
-import net.justmili.leftforgotten.content.item.Brick;
-import net.justmili.leftforgotten.content.item.ClayBall;
+import net.justmili.leftforgotten.content.item.OldBoat;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DoubleHighBlockItem;
@@ -28,7 +26,7 @@ public class ItemRegistry {
         BRICKS, BRICK_STAIRS, BRICK_SLAB, BRICK_WALL,
         OBSIDIAN, IRON_BLOCK, GOLD_BLOCK, DIAMOND_BLOCK,
         BOOKSHELF, GLASS, GLASS_PANE, TNT, IRON_DOOR,
-        FEATURE_VOID, REMODEL_FURNACE, REMODEL_CRAFTING_TABLE, REMODEL_CHEST;
+        FEATURE_VOID, REMODEL_FURNACE, REMODEL_FURNACE_STONE, REMODEL_CRAFTING_TABLE, REMODEL_CHEST;
 
     public static final RegistrySupplier<Item> CLAY_BALL, BRICK, BOAT;
 
@@ -109,23 +107,26 @@ public class ItemRegistry {
         // Dev
         FEATURE_VOID = registerBlock(BlockRegistry.FEATURE_VOID);
         REMODEL_CRAFTING_TABLE = registerBlock(BlockRegistry.REMODEL_CRAFTING_TABLE);
-        REMODEL_FURNACE = registerBlock(BlockRegistry.REMODEL_FURNACE_STONE);
+        REMODEL_FURNACE = registerBlock(BlockRegistry.REMODEL_FURNACE);
+        REMODEL_FURNACE_STONE = registerBlock(BlockRegistry.REMODEL_FURNACE_STONE);
         REMODEL_CHEST = registerBlock(BlockRegistry.REMODEL_CHEST);
 
         /// Items
         // Misc
-        CLAY_BALL = registerItem("clay_ball", ClayBall::new);
-        BRICK = registerItem("brick", Brick::new);
-        BOAT = registerItem("boat", properties -> new Boat());
+        CLAY_BALL = registerItem("clay_ball", Item::new);
+        BRICK = registerItem("brick", Item::new);
+        BOAT = registerItem("boat", OldBoat::new);
     }
 
     private static <T extends Item> RegistrySupplier<T> registerItem(String name, Function<Item.Properties, T> itemBuilder) {
         //var key = ResourceKey.create(Registries.ITEM, LeftForgotten.asId(name)); // not needed right now but keep for later
         return REGISTRY.register(name, () -> itemBuilder.apply(new Item.Properties()));
     }
+
     private static RegistrySupplier<Item> registerBlock(RegistrySupplier<Block> block) {
         return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));
     }
+
     private static RegistrySupplier<Item> registerDoubleBlock(RegistrySupplier<Block> block) {
         return REGISTRY.register(block.getId().getPath(), () -> new DoubleHighBlockItem(block.get(), new Item.Properties()));
     }

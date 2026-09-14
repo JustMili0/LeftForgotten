@@ -29,7 +29,7 @@ public class EatBlockGoalMixin {
     private Level level;
 
     @ModifyReturnValue(method = "canUse", at = @At("RETURN"))
-    public boolean lf$canUse(boolean original) {
+    public boolean lf$makeBlockEdible(boolean original) {
         var below = mob.blockPosition().below();
         if (level.getBlockState(below).is(BlockRegistry.GRASS_BLOCK.get())) {
             return true;

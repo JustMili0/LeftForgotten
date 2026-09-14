@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.core.datagen.providers.tags;
 
-import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
 import net.justmili.leftforgotten.core.registries.BlockRegistry;
+import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;

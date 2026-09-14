@@ -2,8 +2,8 @@ package net.justmili.leftforgotten.neoforge.client;
 
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.client.CommonVersionOverlay;
-import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.core.util.Versions;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -15,6 +15,6 @@ public class VersionOverlay {
 
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void render(RenderGuiEvent.Post event) {
-        if (!ClientUtil.isDebugScreenOn() && Versions.hadVersionOverlay(ClientUtil.dimension())) CommonVersionOverlay.render(event.getGuiGraphics());
+        if (!ClientUtil.isDebugScreenOn() && Versions.hadVersionOverlay(ClientUtil.level())) CommonVersionOverlay.render(event.getGuiGraphics());
     }
 }

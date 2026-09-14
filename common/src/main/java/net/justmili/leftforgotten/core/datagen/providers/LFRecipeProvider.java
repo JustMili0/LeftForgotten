@@ -1,8 +1,8 @@
 package net.justmili.leftforgotten.core.datagen.providers;
 
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.libs.v1.utils.common.datagen.DatagenDataUtil;
 import net.justmili.leftforgotten.core.registries.ItemRegistry;
+import net.justmili.leftforgotten.libs.v1.utils.common.datagen.DatagenDataUtil;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;

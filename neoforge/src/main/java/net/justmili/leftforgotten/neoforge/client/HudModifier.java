@@ -2,9 +2,10 @@ package net.justmili.leftforgotten.neoforge.client;
 
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
-import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
-import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
 import net.justmili.leftforgotten.core.util.Versions;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.libs.v1.utils.client.RenderingUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
@@ -31,16 +32,15 @@ public class HudModifier {
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiLayerEvent.Pre event) {
-        if (!Versions.hadOldHUD(ClientUtil.dimension())) return;
-        var client = ClientUtil.client();
+        if (!Versions.hadOldHUD(ClientUtil.level())) return;
         var player = ClientUtil.player();
         if (player == null) return;
 
         int width = ClientUtil.width(), height = ClientUtil.height();
-        var overlay = event.getLayer();
-        var id = event.getName();
         var graphics = event.getGuiGraphics();
         var gui = ClientUtil.gui();
+        var overlay = event.getLayer();
+        var id = event.getName();
         var partTick = event.getPartialTick(); // NeoForge I swear to god-
 
         // Food disable
@@ -57,7 +57,7 @@ public class HudModifier {
             int armorValue = player.getArmorValue();
             for (int i = 1; armorValue > 0 && i < 20; i += 2) {
                 var sprite = i < armorValue? ARMOR_FULL : i == armorValue? ARMOR_HALF : ARMOR_EMPTY;
-                var atlasSprite = client.getGuiSprites().getSprite(sprite);
+                var atlasSprite = RenderingUtil.getGuiSprites().getSprite(sprite);
                 int origX = width / 2 - 91 + ((i - 1) / 2) * 8;
                 int x1 = mirrorX(origX) + armorW;
                 int y1 = height - 39 + armorH - yOffset();
@@ -75,8 +75,8 @@ public class HudModifier {
             event.setCanceled(true);
             if (ClientUtil.notSurvivalOrHideGui()) return;
 
-            int air = Math.min(player.getAirSupply(), player.getMaxAirSupply());
             int maxAir = player.getMaxAirSupply();
+            int air = Math.min(player.getAirSupply(), maxAir);
             if (!player.isEyeInFluid(FluidTags.WATER) && air >= maxAir) return;
 
             int full = Mth.ceil((air - 2) * 10.0 / maxAir);
@@ -93,7 +93,6 @@ public class HudModifier {
         // Mount HP move down, account for AbstractHorse jump bar when saddled and Armor
         if (id.equals(VanillaGuiLayers.VEHICLE_HEALTH)) {
             event.setCanceled(true);
-            if (ClientUtil.notSurvivalOrHideGui()) return; // Doesn't render in Creative
 
             if (player.getArmorValue() > 0) {
                 // Armor on
@@ -106,7 +105,7 @@ public class HudModifier {
 
         // Get rid of NT's version overlay and stamina bar when in dimension
         if (Platform.isModLoaded("nostalgic_tweaks")) {
-            if (Versions.hadVersionOverlay(ClientUtil.dimension())) {
+            if (Versions.hadVersionOverlay(ClientUtil.level())) {
                 var namespace = id.getNamespace();
                 var path = id.getPath().toLowerCase();
                 if (!(namespace.equals("nostalgic_tweaks"))) return; // "Is it from NT?"

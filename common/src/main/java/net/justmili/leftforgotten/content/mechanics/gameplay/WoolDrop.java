@@ -12,7 +12,7 @@ import net.minecraft.world.item.Items;
 
 public class WoolDrop {
     public static EventResult onEntityHurt(LivingEntity entity, DamageSource source, float value) {
-        if (!(entity instanceof Sheep sheep) || !Versions.upToAlpha(entity.level().dimension())) return EventResult.pass();
+        if (!(entity instanceof Sheep sheep) || !Versions.upToAlpha(entity.level())) return EventResult.pass();
         var level = sheep.level();
         if (level.isClientSide()) return EventResult.pass();
         if (sheep.isSheared()) return EventResult.pass();

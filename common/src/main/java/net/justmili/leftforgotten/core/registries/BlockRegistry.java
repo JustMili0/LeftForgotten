@@ -104,7 +104,7 @@ public class BlockRegistry {
         IRON_DOOR = registerBlock("iron_door", IronDoor::new);
         FEATURE_VOID = registerBlock("feature_void", FeatureVoid::new);
         REMODEL_FURNACE_STONE = registerBlock("furnace_pre_beta", RemodelFurnace::new);
-        REMODEL_FURNACE = registerBlock("furnace_post_beta", RemodelFurnace::new); // TODO: Make own class & datagen
+        REMODEL_FURNACE = registerBlock("furnace_post_beta", RemodelFurnace::new);
         REMODEL_CRAFTING_TABLE = registerBlock("remodel_crafting_table", RemodelCraftingTable::new);
         REMODEL_CHEST = registerBlock("remodel_chest", RemodelChest::new);
     }
@@ -118,6 +118,6 @@ public class BlockRegistry {
     }
 
     public static Block[] getBlocksFromRegistry() {
-        return Streams.stream(BlockRegistry.REGISTRY).filter(Objects::nonNull).map(Supplier::get).toArray(Block[]::new);
+        return Streams.stream(REGISTRY).filter(Objects::nonNull).map(Supplier::get).toArray(Block[]::new);
     }
 }

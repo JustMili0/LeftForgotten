@@ -5,9 +5,9 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.core.util.Versions;
 import net.justmili.leftforgotten.core.util.client.BillboardItems;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
@@ -32,7 +32,7 @@ public abstract class ItemRendererMixin {
     private void lf$tryRenderAsBillboards(ItemRenderer instance, BakedModel model, ItemStack stack, int light, int overlay, PoseStack pose, VertexConsumer consumer,
                                           Operation<Void> original, @Local(argsOnly = true) ItemDisplayContext context) {
 
-        if (context != ItemDisplayContext.GROUND || !Versions.hadBillboardItems(ClientUtil.dimension()) || model.isGui3d()) {
+        if (context != ItemDisplayContext.GROUND || !Versions.hadBillboardItems(ClientUtil.level()) || model.isGui3d()) {
             original.call(instance, model, stack, light, overlay, pose, consumer);
             return;
         }

@@ -1,6 +1,7 @@
 package net.justmili.leftforgotten.libs.v1.utils.client;
 
 import net.minecraft.client.Camera;
+import net.minecraft.client.gui.GuiSpriteManager;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -8,6 +9,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class RenderingUtil {
 
@@ -33,5 +35,13 @@ public class RenderingUtil {
 
     public static BakedModel getItemModel(ItemStack stack) {
         return getItemRenderer().getModel(stack, null, null, 0);
+    }
+
+    public static BakedModel getBlockModel(BlockState state) {
+        return getBlockRenderer().getBlockModel(state);
+    }
+
+    public static GuiSpriteManager getGuiSprites() {
+        return ClientUtil.client().getGuiSprites();
     }
 }

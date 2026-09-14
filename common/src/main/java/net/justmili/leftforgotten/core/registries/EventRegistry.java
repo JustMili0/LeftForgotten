@@ -6,9 +6,9 @@ import dev.architectury.event.events.common.PlayerEvent;
 import dev.architectury.event.events.common.TickEvent;
 import net.justmili.leftforgotten.content.mechanics.compatibility.NostalgicTweaksCompatibiliy;
 import net.justmili.leftforgotten.content.mechanics.events.MoveToAlpha;
-import net.justmili.leftforgotten.content.mechanics.gameplay.PreHungerHealing;
 import net.justmili.leftforgotten.content.mechanics.gameplay.ApplyProgrammerArt;
 import net.justmili.leftforgotten.content.mechanics.gameplay.NoCooldown;
+import net.justmili.leftforgotten.content.mechanics.gameplay.PreHungerHealing;
 import net.justmili.leftforgotten.content.mechanics.gameplay.WoolDrop;
 
 public class EventRegistry {

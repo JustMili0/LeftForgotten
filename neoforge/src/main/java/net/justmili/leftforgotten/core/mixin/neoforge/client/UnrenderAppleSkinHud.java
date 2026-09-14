@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.core.mixin.neoforge.client;
 
-import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.core.util.Versions;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +16,7 @@ public class UnrenderAppleSkinHud {
 
     @Inject(method = "render(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V",
         at = @At("HEAD"), cancellable = true, require = 0)
-    private void lf$unrenderAppleSkinHud(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-        if (Versions.isOldVersion(ClientUtil.dimension())) ci.cancel();
+    private void lf$disableAppleSkinHud(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+        if (Versions.isOldVersion(ClientUtil.level())) ci.cancel();
     }
 }
