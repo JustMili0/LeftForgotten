@@ -7,15 +7,16 @@ import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.function.Supplier;
 
 public class TabRegistry {
     public static final DeferredRegister<CreativeModeTab> REGISTRY = DeferredRegister.create(LeftForgotten.MODID, Registries.CREATIVE_MODE_TAB);
     public static final DeferredSupplier<CreativeModeTab> LEFT_FORGOTTEN;
 
     static {
-        LEFT_FORGOTTEN = register(LeftForgotten.MODID, ItemRegistry.GRASS_BLOCK.get(),
+        LEFT_FORGOTTEN = register(() -> new ItemStack(BlockRegistry.GRASS_BLOCK.get()),
             (params, output) -> {
                 for (var item : ItemRegistry.REGISTRY) {
                     if (item.equals(ItemRegistry.FEATURE_VOID) // Skip dev blocks
@@ -28,10 +29,10 @@ public class TabRegistry {
             });
     }
 
-    private static DeferredSupplier<CreativeModeTab> register(String modId, Item icon, CreativeModeTab.DisplayItemsGenerator displayItems) {
-        return REGISTRY.register(modId, () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
-            .title(Component.translatable(ResourceUtil.parse(modId, "content").toLanguageKey("item_group")))
-            .icon(() -> new ItemStack(icon)).displayItems(displayItems).build());
+    private static DeferredSupplier<CreativeModeTab> register(Supplier<ItemStack> icon, CreativeModeTab.DisplayItemsGenerator displayItems) {
+        return REGISTRY.register(LeftForgotten.MODID, () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
+            .title(Component.translatable(ResourceUtil.parse(LeftForgotten.MODID, "content").toLanguageKey("item_group")))
+            .icon(icon).displayItems(displayItems).build());
     }
 
     public static void register() {
