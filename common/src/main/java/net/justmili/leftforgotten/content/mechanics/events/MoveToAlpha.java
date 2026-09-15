@@ -58,7 +58,7 @@ public class MoveToAlpha {
         if (!(level instanceof ServerLevel serverLevel)) return;
 
         var delta = player.getDeltaMovement();
-        player.teleportTo(serverLevel, player.getX(), returnY(), player.getZ(), RelativeMovement.ALL, player.getYRot(), player.getXRot());
+        player.teleportTo(serverLevel, player.getX(), returnY(), player.getZ(), RelativeMovement.ROTATION, player.getYRot(), player.getXRot());
         player.setDeltaMovement(delta);
         player.startFallFlying();
 
