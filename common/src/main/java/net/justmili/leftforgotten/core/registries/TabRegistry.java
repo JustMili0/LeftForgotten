@@ -16,22 +16,22 @@ public class TabRegistry {
     public static final DeferredSupplier<CreativeModeTab> LEFT_FORGOTTEN;
 
     static {
-        LEFT_FORGOTTEN = register(LeftForgotten.MODID, () -> new ItemStack(BlockRegistry.GRASS_BLOCK.get()),
+        LEFT_FORGOTTEN = register(() -> new ItemStack(BlockRegistry.GRASS_BLOCK.get()),
             (params, output) -> {
                 for (var item : ItemRegistry.REGISTRY) {
-                    if (item.is(ItemRegistry.FEATURE_VOID) // Skip dev blocks
-                        || item.is(ItemRegistry.REMODEL_CRAFTING_TABLE)
-                        || item.is(ItemRegistry.REMODEL_FURNACE_STONE)
-                        || item.is(ItemRegistry.REMODEL_FURNACE)
-                        || item.is(ItemRegistry.REMODEL_CHEST)) continue;
+                    if (item.equals(ItemRegistry.FEATURE_VOID) // Skip dev blocks
+                        || item.equals(ItemRegistry.REMODEL_CRAFTING_TABLE)
+                        || item.equals(ItemRegistry.REMODEL_FURNACE_STONE)
+                        || item.equals(ItemRegistry.REMODEL_FURNACE)
+                        || item.equals(ItemRegistry.REMODEL_CHEST)) continue;
                     output.accept(item.get());
                 }
             });
     }
 
-    private static DeferredSupplier<CreativeModeTab> register(String modId, Supplier<ItemStack> icon, CreativeModeTab.DisplayItemsGenerator displayItems) {
-        return REGISTRY.register(modId, () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
-            .title(Component.translatable(ResourceUtil.parse(modId, "content").toLanguageKey("item_group")))
+    private static DeferredSupplier<CreativeModeTab> register(Supplier<ItemStack> icon, CreativeModeTab.DisplayItemsGenerator displayItems) {
+        return REGISTRY.register(LeftForgotten.MODID, () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
+            .title(Component.translatable(ResourceUtil.parse(LeftForgotten.MODID, "content").toLanguageKey("item_group")))
             .icon(icon).displayItems(displayItems).build());
     }
 
