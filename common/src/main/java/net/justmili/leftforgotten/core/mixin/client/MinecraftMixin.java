@@ -5,6 +5,7 @@ import net.justmili.leftforgotten.core.util.Versions;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -13,10 +14,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Minecraft.class)
 public abstract class MinecraftMixin {
 
+    @Shadow
+    protected int missTime;
+
     @Inject(method = "useAmbientOcclusion", at = @At("HEAD"), cancellable = true)
     private static void lf$setNoAO(CallbackInfoReturnable<Boolean> cir) {
         if (Config.blockyLighting.isNull() || !Config.blockyLighting.get()) return;
 
-        if (ClientUtil.level() != null && Versions.hadBlockyLighting(ClientUtil.level())) cir.setReturnValue(false);
+        if (Versions.hadBlockyLighting(ClientUtil.level())) cir.setReturnValue(false);
+    }
+
+    @Inject(method = "startAttack", at = @At("HEAD"))
+    private void lf$setNoMissPenalty(CallbackInfoReturnable<Boolean> cir) {
+        if (this.missTime > 0 && Versions.isOldVersion(ClientUtil.level())) this.missTime = 0;
     }
 }

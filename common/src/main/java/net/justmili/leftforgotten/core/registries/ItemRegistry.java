@@ -115,7 +115,7 @@ public class ItemRegistry {
         // Misc
         CLAY_BALL = registerItem("clay_ball", Item::new);
         BRICK = registerItem("brick", Item::new);
-        BOAT = registerItem("boat", p -> new OldBoat());
+        BOAT = registerItem("boat", OldBoat::new);
     }
 
     private static <T extends Item> RegistrySupplier<T> registerItem(String name, Function<Item.Properties, T> itemBuilder) {

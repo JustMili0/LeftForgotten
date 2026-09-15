@@ -55,7 +55,7 @@ public class PreHungerHealing {
         Map.entry(Items.SALMON, new FoodEntry(1f)),
         Map.entry(Items.COOKED_SALMON, new FoodEntry(3f)),
         Map.entry(Items.TROPICAL_FISH, new FoodEntry(0.5f)),
-        Map.entry(Items.PUFFERFISH, new FoodEntry(0.5F, FoodAction.POISONS, FoodAction.HUNGERS, FoodAction.CAUSES_NAUSEA)),
+        Map.entry(Items.PUFFERFISH, new FoodEntry(0.5f, FoodAction.POISONS, FoodAction.HUNGERS, FoodAction.CAUSES_NAUSEA)),
         Map.entry(Items.RABBIT, new FoodEntry(1.5f)),
         Map.entry(Items.COOKED_RABBIT, new FoodEntry(2.5f)),
         Map.entry(Items.RABBIT_STEW, new FoodEntry(5f, FoodAction.RESULT_BOWL)),
@@ -77,11 +77,11 @@ public class PreHungerHealing {
         Map.entry(Items.SWEET_BERRIES, new FoodEntry(0.5f)),
         Map.entry(Items.GLOW_BERRIES, new FoodEntry(0.5f)),
         Map.entry(Items.CHORUS_FRUIT, new FoodEntry(2f, FoodAction.TELEPORTS)),
-        Map.entry(Items.MUSHROOM_STEW, new FoodEntry(4.5F, FoodAction.RESULT_BOWL)),
+        Map.entry(Items.MUSHROOM_STEW, new FoodEntry(4.5f, FoodAction.RESULT_BOWL)),
         Map.entry(Items.SUSPICIOUS_STEW, new FoodEntry(3f, FoodAction.RESULT_BOWL, FoodAction.GIVES_EFFECT_FROM_TYPE)),
         Map.entry(Items.ROTTEN_FLESH, new FoodEntry(2f, FoodAction.HUNGERS_WITH_CHANCE)),
         Map.entry(Items.SPIDER_EYE, new FoodEntry(1f, FoodAction.POISONS)),
-        Map.entry(Items.HONEY_BOTTLE, new FoodEntry(1.5F, FoodAction.CURES_POISON, FoodAction.RESULT_BOTTLE, FoodAction.ALWAYS_EDIBLE)),
+        Map.entry(Items.HONEY_BOTTLE, new FoodEntry(1.5f, FoodAction.CURES_POISON, FoodAction.RESULT_BOTTLE, FoodAction.ALWAYS_EDIBLE)),
         Map.entry(Items.DRIED_KELP, new FoodEntry(0.5f))
     );
 
@@ -98,7 +98,6 @@ public class PreHungerHealing {
         if (!Versions.hadNoHunger(player.level())) return CompoundEventResult.pass();
         if (hand != InteractionHand.MAIN_HAND) return CompoundEventResult.interruptTrue(player.getItemInHand(hand));
         var stack = player.getItemInHand(hand);
-
         var entry = FOOD_HEALTH.get(stack.getItem());
 
         if (entry != null) {

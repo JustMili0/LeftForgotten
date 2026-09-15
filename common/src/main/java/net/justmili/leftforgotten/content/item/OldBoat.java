@@ -6,15 +6,14 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BoatItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 
 public class OldBoat extends BoatItem {
-    public OldBoat() {
-        super(false, OldBoatEntity.Type.OAK, new Item.Properties().stacksTo(1));
+    public OldBoat(Properties properties) {
+        super(false, OldBoatEntity.Type.OAK, properties);
     }
 
     @Override

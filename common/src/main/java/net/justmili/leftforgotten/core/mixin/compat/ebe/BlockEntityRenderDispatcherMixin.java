@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -22,11 +21,6 @@ public abstract class BlockEntityRenderDispatcherMixin {
     @TargetHandler(mixin = "foundationgames.enhancedblockentities.mixin.BlockEntityRenderDispatcherMixin", name = "enhanced_bes$renderOverrides", prefix = "handler")
     @Inject(method = "@MixinSquared:Handler", at = @At("HEAD"), require = 0, cancellable = true)
     private static void lf$avoidRenderOverrideIfChest(CallbackInfo ci, @Local(argsOnly = true) BlockEntity blockEntity) {
-        if (blockEntity.getType() == BlockEntityType.CHEST && blockEntity.hasLevel() && lf$inOldVersion(blockEntity)) ci.cancel();
-    }
-
-    @Unique
-    private static boolean lf$inOldVersion(BlockEntity blockEntity) {
-        return Versions.hadBlockyChests(blockEntity.getLevel());
+        if (blockEntity.getType() == BlockEntityType.CHEST && blockEntity.hasLevel() && Versions.hadBlockyChests(blockEntity.getLevel())) ci.cancel();
     }
 }

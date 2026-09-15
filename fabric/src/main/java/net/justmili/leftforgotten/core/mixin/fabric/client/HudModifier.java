@@ -62,7 +62,7 @@ public abstract class HudModifier {
 
     // Food disable
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;getVehicleMaxHearts(Lnet/minecraft/world/entity/LivingEntity;)I"))
-    private int lf$disableFoodBar(Gui gui, LivingEntity vehicle, Operation<Integer> original) {
+    private int lf$disableHungerBar(Gui gui, LivingEntity vehicle, Operation<Integer> original) {
         if (Versions.hadOldHUD(ClientUtil.level())) return -1;
 
         return this.getVehicleMaxHearts(vehicle);

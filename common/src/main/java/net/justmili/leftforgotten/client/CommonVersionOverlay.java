@@ -3,13 +3,11 @@ package net.justmili.leftforgotten.client;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.justmili.leftforgotten.core.util.Versions;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.common.MathUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-
-import static net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil.font;
-import static net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil.level;
 
 @Environment(EnvType.CLIENT)
 public class CommonVersionOverlay {
@@ -56,7 +54,7 @@ public class CommonVersionOverlay {
 
     // Common tick text
     public static void onClientTick(Minecraft client) {
-        if (level() == null || !Versions.hadVersionOverlay(level())) {
+        if (!Versions.hadVersionOverlay(ClientUtil.level())) {
             currentText = BASE_TEXT;
             flashTicks = 0;
             return;
@@ -77,16 +75,14 @@ public class CommonVersionOverlay {
 
     // Fabric/Forger render
     public static void render(GuiGraphics graphics) {
-        var font = font();
-        float targetHeight = 8f;
-        float userScale = (float) Math.round(targetHeight / font.lineHeight);
+        var pose = graphics.pose();
+        var font = ClientUtil.font();
+        int userScale = Math.round(8f / font.lineHeight);
+        int xy = Math.round(2f / userScale);
 
-        int x = Math.round(2 / userScale);
-        int y = Math.round(2 / userScale);
-
-        graphics.pose().pushPose();
-        graphics.pose().scale((int) userScale, (int) userScale, 1f);
-        graphics.drawString(font, Component.literal(currentText), x, y, 0xFFFFFF, true);
-        graphics.pose().popPose();
+        pose.pushPose();
+        pose.scale(userScale, userScale, 1f);
+        graphics.drawString(font, Component.literal(currentText), xy, xy, 0xFFFFFF, true);
+        pose.popPose();
     }
 }

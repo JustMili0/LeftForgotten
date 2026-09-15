@@ -17,6 +17,11 @@ public class Versions {
         return server.getLevel(dimension);
     }
 
+    public static boolean isOverworld(Level level) {
+        if (level == null) return false;
+        return level.dimension().equals(Level.OVERWORLD);
+    }
+
     public static boolean isOldVersion(Level level) {
         if (level == null) return false;
         return VERSIONS.contains(level.dimension());

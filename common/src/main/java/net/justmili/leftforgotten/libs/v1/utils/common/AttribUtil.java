@@ -37,6 +37,7 @@ public class AttribUtil {
     public static void addOrUpdate(AttributeInstance instance, AttributeModifier modifier) {
         // Added addOrUpdateTransientModifier in 1.20.5
         if (instance == null) return;
+        instance.removeModifier(modifier);
         addTransient(instance, modifier);
     }
     public static void addOrReplace(AttributeInstance instance, AttributeModifier modifier) {
@@ -48,7 +49,9 @@ public class AttribUtil {
     public static void addOrUpdate(AttributeInstance instance, ResourceLocation id, double value, AttributeModifier.Operation operation) {
         // Added addOrUpdateTransientModifier in 1.20.5
         if (instance == null) return;
-        addOrUpdate(instance, create(id, value, operation));
+        var modifier = create(id, value, operation);
+        instance.removeModifier(modifier);
+        addOrUpdate(instance, modifier);
     }
     public static void addOrReplace(AttributeInstance instance, ResourceLocation id, double value, AttributeModifier.Operation operation) {
         // Added addOrReplacePermanentModifier in 1.20.5

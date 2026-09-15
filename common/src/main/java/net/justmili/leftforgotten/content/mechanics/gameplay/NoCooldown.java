@@ -13,23 +13,27 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class NoCooldown {
+    static final boolean hasBetterCombat = Platform.isModLoaded("bettercombat");
     static final AttributeModifier modifier = AttribUtil.create(LeftForgotten.asId("no_cooldown_base"), 200, AttributeModifier.Operation.ADDITION);
 
     public static void onPlayerJoin(ServerPlayer player) {
+        if (hasBetterCombat) return;
         applyCooldown(player, player.level());
     }
 
     public static void onChangeDimension(ServerPlayer player, ResourceKey<Level> fromLevel, ResourceKey<Level> toLevel) {
+        if (hasBetterCombat) return;
         applyCooldown(player, Versions.get(player, toLevel));
     }
 
     public static void onPlayerRespawn(ServerPlayer player, boolean alive) {
+        if (hasBetterCombat) return;
         applyCooldown(player, Versions.get(player, player.getRespawnDimension()));
     }
 
     static void applyCooldown(Player player, Level level) {
         var attrib = AttribUtil.get(player, Attributes.ATTACK_SPEED);
-        if (attrib == null || Platform.isModLoaded("bettercombat")) return;
+        if (attrib == null) return;
         if (Versions.hadNoAttackCooldown(level)) AttribUtil.addOrUpdate(attrib, modifier);
     }
 }

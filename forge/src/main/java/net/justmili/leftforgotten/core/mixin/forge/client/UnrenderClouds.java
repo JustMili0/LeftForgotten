@@ -16,7 +16,7 @@ public class UnrenderClouds {
 
     @Inject(method = "renderClouds", at = @At("HEAD"), cancellable = true)
     private void lf$disableClouds(PoseStack pose, Matrix4f matrix4f, float partialTick, double camX, double camY, double camZ, CallbackInfo ci) {
-        // For some reason Forge doesn't understand that if could level is set to Float.NaN then it shouldn't show 'em
+        // For some reason Forge doesn't understand that if cloud level is set to Float.NaN then it shouldn't show 'em
         if (Versions.isOldVersion(ClientUtil.level())) ci.cancel();
     }
 }
