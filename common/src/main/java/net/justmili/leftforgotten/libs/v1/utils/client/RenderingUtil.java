@@ -34,7 +34,7 @@ public class RenderingUtil {
     }
 
     public static BakedModel getItemModel(ItemStack stack) {
-        return getItemRenderer().getModel(stack, null, null, 0);
+        return getItemModel(stack, null, null, 0);
     }
 
     public static BakedModel getBlockModel(BlockState state) {
