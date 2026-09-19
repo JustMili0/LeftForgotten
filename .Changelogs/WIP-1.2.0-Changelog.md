@@ -29,6 +29,7 @@
 ### ***BUG FIXES/TECHNICAL CHANGES***
 - Fixed effects not applying from eaten Suspicious Stews
 - Fixed possible crashes on dedicated servers when attempting to eat something in `left_forgotten:alpha_minecraft`
+- Fixed possible crashes on dedicated servers, ghostblocks etc. coming from the Feature Void dev block
 - Fixed Redstone Ore not generating due to a typo ([#5](https://github.com/JustMili0/LeftForgotten/issues/5))
 - [TODO] Fixed Chest remodels breaking with block entity optimization mods
 - Reworked the Music Player, now any issues it could've had should be gone
