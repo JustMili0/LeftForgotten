@@ -19,12 +19,14 @@
 ### ***NEW CONTENT***
 - Items now render as billboards while on-ground
 - [WIP] Made the Chest, Crafting Table and Furnace also remodel in GUI
-- Updated textures for [TODO] Brittle Bedrock and Feature Void
+- Updated textures for Brittle Bedrock and Feature Void
 
 ### ***CHANGES***
 - Now going back between `left_forgotten:alpha_minecraft` and any other dimension doesn't reset player's hunger, it just pauses as it is and resumes when you're out
 - Players using Better Combat are no longer granted a attack speed boost in `left_forgotten:alpha_minecraft`
 - Mount health is no longer hidden when player is in creative, matching vanilla
+- [WIP] Feature Void now renders similarly to the Barrier Block
+- [TODO] All blocks and items added by the mod now have matching tags with their vanilla counterparts (Including vanilla, `c` or "common" tags, neo/forge-specific and fabric-specific tags)
 
 ### ***BUG FIXES/TECHNICAL CHANGES***
 - Fixed effects not applying from eaten Suspicious Stews
@@ -32,8 +34,7 @@
 - Fixed possible crashes on dedicated servers, ghostblocks etc. coming from the Feature Void dev block
 - Fixed Redstone Ore not generating due to a typo ([#5](https://github.com/JustMili0/LeftForgotten/issues/5))
 - [TODO] Fixed Chest remodels breaking with block entity optimization mods
-- Reworked the Music Player, now any issues it could've had should be gone
-- [TODO] Fully accounted for every block and item tag for every item and block added
+- Fixed and reworked the Music Player, now any issues it could've had should be gone
 
 <hr>
 
