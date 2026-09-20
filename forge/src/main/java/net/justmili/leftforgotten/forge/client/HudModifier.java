@@ -1,13 +1,11 @@
 package net.justmili.leftforgotten.forge.client;
 
-import dev.architectury.platform.Platform;
-import mod.adrenix.nostalgic.tweak.config.CandyTweak;
 import net.justmili.leftforgotten.core.util.Versions;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.Maths;
 import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
@@ -68,12 +66,12 @@ public class HudModifier {
             event.setCanceled(true);
             if (ClientUtil.notSurvivalOrHideGui()) return;
 
-            int air = Math.min(player.getAirSupply(), player.getMaxAirSupply());
+            int air = Maths.min(player.getAirSupply(), player.getMaxAirSupply());
             int maxAir = player.getMaxAirSupply();
             if (!player.isEyeInFluid(FluidTags.WATER) && air >= maxAir) return;
 
-            int full = Mth.ceil((air - 2) * 10.0 / maxAir);
-            int partial = Mth.ceil(air * 10.0 / maxAir) - full;
+            int full = Maths.ceil((air - 2) * 10.0 / maxAir);
+            int partial = Maths.ceil(air * 10.0 / maxAir) - full;
             int top = height - gui.rightHeight - airLvlH - yOffset() - extraHealthRowsOffset();
             int barEnd = width / 2 + 51;
 
@@ -93,20 +91,6 @@ public class HudModifier {
             } else {
                 // Armor off
                 overlay.render(gui, graphics, partTick, width - mountHpW, height - mountHpH - yOffset() + mountHpH_na);
-            }
-        }
-
-        // Get rid of NT's version overlay and stamina bar when in dimension
-        if (Platform.isModLoaded("nostalgic_tweaks")) {
-            if (Versions.hadVersionOverlay(ClientUtil.level())) {
-                var namespace = id.getNamespace();
-                var path = id.getPath().toLowerCase();
-                if (!(namespace.equals("nostalgic_tweaks"))) return;
-                if (path.contains("stamina")) event.setCanceled(true);
-                // Get rid of NT's version overlay
-                if (CandyTweak.OLD_VERSION_OVERLAY.get()) CandyTweak.OLD_VERSION_OVERLAY.setCacheAndDiskThenSave(false);
-            } else {
-                if (!CandyTweak.OLD_VERSION_OVERLAY.get()) CandyTweak.OLD_VERSION_OVERLAY.setCacheAndDiskThenSave(true);
             }
         }
     }

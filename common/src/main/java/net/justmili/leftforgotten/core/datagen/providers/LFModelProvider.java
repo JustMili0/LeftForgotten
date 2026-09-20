@@ -135,6 +135,8 @@ public class LFModelProvider extends ImprovedModelProvider {
     public void generateItemModels(ItemModelGenerators itemGen) {
         var gen = new DatagenAssetUtil(LeftForgotten.MODID, itemGen);
 
+        gen.createFlatBlockItem(BlockRegistry.FEATURE_VOID.get());
+
         gen.createFlatItem(ItemRegistry.CLAY_BALL.get());
         gen.createFlatItem(ItemRegistry.BRICK.get());
         gen.createFlatItem(ItemRegistry.BOAT.get());

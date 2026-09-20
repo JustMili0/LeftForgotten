@@ -123,10 +123,7 @@ public class LFLootTableProvider extends LootTableProvider {
             add(BlockRegistry.IRON_DOOR.get(), createDoorTable(BlockRegistry.IRON_DOOR.get()));
 
             // Dev
-            dropSelf(BlockRegistry.REMODEL_CRAFTING_TABLE.get());
-            dropSelf(BlockRegistry.REMODEL_FURNACE.get());
-            dropSelf(BlockRegistry.REMODEL_FURNACE_STONE.get());
-            dropSelf(BlockRegistry.REMODEL_CHEST.get());
+            // Dev blocks don't have loot tables
         }
 
         // this exact method exists on Forge, and is implemented via mixin by us on Fabric.

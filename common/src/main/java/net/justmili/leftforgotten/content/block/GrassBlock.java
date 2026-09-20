@@ -1,6 +1,7 @@
 package net.justmili.leftforgotten.content.block;
 
 import net.justmili.leftforgotten.core.registries.BlockRegistry;
+import net.justmili.leftforgotten.libs.v1.utils.common.Maths;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -66,7 +67,7 @@ public class GrassBlock extends Block {
     static void getSeeds(LevelReader level, BlockPos pos, Player player) {
         if (player == null) return;
         if (!player.getMainHandItem().is(ItemTags.HOES)) return;
-        if (!(Math.random() < 0.125)) return;
+        if (!Maths.chance(0.125f)) return;
         if (level instanceof ServerLevel serverLevel) {
             ItemEntity seedsItem = new ItemEntity(serverLevel, pos.getX(), (pos.getY() + 1.1), pos.getZ(), new ItemStack(Items.WHEAT_SEEDS));
             seedsItem.setPickUpDelay(15);

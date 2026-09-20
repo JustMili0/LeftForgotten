@@ -1,8 +1,6 @@
 package net.justmili.leftforgotten.client;
 
-import net.justmili.leftforgotten.core.registries.BlockRegistry;
-import net.justmili.leftforgotten.core.util.Versions;
-import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.core.util.client.Remodels;
 import net.justmili.leftforgotten.libs.v1.utils.client.RenderingUtil;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -25,24 +23,14 @@ public abstract class ClassicBlockModels implements BakedModel {
     }
 
     protected @Nullable BakedModel getBakedModel(BlockState state) {
-        var level = ClientUtil.level();
-        if (state != null && Versions.isOldVersion(level)) {
-            if (state.is(Blocks.CRAFTING_TABLE)) {
-                state = BlockRegistry.REMODEL_CRAFTING_TABLE.get().defaultBlockState();
+        if (state == null) return this.wrapped;
 
-                return RenderingUtil.getBlockModel(state);
-            } else if (state.is(Blocks.FURNACE)) {
-                state = Versions.upToAlpha(level)
-                    ? BlockRegistry.REMODEL_FURNACE_STONE.get().withPropertiesOf(state)
-                    : BlockRegistry.REMODEL_FURNACE.get().withPropertiesOf(state);
+        var block = state.getBlock();
+        var remodel = Remodels.of(block);
+        if (remodel == block) return this.wrapped;
 
-                return RenderingUtil.getBlockModel(state);
-            } else if (state.is(Blocks.CHEST)) {
-                return null; // only exists purely for EBE purposes really
-            }
-        }
-
-        return this.wrapped;
+        // Chest here only exists purely for EBE purposes really
+        return state.is(Blocks.CHEST)? null : RenderingUtil.getBlockModel(remodel.withPropertiesOf(state));
     }
 
     @Override
