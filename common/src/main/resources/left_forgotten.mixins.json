@@ -17,16 +17,16 @@
     "client.MusicPlayerMixin",
     "client.PlayerInfoMixin",
     "client.SoundEngineMixin",
-    "compat.ebe.BlockEntityRenderDispatcherMixin"
+    "compat.ebe.BlockEntityRenderDispatcherMixin",
+    "compat.nt.GuiListenerMixin",
+    "compat.nt.StaminaRendererMixin"
   ],
   "mixins": [
     "ChestBlockMixin",
     "EatBlockGoalMixin",
     "FoodDataMixin",
     "PerlinNoiseMixin",
-    "PlayerMixin",
-    "compat.nt.GuiListenerMixin",
-    "compat.nt.StaminaRendererMixin"
+    "PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

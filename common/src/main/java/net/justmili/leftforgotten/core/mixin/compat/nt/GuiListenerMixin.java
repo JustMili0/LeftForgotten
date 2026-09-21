@@ -18,7 +18,6 @@ public class GuiListenerMixin {
     @Expression("OLD_VERSION_OVERLAY.get()")
     @ModifyExpressionValue(method = "renderTextOverlay(Lnet/minecraft/client/gui/GuiGraphics;Z)V", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
     private static Object lf$hideVersionOverlay(Object original) {
-        if (Versions.hadVersionOverlay(ClientUtil.level())) return false;
-        return original;
+        return Versions.hadVersionOverlay(ClientUtil.level())? false : original;
     }
 }

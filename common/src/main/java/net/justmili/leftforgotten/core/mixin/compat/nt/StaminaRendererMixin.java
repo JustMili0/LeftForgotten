@@ -13,7 +13,6 @@ public class StaminaRendererMixin {
 
     @ModifyReturnValue(method = "isVisible", at = @At("RETURN"))
     private static boolean lf$hideStamina(boolean original) {
-        if (Versions.hadNoSprint(ClientUtil.level())) return false;
-        return original;
+        return Versions.hadNoSprint(ClientUtil.level())? false : original;
     }
 }
