@@ -3,7 +3,7 @@ package net.justmili.leftforgotten.content.mechanics.gameplay;
 import dev.architectury.event.CompoundEventResult;
 import dev.architectury.event.EventResult;
 import net.justmili.leftforgotten.core.util.Versions;
-import net.justmili.leftforgotten.libs.v1.utils.common.MathUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.Maths;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -157,7 +157,7 @@ public class PreHungerHealing {
     }
 
     static void applyPoisonWithChance(Player player) {
-        if (MathUtil.chance(0.6f)) player.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0));
+        if (Maths.chance(0.6f)) player.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0));
     }
 
     static void applyPoison(Player player, Item item) {
@@ -169,9 +169,9 @@ public class PreHungerHealing {
     }
 
     static void applyHungerWithChance(Player player, Item item) {
-        if (item == Items.ROTTEN_FLESH && MathUtil.chance(0.8f)) {
+        if (item == Items.ROTTEN_FLESH && Maths.chance(0.8f)) {
             player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 600, 0));
-        } else if (item == Items.CHICKEN && MathUtil.chance(0.3f)) {
+        } else if (item == Items.CHICKEN && Maths.chance(0.3f)) {
             player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 600, 0));
         }
     }
@@ -190,7 +190,7 @@ public class PreHungerHealing {
             double x = player.getX() + (level.random.nextDouble() - 0.5) * 16;
             double y = player.getY() + (level.random.nextInt(16) - 8);
             double z = player.getZ() + (level.random.nextDouble() - 0.D) * 16;
-            y = Math.clamp(y, level.getMinBuildHeight(), level.getMaxBuildHeight() - 1);
+            y = Maths.clamp(y, level.getMinBuildHeight(), level.getMaxBuildHeight() - 1);
             double groundY = findGroundY(level, x, y, z);
             if (groundY >= 0) {
                 player.teleportTo(x, groundY, z);
@@ -213,7 +213,7 @@ public class PreHungerHealing {
     }
 
     static void playConsumptionSound(Player player, LevelAccessor world, double x, double y, double z, Item item) {
-        float pitch = (float) (0.8 + Math.random() * 0.4);
+        float pitch = Maths.randomFloat(0.8f, 1.2f);
         var sound = item == Items.HONEY_BOTTLE ? SoundEvents.HONEY_DRINK : SoundEvents.GENERIC_EAT;
         if (world instanceof Level level) {
             if (!level.isClientSide()) {

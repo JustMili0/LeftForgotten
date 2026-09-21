@@ -3,10 +3,10 @@ package net.justmili.leftforgotten.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.Maths;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import org.joml.Matrix4f;
 
@@ -52,12 +52,12 @@ public class CommonHudModifier {
             var player = player();
             if (player == null) return 0;
 
-            float maxHealth = Math.max(player.getMaxHealth(), player.getHealth());
-            int absorption = Mth.ceil(player.getAbsorptionAmount());
-            int rows = Mth.ceil((maxHealth + absorption) / 2.0F / 10.0F);
+            float maxHealth = Maths.max(player.getMaxHealth(), player.getHealth());
+            int absorption = Maths.ceil(player.getAbsorptionAmount());
+            int rows = Maths.ceil((maxHealth + absorption) / 2.0F / 10.0F);
             if (rows <= 1) return 0;
 
-            int rowHeight = Math.max(10 - (rows - 2), 3);
+            int rowHeight = Maths.max(10 - (rows - 2), 3);
             return (rows - 1) * rowHeight;
         }
     }

@@ -4,7 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.justmili.leftforgotten.core.util.Versions;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
-import net.justmili.leftforgotten.libs.v1.utils.common.MathUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.Maths;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -67,9 +67,9 @@ public class CommonVersionOverlay {
             // Dynamic String Change
             // 6000 - ticks between each random "glitch"
             // "// 2-8 ticks" - "glitch" string show time
-        } else if (MathUtil.random.nextInt(6000) == 0) {
-            currentText = VERSIONS[MathUtil.random.nextInt(VERSIONS.length)];
-            flashTicks = 2 + MathUtil.random.nextInt(6); // 2–8 ticks
+        } else if (Maths.random.nextInt(6000) == 0) {
+            currentText = VERSIONS[Maths.random.nextInt(VERSIONS.length)];
+            flashTicks = 2 + Maths.random.nextInt(6); // 2–8 ticks
         }
     }
 
@@ -77,8 +77,8 @@ public class CommonVersionOverlay {
     public static void render(GuiGraphics graphics) {
         var pose = graphics.pose();
         var font = ClientUtil.font();
-        int userScale = Math.round(8f / font.lineHeight);
-        int xy = Math.round(2f / userScale);
+        int userScale = Maths.round(8f / font.lineHeight);
+        int xy = Maths.round(2f / userScale);
 
         pose.pushPose();
         pose.scale(userScale, userScale, 1f);

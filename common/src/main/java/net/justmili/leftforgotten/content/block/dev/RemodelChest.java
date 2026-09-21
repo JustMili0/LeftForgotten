@@ -1,21 +1,21 @@
 package net.justmili.leftforgotten.content.block.dev;
 
+import net.justmili.leftforgotten.libs.v1.utils.common.BlockBehaviorUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 
 import java.util.List;
 
 public class RemodelChest extends ChestBlock {
     public RemodelChest() {
-        super(Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD).ignitedByLava(), () -> BlockEntityType.CHEST);
+        super(Properties.of().strength(Block.INDESTRUCTIBLE).noLootTable().noOcclusion().isValidSpawn(BlockBehaviorUtil::no).noTerrainParticles().pushReaction(PushReaction.BLOCK), () -> BlockEntityType.CHEST);
     }
 
     @Override

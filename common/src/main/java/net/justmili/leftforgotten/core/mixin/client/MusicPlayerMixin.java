@@ -3,7 +3,7 @@ package net.justmili.leftforgotten.core.mixin.client;
 import net.justmili.leftforgotten.core.util.Versions;
 import net.justmili.leftforgotten.core.util.client.Sounds;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
-import net.justmili.leftforgotten.libs.v1.utils.common.MathUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.Maths;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -42,7 +42,7 @@ public class MusicPlayerMixin {
 
         if (music != null && !minecraft.getSoundManager().isActive(music)) {
             music = null;
-            nextDelay = Math.min(nextDelay, 6000 + MathUtil.random.nextInt(24000 - 6000 + 1));
+            nextDelay = Maths.min(nextDelay, Maths.randomInt(6000, 24000));
         }
 
         this.nextSongDelay = nextDelay;

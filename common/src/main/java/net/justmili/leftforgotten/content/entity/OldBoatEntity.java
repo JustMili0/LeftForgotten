@@ -3,6 +3,7 @@ package net.justmili.leftforgotten.content.entity;
 import dev.architectury.platform.Platform;
 import net.justmili.leftforgotten.core.registries.EntityRegistry;
 import net.justmili.leftforgotten.core.registries.ItemRegistry;
+import net.justmili.leftforgotten.libs.v1.utils.common.Maths;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -49,13 +50,13 @@ public class OldBoatEntity extends Boat {
 
     @Override
     public void tick() {
-        var delta = getDeltaMovement();
-        double speedBefore = Math.sqrt(delta.x * delta.x + delta.z * delta.z);
+        var oldDelta = getDeltaMovement();
+        double speedBefore = Maths.sqrt(oldDelta.x * oldDelta.x + oldDelta.z * oldDelta.z);
 
         super.tick();
 
         var newDelta = getDeltaMovement();
-        double speedAfter = Math.sqrt(newDelta.x * newDelta.x + newDelta.z * newDelta.z);
+        double speedAfter = Maths.sqrt(newDelta.x * newDelta.x + newDelta.z * newDelta.z);
         if (speedBefore > BREAK_SPEED_THRESHOLD && speedAfter < speedBefore * 0.4) {
             if (level().isClientSide) OldBoatImpactPacket.send(getId());
         }

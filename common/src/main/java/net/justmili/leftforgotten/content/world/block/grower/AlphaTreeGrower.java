@@ -9,7 +9,7 @@ public final class AlphaTreeGrower {
     public static final TreeGrower INSTANCE =
         new TreeGrower(
             "tree",
-            0.1F,
+            0.1f,
             Optional.empty(),
             Optional.empty(),
             Optional.of(ConfiguredFeatures.FANCY_TREE),

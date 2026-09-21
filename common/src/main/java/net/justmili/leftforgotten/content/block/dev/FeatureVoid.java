@@ -1,83 +1,70 @@
 package net.justmili.leftforgotten.content.block.dev;
 
 import net.justmili.leftforgotten.core.registries.BlockRegistry;
+import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
+import net.justmili.leftforgotten.libs.v1.utils.common.BlockBehaviorUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BarrierBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 
-public class FeatureVoid extends Block {
-    public FeatureVoid() {
-        super(Properties.of().replaceable().noCollission().noLootTable().noTerrainParticles().pushReaction(PushReaction.DESTROY));
-    }
+public class FeatureVoid extends BarrierBlock {
+    final float[] CHANCES = new float[]{0.38f, 0.34f, 0.08f};
 
-    @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
-        return true;
-    }
-    @Override
-    public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.INVISIBLE;
-    }
-    @Override
-    public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
-        return 1.0F;
+    public FeatureVoid() {
+        super(Properties.of().strength(Block.INDESTRUCTIBLE).noLootTable().noOcclusion().isValidSpawn(BlockBehaviorUtil::no).noTerrainParticles().pushReaction(PushReaction.BLOCK));
     }
 
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
-        if (!level.isClientSide()) {
-            level.scheduleTick(pos, this, 1);
-        }
+        if (!level.isClientSide()) level.scheduleTick(pos, state.getBlock(), 1);
     }
 
-    /** DEV NOTES (Singleplayer)
-     * tick is server but is fucked and just doesn't wanna work
-     * animateTick is client and somehow makes this whole thing work
-     * make it make sense
-     *
-     * DEV NOTES (Multiplayer)
-     * Nevermind, animateTick works fine when running on a server
-     */
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        BlockState above = level.getBlockState(pos.above());
-        boolean hasLeavesAbove = above.is(BlockRegistry.LEAVES.get());
-
-        if (!hasLeavesAbove) {
-            clearAtAndBelow(level, pos);
-            return;
-        }
-
-        clearAtAndBelow(level, pos);
-
-        int roll = random.nextInt(100);
-        if (roll < 1) {
-            level.setBlock(pos, BlockRegistry.WOOD.get().defaultBlockState(), 3);
-            level.setBlock(pos.below(), BlockRegistry.WOOD.get().defaultBlockState(), 3);
-        } else if (roll < 13) {
-            level.setBlock(pos, BlockRegistry.WOOD.get().defaultBlockState(), 3);
-            level.setBlock(pos.below(), BlockRegistry.WOOD.get().defaultBlockState(), 3);
-        } else if (roll < 38) {
-            level.setBlock(pos, BlockRegistry.WOOD.get().defaultBlockState(), 3);
-        }
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+        if (!level.isClientSide()) level.scheduleTick(pos, state.getBlock(), 1);
     }
 
-    private void clearAtAndBelow(Level level, BlockPos pos) {
-        BlockPos current = pos;
-        while (true) {
-            BlockState state = level.getBlockState(current);
-            if (state.is(BlockRegistry.DIRT.get()) || state.is(BlockRegistry.GRASS_BLOCK.get())) break;
-            if (state.isAir()) break;
-            if (state.is(this)) {
-                level.setBlock(current, Blocks.AIR.defaultBlockState(), 3);
-            }
+    @Override
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (!level.getBlockState(pos.above()).is(BlockRegistry.LEAVES.get())) return;
+
+        var wood = BlockRegistry.WOOD.get().defaultBlockState();
+        var current = pos;
+        for (float chance : CHANCES) {
+            if (!level.getBlockState(current).is(this)) break;
+            if (random.nextFloat() >= chance) break;
+            level.setBlock(current, wood, Block.UPDATE_ALL);
             current = current.below();
         }
+        clearAtAndBelow(level, current);
+
+        level.scheduleTick(pos, state.getBlock(), 1);
+    }
+
+    void clearAtAndBelow(Level level, BlockPos pos) {
+        var current = pos;
+        while (true) {
+            var state = level.getBlockState(current);
+            if (state.is(BlockRegistry.DIRT.get()) || state.is(BlockRegistry.GRASS_BLOCK.get())) break;
+            if (state.isAir()) break;
+            if (state.is(this)) level.setBlock(current, Blocks.AIR.defaultBlockState(), 3);
+            current = current.below();
+        }
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        var player = ClientUtil.player();
+        if (player == null || !player.isCreative() || !player.isHolding(this.asItem())) return;
+
+        level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK_MARKER, state), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0, 0);
     }
 }

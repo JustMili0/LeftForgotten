@@ -69,6 +69,7 @@ tasks.processResources {
             "architectury_api" to libs.versions.arch.api.get()
         )
     }
+    exclude(".cache")
 }
 
 tasks.shadowJar {
