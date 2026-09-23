@@ -16,16 +16,16 @@ import net.minecraft.world.level.block.Blocks;
 public class Remodels {
 
     public static Block of(Block block) {
-        if (block == Blocks.CHEST && chests()) return BlockRegistry.REMODEL_CHEST.get();
-        if (block == Blocks.CRAFTING_TABLE && workstations()) return BlockRegistry.REMODEL_CRAFTING_TABLE.get();
-        if (block == Blocks.FURNACE && workstations()) return stoneFurnace()? BlockRegistry.REMODEL_FURNACE_STONE.get() : BlockRegistry.REMODEL_FURNACE.get();
+        if (block == Blocks.CHEST && chests()) return BlockRegistry.RMDL_CHEST.get();
+        if (block == Blocks.CRAFTING_TABLE && workstations()) return BlockRegistry.RMDL_CRAFTING.get();
+        if (block == Blocks.FURNACE && workstations()) return stoneFurnace()? BlockRegistry.RMDL_FURNACE_STONE.get() : BlockRegistry.RMDL_FURNACE.get();
         return block;
     }
 
     public static Item of(Item item) {
-        if (item == Items.CHEST && chests()) return ItemRegistry.REMODEL_CHEST.get();
-        if (item == Items.CRAFTING_TABLE && workstations()) return ItemRegistry.REMODEL_CRAFTING_TABLE.get();
-        if (item == Items.FURNACE && workstations()) return stoneFurnace()? ItemRegistry.REMODEL_FURNACE_STONE.get() : ItemRegistry.REMODEL_FURNACE.get();
+        if (item == Items.CHEST && chests()) return ItemRegistry.RMDL_CHEST.get();
+        if (item == Items.CRAFTING_TABLE && workstations()) return ItemRegistry.RMDL_CRAFTING.get();
+        if (item == Items.FURNACE && workstations()) return stoneFurnace()? ItemRegistry.RMDL_FURNACE_STONE.get() : ItemRegistry.RMDL_FURNACE.get();
         return item;
     }
 

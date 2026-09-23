@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "left_forgotten:block/wooden_planks",
+    "east": "left_forgotten:block/rmdl_crafting_table_side",
+    "north": "left_forgotten:block/rmdl_crafting_table_front",
+    "particle": "left_forgotten:block/rmdl_crafting_table_front",
+    "south": "left_forgotten:block/rmdl_crafting_table_front",
+    "up": "left_forgotten:block/rmdl_crafting_table_top",
+    "west": "left_forgotten:block/rmdl_crafting_table_side"
+  }
+}

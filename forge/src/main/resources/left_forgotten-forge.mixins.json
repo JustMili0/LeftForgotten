@@ -10,6 +10,7 @@
     "client.UnrenderClouds"
   ],
   "mixins": [
+    "FluidInteractionRegistryMixin"
   ],
   "injectors": {
     "defaultRequire": 1

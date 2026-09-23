@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "left_forgotten:block/rmdl_chest_front_left",
+    "side": "left_forgotten:block/rmdl_chest_side",
+    "south": "left_forgotten:block/rmdl_chest_back_left",
+    "top": "left_forgotten:block/rmdl_chest_top"
+  }
+}

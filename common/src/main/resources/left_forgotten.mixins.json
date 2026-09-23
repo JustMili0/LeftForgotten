@@ -25,6 +25,7 @@
     "ChestBlockMixin",
     "EatBlockGoalMixin",
     "FoodDataMixin",
+    "LavaFluidMixin",
     "PerlinNoiseMixin",
     "PlayerMixin"
   ],

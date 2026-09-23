@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "left_forgotten:stone"
+    "left_forgotten:grass_block",
+    "left_forgotten:dirt",
+    "left_forgotten:gravel",
+    "left_forgotten:sand",
+    "left_forgotten:stone",
+    "left_forgotten:iron_ore"
   ]
 }

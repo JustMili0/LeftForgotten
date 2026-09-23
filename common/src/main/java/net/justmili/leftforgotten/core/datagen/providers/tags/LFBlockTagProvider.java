@@ -1,21 +1,22 @@
 package net.justmili.leftforgotten.core.datagen.providers.tags;
 
-import net.justmili.leftforgotten.core.registries.BlockRegistry;
+import net.justmili.leftforgotten.core.references.LFBlockItemIds;
+import net.justmili.leftforgotten.core.registries.TagRegistry;
+import net.justmili.leftforgotten.libs.v1.references.BlockItemId;
 import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
 import java.util.concurrent.CompletableFuture;
 
+import static net.minecraft.tags.BlockTags.*;
+
 public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
-    public static final TagKey<Block> FORGE_COBBLE = TagKey.create(Registries.BLOCK, ResourceUtil.asForge("cobblestone"));
-    public static final TagKey<Block> FORGE_STONE = TagKey.create(Registries.BLOCK, ResourceUtil.asForge("stone"));
 
     public LFBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(output, Registries.BLOCK, lookupProvider, block -> BuiltInRegistries.BLOCK.getResourceKey(block).orElseThrow());
@@ -23,202 +24,223 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        /**
-         * Forge and Fabric tags
-         */
-        // FORGE
-        this.tag(FORGE_COBBLE)
-            .add(BlockRegistry.COBBLESTONE.get());
-        this.tag(FORGE_STONE)
-            .add(BlockRegistry.STONE.get());
-        // FABRIC
-        // idk does Fabric have additional tags like forge
 
-        /**
-         * ADDS TO VANILLA TAGS
-         */
-        this.tag(BlockTags.SMALL_FLOWERS)
-            .add(BlockRegistry.RED_FLOWER.get(), BlockRegistry.YELLOW_FLOWER.get());
+        add(LFBlockItemIds.BRITTLE_BEDROCK, LAVA_POOL_STONE_CANNOT_REPLACE, FEATURES_CANNOT_REPLACE, INFINIBURN_END, DRAGON_IMMUNE, GEODE_INVALID_BLOCKS, WITHER_IMMUNE);
 
-        this.tag(BlockTags.STONE_ORE_REPLACEABLES)
-            .add(BlockRegistry.STONE.get());
+        add(LFBlockItemIds.GRASS_BLOCK,
+            SNIFFER_DIGGABLE_BLOCK,
+            RABBITS_SPAWNABLE_ON,
+            WOLVES_SPAWNABLE_ON,
+            PARROTS_SPAWNABLE_ON,
+            OVERWORLD_CARVER_REPLACEABLES,
+            BIG_DRIPLEAF_PLACEABLE,
+            MOSS_REPLACEABLE,
+            LUSH_GROUND_REPLACEABLE,
+            MINEABLE_WITH_SHOVEL,
+            VALID_SPAWN,
+            SCULK_REPLACEABLE,
+            GOATS_SPAWNABLE_ON,
+            FROGS_SPAWNABLE_ON,
+            BAMBOO_PLANTABLE_ON,
+            SCULK_REPLACEABLE_WORLD_GEN,
+            AZALEA_GROWS_ON,
+            ANIMALS_SPAWNABLE_ON,
+            NETHER_CARVER_REPLACEABLES,
+            DIRT,
+            FOXES_SPAWNABLE_ON,
+            ENDERMAN_HOLDABLE,
+            AZALEA_ROOT_REPLACEABLE,
+            DEAD_BUSH_MAY_PLACE_ON
+        );
+        add(LFBlockItemIds.DIRT,
+            CONVERTABLE_TO_MUD,
+            DEAD_BUSH_MAY_PLACE_ON,
+            NETHER_CARVER_REPLACEABLES,
+            AZALEA_ROOT_REPLACEABLE,
+            MOSS_REPLACEABLE,
+            SNIFFER_DIGGABLE_BLOCK,
+            SCULK_REPLACEABLE,
+            OVERWORLD_CARVER_REPLACEABLES,
+            BIG_DRIPLEAF_PLACEABLE,
+            SCULK_REPLACEABLE_WORLD_GEN,
+            LUSH_GROUND_REPLACEABLE,
+            AZALEA_GROWS_ON,
+            BAMBOO_PLANTABLE_ON,
+            MINEABLE_WITH_SHOVEL,
+            ENDERMAN_HOLDABLE
+        );
+        add(LFBlockItemIds.FARMLAND, BIG_DRIPLEAF_PLACEABLE, MINEABLE_WITH_SHOVEL);
 
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .add(BlockRegistry.COBBLESTONE.get(), BlockRegistry.COBBLESTONE_WALL.get(), BlockRegistry.COBBLESTONE_STAIRS.get(),
-                BlockRegistry.COBBLESTONE_SLAB.get(),
-                BlockRegistry.STONE.get(), BlockRegistry.STONE_SLAB.get(), BlockRegistry.STONE_STAIRS.get(),
-                BlockRegistry.STONE_PRESSURE_PLATE.get(), BlockRegistry.STONE_BUTTON.get(),
-                BlockRegistry.COAL_ORE.get(), BlockRegistry.IRON_ORE.get(), BlockRegistry.GOLD_ORE.get(), BlockRegistry.DIAMOND_ORE.get(), BlockRegistry.REDSTONE_ORE.get(),
-                BlockRegistry.OBSIDIAN.get(), BlockRegistry.BRICKS.get(), BlockRegistry.BRICK_STAIRS.get(), BlockRegistry.BRICK_SLAB.get(), BlockRegistry.BRICK_WALL.get(),
-                BlockRegistry.IRON_DOOR.get(),
-                BlockRegistry.MOSSY_COBBLESTONE.get(), BlockRegistry.MOSSY_COBBLESTONE_STAIRS.get(), BlockRegistry.MOSSY_COBBLESTONE_SLAB.get(), BlockRegistry.MOSSY_COBBLESTONE_WALL.get(),
-                BlockRegistry.GLASS.get(), BlockRegistry.GLASS_PANE.get(),
-                BlockRegistry.WOODEN_SLAB.get(), // intentional, see: old slabs
-                BlockRegistry.IRON_BLOCK.get(),
-                BlockRegistry.GOLD_BLOCK.get(),
-                BlockRegistry.DIAMOND_BLOCK.get()
-            );
+        add(LFBlockItemIds.GRAVEL,
+            LUSH_GROUND_REPLACEABLE,
+            SCULK_REPLACEABLE,
+            SCULK_REPLACEABLE_WORLD_GEN,
+            c("gravel"),
+            TRAIL_RUINS_REPLACEABLE,
+            MINEABLE_WITH_SHOVEL,
+            OVERWORLD_CARVER_REPLACEABLES,
+            ENDERMAN_HOLDABLE,
+            BAMBOO_PLANTABLE_ON,
+            AZALEA_ROOT_REPLACEABLE,
+            GOATS_SPAWNABLE_ON
+        );
+        add(LFBlockItemIds.SAND,
+            LUSH_GROUND_REPLACEABLE,
+            AZALEA_ROOT_REPLACEABLE,
+            SMELTS_TO_GLASS,
+            MINEABLE_WITH_SHOVEL,
+            BAMBOO_PLANTABLE_ON,
+            cd(SAND),
+            SCULK_REPLACEABLE_WORLD_GEN,
+            SCULK_REPLACEABLE,
+            DEAD_BUSH_MAY_PLACE_ON,
+            ENDERMAN_HOLDABLE,
+            OVERWORLD_CARVER_REPLACEABLES,
+            c("colorless_sand"),
+            RABBITS_SPAWNABLE_ON,
+            SAND
+        );
+        add(LFBlockItemIds.CLAY,
+            AXOLOTLS_SPAWNABLE_ON,
+            MINEABLE_WITH_SHOVEL,
+            BIG_DRIPLEAF_PLACEABLE,
+            SCULK_REPLACEABLE_WORLD_GEN,
+            AZALEA_ROOT_REPLACEABLE,
+            LUSH_GROUND_REPLACEABLE,
+            ENDERMAN_HOLDABLE,
+            SCULK_REPLACEABLE,
+            SMALL_DRIPLEAF_PLACEABLE
+        );
 
-        this.tag(BlockTags.NEEDS_STONE_TOOL)
-            .add(BlockRegistry.IRON_ORE.get(),
-                BlockRegistry.IRON_BLOCK.get()
-            );
+        add(LFBlockItemIds.RED_FLOWER, ENDERMAN_HOLDABLE, SWORD_EFFICIENT, FLOWERS, SMALL_FLOWERS);
+        add(LFBlockItemIds.YELLOW_FLOWER, ENDERMAN_HOLDABLE, SWORD_EFFICIENT, FLOWERS, SMALL_FLOWERS);
+        add(LFBlockItemIds.RED_MUSHROOM, MINEABLE_WITH_AXE, SWORD_EFFICIENT, ENDERMAN_HOLDABLE);
+        add(LFBlockItemIds.BROWN_MUSHROOM, MINEABLE_WITH_AXE, SWORD_EFFICIENT, ENDERMAN_HOLDABLE);
+        add(LFBlockItemIds.CACTUS, ENDERMAN_HOLDABLE);
+        add(LFBlockItemIds.SAPLING, MINEABLE_WITH_AXE, SWORD_EFFICIENT, SAPLINGS);
+        add(LFBlockItemIds.LEAVES,
+            LAVA_POOL_STONE_CANNOT_REPLACE,
+            PARROTS_SPAWNABLE_ON,
+            MINEABLE_WITH_HOE,
+            LEAVES,
+            REPLACEABLE_BY_TREES,
+            SWORD_EFFICIENT,
+            COMPLETES_FIND_TREE_TUTORIAL
+        );
 
-        this.tag(BlockTags.NEEDS_IRON_TOOL)
-            .add(BlockRegistry.GOLD_ORE.get(),
-                BlockRegistry.DIAMOND_ORE.get(),
-                BlockRegistry.REDSTONE_ORE.get(),
-                BlockRegistry.GOLD_BLOCK.get(),
-                BlockRegistry.DIAMOND_BLOCK.get()
-            );
+        add(LFBlockItemIds.WOOD,
+            LOGS_THAT_BURN,
+            OVERWORLD_NATURAL_LOGS,
+            TagRegistry.ALPHA_NATURAL_LOGS,
+            SNAPS_GOAT_HORN,
+            COMPLETES_FIND_TREE_TUTORIAL,
+            LOGS,
+            LAVA_POOL_STONE_CANNOT_REPLACE,
+            PARROTS_SPAWNABLE_ON,
+            MINEABLE_WITH_AXE,
+            OAK_LOGS
+        );
+        add(LFBlockItemIds.WOOD_6_SIDED,
+            LAVA_POOL_STONE_CANNOT_REPLACE,
+            LOGS,
+            LOGS_THAT_BURN,
+            PARROTS_SPAWNABLE_ON,
+            MINEABLE_WITH_AXE,
+            COMPLETES_FIND_TREE_TUTORIAL,
+            OAK_LOGS
+        );
+        add(LFBlockItemIds.WOODEN_PLANKS, PLANKS, MINEABLE_WITH_AXE);
+        add(LFBlockItemIds.WOODEN_STAIRS, STAIRS, WOODEN_STAIRS, MINEABLE_WITH_AXE);
+        add(LFBlockItemIds.WOODEN_SLAB, SLABS, WOODEN_SLABS, MINEABLE_WITH_AXE, MINEABLE_WITH_PICKAXE /* intentional, see: old slabs */);
+        add(LFBlockItemIds.FENCE, MINEABLE_WITH_AXE, FENCES, WOODEN_FENCES, cd(FENCES), cd(WOODEN_FENCES));
+        add(LFBlockItemIds.FENCE_GATE, UNSTABLE_BOTTOM_CENTER, FENCE_GATES, cd(FENCE_GATES), c("wooden_fence_gates") /* no vanilla tag */, MINEABLE_WITH_AXE);
+        add(LFBlockItemIds.DOOR, MINEABLE_WITH_AXE, DOORS, WOODEN_DOORS);
+        add(LFBlockItemIds.TRAPDOOR, MINEABLE_WITH_AXE, WOODEN_TRAPDOORS, TRAPDOORS);
+        add(LFBlockItemIds.PRESSURE_PLATE, PRESSURE_PLATES, WALL_POST_OVERRIDE, WOODEN_PRESSURE_PLATES, MINEABLE_WITH_AXE);
+        add(LFBlockItemIds.BUTTON, WOODEN_BUTTONS, BUTTONS, MINEABLE_WITH_AXE);
 
-        this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
-            .add(BlockRegistry.OBSIDIAN.get());
+        add(LFBlockItemIds.STONE,
+            MINEABLE_WITH_PICKAXE,
+            LUSH_GROUND_REPLACEABLE,
+            STONE_ORE_REPLACEABLES,
+            DRIPSTONE_REPLACEABLE,
+            GOATS_SPAWNABLE_ON,
+            SNAPS_GOAT_HORN,
+            NETHER_CARVER_REPLACEABLES,
+            SCULK_REPLACEABLE_WORLD_GEN,
+            SCULK_REPLACEABLE,
+            c("ore_bearing_ground/stone"),
+            MOSS_REPLACEABLE,
+            BASE_STONE_OVERWORLD,
+            c("stone"),
+            OVERWORLD_CARVER_REPLACEABLES,
+            AZALEA_ROOT_REPLACEABLE
+        );
+        add(LFBlockItemIds.STONE_STAIRS, MINEABLE_WITH_PICKAXE, STAIRS);
+        add(LFBlockItemIds.STONE_SLAB, MINEABLE_WITH_PICKAXE, SLABS);
+        add(LFBlockItemIds.STONE_PRESSURE_PLATE, STONE_PRESSURE_PLATES, PRESSURE_PLATES, WALL_POST_OVERRIDE, MINEABLE_WITH_PICKAXE);
+        add(LFBlockItemIds.STONE_BUTTON, STONE_BUTTONS, BUTTONS, MINEABLE_WITH_PICKAXE);
 
-        this.tag(BlockTags.MINEABLE_WITH_AXE)
-            .add(BlockRegistry.WOODEN_PLANKS.get(), BlockRegistry.WOOD.get(), BlockRegistry.WOOD_6_SIDED.get(),
-                BlockRegistry.WOODEN_STAIRS.get(), BlockRegistry.WOODEN_SLAB.get(),
-                BlockRegistry.FENCE.get(), BlockRegistry.FENCE_GATE.get(),
-                BlockRegistry.DOOR.get(), BlockRegistry.TRAPDOOR.get(),
-                BlockRegistry.PRESSURE_PLATE.get(), BlockRegistry.BUTTON.get(),
-                BlockRegistry.BOOKSHELF.get()
-            );
+        var cobble = c("cobblestone");
+        add(LFBlockItemIds.COBBLESTONE, cobble, c("normal_cobblestone"), MINEABLE_WITH_PICKAXE);
+        add(LFBlockItemIds.COBBLESTONE_STAIRS, MINEABLE_WITH_PICKAXE, STAIRS);
+        add(LFBlockItemIds.COBBLESTONE_SLAB, MINEABLE_WITH_PICKAXE, SLABS);
+        add(LFBlockItemIds.COBBLESTONE_WALL, WALLS, MINEABLE_WITH_PICKAXE);
 
-        this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
-            .add(BlockRegistry.GRASS_BLOCK.get(), BlockRegistry.DIRT.get(), BlockRegistry.FARMLAND.get(),
-                BlockRegistry.SAND.get(), BlockRegistry.GRAVEL.get(), BlockRegistry.CLAY.get());
+        add(LFBlockItemIds.MOSSY_COBBLESTONE, cobble, c("mossy_cobblestone"), MINEABLE_WITH_PICKAXE);
+        add(LFBlockItemIds.MOSSY_COBBLESTONE_STAIRS, MINEABLE_WITH_PICKAXE, STAIRS);
+        add(LFBlockItemIds.MOSSY_COBBLESTONE_SLAB, MINEABLE_WITH_PICKAXE, SLABS);
+        add(LFBlockItemIds.MOSSY_COBBLESTONE_WALL, WALLS, MINEABLE_WITH_PICKAXE);
 
-        this.tag(BlockTags.MINEABLE_WITH_HOE)
-            .add(BlockRegistry.LEAVES.get());
+        var ores = c("ores");
+        var ores_in_stone = c("ores_in_ground/stone");
+        var ores_singular = c("ore_rates/singular");
+        var ores_dense = c("ore_rates/dense");
+        add(LFBlockItemIds.COAL_ORE, ores_singular, COAL_ORES, cd(COAL_ORES), SNAPS_GOAT_HORN, ores_in_stone, ores, MINEABLE_WITH_PICKAXE);
+        add(LFBlockItemIds.IRON_ORE,
+            NEEDS_STONE_TOOL,
+            ores_singular,
+            SNAPS_GOAT_HORN,
+            ores_in_stone,
+            IRON_ORES,
+            OVERWORLD_CARVER_REPLACEABLES,
+            MINEABLE_WITH_PICKAXE,
+            cd(IRON_ORES)
+        );
+        add(LFBlockItemIds.GOLD_ORE, cd(GOLD_ORES), ores, MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, GOLD_ORES, GUARDED_BY_PIGLINS, ores_in_stone);
+        add(LFBlockItemIds.REDSTONE_ORE, ores_dense, ores_in_stone, ores, REDSTONE_ORES, MINEABLE_WITH_PICKAXE, cd(REDSTONE_ORES), NEEDS_IRON_TOOL);
+        add(LFBlockItemIds.DIAMOND_ORE, ores_singular, DIAMOND_ORES, cd(DIAMOND_ORES), ores_in_stone, ores, MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL);
 
-        this.tag(BlockTags.ANIMALS_SPAWNABLE_ON)
-            .add(BlockRegistry.GRASS_BLOCK.get());
+        add(LFBlockItemIds.BRICKS, MINEABLE_WITH_PICKAXE);
+        add(LFBlockItemIds.BRICK_STAIRS, MINEABLE_WITH_PICKAXE, STAIRS);
+        add(LFBlockItemIds.BRICK_SLAB, MINEABLE_WITH_PICKAXE, SLABS);
+        add(LFBlockItemIds.BRICK_WALL, MINEABLE_WITH_PICKAXE, WALLS);
 
-        this.tag(BlockTags.DIRT)
-            .add(BlockRegistry.GRASS_BLOCK.get(), BlockRegistry.DIRT.get());
+        var storage_blocks = c("storage_blocks");
+        add(LFBlockItemIds.OBSIDIAN, c("obsidian"), NEEDS_DIAMOND_TOOL, DRAGON_IMMUNE, MINEABLE_WITH_PICKAXE);
+        add(LFBlockItemIds.IRON_BLOCK, BEACON_BASE_BLOCKS, storage_blocks, NEEDS_STONE_TOOL, c("iron_blocks"), MINEABLE_WITH_PICKAXE);
+        add(LFBlockItemIds.GOLD_BLOCK, c("gold_blocks"), GUARDED_BY_PIGLINS, storage_blocks, NEEDS_IRON_TOOL, MINEABLE_WITH_PICKAXE, BEACON_BASE_BLOCKS);
+        add(LFBlockItemIds.DIAMOND_BLOCK, BEACON_BASE_BLOCKS, storage_blocks, NEEDS_IRON_TOOL, MINEABLE_WITH_PICKAXE, c("diamond_blocks"));
 
-        this.tag(BlockTags.SAND)
-            .add(BlockRegistry.SAND.get());
+        add(LFBlockItemIds.BOOKSHELF, ENCHANTMENT_POWER_PROVIDER, c("bookshelves"), MINEABLE_WITH_AXE);
+        add(LFBlockItemIds.GLASS, IMPERMEABLE, c("silica_glass"), c("glass_blocks"), c("colorless_glass"));
+        add(LFBlockItemIds.GLASS_PANE, c("glass_panes"), c("colorless_glass_panes"));
+        add(LFBlockItemIds.TNT, ENDERMAN_HOLDABLE);
+        add(LFBlockItemIds.IRON_DOOR, DOORS, MINEABLE_WITH_PICKAXE);
+    }
 
-        this.tag(BlockTags.LEAVES)
-            .add(BlockRegistry.LEAVES.get());
+    @SafeVarargs
+    private void add(BlockItemId id, TagKey<Block>... tags) {
+        for (var tag : tags) {
+            this.tag(tag).add(id.block());
+        }
+    }
 
-        this.tag(BlockTags.LOGS)
-            .add(BlockRegistry.WOOD.get(), BlockRegistry.WOOD_6_SIDED.get());
+    private static TagKey<Block> c(String path) { // Common
+        return TagKey.create(Registries.BLOCK, ResourceUtil.asCommon(path));
+    }
 
-        this.tag(BlockTags.LOGS_THAT_BURN)
-            .add(BlockRegistry.WOOD.get(), BlockRegistry.WOOD_6_SIDED.get());
-
-        this.tag(BlockTags.PLANKS)
-            .add(BlockRegistry.WOODEN_PLANKS.get());
-
-        this.tag(BlockTags.WOODEN_STAIRS)
-            .add(BlockRegistry.WOODEN_STAIRS.get());
-
-        this.tag(BlockTags.WOODEN_SLABS)
-            .add(BlockRegistry.WOODEN_SLAB.get());
-
-        this.tag(BlockTags.FENCES)
-            .add(BlockRegistry.FENCE.get());
-
-        this.tag(BlockTags.WOODEN_FENCES)
-            .add(BlockRegistry.FENCE.get());
-
-        this.tag(BlockTags.FENCE_GATES)
-            .add(BlockRegistry.FENCE_GATE.get());
-
-        this.tag(BlockTags.DOORS)
-            .add(BlockRegistry.DOOR.get(), BlockRegistry.IRON_DOOR.get());
-
-        this.tag(BlockTags.WOODEN_DOORS)
-            .add(BlockRegistry.DOOR.get());
-
-        this.tag(BlockTags.TRAPDOORS)
-            .add(BlockRegistry.TRAPDOOR.get());
-
-        this.tag(BlockTags.WOODEN_TRAPDOORS)
-            .add(BlockRegistry.TRAPDOOR.get());
-
-        this.tag(BlockTags.PRESSURE_PLATES)
-            .add(BlockRegistry.PRESSURE_PLATE.get(), BlockRegistry.STONE_PRESSURE_PLATE.get());
-
-        this.tag(BlockTags.WOODEN_PRESSURE_PLATES)
-            .add(BlockRegistry.PRESSURE_PLATE.get());
-
-        this.tag(BlockTags.BUTTONS)
-            .add(BlockRegistry.BUTTON.get(), BlockRegistry.STONE_BUTTON.get());
-
-        this.tag(BlockTags.WOODEN_BUTTONS)
-            .add(BlockRegistry.BUTTON.get());
-
-        this.tag(BlockTags.WALLS)
-            .add(BlockRegistry.COBBLESTONE_WALL.get(), BlockRegistry.MOSSY_COBBLESTONE_WALL.get(), BlockRegistry.BRICK_WALL.get());
-
-        this.tag(BlockTags.STAIRS)
-            .add(BlockRegistry.WOODEN_STAIRS.get(), BlockRegistry.STONE_STAIRS.get(), BlockRegistry.COBBLESTONE_STAIRS.get(),
-                BlockRegistry.MOSSY_COBBLESTONE_STAIRS.get(), BlockRegistry.BRICK_STAIRS.get());
-
-        this.tag(BlockTags.SLABS)
-            .add(BlockRegistry.WOODEN_SLAB.get(), BlockRegistry.STONE_SLAB.get(), BlockRegistry.COBBLESTONE_SLAB.get(),
-                BlockRegistry.MOSSY_COBBLESTONE_SLAB.get(), BlockRegistry.BRICK_SLAB.get());
-
-        this.tag(BlockTags.COAL_ORES)
-            .add(BlockRegistry.COAL_ORE.get());
-
-        this.tag(BlockTags.IRON_ORES)
-            .add(BlockRegistry.IRON_ORE.get());
-
-        this.tag(BlockTags.GOLD_ORES)
-            .add(BlockRegistry.GOLD_ORE.get());
-
-        this.tag(BlockTags.REDSTONE_ORES)
-            .add(BlockRegistry.REDSTONE_ORE.get());
-
-        this.tag(BlockTags.DIAMOND_ORES)
-            .add(BlockRegistry.DIAMOND_ORE.get());
-
-        this.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES)
-            .add(BlockRegistry.STONE.get());
-
-        this.tag(BlockTags.SAPLINGS)
-            .add(BlockRegistry.SAPLING.get());
-
-        this.tag(BlockTags.FLOWERS)
-            .add(BlockRegistry.RED_FLOWER.get(), BlockRegistry.YELLOW_FLOWER.get());
-
-        this.tag(BlockTags.MOSS_REPLACEABLE)
-            .add(BlockRegistry.STONE.get(), BlockRegistry.DIRT.get(), BlockRegistry.GRASS_BLOCK.get(),
-                BlockRegistry.GRAVEL.get(), BlockRegistry.SAND.get());
-
-        this.tag(BlockTags.IMPERMEABLE)
-            .add(BlockRegistry.GLASS.get(), BlockRegistry.GLASS_PANE.get());
-
-        this.tag(BlockTags.SWORD_EFFICIENT)
-            .add(BlockRegistry.LEAVES.get());
-
-        this.tag(BlockTags.WALL_POST_OVERRIDE)
-            .add(BlockRegistry.PRESSURE_PLATE.get(), BlockRegistry.STONE_PRESSURE_PLATE.get(),
-                BlockRegistry.BUTTON.get(), BlockRegistry.STONE_BUTTON.get());
-
-        this.tag(BlockTags.VALID_SPAWN)
-            .add(BlockRegistry.GRASS_BLOCK.get());
-
-        this.tag(BlockTags.STONE_BUTTONS)
-            .add(BlockRegistry.STONE_BUTTON.get());
-
-        this.tag(BlockTags.STONE_PRESSURE_PLATES)
-            .add(BlockRegistry.STONE_PRESSURE_PLATE.get());
-
-        this.tag(BlockTags.MUSHROOM_GROW_BLOCK)
-            .add(BlockRegistry.DIRT.get(), BlockRegistry.GRASS_BLOCK.get());
-
-        this.tag(BlockTags.DEAD_BUSH_MAY_PLACE_ON)
-            .add(BlockRegistry.SAND.get(), BlockRegistry.GRAVEL.get(), BlockRegistry.DIRT.get());
-
-        this.tag(BlockTags.REPLACEABLE_BY_TREES)
-            .add(BlockRegistry.GRASS_BLOCK.get());
-
-        this.tag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL)
-            .add(BlockRegistry.WOOD.get(), BlockRegistry.WOOD_6_SIDED.get(), BlockRegistry.WOODEN_PLANKS.get());
+    private static TagKey<Block> cd(TagKey<Block> tag) { // Common Dupe
+        return TagKey.create(Registries.BLOCK, ResourceUtil.asCommon(tag.location().getPath()));
     }
 }

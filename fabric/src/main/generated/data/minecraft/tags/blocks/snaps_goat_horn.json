@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "left_forgotten:wood",
+    "left_forgotten:stone",
+    "left_forgotten:coal_ore",
+    "left_forgotten:iron_ore"
+  ]
+}

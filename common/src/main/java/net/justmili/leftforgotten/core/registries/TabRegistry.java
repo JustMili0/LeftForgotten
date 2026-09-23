@@ -20,10 +20,10 @@ public class TabRegistry {
             (params, output) -> {
                 for (var item : ItemRegistry.REGISTRY) {
                     if (item.equals(ItemRegistry.FEATURE_VOID) // Skip dev blocks
-                        || item.equals(ItemRegistry.REMODEL_CRAFTING_TABLE)
-                        || item.equals(ItemRegistry.REMODEL_FURNACE_STONE)
-                        || item.equals(ItemRegistry.REMODEL_FURNACE)
-                        || item.equals(ItemRegistry.REMODEL_CHEST)) continue;
+                        || item.equals(ItemRegistry.RMDL_FURNACE)
+                        || item.equals(ItemRegistry.RMDL_FURNACE_STONE)
+                        || item.equals(ItemRegistry.RMDL_CRAFTING)
+                        || item.equals(ItemRegistry.RMDL_CHEST)) continue;
                     output.accept(item.get());
                 }
             });

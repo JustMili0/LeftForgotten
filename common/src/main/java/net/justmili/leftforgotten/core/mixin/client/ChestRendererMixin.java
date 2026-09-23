@@ -32,7 +32,7 @@ public class ChestRendererMixin {
         ci.cancel();
 
         var renderer = RenderingUtil.getBlockRenderer();
-        var state = BlockRegistry.REMODEL_CHEST.get().withPropertiesOf(blockEntity.getBlockState());
+        var state = BlockRegistry.RMDL_CHEST.get().withPropertiesOf(blockEntity.getBlockState());
         var model = renderer.getBlockModel(state);
 
         pose.pushPose();

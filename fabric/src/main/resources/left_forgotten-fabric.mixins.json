@@ -11,7 +11,8 @@
     "client.VersionOverlay"
   ],
   "mixins": [
-    "BlockLootSubProviderMixin"
+    "BlockLootSubProviderMixin",
+    "LiquidBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "left_forgotten:grass_block",
+    "left_forgotten:dirt",
+    "left_forgotten:gravel",
+    "left_forgotten:sand",
+    "left_forgotten:clay",
+    "left_forgotten:red_flower",
+    "left_forgotten:yellow_flower",
+    "left_forgotten:red_mushroom",
+    "left_forgotten:brown_mushroom",
+    "left_forgotten:cactus",
+    "left_forgotten:tnt"
+  ]
+}

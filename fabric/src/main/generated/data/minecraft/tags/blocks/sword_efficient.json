@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
+    "left_forgotten:red_flower",
+    "left_forgotten:yellow_flower",
+    "left_forgotten:red_mushroom",
+    "left_forgotten:brown_mushroom",
+    "left_forgotten:sapling",
     "left_forgotten:leaves"
   ]
 }

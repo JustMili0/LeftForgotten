@@ -9,6 +9,8 @@ import net.justmili.leftforgotten.content.block.dev.FeatureVoid;
 import net.justmili.leftforgotten.content.block.dev.RemodelChest;
 import net.justmili.leftforgotten.content.block.dev.RemodelCraftingTable;
 import net.justmili.leftforgotten.content.block.dev.RemodelFurnace;
+import net.justmili.leftforgotten.core.references.LFBlockItemIds;
+import net.justmili.leftforgotten.libs.v1.references.BlockItemId;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 
@@ -28,88 +30,89 @@ public class BlockRegistry {
         BRICKS, BRICK_STAIRS, BRICK_SLAB, BRICK_WALL,
         OBSIDIAN, IRON_BLOCK, GOLD_BLOCK, DIAMOND_BLOCK,
         BOOKSHELF, GLASS, GLASS_PANE, TNT, IRON_DOOR,
-        FEATURE_VOID, REMODEL_FURNACE_STONE, REMODEL_FURNACE, REMODEL_CRAFTING_TABLE, REMODEL_CHEST;
+        FEATURE_VOID, RMDL_FURNACE, RMDL_FURNACE_STONE, RMDL_CRAFTING, RMDL_CHEST;
 
     static {
         // In-Overworld
-        BRITTLE_BEDROCK = block("brittle_bedrock", BrittleBedrock::new);
+        BRITTLE_BEDROCK = block(LFBlockItemIds.BRITTLE_BEDROCK, BrittleBedrock::new);
 
         // Nature / Ground
-        GRASS_BLOCK = block("grass_block", GrassBlock::new);
-        DIRT = block("dirt", Dirt::new);
-        FARMLAND = block("farmland", Farmland::new);
-        GRAVEL = block("gravel", Gravel::new);
-        SAND = block("sand", Sand::new);
-        CLAY = block("clay", Clay::new);
+        GRASS_BLOCK = block(LFBlockItemIds.GRASS_BLOCK, GrassBlock::new);
+        DIRT = block(LFBlockItemIds.DIRT, Dirt::new);
+        FARMLAND = block(LFBlockItemIds.FARMLAND, Farmland::new);
+        GRAVEL = block(LFBlockItemIds.GRAVEL, Gravel::new);
+        SAND = block(LFBlockItemIds.SAND, Sand::new);
+        CLAY = block(LFBlockItemIds.CLAY, Clay::new);
 
         // Nature / Vegetation
-        RED_FLOWER = block("red_flower", RedFlower::new);
-        YELLOW_FLOWER = block("yellow_flower", YellowFlower::new);
-        RED_MUSHROOM = block("red_mushroom", RedMushroom::new);
-        BROWN_MUSHROOM = block("brown_mushroom", BrownMushroom::new);
-        CACTUS = block("cactus", Cactus::new);
-        SAPLING = block("sapling", Sapling::new);
-        LEAVES = block("leaves", Leaves::new);
+        RED_FLOWER = block(LFBlockItemIds.RED_FLOWER, RedFlower::new);
+        YELLOW_FLOWER = block(LFBlockItemIds.YELLOW_FLOWER, YellowFlower::new);
+        RED_MUSHROOM = block(LFBlockItemIds.RED_MUSHROOM, RedMushroom::new);
+        BROWN_MUSHROOM = block(LFBlockItemIds.BROWN_MUSHROOM, BrownMushroom::new);
+        CACTUS = block(LFBlockItemIds.CACTUS, Cactus::new);
+        SAPLING = block(LFBlockItemIds.SAPLING, Sapling::new);
+        LEAVES = block(LFBlockItemIds.LEAVES, Leaves::new);
 
         // Building / Wood
-        WOOD = block("wood", Wood::new);
-        WOOD_6_SIDED = block("wood_6_sided", Wood6Sided::new);
-        WOODEN_PLANKS = block("wooden_planks", WoodenPlanks::new);
-        WOODEN_STAIRS = block("wooden_stairs", WoodenStairs::new);
-        WOODEN_SLAB = block("wooden_slab", WoodenSlab::new);
-        FENCE = block("fence", WoodenFence::new);
-        FENCE_GATE = block("fence_gate", WoodenFenceGate::new);
-        DOOR = block("door", WoodenDoor::new);
-        TRAPDOOR = block("trapdoor", WoodenTrapdoor::new);
-        PRESSURE_PLATE = block("pressure_plate", WoodenPressurePlate::new);
-        BUTTON = block("button", WoodenButton::new);
+        WOOD = block(LFBlockItemIds.WOOD, Wood::new);
+        WOOD_6_SIDED = block(LFBlockItemIds.WOOD_6_SIDED, Wood6Sided::new);
+        WOODEN_PLANKS = block(LFBlockItemIds.WOODEN_PLANKS, WoodenPlanks::new);
+        WOODEN_STAIRS = block(LFBlockItemIds.WOODEN_STAIRS, WoodenStairs::new);
+        WOODEN_SLAB = block(LFBlockItemIds.WOODEN_SLAB, WoodenSlab::new);
+        FENCE = block(LFBlockItemIds.FENCE, WoodenFence::new);
+        FENCE_GATE = block(LFBlockItemIds.FENCE_GATE, WoodenFenceGate::new);
+        DOOR = block(LFBlockItemIds.DOOR, WoodenDoor::new);
+        TRAPDOOR = block(LFBlockItemIds.TRAPDOOR, WoodenTrapdoor::new);
+        PRESSURE_PLATE = block(LFBlockItemIds.PRESSURE_PLATE, WoodenPressurePlate::new);
+        BUTTON = block(LFBlockItemIds.BUTTON, WoodenButton::new);
 
         // Nature / Underground
-        COAL_ORE = block("coal_ore", CoalOre::new);
-        IRON_ORE = block("iron_ore", IronOre::new);
-        GOLD_ORE = block("gold_ore", GoldOre::new);
-        REDSTONE_ORE = block("redstone_ore", RedstoneOre::new);
-        DIAMOND_ORE = block("diamond_ore", DiamondOre::new);
-        STONE = block("stone", Stone::new);
+        COAL_ORE = block(LFBlockItemIds.COAL_ORE, CoalOre::new);
+        IRON_ORE = block(LFBlockItemIds.IRON_ORE, IronOre::new);
+        GOLD_ORE = block(LFBlockItemIds.GOLD_ORE, GoldOre::new);
+        REDSTONE_ORE = block(LFBlockItemIds.REDSTONE_ORE, RedstoneOre::new);
+        DIAMOND_ORE = block(LFBlockItemIds.DIAMOND_ORE, DiamondOre::new);
+        STONE = block(LFBlockItemIds.STONE, Stone::new);
 
         // Building / Stone
-        STONE_STAIRS = block("stone_stairs", StoneStairs::new);
-        STONE_SLAB = block("stone_slab", StoneSlab::new);
-        STONE_PRESSURE_PLATE = block("stone_pressure_plate", StonePressurePlate::new);
-        STONE_BUTTON = block("stone_button", StoneButton::new);
-        COBBLESTONE = block("cobblestone", Cobblestone::new);
-        COBBLESTONE_STAIRS = block("cobblestone_stairs", CobblestoneStairs::new);
-        COBBLESTONE_SLAB = block("cobblestone_slab", CobblestoneSlab::new);
-        COBBLESTONE_WALL = block("cobblestone_wall", CobblestoneWall::new);
-        MOSSY_COBBLESTONE = block("mossy_cobblestone", MossyCobblestone::new);
-        MOSSY_COBBLESTONE_STAIRS = block("mossy_cobblestone_stairs", MossyCobblestoneStairs::new);
-        MOSSY_COBBLESTONE_SLAB = block("mossy_cobblestone_slab", MossyCobblestoneSlab::new);
-        MOSSY_COBBLESTONE_WALL = block("mossy_cobblestone_wall", MossyCobblestoneWall::new);
-        BRICKS = block("bricks", Bricks::new);
-        BRICK_STAIRS = block("brick_stairs", BrickStairs::new);
-        BRICK_SLAB = block("brick_slab", BrickSlab::new);
-        BRICK_WALL = block("brick_wall", BrickWall::new);
+        STONE_STAIRS = block(LFBlockItemIds.STONE_STAIRS, StoneStairs::new);
+        STONE_SLAB = block(LFBlockItemIds.STONE_SLAB, StoneSlab::new);
+        STONE_PRESSURE_PLATE = block(LFBlockItemIds.STONE_PRESSURE_PLATE, StonePressurePlate::new);
+        STONE_BUTTON = block(LFBlockItemIds.STONE_BUTTON, StoneButton::new);
+        COBBLESTONE = block(LFBlockItemIds.COBBLESTONE, Cobblestone::new);
+        COBBLESTONE_STAIRS = block(LFBlockItemIds.COBBLESTONE_STAIRS, CobblestoneStairs::new);
+        COBBLESTONE_SLAB = block(LFBlockItemIds.COBBLESTONE_SLAB, CobblestoneSlab::new);
+        COBBLESTONE_WALL = block(LFBlockItemIds.COBBLESTONE_WALL, CobblestoneWall::new);
+        MOSSY_COBBLESTONE = block(LFBlockItemIds.MOSSY_COBBLESTONE, MossyCobblestone::new);
+        MOSSY_COBBLESTONE_STAIRS = block(LFBlockItemIds.MOSSY_COBBLESTONE_STAIRS, MossyCobblestoneStairs::new);
+        MOSSY_COBBLESTONE_SLAB = block(LFBlockItemIds.MOSSY_COBBLESTONE_SLAB, MossyCobblestoneSlab::new);
+        MOSSY_COBBLESTONE_WALL = block(LFBlockItemIds.MOSSY_COBBLESTONE_WALL, MossyCobblestoneWall::new);
+        BRICKS = block(LFBlockItemIds.BRICKS, Bricks::new);
+        BRICK_STAIRS = block(LFBlockItemIds.BRICK_STAIRS, BrickStairs::new);
+        BRICK_SLAB = block(LFBlockItemIds.BRICK_SLAB, BrickSlab::new);
+        BRICK_WALL = block(LFBlockItemIds.BRICK_WALL, BrickWall::new);
 
         // Building / Deco
-        OBSIDIAN = block("obsidian", Obsidian::new);
-        IRON_BLOCK = block("iron_block", IronBlock::new);
-        GOLD_BLOCK = block("gold_block", GoldBlock::new);
-        DIAMOND_BLOCK = block("diamond_block", DiamondBlock::new);
-        BOOKSHELF = block("bookshelf", Bookshelf::new);
-        GLASS = block("glass", Glass::new);
-        GLASS_PANE = block("glass_pane", GlassPane::new);
-        TNT = block("tnt", Tnt::new);
-        IRON_DOOR = block("iron_door", IronDoor::new);
+        OBSIDIAN = block(LFBlockItemIds.OBSIDIAN, Obsidian::new);
+        IRON_BLOCK = block(LFBlockItemIds.IRON_BLOCK, IronBlock::new);
+        GOLD_BLOCK = block(LFBlockItemIds.GOLD_BLOCK, GoldBlock::new);
+        DIAMOND_BLOCK = block(LFBlockItemIds.DIAMOND_BLOCK, DiamondBlock::new);
+        BOOKSHELF = block(LFBlockItemIds.BOOKSHELF, Bookshelf::new);
+        GLASS = block(LFBlockItemIds.GLASS, Glass::new);
+        GLASS_PANE = block(LFBlockItemIds.GLASS_PANE, GlassPane::new);
+        TNT = block(LFBlockItemIds.TNT, Tnt::new);
+        IRON_DOOR = block(LFBlockItemIds.IRON_DOOR, IronDoor::new);
 
-        FEATURE_VOID = block("feature_void", FeatureVoid::new);
-        REMODEL_FURNACE_STONE = block("furnace_pre_beta", RemodelFurnace::new);
-        REMODEL_FURNACE = block("furnace_post_beta", RemodelFurnace::new);
-        REMODEL_CRAFTING_TABLE = block("remodel_crafting_table", RemodelCraftingTable::new);
-        REMODEL_CHEST = block("remodel_chest", RemodelChest::new);
+        // Dev
+        FEATURE_VOID = block(LFBlockItemIds.FEATURE_VOID, FeatureVoid::new);
+        RMDL_FURNACE_STONE = block(LFBlockItemIds.RMDL_FURNACE_STONE, RemodelFurnace::new);
+        RMDL_FURNACE = block(LFBlockItemIds.RMDL_FURNACE, RemodelFurnace::new);
+        RMDL_CRAFTING = block(LFBlockItemIds.RMDL_CRAFTING, RemodelCraftingTable::new);
+        RMDL_CHEST = block(LFBlockItemIds.RMDL_CHEST, RemodelChest::new);
     }
 
-    private static RegistrySupplier<Block> block(String key, Supplier<Block> block) {
-        return REGISTRY.register(key, block);
+    private static RegistrySupplier<Block> block(BlockItemId id, Supplier<Block> block) {
+        return REGISTRY.register(id.block().location().getPath(), block);
     }
 
     public static void register() {

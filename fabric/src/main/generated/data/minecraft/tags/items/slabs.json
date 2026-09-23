@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "left_forgotten:wooden_slab",
+    "left_forgotten:stone_slab",
+    "left_forgotten:cobblestone_slab",
+    "left_forgotten:mossy_cobblestone_slab",
+    "left_forgotten:brick_slab"
+  ]
+}
