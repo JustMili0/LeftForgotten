@@ -34,8 +34,8 @@ public class SoundRegistry {
         MUSIC_DROOPY_LIKES_YOUR_FACE = register("music.unused.droopy_likes_your_face");
     }
 
-    private static RegistrySupplier<SoundEvent> register(String name) {
-        return REGISTRY.register(name, () -> SoundEvent.createVariableRangeEvent(LeftForgotten.asId(name)));
+    private static RegistrySupplier<SoundEvent> register(String path) {
+        return REGISTRY.register(path, () -> SoundEvent.createVariableRangeEvent(LeftForgotten.asId(path)));
     }
 
     public static void register() {

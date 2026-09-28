@@ -125,10 +125,10 @@ public class LFModelProvider extends ImprovedModelProvider {
 
         // Dev
         gen.createCube(BlockRegistry.FEATURE_VOID.get(), noRot);
-        gen.createCraftingTable(BlockRegistry.REMODEL_CRAFTING_TABLE.get(), BlockRegistry.WOODEN_PLANKS.get());
-        gen.createFurnace(BlockRegistry.REMODEL_FURNACE.get());
-        DatagenAssetUtilExtra.createOldFurnace(blockGen, BlockRegistry.REMODEL_FURNACE_STONE.get(), BlockRegistry.STONE.get());
-        DatagenAssetUtilExtra.createOldChest(blockGen, BlockRegistry.REMODEL_CHEST.get());
+        gen.createCraftingTable(BlockRegistry.RMDL_CRAFTING.get(), BlockRegistry.WOODEN_PLANKS.get());
+        gen.createFurnace(BlockRegistry.RMDL_FURNACE.get());
+        DatagenAssetUtilExtra.createOldFurnace(blockGen, BlockRegistry.RMDL_FURNACE_STONE.get(), BlockRegistry.STONE.get());
+        DatagenAssetUtilExtra.createOldChest(blockGen, BlockRegistry.RMDL_CHEST.get());
     }
 
     @Override

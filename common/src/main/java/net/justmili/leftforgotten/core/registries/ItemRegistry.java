@@ -4,7 +4,9 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.content.item.OldBoat;
+import net.justmili.leftforgotten.core.references.LFItemIds;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.Item;
@@ -26,7 +28,7 @@ public class ItemRegistry {
         BRICKS, BRICK_STAIRS, BRICK_SLAB, BRICK_WALL,
         OBSIDIAN, IRON_BLOCK, GOLD_BLOCK, DIAMOND_BLOCK,
         BOOKSHELF, GLASS, GLASS_PANE, TNT, IRON_DOOR,
-        FEATURE_VOID, REMODEL_FURNACE, REMODEL_FURNACE_STONE, REMODEL_CRAFTING_TABLE, REMODEL_CHEST;
+        FEATURE_VOID, RMDL_FURNACE, RMDL_FURNACE_STONE, RMDL_CRAFTING, RMDL_CHEST;
     public static final RegistrySupplier<Item> CLAY_BALL, BRICK, BOAT;
 
     static {
@@ -104,21 +106,21 @@ public class ItemRegistry {
         // Dev
         var devProps = new Item.Properties().rarity(Rarity.EPIC);
         FEATURE_VOID = block(BlockRegistry.FEATURE_VOID, devProps);
-        REMODEL_CRAFTING_TABLE = block(BlockRegistry.REMODEL_CRAFTING_TABLE, devProps);
-        REMODEL_FURNACE = block(BlockRegistry.REMODEL_FURNACE, devProps);
-        REMODEL_FURNACE_STONE = block(BlockRegistry.REMODEL_FURNACE_STONE, devProps);
-        REMODEL_CHEST = block(BlockRegistry.REMODEL_CHEST, devProps);
+        RMDL_CRAFTING = block(BlockRegistry.RMDL_CRAFTING, devProps);
+        RMDL_FURNACE = block(BlockRegistry.RMDL_FURNACE, devProps);
+        RMDL_FURNACE_STONE = block(BlockRegistry.RMDL_FURNACE_STONE, devProps);
+        RMDL_CHEST = block(BlockRegistry.RMDL_CHEST, devProps);
 
         /// Items
         // Misc
-        CLAY_BALL = item("clay_ball", Item::new);
-        BRICK = item("brick", Item::new);
-        BOAT = item("boat", OldBoat::new);
+        CLAY_BALL = item(LFItemIds.CLAY_BALL, Item::new);
+        BRICK = item(LFItemIds.BRICK, Item::new);
+        BOAT = item(LFItemIds.BOAT, OldBoat::new);
     }
 
-    private static <T extends Item> RegistrySupplier<T> item(String name, Function<Item.Properties, T> itemBuilder) {
-        //var key = ResourceKey.create(Registries.ITEM, LeftForgotten.asId(name)); // not needed right now but keep for later
-        return REGISTRY.register(name, () -> itemBuilder.apply(new Item.Properties()));
+    private static <T extends Item> RegistrySupplier<T> item(ResourceKey<Item> id, Function<Item.Properties, T> itemBuilder) {
+        //var id = ResourceKey.create(Registries.ITEM, LeftForgotten.asId(name)); // not needed right now but keep for later
+        return REGISTRY.register(id.location().getPath(), () -> itemBuilder.apply(new Item.Properties()));
     }
 
     private static RegistrySupplier<Item> block(RegistrySupplier<Block> block, Item.Properties props) {

@@ -40,7 +40,7 @@ public class ClientUtil {
     }
 
     public static boolean isDebugScreenOn() {
-        return shouldHideGui();
+        return client.gui.getDebugOverlay().showDebugScreen();
     }
 
     public static boolean notSurvivalOrHideGui() {
