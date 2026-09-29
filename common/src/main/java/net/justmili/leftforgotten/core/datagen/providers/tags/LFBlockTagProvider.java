@@ -26,200 +26,190 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
     protected void addTags(HolderLookup.Provider provider) {
 
         add(LFBlockItemIds.BRITTLE_BEDROCK,
-            LAVA_POOL_STONE_CANNOT_REPLACE,
-            BLOCKS_WIND_CHARGE_EXPLOSIONS,
-            FEATURES_CANNOT_REPLACE,
-            INFINIBURN_END,
             DRAGON_IMMUNE,
+            FEATURES_CANNOT_REPLACE,
             GEODE_INVALID_BLOCKS,
+            INFINIBURN_END,
+            LAVA_POOL_STONE_CANNOT_REPLACE,
             WITHER_IMMUNE
         );
 
         add(LFBlockItemIds.GRASS_BLOCK,
-            SNIFFER_DIGGABLE_BLOCK,
-            RABBITS_SPAWNABLE_ON,
-            WOLVES_SPAWNABLE_ON,
-            PARROTS_SPAWNABLE_ON,
-            OVERWORLD_CARVER_REPLACEABLES,
+            ANIMALS_SPAWNABLE_ON,
+            AZALEA_GROWS_ON,
+            AZALEA_ROOT_REPLACEABLE,
+            BAMBOO_PLANTABLE_ON,
             BIG_DRIPLEAF_PLACEABLE,
-            MOSS_REPLACEABLE,
+            DEAD_BUSH_MAY_PLACE_ON,
+            DIRT,
+            ENDERMAN_HOLDABLE,
+            FROGS_SPAWNABLE_ON,
+            FOXES_SPAWNABLE_ON,
+            GOATS_SPAWNABLE_ON,
             LUSH_GROUND_REPLACEABLE,
             MINEABLE_WITH_SHOVEL,
-            VALID_SPAWN,
-            SCULK_REPLACEABLE,
-            GOATS_SPAWNABLE_ON,
-            FROGS_SPAWNABLE_ON,
-            BAMBOO_PLANTABLE_ON,
-            SCULK_REPLACEABLE_WORLD_GEN,
-            AZALEA_GROWS_ON,
-            ANIMALS_SPAWNABLE_ON,
-            ARMADILLO_SPAWNABLE_ON,
+            MOSS_REPLACEABLE,
             NETHER_CARVER_REPLACEABLES,
-            DIRT,
-            FOXES_SPAWNABLE_ON,
-            ENDERMAN_HOLDABLE,
-            AZALEA_ROOT_REPLACEABLE,
-            DEAD_BUSH_MAY_PLACE_ON
+            OVERWORLD_CARVER_REPLACEABLES,
+            PARROTS_SPAWNABLE_ON,
+            RABBITS_SPAWNABLE_ON,
+            SCULK_REPLACEABLE,
+            SCULK_REPLACEABLE_WORLD_GEN,
+            SNIFFER_DIGGABLE_BLOCK,
+            VALID_SPAWN,
+            WOLVES_SPAWNABLE_ON
         );
         add(LFBlockItemIds.DIRT,
-            DIRT,
+            AZALEA_GROWS_ON,
+            AZALEA_ROOT_REPLACEABLE,
+            BAMBOO_PLANTABLE_ON,
+            BIG_DRIPLEAF_PLACEABLE,
             CONVERTABLE_TO_MUD,
             DEAD_BUSH_MAY_PLACE_ON,
-            NETHER_CARVER_REPLACEABLES,
-            AZALEA_ROOT_REPLACEABLE,
-            MOSS_REPLACEABLE,
-            SNIFFER_DIGGABLE_BLOCK,
-            SCULK_REPLACEABLE,
-            OVERWORLD_CARVER_REPLACEABLES,
-            BIG_DRIPLEAF_PLACEABLE,
-            SCULK_REPLACEABLE_WORLD_GEN,
+            DIRT,
+            ENDERMAN_HOLDABLE,
             LUSH_GROUND_REPLACEABLE,
-            AZALEA_GROWS_ON,
-            BAMBOO_PLANTABLE_ON,
             MINEABLE_WITH_SHOVEL,
-            ENDERMAN_HOLDABLE
+            MOSS_REPLACEABLE,
+            NETHER_CARVER_REPLACEABLES,
+            OVERWORLD_CARVER_REPLACEABLES,
+            SCULK_REPLACEABLE,
+            SCULK_REPLACEABLE_WORLD_GEN,
+            SNIFFER_DIGGABLE_BLOCK
         );
         add(LFBlockItemIds.FARMLAND, BIG_DRIPLEAF_PLACEABLE, MINEABLE_WITH_SHOVEL);
 
         add(LFBlockItemIds.GRAVEL,
+            c("gravel"),
+            AZALEA_ROOT_REPLACEABLE,
+            BAMBOO_PLANTABLE_ON,
+            ENDERMAN_HOLDABLE,
+            GOATS_SPAWNABLE_ON,
             LUSH_GROUND_REPLACEABLE,
-            SCULK_REPLACEABLE,
-            SCULK_REPLACEABLE_WORLD_GEN,
-            c("gravels"),
-            TRAIL_RUINS_REPLACEABLE,
             MINEABLE_WITH_SHOVEL,
             OVERWORLD_CARVER_REPLACEABLES,
-            ENDERMAN_HOLDABLE,
-            BAMBOO_PLANTABLE_ON,
-            AZALEA_ROOT_REPLACEABLE,
-            GOATS_SPAWNABLE_ON
+            SCULK_REPLACEABLE,
+            SCULK_REPLACEABLE_WORLD_GEN,
+            TRAIL_RUINS_REPLACEABLE
         );
         add(LFBlockItemIds.SAND,
-            LUSH_GROUND_REPLACEABLE,
+            c("colorless_sand"),
+            c("sand"),
+            AZALEA_GROWS_ON,
             AZALEA_ROOT_REPLACEABLE,
-            SMELTS_TO_GLASS,
-            MINEABLE_WITH_SHOVEL,
             BAMBOO_PLANTABLE_ON,
-            c("sands"),
-            SCULK_REPLACEABLE_WORLD_GEN,
-            SCULK_REPLACEABLE,
             DEAD_BUSH_MAY_PLACE_ON,
             ENDERMAN_HOLDABLE,
+            LUSH_GROUND_REPLACEABLE,
+            MINEABLE_WITH_SHOVEL,
             OVERWORLD_CARVER_REPLACEABLES,
-            c("colorless_sand"),
             RABBITS_SPAWNABLE_ON,
-            SAND
+            SAND,
+            SCULK_REPLACEABLE,
+            SCULK_REPLACEABLE_WORLD_GEN,
+            SMELTS_TO_GLASS
         );
         add(LFBlockItemIds.CLAY,
             AXOLOTLS_SPAWNABLE_ON,
-            MINEABLE_WITH_SHOVEL,
-            BIG_DRIPLEAF_PLACEABLE,
-            SCULK_REPLACEABLE_WORLD_GEN,
             AZALEA_ROOT_REPLACEABLE,
-            LUSH_GROUND_REPLACEABLE,
+            BIG_DRIPLEAF_PLACEABLE,
             ENDERMAN_HOLDABLE,
+            LUSH_GROUND_REPLACEABLE,
+            MINEABLE_WITH_SHOVEL,
             SCULK_REPLACEABLE,
+            SCULK_REPLACEABLE_WORLD_GEN,
             SMALL_DRIPLEAF_PLACEABLE
         );
 
-        add(LFBlockItemIds.RED_FLOWER, ENDERMAN_HOLDABLE, SWORD_EFFICIENT, FLOWERS, SMALL_FLOWERS);
-        add(LFBlockItemIds.YELLOW_FLOWER, ENDERMAN_HOLDABLE, SWORD_EFFICIENT, FLOWERS, SMALL_FLOWERS);
-        add(LFBlockItemIds.RED_MUSHROOM, MINEABLE_WITH_AXE, SWORD_EFFICIENT, ENDERMAN_HOLDABLE);
-        add(LFBlockItemIds.BROWN_MUSHROOM, MINEABLE_WITH_AXE, SWORD_EFFICIENT, ENDERMAN_HOLDABLE);
+        add(LFBlockItemIds.RED_FLOWER, ENDERMAN_HOLDABLE, FLOWERS, SMALL_FLOWERS, SWORD_EFFICIENT);
+        add(LFBlockItemIds.YELLOW_FLOWER, ENDERMAN_HOLDABLE, FLOWERS, SMALL_FLOWERS, SWORD_EFFICIENT);
+        add(LFBlockItemIds.RED_MUSHROOM, ENDERMAN_HOLDABLE, MINEABLE_WITH_AXE, SWORD_EFFICIENT);
+        add(LFBlockItemIds.BROWN_MUSHROOM, ENDERMAN_HOLDABLE, MINEABLE_WITH_AXE, SWORD_EFFICIENT);
         add(LFBlockItemIds.CACTUS, ENDERMAN_HOLDABLE);
-        add(LFBlockItemIds.SAPLING, MINEABLE_WITH_AXE, SWORD_EFFICIENT, SAPLINGS);
+        add(LFBlockItemIds.SAPLING, MINEABLE_WITH_AXE, SAPLINGS, SWORD_EFFICIENT);
         add(LFBlockItemIds.LEAVES,
+            COMPLETES_FIND_TREE_TUTORIAL,
             LAVA_POOL_STONE_CANNOT_REPLACE,
-            PARROTS_SPAWNABLE_ON,
-            MINEABLE_WITH_HOE,
             LEAVES,
+            MINEABLE_WITH_HOE,
+            PARROTS_SPAWNABLE_ON,
             REPLACEABLE_BY_TREES,
-            SWORD_EFFICIENT,
-            COMPLETES_FIND_TREE_TUTORIAL
+            SWORD_EFFICIENT
         );
 
         add(LFBlockItemIds.WOOD,
-            LOGS_THAT_BURN,
-            OVERWORLD_NATURAL_LOGS,
             TagRegistry.ALPHA_NATURAL_LOGS,
-            SNAPS_GOAT_HORN,
             COMPLETES_FIND_TREE_TUTORIAL,
-            LOGS,
             LAVA_POOL_STONE_CANNOT_REPLACE,
-            PARROTS_SPAWNABLE_ON,
+            LOGS,
+            LOGS_THAT_BURN,
             MINEABLE_WITH_AXE,
-            OAK_LOGS
+            OAK_LOGS,
+            OVERWORLD_NATURAL_LOGS,
+            PARROTS_SPAWNABLE_ON,
+            SNAPS_GOAT_HORN
         );
         add(LFBlockItemIds.WOOD_6_SIDED,
+            COMPLETES_FIND_TREE_TUTORIAL,
             LAVA_POOL_STONE_CANNOT_REPLACE,
             LOGS,
             LOGS_THAT_BURN,
-            PARROTS_SPAWNABLE_ON,
             MINEABLE_WITH_AXE,
-            COMPLETES_FIND_TREE_TUTORIAL,
-            OAK_LOGS
+            OAK_LOGS,
+            PARROTS_SPAWNABLE_ON
         );
-        add(LFBlockItemIds.WOODEN_PLANKS, PLANKS, MINEABLE_WITH_AXE);
-        add(LFBlockItemIds.WOODEN_STAIRS, STAIRS, WOODEN_STAIRS, MINEABLE_WITH_AXE);
-        add(LFBlockItemIds.WOODEN_SLAB, SLABS, WOODEN_SLABS, MINEABLE_WITH_AXE, MINEABLE_WITH_PICKAXE /* intentional, see: old slabs */);
-        add(LFBlockItemIds.FENCE, MINEABLE_WITH_AXE, FENCES, WOODEN_FENCES, c(FENCES), c(WOODEN_FENCES));
-        add(LFBlockItemIds.FENCE_GATE, UNSTABLE_BOTTOM_CENTER, FENCE_GATES, c(FENCE_GATES), c("wooden_fence_gates") /* no vanilla tag */, MINEABLE_WITH_AXE);
-        add(LFBlockItemIds.DOOR, MINEABLE_WITH_AXE, DOORS, WOODEN_DOORS);
-        add(LFBlockItemIds.TRAPDOOR, MINEABLE_WITH_AXE, WOODEN_TRAPDOORS, TRAPDOORS);
-        add(LFBlockItemIds.PRESSURE_PLATE, PRESSURE_PLATES, WALL_POST_OVERRIDE, WOODEN_PRESSURE_PLATES, MINEABLE_WITH_AXE);
-        add(LFBlockItemIds.BUTTON, WOODEN_BUTTONS, BUTTONS, MINEABLE_WITH_AXE);
+        add(LFBlockItemIds.WOODEN_PLANKS, MINEABLE_WITH_AXE, PLANKS);
+        add(LFBlockItemIds.WOODEN_STAIRS, MINEABLE_WITH_AXE, STAIRS, WOODEN_STAIRS);
+        add(LFBlockItemIds.WOODEN_SLAB, MINEABLE_WITH_AXE, MINEABLE_WITH_PICKAXE /* intentional, see: old slabs */, SLABS, WOODEN_SLABS);
+        add(LFBlockItemIds.FENCE, c(FENCES), c(WOODEN_FENCES), FENCES, MINEABLE_WITH_AXE, WOODEN_FENCES);
+        add(LFBlockItemIds.FENCE_GATE, c(FENCE_GATES), c("wooden_fence_gates") /* no vanilla tag */, FENCE_GATES, MINEABLE_WITH_AXE, UNSTABLE_BOTTOM_CENTER);
+        add(LFBlockItemIds.DOOR, DOORS, MINEABLE_WITH_AXE, WOODEN_DOORS);
+        add(LFBlockItemIds.TRAPDOOR, MINEABLE_WITH_AXE, TRAPDOORS, WOODEN_TRAPDOORS);
+        add(LFBlockItemIds.PRESSURE_PLATE, MINEABLE_WITH_AXE, PRESSURE_PLATES, WALL_POST_OVERRIDE, WOODEN_PRESSURE_PLATES);
+        add(LFBlockItemIds.BUTTON, BUTTONS, MINEABLE_WITH_AXE, WOODEN_BUTTONS);
 
         add(LFBlockItemIds.STONE,
-            MINEABLE_WITH_PICKAXE,
-            LUSH_GROUND_REPLACEABLE,
-            STONE_ORE_REPLACEABLES,
+            c("ore_bearing_ground/stone"),
+            c("stone"),
+            AZALEA_ROOT_REPLACEABLE,
+            BASE_STONE_OVERWORLD,
             DRIPSTONE_REPLACEABLE,
             GOATS_SPAWNABLE_ON,
-            SNAPS_GOAT_HORN,
-            NETHER_CARVER_REPLACEABLES,
-            SCULK_REPLACEABLE_WORLD_GEN,
-            SCULK_REPLACEABLE,
-            c("ore_bearing_ground/stone"),
+            LUSH_GROUND_REPLACEABLE,
+            MINEABLE_WITH_PICKAXE,
             MOSS_REPLACEABLE,
-            BASE_STONE_OVERWORLD,
-            c("stone"),
+            NETHER_CARVER_REPLACEABLES,
             OVERWORLD_CARVER_REPLACEABLES,
-            AZALEA_ROOT_REPLACEABLE
+            SCULK_REPLACEABLE,
+            SCULK_REPLACEABLE_WORLD_GEN,
+            SNAPS_GOAT_HORN,
+            STONE_ORE_REPLACEABLES
         );
         add(LFBlockItemIds.STONE_STAIRS, MINEABLE_WITH_PICKAXE, STAIRS);
         add(LFBlockItemIds.STONE_SLAB, MINEABLE_WITH_PICKAXE, SLABS);
-        add(LFBlockItemIds.STONE_PRESSURE_PLATE, STONE_PRESSURE_PLATES, PRESSURE_PLATES, WALL_POST_OVERRIDE, MINEABLE_WITH_PICKAXE);
-        add(LFBlockItemIds.STONE_BUTTON, STONE_BUTTONS, BUTTONS, MINEABLE_WITH_PICKAXE);
+        add(LFBlockItemIds.STONE_PRESSURE_PLATE, MINEABLE_WITH_PICKAXE, PRESSURE_PLATES, STONE_PRESSURE_PLATES, WALL_POST_OVERRIDE);
+        add(LFBlockItemIds.STONE_BUTTON, BUTTONS, MINEABLE_WITH_PICKAXE, STONE_BUTTONS);
 
         var cobble = c("cobblestone");
         add(LFBlockItemIds.COBBLESTONE, cobble, c("normal_cobblestone"), MINEABLE_WITH_PICKAXE);
         add(LFBlockItemIds.COBBLESTONE_STAIRS, MINEABLE_WITH_PICKAXE, STAIRS);
         add(LFBlockItemIds.COBBLESTONE_SLAB, MINEABLE_WITH_PICKAXE, SLABS);
-        add(LFBlockItemIds.COBBLESTONE_WALL, WALLS, MINEABLE_WITH_PICKAXE);
+        add(LFBlockItemIds.COBBLESTONE_WALL, MINEABLE_WITH_PICKAXE, WALLS);
 
         add(LFBlockItemIds.MOSSY_COBBLESTONE, cobble, c("mossy_cobblestone"), MINEABLE_WITH_PICKAXE);
         add(LFBlockItemIds.MOSSY_COBBLESTONE_STAIRS, MINEABLE_WITH_PICKAXE, STAIRS);
         add(LFBlockItemIds.MOSSY_COBBLESTONE_SLAB, MINEABLE_WITH_PICKAXE, SLABS);
-        add(LFBlockItemIds.MOSSY_COBBLESTONE_WALL, WALLS, MINEABLE_WITH_PICKAXE);
+        add(LFBlockItemIds.MOSSY_COBBLESTONE_WALL, MINEABLE_WITH_PICKAXE, WALLS);
 
         var ores = c("ores");
         var ores_in_stone = c("ores_in_ground/stone");
         var ores_singular = c("ore_rates/singular");
         var ores_dense = c("ore_rates/dense");
-        add(LFBlockItemIds.COAL_ORE, ores_singular, COAL_ORES, c(COAL_ORES), SNAPS_GOAT_HORN, ores_in_stone, ores, MINEABLE_WITH_PICKAXE);
-        add(LFBlockItemIds.IRON_ORE,
-            NEEDS_STONE_TOOL,
-            ores_singular,
-            SNAPS_GOAT_HORN,
-            ores_in_stone,
-            IRON_ORES,
-            OVERWORLD_CARVER_REPLACEABLES,
-            MINEABLE_WITH_PICKAXE,
-            c(IRON_ORES)
-        );
-        add(LFBlockItemIds.GOLD_ORE, c(GOLD_ORES), ores, MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, GOLD_ORES, GUARDED_BY_PIGLINS, ores_in_stone);
-        add(LFBlockItemIds.REDSTONE_ORE, ores_dense, ores_in_stone, ores, REDSTONE_ORES, MINEABLE_WITH_PICKAXE, c(REDSTONE_ORES), NEEDS_IRON_TOOL);
-        add(LFBlockItemIds.DIAMOND_ORE, ores_singular, DIAMOND_ORES, c(DIAMOND_ORES), ores_in_stone, ores, MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL);
+        add(LFBlockItemIds.COAL_ORE, c(COAL_ORES), ores_singular, ores, ores_in_stone, COAL_ORES, MINEABLE_WITH_PICKAXE, SNAPS_GOAT_HORN);
+        add(LFBlockItemIds.IRON_ORE, c(IRON_ORES), ores_singular, ores, ores_in_stone, IRON_ORES, MINEABLE_WITH_PICKAXE, NEEDS_STONE_TOOL, OVERWORLD_CARVER_REPLACEABLES, SNAPS_GOAT_HORN);
+        add(LFBlockItemIds.GOLD_ORE, c(GOLD_ORES), ores_singular, ores, ores_in_stone, GOLD_ORES, GUARDED_BY_PIGLINS, MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL);
+        add(LFBlockItemIds.REDSTONE_ORE, c(REDSTONE_ORES), ores_dense, ores, ores_in_stone, MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, REDSTONE_ORES);
+        add(LFBlockItemIds.DIAMOND_ORE, c(DIAMOND_ORES), ores_singular, ores, ores_in_stone, DIAMOND_ORES, MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL);
 
         add(LFBlockItemIds.BRICKS, MINEABLE_WITH_PICKAXE);
         add(LFBlockItemIds.BRICK_STAIRS, MINEABLE_WITH_PICKAXE, STAIRS);
@@ -227,14 +217,14 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
         add(LFBlockItemIds.BRICK_WALL, MINEABLE_WITH_PICKAXE, WALLS);
 
         var storage_blocks = c("storage_blocks");
-        add(LFBlockItemIds.OBSIDIAN, c("obsidian"), NEEDS_DIAMOND_TOOL, DRAGON_IMMUNE, MINEABLE_WITH_PICKAXE);
-        add(LFBlockItemIds.IRON_BLOCK, BEACON_BASE_BLOCKS, storage_blocks, NEEDS_STONE_TOOL, c("iron_blocks"), MINEABLE_WITH_PICKAXE);
-        add(LFBlockItemIds.GOLD_BLOCK, c("gold_blocks"), GUARDED_BY_PIGLINS, storage_blocks, NEEDS_IRON_TOOL, MINEABLE_WITH_PICKAXE, BEACON_BASE_BLOCKS);
-        add(LFBlockItemIds.DIAMOND_BLOCK, BEACON_BASE_BLOCKS, storage_blocks, NEEDS_IRON_TOOL, MINEABLE_WITH_PICKAXE, c("diamond_blocks"));
+        add(LFBlockItemIds.OBSIDIAN, c("obsidian"), DRAGON_IMMUNE, MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL);
+        add(LFBlockItemIds.IRON_BLOCK, c("iron_blocks"), storage_blocks, BEACON_BASE_BLOCKS, MINEABLE_WITH_PICKAXE, NEEDS_STONE_TOOL);
+        add(LFBlockItemIds.GOLD_BLOCK, c("gold_blocks"), storage_blocks, BEACON_BASE_BLOCKS, GUARDED_BY_PIGLINS, MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL);
+        add(LFBlockItemIds.DIAMOND_BLOCK, c("diamond_blocks"), storage_blocks, BEACON_BASE_BLOCKS, MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL);
 
-        add(LFBlockItemIds.BOOKSHELF, ENCHANTMENT_POWER_PROVIDER, c("bookshelves"), MINEABLE_WITH_AXE);
-        add(LFBlockItemIds.GLASS, IMPERMEABLE, c("silica_glass"), c("glass_blocks"), c("colorless_glass"));
-        add(LFBlockItemIds.GLASS_PANE, c("glass_panes"), c("colorless_glass_panes"));
+        add(LFBlockItemIds.BOOKSHELF, c("bookshelves"), ENCHANTMENT_POWER_PROVIDER, MINEABLE_WITH_AXE);
+        add(LFBlockItemIds.GLASS, c("colorless_glass"), c("glass_blocks"), c("silica_glass"), IMPERMEABLE);
+        add(LFBlockItemIds.GLASS_PANE, c("colorless_glass_panes"), c("glass_panes"));
         add(LFBlockItemIds.TNT, ENDERMAN_HOLDABLE);
         add(LFBlockItemIds.IRON_DOOR, DOORS, MINEABLE_WITH_PICKAXE);
     }
