@@ -28,13 +28,15 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
 
         add(LFBlockItemIds.GRASS_BLOCK, DIRT);
         add(LFBlockItemIds.DIRT, DIRT);
-        add(LFBlockItemIds.GRAVEL, c("gravel"));
-        add(LFBlockItemIds.SAND, c("colorless_sand"), c("sand"), SAND, SMELTS_TO_GLASS);
+        add(LFBlockItemIds.GRAVEL, c("gravels"));
+        add(LFBlockItemIds.SAND, c("sands"), c("sands/colorless"), SAND, SMELTS_TO_GLASS);
 
-        add(LFBlockItemIds.RED_FLOWER, FLOWERS, SMALL_FLOWERS);
-        add(LFBlockItemIds.YELLOW_FLOWER, FLOWERS, SMALL_FLOWERS);
+        var animal_foods = c("animal_foods");
+        add(LFBlockItemIds.RED_FLOWER, animal_foods, BEE_FOOD, FLOWERS, SMALL_FLOWERS);
+        add(LFBlockItemIds.YELLOW_FLOWER, animal_foods, BEE_FOOD, FLOWERS, RABBIT_FOOD, SMALL_FLOWERS);
         add(LFBlockItemIds.RED_MUSHROOM, c("mushrooms"));
         add(LFBlockItemIds.BROWN_MUSHROOM, c("mushrooms"));
+        add(LFBlockItemIds.CACTUS, animal_foods, c("crops"), c("crops/cactus"), CAMEL_FOOD);
         add(LFBlockItemIds.SAPLING, SAPLINGS);
         add(LFBlockItemIds.LEAVES, COMPLETES_FIND_TREE_TUTORIAL, LEAVES);
 
@@ -43,25 +45,25 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         add(LFBlockItemIds.WOODEN_PLANKS, PLANKS);
         add(LFBlockItemIds.WOODEN_STAIRS, STAIRS, WOODEN_STAIRS);
         add(LFBlockItemIds.WOODEN_SLAB, SLABS, WOODEN_SLABS);
-        add(LFBlockItemIds.FENCE, c(FENCES), c(WOODEN_FENCES), FENCES, WOODEN_FENCES);
-        add(LFBlockItemIds.FENCE_GATE, c(FENCE_GATES), c("wooden_fence_gates") /* no vanilla tag */, FENCE_GATES);
+        add(LFBlockItemIds.FENCE, c(FENCES), c("fences/wooden"), FENCES, WOODEN_FENCES);
+        add(LFBlockItemIds.FENCE_GATE, c(FENCE_GATES), c("fence_gates/wooden") /* no vanilla tag */, FENCE_GATES);
         add(LFBlockItemIds.DOOR, DOORS, WOODEN_DOORS);
         add(LFBlockItemIds.TRAPDOOR, TRAPDOORS, WOODEN_TRAPDOORS);
         add(LFBlockItemIds.PRESSURE_PLATE, WOODEN_PRESSURE_PLATES);
         add(LFBlockItemIds.BUTTON, BUTTONS, WOODEN_BUTTONS);
 
-        add(LFBlockItemIds.STONE, c("ore_bearing_ground/stone"), c("stone"));
+        add(LFBlockItemIds.STONE, c("ore_bearing_ground/stone"), c("stones"));
         add(LFBlockItemIds.STONE_STAIRS, STAIRS);
         add(LFBlockItemIds.STONE_SLAB, SLABS);
         add(LFBlockItemIds.STONE_BUTTON, BUTTONS, STONE_BUTTONS);
 
-        var cobble = c("cobblestone");
-        add(LFBlockItemIds.COBBLESTONE, cobble, c("normal_cobblestone"), STONE_CRAFTING_MATERIALS, STONE_TOOL_MATERIALS);
+        var cobble = c("cobblestones");
+        add(LFBlockItemIds.COBBLESTONE, cobble, c("cobblestones/normal"), STONE_CRAFTING_MATERIALS, STONE_TOOL_MATERIALS);
         add(LFBlockItemIds.COBBLESTONE_STAIRS, STAIRS);
         add(LFBlockItemIds.COBBLESTONE_SLAB, SLABS);
         add(LFBlockItemIds.COBBLESTONE_WALL, WALLS);
 
-        add(LFBlockItemIds.MOSSY_COBBLESTONE, cobble, c("mossy_cobblestone"));
+        add(LFBlockItemIds.MOSSY_COBBLESTONE, cobble, c("cobblestones/mossy"));
         add(LFBlockItemIds.MOSSY_COBBLESTONE_STAIRS, STAIRS);
         add(LFBlockItemIds.MOSSY_COBBLESTONE_SLAB, SLABS);
         add(LFBlockItemIds.MOSSY_COBBLESTONE_WALL, WALLS);

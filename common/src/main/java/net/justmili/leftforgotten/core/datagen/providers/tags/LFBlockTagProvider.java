@@ -26,6 +26,7 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
     protected void addTags(HolderLookup.Provider provider) {
 
         add(LFBlockItemIds.BRITTLE_BEDROCK,
+            BLOCKS_WIND_CHARGE_EXPLOSIONS,
             DRAGON_IMMUNE,
             FEATURES_CANNOT_REPLACE,
             GEODE_INVALID_BLOCKS,
@@ -36,6 +37,7 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
 
         add(LFBlockItemIds.GRASS_BLOCK,
             ANIMALS_SPAWNABLE_ON,
+            ARMADILLO_SPAWNABLE_ON,
             AZALEA_GROWS_ON,
             AZALEA_ROOT_REPLACEABLE,
             BAMBOO_PLANTABLE_ON,
@@ -80,7 +82,7 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
         add(LFBlockItemIds.FARMLAND, BIG_DRIPLEAF_PLACEABLE, MINEABLE_WITH_SHOVEL);
 
         add(LFBlockItemIds.GRAVEL,
-            c("gravel"),
+            c("gravels"),
             AZALEA_ROOT_REPLACEABLE,
             BAMBOO_PLANTABLE_ON,
             ENDERMAN_HOLDABLE,
@@ -93,10 +95,11 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
             TRAIL_RUINS_REPLACEABLE
         );
         add(LFBlockItemIds.SAND,
-            c("colorless_sand"),
-            c("sand"),
+            c("sands"),
+            c("sands/colorless"),
             AZALEA_GROWS_ON,
             AZALEA_ROOT_REPLACEABLE,
+            CAMEL_SAND_STEP_SOUND_BLOCKS,
             BAMBOO_PLANTABLE_ON,
             DEAD_BUSH_MAY_PLACE_ON,
             ENDERMAN_HOLDABLE,
@@ -161,16 +164,16 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
         add(LFBlockItemIds.WOODEN_PLANKS, MINEABLE_WITH_AXE, PLANKS);
         add(LFBlockItemIds.WOODEN_STAIRS, MINEABLE_WITH_AXE, STAIRS, WOODEN_STAIRS);
         add(LFBlockItemIds.WOODEN_SLAB, MINEABLE_WITH_AXE, MINEABLE_WITH_PICKAXE /* intentional, see: old slabs */, SLABS, WOODEN_SLABS);
-        add(LFBlockItemIds.FENCE, c(FENCES), c(WOODEN_FENCES), FENCES, MINEABLE_WITH_AXE, WOODEN_FENCES);
-        add(LFBlockItemIds.FENCE_GATE, c(FENCE_GATES), c("wooden_fence_gates") /* no vanilla tag */, FENCE_GATES, MINEABLE_WITH_AXE, UNSTABLE_BOTTOM_CENTER);
-        add(LFBlockItemIds.DOOR, DOORS, MINEABLE_WITH_AXE, WOODEN_DOORS);
+        add(LFBlockItemIds.FENCE, c(FENCES), c("fences/wooden"), FENCES, MINEABLE_WITH_AXE, WOODEN_FENCES);
+        add(LFBlockItemIds.FENCE_GATE, c(FENCE_GATES), c("fence_gates/wooden") /* no vanilla tag */, FENCE_GATES, MINEABLE_WITH_AXE, UNSTABLE_BOTTOM_CENTER);
+        add(LFBlockItemIds.DOOR, DOORS, MINEABLE_WITH_AXE, MOB_INTERACTABLE_DOORS, WOODEN_DOORS);
         add(LFBlockItemIds.TRAPDOOR, MINEABLE_WITH_AXE, TRAPDOORS, WOODEN_TRAPDOORS);
         add(LFBlockItemIds.PRESSURE_PLATE, MINEABLE_WITH_AXE, PRESSURE_PLATES, WALL_POST_OVERRIDE, WOODEN_PRESSURE_PLATES);
         add(LFBlockItemIds.BUTTON, BUTTONS, MINEABLE_WITH_AXE, WOODEN_BUTTONS);
 
         add(LFBlockItemIds.STONE,
             c("ore_bearing_ground/stone"),
-            c("stone"),
+            c("stones"),
             AZALEA_ROOT_REPLACEABLE,
             BASE_STONE_OVERWORLD,
             DRIPSTONE_REPLACEABLE,
@@ -190,41 +193,137 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
         add(LFBlockItemIds.STONE_PRESSURE_PLATE, MINEABLE_WITH_PICKAXE, PRESSURE_PLATES, STONE_PRESSURE_PLATES, WALL_POST_OVERRIDE);
         add(LFBlockItemIds.STONE_BUTTON, BUTTONS, MINEABLE_WITH_PICKAXE, STONE_BUTTONS);
 
-        var cobble = c("cobblestone");
-        add(LFBlockItemIds.COBBLESTONE, cobble, c("normal_cobblestone"), MINEABLE_WITH_PICKAXE);
+        var cobble = c("cobblestones");
+        add(LFBlockItemIds.COBBLESTONE, cobble, c("cobblestones/normal"), MINEABLE_WITH_PICKAXE);
         add(LFBlockItemIds.COBBLESTONE_STAIRS, MINEABLE_WITH_PICKAXE, STAIRS);
         add(LFBlockItemIds.COBBLESTONE_SLAB, MINEABLE_WITH_PICKAXE, SLABS);
         add(LFBlockItemIds.COBBLESTONE_WALL, MINEABLE_WITH_PICKAXE, WALLS);
 
-        add(LFBlockItemIds.MOSSY_COBBLESTONE, cobble, c("mossy_cobblestone"), MINEABLE_WITH_PICKAXE);
+        add(LFBlockItemIds.MOSSY_COBBLESTONE, cobble, c("cobblestones/mossy"), MINEABLE_WITH_PICKAXE);
         add(LFBlockItemIds.MOSSY_COBBLESTONE_STAIRS, MINEABLE_WITH_PICKAXE, STAIRS);
         add(LFBlockItemIds.MOSSY_COBBLESTONE_SLAB, MINEABLE_WITH_PICKAXE, SLABS);
         add(LFBlockItemIds.MOSSY_COBBLESTONE_WALL, MINEABLE_WITH_PICKAXE, WALLS);
 
-        var ores = c("ores");
+        String ores = "ores";
         var ores_in_stone = c("ores_in_ground/stone");
         var ores_singular = c("ore_rates/singular");
         var ores_dense = c("ore_rates/dense");
-        add(LFBlockItemIds.COAL_ORE, c(COAL_ORES), ores_singular, ores, ores_in_stone, COAL_ORES, MINEABLE_WITH_PICKAXE, SNAPS_GOAT_HORN);
-        add(LFBlockItemIds.IRON_ORE, c(IRON_ORES), ores_singular, ores, ores_in_stone, IRON_ORES, MINEABLE_WITH_PICKAXE, NEEDS_STONE_TOOL, OVERWORLD_CARVER_REPLACEABLES, SNAPS_GOAT_HORN);
-        add(LFBlockItemIds.GOLD_ORE, c(GOLD_ORES), ores_singular, ores, ores_in_stone, GOLD_ORES, GUARDED_BY_PIGLINS, MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL);
-        add(LFBlockItemIds.REDSTONE_ORE, c(REDSTONE_ORES), ores_dense, ores, ores_in_stone, MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, REDSTONE_ORES);
-        add(LFBlockItemIds.DIAMOND_ORE, c(DIAMOND_ORES), ores_singular, ores, ores_in_stone, DIAMOND_ORES, MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL);
+        add(LFBlockItemIds.COAL_ORE, c(COAL_ORES), ores_singular, c(ores), c(ores, "coal"), ores_in_stone, COAL_ORES, MINEABLE_WITH_PICKAXE, SNAPS_GOAT_HORN);
+        add(LFBlockItemIds.IRON_ORE,
+            c(IRON_ORES),
+            ores_singular,
+            c(ores),
+            c(ores, "iron"),
+            ores_in_stone,
+            IRON_ORES,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
+            MINEABLE_WITH_PICKAXE,
+            NEEDS_STONE_TOOL,
+            OVERWORLD_CARVER_REPLACEABLES,
+            SNAPS_GOAT_HORN
+        );
+        add(LFBlockItemIds.GOLD_ORE,
+            c(GOLD_ORES),
+            ores_singular,
+            c(ores),
+            c(ores, "gold"),
+            ores_in_stone,
+            GOLD_ORES,
+            GUARDED_BY_PIGLINS,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_STONE_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
+            MINEABLE_WITH_PICKAXE,
+            NEEDS_IRON_TOOL
+        );
+        add(LFBlockItemIds.REDSTONE_ORE,
+            c(REDSTONE_ORES),
+            ores_dense,
+            c(ores),
+            c(ores, "redstone"),
+            ores_in_stone,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_STONE_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
+            MINEABLE_WITH_PICKAXE,
+            NEEDS_IRON_TOOL,
+            REDSTONE_ORES
+        );
+        add(LFBlockItemIds.DIAMOND_ORE,
+            c(DIAMOND_ORES),
+            ores_singular,
+            c(ores),
+            c(ores, "diamond"),
+            ores_in_stone,
+            DIAMOND_ORES,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_STONE_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
+            MINEABLE_WITH_PICKAXE,
+            NEEDS_IRON_TOOL
+        );
 
         add(LFBlockItemIds.BRICKS, MINEABLE_WITH_PICKAXE);
         add(LFBlockItemIds.BRICK_STAIRS, MINEABLE_WITH_PICKAXE, STAIRS);
         add(LFBlockItemIds.BRICK_SLAB, MINEABLE_WITH_PICKAXE, SLABS);
         add(LFBlockItemIds.BRICK_WALL, MINEABLE_WITH_PICKAXE, WALLS);
 
-        var storage_blocks = c("storage_blocks");
-        add(LFBlockItemIds.OBSIDIAN, c("obsidian"), DRAGON_IMMUNE, MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL);
-        add(LFBlockItemIds.IRON_BLOCK, c("iron_blocks"), storage_blocks, BEACON_BASE_BLOCKS, MINEABLE_WITH_PICKAXE, NEEDS_STONE_TOOL);
-        add(LFBlockItemIds.GOLD_BLOCK, c("gold_blocks"), storage_blocks, BEACON_BASE_BLOCKS, GUARDED_BY_PIGLINS, MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL);
-        add(LFBlockItemIds.DIAMOND_BLOCK, c("diamond_blocks"), storage_blocks, BEACON_BASE_BLOCKS, MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL);
+        String storage = "storage_blocks";
+        add(LFBlockItemIds.OBSIDIAN,
+            c("obsidians"),
+            c("obsidians/normal"),
+            DRAGON_IMMUNE,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_IRON_TOOL,
+            INCORRECT_FOR_STONE_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
+            MINEABLE_WITH_PICKAXE,
+            NEEDS_DIAMOND_TOOL
+        );
+        add(LFBlockItemIds.IRON_BLOCK,
+            c(storage),
+            c(storage, "iron"),
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
+            BEACON_BASE_BLOCKS,
+            MINEABLE_WITH_PICKAXE,
+            NEEDS_STONE_TOOL
+        );
+        add(LFBlockItemIds.GOLD_BLOCK,
+            c(storage),
+            c(storage, "gold"),
+            BEACON_BASE_BLOCKS,
+            GUARDED_BY_PIGLINS,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_STONE_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
+            MINEABLE_WITH_PICKAXE,
+            NEEDS_IRON_TOOL
+        );
+        add(LFBlockItemIds.DIAMOND_BLOCK,
+            c(storage),
+            c(storage, "diamond"),
+            BEACON_BASE_BLOCKS,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_STONE_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
+            MINEABLE_WITH_PICKAXE,
+            NEEDS_IRON_TOOL
+        );
 
         add(LFBlockItemIds.BOOKSHELF, c("bookshelves"), ENCHANTMENT_POWER_PROVIDER, MINEABLE_WITH_AXE);
-        add(LFBlockItemIds.GLASS, c("colorless_glass"), c("glass_blocks"), c("silica_glass"), IMPERMEABLE);
-        add(LFBlockItemIds.GLASS_PANE, c("colorless_glass_panes"), c("glass_panes"));
+        add(LFBlockItemIds.GLASS,
+            c("glass_blocks"),
+            c("glass_blocks/cheap"),
+            c("glass_blocks/colorless"),
+            IMPERMEABLE
+        );
+        add(LFBlockItemIds.GLASS_PANE,
+            c("glass_panes"),
+            c("glass_panes/colorless")
+        );
         add(LFBlockItemIds.TNT, ENDERMAN_HOLDABLE);
         add(LFBlockItemIds.IRON_DOOR, DOORS, MINEABLE_WITH_PICKAXE);
     }
@@ -238,6 +337,10 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
 
     private static TagKey<Block> c(String path) { // Common
         return TagKey.create(Registries.BLOCK, ResourceUtil.asCommon(path));
+    }
+
+    private static TagKey<Block> c(String directory, String path) { // Common
+        return TagKey.create(Registries.BLOCK, ResourceUtil.asCommon(directory + "/" + path));
     }
 
     private static TagKey<Block> c(TagKey<Block> tag) { // Common Dupe

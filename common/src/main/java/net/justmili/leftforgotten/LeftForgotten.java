@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten;
 
+import dev.architectury.event.events.common.PlayerEvent;
 import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.content.entity.OldBoatImpactPacket;
 import net.justmili.leftforgotten.core.registries.*;
