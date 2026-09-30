@@ -26,6 +26,7 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
     protected void addTags(HolderLookup.Provider provider) {
 
         add(LFBlockItemIds.BRITTLE_BEDROCK,
+            BLOCKS_WIND_CHARGE_EXPLOSIONS,
             DRAGON_IMMUNE,
             FEATURES_CANNOT_REPLACE,
             GEODE_INVALID_BLOCKS,
@@ -36,6 +37,7 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
 
         add(LFBlockItemIds.GRASS_BLOCK,
             ANIMALS_SPAWNABLE_ON,
+            ARMADILLO_SPAWNABLE_ON,
             AZALEA_GROWS_ON,
             AZALEA_ROOT_REPLACEABLE,
             BAMBOO_PLANTABLE_ON,
@@ -83,7 +85,7 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
         );
 
         add(LFBlockItemIds.GRAVEL,
-            c("gravel"),
+            c("gravels"),
             AZALEA_ROOT_REPLACEABLE,
             BAMBOO_PLANTABLE_ON,
             ENDERMAN_HOLDABLE,
@@ -96,11 +98,12 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
             TRAIL_RUINS_REPLACEABLE
         );
         add(LFBlockItemIds.SAND,
-            c("colorless_sand"),
-            c("sand"),
+            c("sands"),
+            c("sands", "colorless"),
             AZALEA_GROWS_ON,
             AZALEA_ROOT_REPLACEABLE,
             BAMBOO_PLANTABLE_ON,
+            CAMEL_SAND_STEP_SOUND_BLOCKS,
             DEAD_BUSH_MAY_PLACE_ON,
             ENDERMAN_HOLDABLE,
             LUSH_GROUND_REPLACEABLE,
@@ -202,14 +205,14 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
         );
         add(LFBlockItemIds.FENCE,
             c("fences"),
-            c("wooden_fences"),
+            c("fences", "wooden"),
             FENCES,
             MINEABLE_WITH_AXE,
             WOODEN_FENCES
         );
         add(LFBlockItemIds.FENCE_GATE,
             c("fence_gates"),
-            c("wooden_fence_gates"), /* no vanilla tag */
+            c("fence_gates", "wooden"), /* no vanilla tag */
             FENCE_GATES,
             MINEABLE_WITH_AXE,
             UNSTABLE_BOTTOM_CENTER
@@ -217,6 +220,7 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
         add(LFBlockItemIds.DOOR,
             DOORS,
             MINEABLE_WITH_AXE,
+            MOB_INTERACTABLE_DOORS,
             WOODEN_DOORS
         );
         add(LFBlockItemIds.TRAPDOOR,
@@ -238,7 +242,7 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
 
         add(LFBlockItemIds.STONE,
             c("ore_bearing_ground", "stone"),
-            c("stone"),
+            c("stones"),
             AZALEA_ROOT_REPLACEABLE,
             BASE_STONE_OVERWORLD,
             DRIPSTONE_REPLACEABLE,
@@ -273,10 +277,10 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
             STONE_BUTTONS
         );
 
-        var cobble = "cobblestone";
+        var cobble = "cobblestones";
         add(LFBlockItemIds.COBBLESTONE,
             c(cobble),
-            c("normal_" + cobble),
+            c(cobble, "normal"),
             MINEABLE_WITH_PICKAXE
         );
         add(LFBlockItemIds.COBBLESTONE_STAIRS,
@@ -294,7 +298,7 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
 
         add(LFBlockItemIds.MOSSY_COBBLESTONE,
             c(cobble),
-            c("mossy_" + cobble),
+            c(cobble, "mossy"),
             MINEABLE_WITH_PICKAXE
         );
         add(LFBlockItemIds.MOSSY_COBBLESTONE_STAIRS,
@@ -310,24 +314,26 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
             WALLS
         );
 
-        var ores = c("ores");
+        var ores = "ores";
         var ores_in_stone = c("ores_in_ground", "stone");
         var ores_singular = c("ore_rates", "singular");
         var ores_dense = c("ore_rates", "dense");
         add(LFBlockItemIds.COAL_ORE,
-            c(COAL_ORES),
             ores_singular,
-            ores,
+            c(ores),
+            c(ores, "coal"),
             ores_in_stone,
             COAL_ORES,
             MINEABLE_WITH_PICKAXE,
             SNAPS_GOAT_HORN
         );
         add(LFBlockItemIds.IRON_ORE,
-            c(IRON_ORES),
             ores_singular,
-            ores,
+            c(ores),
+            c(ores, "iron"),
             ores_in_stone,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
             IRON_ORES,
             MINEABLE_WITH_PICKAXE,
             NEEDS_STONE_TOOL,
@@ -335,30 +341,39 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
             SNAPS_GOAT_HORN
         );
         add(LFBlockItemIds.GOLD_ORE,
-            c(GOLD_ORES),
             ores_singular,
-            ores,
+            c(ores),
+            c(ores, "gold"),
             ores_in_stone,
             GOLD_ORES,
             GUARDED_BY_PIGLINS,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_STONE_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
             MINEABLE_WITH_PICKAXE,
             NEEDS_IRON_TOOL
         );
         add(LFBlockItemIds.REDSTONE_ORE,
-            c(REDSTONE_ORES),
             ores_dense,
-            ores,
+            c(ores),
+            c(ores, "redstone"),
             ores_in_stone,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_STONE_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
             MINEABLE_WITH_PICKAXE,
             NEEDS_IRON_TOOL,
             REDSTONE_ORES
         );
         add(LFBlockItemIds.DIAMOND_ORE,
-            c(DIAMOND_ORES),
             ores_singular,
-            ores,
+            c(ores),
+            c(ores, "diamond"),
             ores_in_stone,
             DIAMOND_ORES,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_STONE_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
             MINEABLE_WITH_PICKAXE,
             NEEDS_IRON_TOOL
         );
@@ -381,30 +396,43 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
 
         var storage = "storage_blocks";
         add(LFBlockItemIds.OBSIDIAN,
-            c("obsidian"),
+            c("obsidians"),
+            c("obsidians", "normal"),
             DRAGON_IMMUNE,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_IRON_TOOL,
+            INCORRECT_FOR_STONE_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
             MINEABLE_WITH_PICKAXE,
             NEEDS_DIAMOND_TOOL
         );
         add(LFBlockItemIds.IRON_BLOCK,
-            c("iron_blocks"),
             c(storage),
+            c(storage, "iron"),
             BEACON_BASE_BLOCKS,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
             MINEABLE_WITH_PICKAXE,
             NEEDS_STONE_TOOL
         );
         add(LFBlockItemIds.GOLD_BLOCK,
-            c("gold_blocks"),
             c(storage),
+            c(storage, "gold"),
             BEACON_BASE_BLOCKS,
             GUARDED_BY_PIGLINS,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_STONE_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
             MINEABLE_WITH_PICKAXE,
             NEEDS_IRON_TOOL
         );
         add(LFBlockItemIds.DIAMOND_BLOCK,
-            c("diamond_blocks"),
             c(storage),
+            c(storage, "diamond"),
             BEACON_BASE_BLOCKS,
+            INCORRECT_FOR_GOLD_TOOL,
+            INCORRECT_FOR_STONE_TOOL,
+            INCORRECT_FOR_WOODEN_TOOL,
             MINEABLE_WITH_PICKAXE,
             NEEDS_IRON_TOOL
         );
@@ -415,14 +443,14 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
             MINEABLE_WITH_AXE
         );
         add(LFBlockItemIds.GLASS,
-            c("colorless_glass"),
             c("glass_blocks"),
-            c("silica_glass"),
+            c("glass_blocks", "cheap"),
+            c("glass_blocks", "colorless"),
             IMPERMEABLE
         );
         add(LFBlockItemIds.GLASS_PANE,
-            c("colorless_glass_panes"),
-            c("glass_panes")
+            c("glass_panes"),
+            c("glass_panes", "colorless")
         );
         add(LFBlockItemIds.TNT,
             ENDERMAN_HOLDABLE
@@ -445,10 +473,5 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
 
     private static TagKey<Block> c(String directory, String path) {
         return c(directory + "/" + path);
-    }
-
-    private static TagKey<Block> c(TagKey<Block> tag) {
-        // Copy a vanilla tag path and namespace it to common
-        return c(tag.location().getPath());
     }
 }

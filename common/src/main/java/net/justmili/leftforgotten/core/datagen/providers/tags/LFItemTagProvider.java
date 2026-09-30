@@ -33,21 +33,27 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             DIRT
         );
         add(LFBlockItemIds.GRAVEL,
-            c("gravel")
+            c("gravels")
         );
         add(LFBlockItemIds.SAND,
-            c("colorless_sand"),
-            c("sand"),
+            c("sands"),
+            c("sands", "colorless"),
             SAND,
             SMELTS_TO_GLASS
         );
 
+        var forage = c("animal_foods");
         add(LFBlockItemIds.RED_FLOWER,
+            forage,
+            BEE_FOOD,
             FLOWERS,
             SMALL_FLOWERS
         );
         add(LFBlockItemIds.YELLOW_FLOWER,
+            forage,
+            BEE_FOOD,
             FLOWERS,
+            RABBIT_FOOD,
             SMALL_FLOWERS
         );
         add(LFBlockItemIds.RED_MUSHROOM,
@@ -55,6 +61,12 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         );
         add(LFBlockItemIds.BROWN_MUSHROOM,
             c("mushrooms")
+        );
+        add(LFBlockItemIds.CACTUS,
+            forage,
+            c("crops"),
+            c("crops", "cactus"),
+            CAMEL_FOOD
         );
         add(LFBlockItemIds.SAPLING,
             SAPLINGS
@@ -89,13 +101,13 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         );
         add(LFBlockItemIds.FENCE,
             c("fences"),
-            c("wooden_fences"),
+            c("fences", "wooden"),
             FENCES,
             WOODEN_FENCES
         );
         add(LFBlockItemIds.FENCE_GATE,
             c("fence_gates"),
-            c("wooden_fence_gates"), /* no vanilla tag */
+            c("fence_gates", "wooden"), /* no vanilla tag */
             FENCE_GATES
         );
         add(LFBlockItemIds.DOOR,
@@ -116,7 +128,7 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
 
         add(LFBlockItemIds.STONE,
             c("ore_bearing_ground", "stone"),
-            c("stone")
+            c("stones")
         );
         add(LFBlockItemIds.STONE_STAIRS,
             STAIRS
@@ -129,10 +141,10 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             STONE_BUTTONS
         );
 
-        var cobble = "cobblestone";
+        var cobble = "cobblestones";
         add(LFBlockItemIds.COBBLESTONE,
             c(cobble),
-            c("normal_" + cobble),
+            c(cobble, "normal"),
             STONE_CRAFTING_MATERIALS,
             STONE_TOOL_MATERIALS
         );
@@ -148,7 +160,7 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
 
         add(LFBlockItemIds.MOSSY_COBBLESTONE,
             c(cobble),
-            c("mossy_" + cobble)
+            c(cobble, "mossy")
         );
         add(LFBlockItemIds.MOSSY_COBBLESTONE_STAIRS,
             STAIRS
@@ -160,43 +172,43 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             WALLS
         );
 
-        var ores = c("ores");
+        var ores = "ores";
         var ores_in_stone = c("ores_in_ground", "stone");
         var ores_singular = c("ore_rates", "singular");
         var ores_dense = c("ore_rates", "dense");
         add(LFBlockItemIds.COAL_ORE,
-            c(COAL_ORES),
             ores_singular,
-            ores,
+            c(ores),
+            c(ores, "coal"),
             ores_in_stone,
             COAL_ORES
         );
         add(LFBlockItemIds.IRON_ORE,
-            c(IRON_ORES),
             ores_singular,
-            ores,
+            c(ores),
+            c(ores, "iron"),
             ores_in_stone,
             IRON_ORES
         );
         add(LFBlockItemIds.GOLD_ORE,
-            c(GOLD_ORES),
             ores_singular,
-            ores,
+            c(ores),
+            c(ores, "gold"),
             ores_in_stone,
             GOLD_ORES,
             PIGLIN_LOVED
         );
         add(LFBlockItemIds.REDSTONE_ORE,
-            c(REDSTONE_ORES),
             ores_dense,
-            ores,
+            c(ores),
+            c(ores, "redstone"),
             ores_in_stone,
             REDSTONE_ORES
         );
         add(LFBlockItemIds.DIAMOND_ORE,
-            c(DIAMOND_ORES),
             ores_singular,
-            ores,
+            c(ores),
+            c(ores, "diamond"),
             ores_in_stone,
             DIAMOND_ORES
         );
@@ -213,33 +225,34 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
 
         var storage = "storage_blocks";
         add(LFBlockItemIds.OBSIDIAN,
-            c("obsidian")
+            c("obsidians"),
+            c("obsidians", "normal")
         );
         add(LFBlockItemIds.IRON_BLOCK,
-            c("iron_blocks"),
-            c(storage)
+            c(storage),
+            c(storage, "iron")
         );
         add(LFBlockItemIds.GOLD_BLOCK,
-            c("gold_blocks"),
             c(storage),
+            c(storage, "gold"),
             PIGLIN_LOVED
         );
         add(LFBlockItemIds.DIAMOND_BLOCK,
-            c("diamond_blocks"),
-            c(storage)
+            c(storage),
+            c(storage, "diamond")
         );
 
         add(LFBlockItemIds.BOOKSHELF,
             c("bookshelves")
         );
         add(LFBlockItemIds.GLASS,
-            c("colorless_glass"),
             c("glass_blocks"),
-            c("silica_glass")
+            c("glass_blocks", "cheap"),
+            c("glass_blocks", "colorless")
         );
         add(LFBlockItemIds.GLASS_PANE,
-            c("colorless_glass_panes"),
-            c("glass_panes")
+            c("glass_panes"),
+            c("glass_panes", "colorless")
         );
         add(LFBlockItemIds.IRON_DOOR,
             DOORS
@@ -249,8 +262,9 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             BOATS
         );
         add(LFItemIds.BRICK,
-            c("brick_ingots"),
+            c("brick_ingots"), // Seen still in use in Neo 1.21.1
             c("ingots"),
+            c("ingots", "brick"), // Added despite not seen in testing
             DECORATED_POT_INGREDIENTS
         );
     }
@@ -274,10 +288,5 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
 
     private static TagKey<Item> c(String directory, String path) {
         return c(directory + "/" + path);
-    }
-
-    private static TagKey<Item> c(TagKey<Item> tag) {
-        // Copy a vanilla tag path and namespace it to common
-        return c(tag.location().getPath());
     }
 }
