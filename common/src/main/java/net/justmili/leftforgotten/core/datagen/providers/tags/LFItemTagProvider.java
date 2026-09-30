@@ -160,43 +160,43 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             WALLS
         );
 
-        var ores = c("ores");
+        var ores = "ores";
         var ores_in_stone = c("ores_in_ground", "stone");
         var ores_singular = c("ore_rates", "singular");
         var ores_dense = c("ore_rates", "dense");
         add(LFBlockItemIds.COAL_ORE,
-            c(COAL_ORES),
+            c("coal_ores"),
             ores_singular,
-            ores,
+            c(ores),
             ores_in_stone,
             COAL_ORES
         );
         add(LFBlockItemIds.IRON_ORE,
-            c(IRON_ORES),
+            c("iron_ores"),
             ores_singular,
-            ores,
+            c(ores),
             ores_in_stone,
             IRON_ORES
         );
         add(LFBlockItemIds.GOLD_ORE,
-            c(GOLD_ORES),
+            c("gold_ores"),
             ores_singular,
-            ores,
+            c(ores),
             ores_in_stone,
             GOLD_ORES,
             PIGLIN_LOVED
         );
         add(LFBlockItemIds.REDSTONE_ORE,
-            c(REDSTONE_ORES),
+            c("redstone_ores"),
             ores_dense,
-            ores,
+            c(ores),
             ores_in_stone,
             REDSTONE_ORES
         );
         add(LFBlockItemIds.DIAMOND_ORE,
-            c(DIAMOND_ORES),
+            c("diamond_ores"),
             ores_singular,
-            ores,
+            c(ores),
             ores_in_stone,
             DIAMOND_ORES
         );
