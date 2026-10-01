@@ -41,7 +41,7 @@ public class FeatureVoid extends BarrierBlock {
         for (float chance : CHANCES) {
             if (!level.getBlockState(current).is(this)) break;
             if (random.nextFloat() >= chance) break;
-            level.setBlock(current, wood, Block.UPDATE_ALL);
+            level.setBlock(current, wood, UPDATE_ALL);
             current = current.below();
         }
         clearAtAndBelow(level, current);

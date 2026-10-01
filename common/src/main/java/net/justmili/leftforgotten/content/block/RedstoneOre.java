@@ -16,7 +16,7 @@ public class RedstoneOre extends RedStoneOreBlock {
 			.mapColor(MapColor.STONE)
 			.sound(SoundType.STONE)
 			.strength(3f)
-			.lightLevel(state -> state.getValue(LIT) ? 9 : 0)
+			.lightLevel(state -> state.getValue(LIT)? 9 : 0)
 			.instrument(NoteBlockInstrument.BASEDRUM)
 			.requiresCorrectToolForDrops()
 			.randomTicks()
