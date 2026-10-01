@@ -10,6 +10,7 @@
     "client.UnrenderClouds"
   ],
   "mixins": [
+    "ExpDroppingBlocksMixin",
     "FluidInteractionRegistryMixin"
   ],
   "injectors": {

@@ -55,7 +55,7 @@ public class FeatureVoid extends BarrierBlock {
             var state = level.getBlockState(current);
             if (state.is(BlockRegistry.DIRT.get()) || state.is(BlockRegistry.GRASS_BLOCK.get())) break;
             if (state.isAir()) break;
-            if (state.is(this)) level.setBlock(current, Blocks.AIR.defaultBlockState(), 3);
+            if (state.is(this)) level.setBlock(current, Blocks.AIR.defaultBlockState(), UPDATE_ALL);
             current = current.below();
         }
     }

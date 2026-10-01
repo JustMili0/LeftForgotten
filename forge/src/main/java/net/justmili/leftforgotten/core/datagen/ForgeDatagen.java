@@ -10,13 +10,12 @@ import net.minecraftforge.data.event.GatherDataEvent;
 
 public class ForgeDatagen {
     public static void onDatagenSetup(GatherDataEvent event) {
-        var generator = event.getGenerator();
+        var pack = event.getGenerator();
         var server = event.includeServer();
-        var client = event.includeClient();
-        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFBlockTagProvider(output, event.getLookupProvider())));
-        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFItemTagProvider(output, event.getLookupProvider())));
-        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) (LFLootTableProvider::new));
-        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) (LFRecipeProvider::new));
-        generator.addProvider(client, (DataProvider.Factory<? extends DataProvider>) (LFModelProvider::new));
+        pack.addProvider(server, (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFBlockTagProvider(output, event.getLookupProvider())));
+        pack.addProvider(server, (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFItemTagProvider(output, event.getLookupProvider())));
+        pack.addProvider(server, (DataProvider.Factory<? extends DataProvider>) (LFLootTableProvider::new));
+        pack.addProvider(server, (DataProvider.Factory<? extends DataProvider>) (LFRecipeProvider::new));
+        pack.addProvider(event.includeClient(), (DataProvider.Factory<? extends DataProvider>) (LFModelProvider::new));
     }
 }

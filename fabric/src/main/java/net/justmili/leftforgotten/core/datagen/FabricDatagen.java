@@ -11,11 +11,11 @@ import net.justmili.leftforgotten.core.datagen.providers.tags.LFItemTagProvider;
 public class FabricDatagen implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator event) {
-        var generator = event.createPack();
-        generator.addProvider((output, lookup) -> new LFLootTableProvider(output));
-        generator.addProvider(LFBlockTagProvider::new);
-        generator.addProvider(LFItemTagProvider::new);
-        generator.addProvider((output, lookup) -> new LFModelProvider(output));
-        generator.addProvider((output, lookup) -> new LFRecipeProvider(output));
+        var pack = event.createPack();
+        pack.addProvider(LFBlockTagProvider::new);
+        pack.addProvider(LFItemTagProvider::new);
+        pack.addProvider((output, lookup) -> new LFLootTableProvider(output));
+        pack.addProvider((output, lookup) -> new LFRecipeProvider(output));
+        pack.addProvider((output, lookup) -> new LFModelProvider(output));
     }
 }

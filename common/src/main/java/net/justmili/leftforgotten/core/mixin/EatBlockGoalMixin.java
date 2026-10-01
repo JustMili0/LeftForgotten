@@ -48,7 +48,7 @@ public class EatBlockGoalMixin {
 
             if (level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
                 level.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, below, Block.getId(Blocks.GRASS_BLOCK.defaultBlockState()));
-                level.setBlock(below, Blocks.DIRT.defaultBlockState(), 2);
+                level.setBlock(below, Blocks.DIRT.defaultBlockState(), Block.UPDATE_CLIENTS);
             }
 
             mob.ate();

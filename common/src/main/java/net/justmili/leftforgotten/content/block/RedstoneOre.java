@@ -25,9 +25,6 @@ public class RedstoneOre extends RedStoneOreBlock {
 
 	@Override // Purposefully added extra functionality
 	public void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
-		var pos = hit.getBlockPos();
-		if (!state.getValue(LIT)) {
-			level.setBlock(pos, state.setValue(LIT, true), 3);
-		}
+		if (!state.getValue(LIT)) level.setBlock(hit.getBlockPos(), state.setValue(LIT, true), UPDATE_ALL);
 	}
 }

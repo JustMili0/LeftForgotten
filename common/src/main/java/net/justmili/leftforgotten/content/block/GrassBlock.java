@@ -31,7 +31,7 @@ public class GrassBlock extends Block {
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!canSurvive(level, pos)) {
             if (!level.isClientSide()) {
-                level.setBlock(pos, BlockRegistry.DIRT.get().defaultBlockState(), 3);
+                level.setBlock(pos, BlockRegistry.DIRT.get().defaultBlockState(), UPDATE_ALL);
             }
         }
     }
@@ -44,7 +44,7 @@ public class GrassBlock extends Block {
         var aboveState = level.getBlockState(pos.above());
         if (!aboveState.isAir()) return InteractionResult.FAIL;
 
-        level.setBlock(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ()), BlockRegistry.FARMLAND.get().defaultBlockState(), 3);
+        level.setBlock(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ()), BlockRegistry.FARMLAND.get().defaultBlockState(), UPDATE_ALL);
 
         float pitch = 0.9f + level.getRandom().nextFloat() * 0.2f;
         level.playSound(null, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0f, pitch);
