@@ -13,5 +13,5 @@
 - Cyber_Sammy - Helped port to 1.21.1
 
 ## Playtesters
-- JustMili (duh, ofc)
 - NBSurprise
+- koizkoiz
