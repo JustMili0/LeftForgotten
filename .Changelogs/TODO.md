@@ -17,7 +17,8 @@ Next 1.21.1 commit (1.2.0-beta.3):
 
 -------------------------------------------- Send dev build to koi
 
-Next 1.20.1 commit (1.2.0-beta.4):
+Next ~~1.20.1~~ content branch commit (1.2.0-beta.4):
+- Switch to Stonecutter (but BluSpring version)
 - Fix chest remodels with all possible block entity optimization mods
 ```
 NOTE: This has to be re-tested, include player interacting with chest
@@ -54,13 +55,18 @@ Tested mods
 - Optimized Block Entities - NeoForge 1.21.1
 ```
 
-Next 1.21.1 commit (1.2.0-beta.4):
-- Copy last 1.20.1 commit
-
 -------------------------------------------- Send dev build to koi
 
 Next rep-info commit:
 - Update READMEs to be more compact and more clearly state what the mod is based on, what it is (mainly a nostalgic building mod) and what the future of it will be
+
+Next content branch commit (1.2.0):
+- Finally use MCL (Millie's Core Libraries) - By that time, a big rewrite will be needed in LF, as util classes and everything else will be definitely majorly overhauled from what it is now
+
+Next:
+- Test
+- Bug fix
+- Publish
 
 <hr>
 
