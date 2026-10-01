@@ -7,7 +7,7 @@
 - JustMili - Large portion of (most of) the current (Left Forgotten's) and source (True End's) codebase
 
 ## Contributors
-- BluSpring - Datagen help, block remodel rendering
+- BluSpring - Taught Mili like most of the things she knows now
 - NBSurprise - Built all the (unused) structures for the mod
 - Eetgeenappels - Helped with armor sprite flipping on Fabric
 - Cyber_Sammy - Helped port to 1.21.1
