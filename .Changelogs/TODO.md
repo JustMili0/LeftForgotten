@@ -1,12 +1,13 @@
-Last updated October 2nd 2026 01:00am CEST
+Last updated October 2nd 2026 01:02am CEST
 
 <hr>
+
+## TODO
 
 -- beta.1 is finished now --
 
 -------------------------------------------- Send dev build to koi, publish to ko-fi
 
-# TODO
 Next 1.20.1 commit (1.2.0-beta.2):
 - Rework block and item registries so most basic blocks and items that can be made inline in the registries will be put there instead of having an individual file for every single thing
 
@@ -76,7 +77,7 @@ Next:
 
 <hr>
 
-# PORT TO:
+## PORT TO:
 - **[INIT]** 1.20.1 Fabric & Forge
 - **[DONE]** 1.21.1 Fabric & NeoForge
 - 1.21.11 Fabric & NeoForge
