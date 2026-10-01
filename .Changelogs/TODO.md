@@ -1,4 +1,10 @@
-Last updated October 2nd 2026 12:54am CEST
+Last updated October 2nd 2026 01:00am CEST
+
+<hr>
+
+-- beta.1 is finished now --
+
+-------------------------------------------- Send dev build to koi, publish to ko-fi
 
 # TODO
 Next 1.20.1 commit (1.2.0-beta.2):
@@ -10,7 +16,7 @@ Next 1.21.1 commit (1.2.0-beta.2):
 -------------------------------------------- Send dev build to koi
 
 Next 1.20.1 commit (1.2.0-beta.3):
-- Go through every file in the code and optimize the fuck out of it al
+- Go through every file in the code and optimize the fuck out of it all
 
 Next 1.21.1 commit (1.2.0-beta.3):
 - Copy last 1.20.1 commit
