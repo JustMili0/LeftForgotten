@@ -62,7 +62,7 @@ Tested mods
 - Optimized Block Entities - NeoForge 1.21.1
 ```
 
--------------------------------------------- Send dev build to koi
+-------------------------------------------- Send dev build to koi, publish to ko-fi
 
 Next rep-info commit:
 - Update READMEs to be more compact and more clearly state what the mod is based on, what it is (mainly a nostalgic building mod) and what the future of it will be
@@ -70,10 +70,12 @@ Next rep-info commit:
 Next content branch commit (1.2.0):
 - Finally use MCL (Millie's Core Libraries) - By that time, a big rewrite will be needed in LF, as util classes and everything else will be definitely majorly overhauled from what it is now
 
+-------------------------------------------- Send early test build to koi, publish to ko-fi
+
 Next:
 - Test
 - Bug fix
-- Publish
+- Publish (after a month or two on ko-fi)
 
 <hr>
 
