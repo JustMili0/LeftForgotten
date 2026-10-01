@@ -1,9 +1,27 @@
-# TODO
-- Compare file by file 1.20.1 and 1.21.1 branches, optimize everywhere
-- Update READMEs and changelog for 1.2.0
-- Fix chest remodeling, issues caused by multiple different block entity optimization mods
+Last updated October 2nd 2026 12:54am CEST
 
+# TODO
+Next 1.20.1 commit (1.2.0-beta.2):
+- Rework block and item registries so most basic blocks and items that can be made inline in the registries will be put there instead of having an individual file for every single thing
+
+Next 1.21.1 commit (1.2.0-beta.2):
+- Copy last 1.20.1 commit
+
+-------------------------------------------- Send dev build to koi
+
+Next 1.20.1 commit (1.2.0-beta.3):
+- Go through every file in the code and optimize the fuck out of it al
+
+Next 1.21.1 commit (1.2.0-beta.3):
+- Copy last 1.20.1 commit
+
+-------------------------------------------- Send dev build to koi
+
+Next 1.20.1 commit (1.2.0-beta.4):
+- Fix chest remodels with all possible block entity optimization mods
 ```
+NOTE: This has to be re-tested, include player interacting with chest
+
 Fabric 1.20.1
 - EBE - Chest Z-fights
 - OBE - Chest remodel breaks completely
@@ -35,7 +53,16 @@ Tested mods
 - Enhanced Block Entities NEOFORGED - NeoForge 1.21.1
 - Optimized Block Entities - NeoForge 1.21.1
 ```
-- Properly account for all tags from Forge/Neo and Fabric
+
+Next 1.21.1 commit (1.2.0-beta.4):
+- Copy last 1.20.1 commit
+
+-------------------------------------------- Send dev build to koi
+
+Next rep-info commit:
+- Update READMEs to be more compact and more clearly state what the mod is based on, what it is (mainly a nostalgic building mod) and what the future of it will be
+
+<hr>
 
 # PORT TO:
 - **[INIT]** 1.20.1 Fabric & Forge
@@ -43,4 +70,4 @@ Tested mods
 - 1.21.11 Fabric & NeoForge
 - 26.1.2 Fabric & NeoForge
 - 26.2 Fabric-Only
-- 26.3.x Fabric-Only
+- 26.3 Fabric-Only
