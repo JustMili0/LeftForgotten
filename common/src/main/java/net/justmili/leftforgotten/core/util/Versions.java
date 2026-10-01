@@ -66,6 +66,10 @@ public class Versions {
         return upToBeta(level);
     }
 
+    public static boolean hadNoExp(Level level) {
+        return upToAlpha(level);
+    }
+
     public static boolean hadNoBeds(Level level) {
         return upToAlpha(level);
     }

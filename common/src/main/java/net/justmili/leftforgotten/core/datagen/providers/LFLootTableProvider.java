@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.core.datagen.providers;
 
 import com.google.common.collect.Streams;
-import net.justmili.leftforgotten.LeftForgotten;
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.justmili.leftforgotten.core.registries.BlockRegistry;
 import net.justmili.leftforgotten.core.registries.ItemRegistry;
 import net.justmili.leftforgotten.libs.v1.utils.common.datagen.extensions.KnownBlocksLootProvider;
@@ -10,34 +10,26 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.data.loot.LootTableSubProvider;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class LFLootTableProvider extends LootTableProvider {
     public LFLootTableProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, Set.of(), List.of(
-            new SubProviderEntry(LFBlockLootProvider::new, LootContextParamSets.BLOCK),
-            new SubProviderEntry(LFChestLootProvider::new, LootContextParamSets.CHEST)
+            new SubProviderEntry(LFBlockLootProvider::new, LootContextParamSets.BLOCK)
         ), registries);
     }
 
@@ -48,86 +40,82 @@ public class LFLootTableProvider extends LootTableProvider {
 
         @Override
         public void generate() {
-            var FORTUNE = registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE);
+            var registryLookup = registries.lookupOrThrow(Registries.ENCHANTMENT);
 
             // Nature / Ground
-            add(BlockRegistry.GRASS_BLOCK.get(), createSingleItemTableWithSilkTouch(BlockRegistry.GRASS_BLOCK.get(), BlockRegistry.DIRT.get()));
-            dropSelf(BlockRegistry.DIRT.get());
-            add(BlockRegistry.FARMLAND.get(), createSingleItemTableWithSilkTouch(BlockRegistry.FARMLAND.get(), BlockRegistry.DIRT.get()));
-            add(BlockRegistry.GRAVEL.get(), createSilkTouchDispatchTable(BlockRegistry.GRAVEL.get(),
-                LootItem.lootTableItem(Items.FLINT)
-                    .when(BonusLevelTableCondition.bonusLevelFlatChance(FORTUNE, 0.1F, 0.14285715F, 0.25F, 1.0F))
-                    .otherwise(LootItem.lootTableItem(BlockRegistry.GRAVEL.get()))));
-            dropSelf(BlockRegistry.SAND.get());
-            add(BlockRegistry.CLAY.get(), createSilkTouchDispatchTable(BlockRegistry.CLAY.get(),
-                LootItem.lootTableItem(ItemRegistry.CLAY_BALL.get())
-                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4)))));
+            silkOrElse(BlockRegistry.GRASS_BLOCK, BlockRegistry.DIRT);
+            self(BlockRegistry.DIRT);
+            other(BlockRegistry.FARMLAND, BlockRegistry.DIRT);
+            var gravel = BlockRegistry.GRAVEL;
+            loot(gravel, createSilkTouchDispatchTable(gravel.get(), applyExplosionCondition(gravel.get(), LootItem.lootTableItem(Items.FLINT)
+                .when(BonusLevelTableCondition.bonusLevelFlatChance(registryLookup.getOrThrow(Enchantments.FORTUNE), 0.1F, 0.14285715F, 0.25F, 1.0F))
+                .otherwise(LootItem.lootTableItem(gravel.get()))
+            )));
+            self(BlockRegistry.SAND);
+            silkOrElse(BlockRegistry.CLAY, ItemRegistry.CLAY_BALL.get(), ConstantValue.exactly(4));
 
             // Nature / Vegetation
-            dropSelf(BlockRegistry.RED_FLOWER.get());
-            dropSelf(BlockRegistry.YELLOW_FLOWER.get());
-            dropSelf(BlockRegistry.RED_MUSHROOM.get());
-            dropSelf(BlockRegistry.BROWN_MUSHROOM.get());
-            dropSelf(BlockRegistry.CACTUS.get());
-            dropSelf(BlockRegistry.SAPLING.get());
-            add(BlockRegistry.LEAVES.get(), createLeavesDrops(BlockRegistry.LEAVES.get(), BlockRegistry.SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+            self(BlockRegistry.RED_FLOWER);
+            self(BlockRegistry.YELLOW_FLOWER);
+            self(BlockRegistry.RED_MUSHROOM);
+            self(BlockRegistry.BROWN_MUSHROOM);
+            self(BlockRegistry.CACTUS);
+            self(BlockRegistry.SAPLING);
+            loot(BlockRegistry.LEAVES, createLeavesDrops(BlockRegistry.LEAVES.get(), BlockRegistry.SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
             // Building / Wood
-            dropSelf(BlockRegistry.WOOD.get());
-            dropSelf(BlockRegistry.WOOD_6_SIDED.get());
-            dropSelf(BlockRegistry.WOODEN_PLANKS.get());
-            dropSelf(BlockRegistry.WOODEN_STAIRS.get());
-            dropSelf(BlockRegistry.WOODEN_SLAB.get());
-            dropSelf(BlockRegistry.FENCE.get());
-            dropSelf(BlockRegistry.FENCE_GATE.get());
-            add(BlockRegistry.DOOR.get(), createDoorTable(BlockRegistry.DOOR.get()));
-            dropSelf(BlockRegistry.TRAPDOOR.get());
-            dropSelf(BlockRegistry.PRESSURE_PLATE.get());
-            dropSelf(BlockRegistry.BUTTON.get());
+            self(BlockRegistry.WOOD);
+            self(BlockRegistry.WOOD_6_SIDED);
+            self(BlockRegistry.WOODEN_PLANKS);
+            self(BlockRegistry.WOODEN_STAIRS);
+            self(BlockRegistry.WOODEN_SLAB);
+            self(BlockRegistry.FENCE);
+            self(BlockRegistry.FENCE_GATE);
+            door(BlockRegistry.DOOR);
+            self(BlockRegistry.TRAPDOOR);
+            self(BlockRegistry.PRESSURE_PLATE);
+            self(BlockRegistry.BUTTON);
 
             // Nature / Underground
-            add(BlockRegistry.COAL_ORE.get(), createOreDrop(BlockRegistry.COAL_ORE.get(), Items.COAL));
-            dropSelf(BlockRegistry.IRON_ORE.get());
-            dropSelf(BlockRegistry.GOLD_ORE.get());
-            add(BlockRegistry.REDSTONE_ORE.get(), createRedstoneOreDrops(BlockRegistry.REDSTONE_ORE.get()));
-            add(BlockRegistry.DIAMOND_ORE.get(), createOreDrop(BlockRegistry.DIAMOND_ORE.get(), Items.DIAMOND));
-            add(BlockRegistry.STONE.get(), createSingleItemTableWithSilkTouch(BlockRegistry.STONE.get(), BlockRegistry.COBBLESTONE.get()));
+            ore(BlockRegistry.COAL_ORE, Items.COAL);
+            self(BlockRegistry.IRON_ORE);
+            self(BlockRegistry.GOLD_ORE);
+            loot(BlockRegistry.REDSTONE_ORE, createRedstoneOreDrops(BlockRegistry.REDSTONE_ORE.get()));
+            ore(BlockRegistry.DIAMOND_ORE, Items.DIAMOND);
+            silkOrElse(BlockRegistry.STONE, BlockRegistry.COBBLESTONE);
 
             // Building / Stone
-            dropSelf(BlockRegistry.STONE_STAIRS.get());
-            dropSelf(BlockRegistry.STONE_SLAB.get());
-            dropSelf(BlockRegistry.STONE_PRESSURE_PLATE.get());
-            dropSelf(BlockRegistry.STONE_BUTTON.get());
-            dropSelf(BlockRegistry.COBBLESTONE.get());
-            dropSelf(BlockRegistry.COBBLESTONE_STAIRS.get());
-            dropSelf(BlockRegistry.COBBLESTONE_SLAB.get());
-            dropSelf(BlockRegistry.COBBLESTONE_WALL.get());
-            dropSelf(BlockRegistry.MOSSY_COBBLESTONE.get());
-            dropSelf(BlockRegistry.MOSSY_COBBLESTONE_STAIRS.get());
-            dropSelf(BlockRegistry.MOSSY_COBBLESTONE_SLAB.get());
-            dropSelf(BlockRegistry.MOSSY_COBBLESTONE_WALL.get());
-            dropSelf(BlockRegistry.BRICKS.get());
-            dropSelf(BlockRegistry.BRICK_STAIRS.get());
-            dropSelf(BlockRegistry.BRICK_SLAB.get());
-            dropSelf(BlockRegistry.BRICK_WALL.get());
+            self(BlockRegistry.STONE_STAIRS);
+            self(BlockRegistry.STONE_SLAB);
+            self(BlockRegistry.STONE_PRESSURE_PLATE);
+            self(BlockRegistry.STONE_BUTTON);
+            self(BlockRegistry.COBBLESTONE);
+            self(BlockRegistry.COBBLESTONE_STAIRS);
+            self(BlockRegistry.COBBLESTONE_SLAB);
+            self(BlockRegistry.COBBLESTONE_WALL);
+            self(BlockRegistry.MOSSY_COBBLESTONE);
+            self(BlockRegistry.MOSSY_COBBLESTONE_STAIRS);
+            self(BlockRegistry.MOSSY_COBBLESTONE_SLAB);
+            self(BlockRegistry.MOSSY_COBBLESTONE_WALL);
+            self(BlockRegistry.BRICKS);
+            self(BlockRegistry.BRICK_STAIRS);
+            self(BlockRegistry.BRICK_SLAB);
+            self(BlockRegistry.BRICK_WALL);
 
             // Building / Deco
-            dropSelf(BlockRegistry.OBSIDIAN.get());
-            add(BlockRegistry.GLASS.get(), createSilkTouchOnlyTable(BlockRegistry.GLASS.get()));
-            add(BlockRegistry.GLASS_PANE.get(), createSilkTouchOnlyTable(BlockRegistry.GLASS_PANE.get()));
-            add(BlockRegistry.BOOKSHELF.get(), createSilkTouchDispatchTable(BlockRegistry.BOOKSHELF.get(),
-                LootItem.lootTableItem(Items.BOOK)
-                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3)))));
-            dropSelf(BlockRegistry.TNT.get());
-            dropSelf(BlockRegistry.IRON_BLOCK.get());
-            dropSelf(BlockRegistry.GOLD_BLOCK.get());
-            dropSelf(BlockRegistry.DIAMOND_BLOCK.get());
+            self(BlockRegistry.OBSIDIAN);
+            silkOnly(BlockRegistry.GLASS);
+            silkOnly(BlockRegistry.GLASS_PANE);
+            silkOrElse(BlockRegistry.BOOKSHELF, Items.BOOK, ConstantValue.exactly(3));
+            self(BlockRegistry.TNT);
+            self(BlockRegistry.IRON_BLOCK);
+            self(BlockRegistry.GOLD_BLOCK);
+            self(BlockRegistry.DIAMOND_BLOCK);
 
             // Building / Iron
-            add(BlockRegistry.IRON_DOOR.get(), createDoorTable(BlockRegistry.IRON_DOOR.get()));
+            door(BlockRegistry.IRON_DOOR);
 
-            // Dev
-            // Dev blocks don't have loot tables
+            // Dev.. dev blocks don't have loot tables
         }
 
         // this exact method exists on Forge, and is implemented via mixin by us on Fabric.
@@ -137,73 +125,37 @@ public class LFLootTableProvider extends LootTableProvider {
         public Iterable<Block> getKnownBlocks() {
             return Streams.stream(BlockRegistry.REGISTRY).map(Supplier::get).toList();
         }
-    }
 
-    public static class LFChestLootProvider implements LootTableSubProvider {
-        public static final ResourceKey<LootTable> HOUSES_LOOT_KEY = ResourceKey.create(Registries.LOOT_TABLE, LeftForgotten.asId("chests/house"));
-        public LFChestLootProvider(HolderLookup.Provider provider) {
+        private void loot(RegistrySupplier<Block> block, LootTable.Builder builder) {
+            this.add(block.get(), builder);
         }
 
-        @Override
-        public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output) {
-            output.accept(HOUSES_LOOT_KEY, LootTable.lootTable()
-                // Broken wooden pickaxe
-                .withPool(LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1))
-                    .when(LootItemRandomChanceCondition.randomChance(0.2f))
-                    .add(LootItem.lootTableItem(Items.WOODEN_PICKAXE)
-                        .apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.5f, 0.95f)))))
-                // Sticks
-                .withPool(LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1))
-                    .setBonusRolls(ConstantValue.exactly(1))
-                    .when(LootItemRandomChanceCondition.randomChance(0.3f))
-                    .add(LootItem.lootTableItem(Items.STICK)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 7)))))
-                // Feathers
-                .withPool(LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1))
-                    .setBonusRolls(ConstantValue.exactly(1))
-                    .when(LootItemRandomChanceCondition.randomChance(0.25f))
-                    .add(LootItem.lootTableItem(Items.FEATHER)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))))
-                // Bones
-                .withPool(LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1))
-                    .when(LootItemRandomChanceCondition.randomChance(0.25f))
-                    .add(LootItem.lootTableItem(Items.BONE)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))))
-                // String
-                .withPool(LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1))
-                    .when(LootItemRandomChanceCondition.randomChance(0.3f))
-                    .add(LootItem.lootTableItem(Items.STRING)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))))
-                // Dirt
-                .withPool(LootPool.lootPool()
-                    .setRolls(UniformGenerator.between(0, 3))
-                    .when(LootItemRandomChanceCondition.randomChance(0.3f))
-                    .add(LootItem.lootTableItem(ItemRegistry.DIRT.get())
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 7)))))
-                // Cobblestone
-                .withPool(LootPool.lootPool()
-                    .setRolls(UniformGenerator.between(0, 3))
-                    .when(LootItemRandomChanceCondition.randomChance(0.3f))
-                    .add(LootItem.lootTableItem(ItemRegistry.COBBLESTONE.get())
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 5)))))
-                // Wood
-                .withPool(LootPool.lootPool()
-                    .setRolls(UniformGenerator.between(0, 3))
-                    .when(LootItemRandomChanceCondition.randomChance(0.4f))
-                    .add(LootItem.lootTableItem(ItemRegistry.WOOD.get())
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))))
-                // Wooden Planks
-                .withPool(LootPool.lootPool()
-                    .setRolls(UniformGenerator.between(0, 3))
-                    .when(LootItemRandomChanceCondition.randomChance(0.4f))
-                    .add(LootItem.lootTableItem(ItemRegistry.WOODEN_PLANKS.get())
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 6)))))
-            );
+        private void self(RegistrySupplier<Block> block) {
+            this.dropSelf(block.get());
+        }
+
+        private void other(RegistrySupplier<Block> block, RegistrySupplier<Block> other) {
+            this.dropOther(block.get(), other.get());
+        }
+
+        private void silkOnly(RegistrySupplier<Block> block) {
+            loot(block, createSilkTouchOnlyTable(block.get()));
+        }
+
+        private void silkOrElse(RegistrySupplier<Block> block, RegistrySupplier<Block> other) {
+            loot(block, createSingleItemTableWithSilkTouch(block.get(), other.get()));
+        }
+
+        private void silkOrElse(RegistrySupplier<Block> block, Item other, ConstantValue otherDrop) {
+            loot(block, createSingleItemTableWithSilkTouch(block.get(), other, otherDrop));
+        }
+
+        private void ore(RegistrySupplier<Block> block, Item other) {
+            loot(block, createOreDrop(block.get(), other));
+        }
+
+        private void door(RegistrySupplier<Block> block) {
+            loot(block, createDoorTable(block.get()));
         }
     }
 }

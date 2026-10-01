@@ -32,7 +32,7 @@ public class GrassBlock extends Block {
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!canSurvive(level, pos)) {
             if (!level.isClientSide()) {
-                level.setBlock(pos, BlockRegistry.DIRT.get().defaultBlockState(), 3);
+                level.setBlock(pos, BlockRegistry.DIRT.get().defaultBlockState(), UPDATE_ALL);
             }
         }
     }

@@ -30,7 +30,7 @@ public class Dirt extends Block {
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (canGrowGrass(level, pos)) {
             if (!level.isClientSide()) {
-                level.setBlock(pos, BlockRegistry.GRASS_BLOCK.get().defaultBlockState(), 3);
+                level.setBlock(pos, BlockRegistry.GRASS_BLOCK.get().defaultBlockState(), UPDATE_ALL);
             }
         }
     }

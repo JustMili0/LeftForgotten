@@ -16,7 +16,7 @@ public class RedstoneOre extends RedStoneOreBlock {
             .mapColor(MapColor.STONE)
             .sound(SoundType.STONE)
             .strength(3f)
-            .lightLevel(state -> state.getValue(LIT) ? 9 : 0)
+            .lightLevel(state -> state.getValue(LIT)? 9 : 0)
             .instrument(NoteBlockInstrument.BASEDRUM)
             .requiresCorrectToolForDrops()
             .randomTicks()
@@ -25,9 +25,6 @@ public class RedstoneOre extends RedStoneOreBlock {
 
     @Override // Purposefully added extra functionality
     public void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
-        var pos = hit.getBlockPos();
-        if (!state.getValue(LIT)) {
-            level.setBlock(pos, state.setValue(LIT, true), 3);
-        }
+        if (!state.getValue(LIT)) level.setBlock(hit.getBlockPos(), state.setValue(LIT, true), UPDATE_ALL);
     }
 }

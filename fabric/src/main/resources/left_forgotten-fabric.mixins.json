@@ -12,6 +12,7 @@
   ],
   "mixins": [
     "BlockLootSubProviderMixin",
+    "ExpDroppingBlocksMixin",
     "LiquidBlockMixin"
   ],
   "injectors": {

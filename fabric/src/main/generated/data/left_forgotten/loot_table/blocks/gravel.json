@@ -51,6 +51,11 @@
                   "type": "minecraft:item",
                   "name": "left_forgotten:gravel"
                 }
+              ],
+              "conditions": [
+                {
+                  "condition": "minecraft:survives_explosion"
+                }
               ]
             }
           ]
