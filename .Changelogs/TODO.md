@@ -1,11 +1,10 @@
-Last updated October 2nd 2026 01:02am CEST
+Last updated October 2nd 2026 10:50pm CEST
 
 <hr>
 
 ## TODO
 
 Next 1.20.1 commit (1.2.0-beta.2):
-- Rework CommonVersionOverlay
 - Fix issue with `Nostaligc Tweaks -> Gameplay -> Experience System -> Disable Orb Spawning` dropping hud elements (Hearts, air) in alpah dimension
 - Rework block and item registries so most basic blocks and items that can be made inline in the registries will be put there instead of having an individual file for every single thing
 
