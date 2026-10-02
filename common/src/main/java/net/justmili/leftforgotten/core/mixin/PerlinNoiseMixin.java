@@ -11,7 +11,6 @@ public class PerlinNoiseMixin {
 
     @ModifyReturnValue(method = "wrap", at = @At("RETURN"))
     private static double lf$replaceWrapReturn(double original, double value) {
-        if (!Config.farlands.get()) return original;
-        return value;
+        return Config.farlands.get()? value : original;
     }
 }

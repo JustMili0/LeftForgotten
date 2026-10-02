@@ -33,7 +33,7 @@ public class MusicPlayerMixin {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void lf$tryPlayTracks(CallbackInfo ci) {
-        if (ClientUtil.level() == null || Versions.isOldVersion(ClientUtil.level())) return;
+        if (ClientUtil.level() == null || !Versions.isOldVersion(ClientUtil.level())) return;
 
         ci.cancel();
 
