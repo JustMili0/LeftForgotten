@@ -10,7 +10,7 @@ import net.justmili.leftforgotten.content.mechanics.gameplay.ApplyProgrammerArt;
 @Environment(EnvType.CLIENT)
 public class ClientEventRegistry {
 
-    public static void register() {
+    public static void init() {
         ClientTickEvent.CLIENT_POST.register(CommonVersionOverlay::onClientTick);
 
         PlayerEvent.PLAYER_JOIN.register(ApplyProgrammerArt::onPlayerJoin);

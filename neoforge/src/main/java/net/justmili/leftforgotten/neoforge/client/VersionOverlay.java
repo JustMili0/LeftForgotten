@@ -10,7 +10,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 
-@EventBusSubscriber(modid = LeftForgotten.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = LeftForgotten.ID, value = Dist.CLIENT)
 public class VersionOverlay {
 
     @SubscribeEvent(priority = EventPriority.NORMAL)

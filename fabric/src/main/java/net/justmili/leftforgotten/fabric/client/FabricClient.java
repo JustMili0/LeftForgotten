@@ -5,28 +5,23 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.justmili.leftforgotten.client.CommonClient;
-import net.justmili.leftforgotten.content.entity.renderer.OldBoatRenderer;
+import net.justmili.leftforgotten.client.renderer.entity.OldBoatRenderer;
 import net.justmili.leftforgotten.core.registries.BlockRegistry;
 import net.justmili.leftforgotten.core.registries.EntityRegistry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
 
 public final class FabricClient implements ClientModInitializer {
+
     @Override
     public void onInitializeClient() {
         for (Block block : BlockRegistry.getBlocksFromRegistry()) {
             BlockRenderLayerMap.INSTANCE.putBlock(block, RenderType.cutout());
         }
+        CommonClient.init();
 
+        ModelLoadingPlugin.register(context -> context.modifyModelAfterBake().register((model, ctx) ->
+            CommonClient.shouldReplaceBakedModel(ctx.topLevelId())? new ClassicBlockModelsFabric(model) : model));
         EntityRendererRegistry.register(EntityRegistry.BOAT, OldBoatRenderer::new);
-
-        CommonClient.register();
-
-        ModelLoadingPlugin.register(context ->
-            context.modifyModelAfterBake().register((model, ctx) -> {
-                if (CommonClient.shouldReplaceBakedModel(ctx.topLevelId())) return new ClassicBlockModelsFabric(model);
-                return model;
-            })
-        );
     }
 }

@@ -20,7 +20,7 @@ public class LFRecipeProvider extends RecipeProvider {
 
     @Override
     public void buildRecipes(RecipeOutput writer) {
-        var gen = new DatagenDataUtil(LeftForgotten.MODID, writer);
+        var gen = new DatagenDataUtil(LeftForgotten.ID, writer);
 
         // Wood & Planks
         gen.planksFromLogs(ItemRegistry.WOOD.get(), ItemRegistry.WOODEN_PLANKS.get());

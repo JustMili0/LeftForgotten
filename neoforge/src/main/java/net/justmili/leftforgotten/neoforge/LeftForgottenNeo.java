@@ -6,8 +6,9 @@ import net.justmili.leftforgotten.core.datagen.NeoDatagen;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 
-@Mod(LeftForgotten.MODID)
+@Mod(LeftForgotten.ID)
 public final class LeftForgottenNeo {
+
     public LeftForgottenNeo(IEventBus modEventBus) {
         if (Platform.isModLoaded("true_end")) {
             throw new RuntimeException("""

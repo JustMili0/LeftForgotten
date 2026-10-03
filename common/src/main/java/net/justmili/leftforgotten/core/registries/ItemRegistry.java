@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.Block;
 import java.util.function.Function;
 
 public class ItemRegistry {
-    public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(LeftForgotten.MODID, Registries.ITEM);
+    public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(LeftForgotten.ID, Registries.ITEM);
     public static final RegistrySupplier<Item>
         BRITTLE_BEDROCK, GRASS_BLOCK, DIRT, FARMLAND, GRAVEL, SAND, CLAY,
         RED_FLOWER, YELLOW_FLOWER, RED_MUSHROOM, BROWN_MUSHROOM, CACTUS, SAPLING, LEAVES,
@@ -135,7 +135,7 @@ public class ItemRegistry {
         return REGISTRY.register(block.getId().getPath(), () -> new DoubleHighBlockItem(block.get(), new Item.Properties()));
     }
 
-    public static void register() {
+    public static void init() {
         REGISTRY.register();
     }
 }

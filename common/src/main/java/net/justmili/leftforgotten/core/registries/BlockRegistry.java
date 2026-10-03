@@ -32,7 +32,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class BlockRegistry {
-    public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(LeftForgotten.MODID, Registries.BLOCK);
+    public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(LeftForgotten.ID, Registries.BLOCK);
     public static final RegistrySupplier<Block>
         BRITTLE_BEDROCK, GRASS_BLOCK, DIRT, FARMLAND, GRAVEL, SAND, CLAY,
         RED_FLOWER, YELLOW_FLOWER, RED_MUSHROOM, BROWN_MUSHROOM, CACTUS, SAPLING, LEAVES,
@@ -137,7 +137,7 @@ public class BlockRegistry {
         return BlockBehaviour.Properties.ofFullCopy(block);
     }
 
-    public static void register() {
+    public static void init() {
         REGISTRY.register();
     }
 

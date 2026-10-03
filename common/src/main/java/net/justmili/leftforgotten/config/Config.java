@@ -6,8 +6,8 @@ import net.justmili.leftforgotten.libs.v1.config.entry.ConfigEntry;
 import net.justmili.leftforgotten.libs.v1.config.type.FileType;
 
 public class Config {
-    public static MConfigBuilder client = new MConfigBuilder(LeftForgotten.MODID, "client", FileType.PROPERTIES, true);
-    public static MConfigBuilder common = new MConfigBuilder(LeftForgotten.MODID, "common", FileType.PROPERTIES, true);
+    public static MConfigBuilder client = new MConfigBuilder(LeftForgotten.ID, "client", FileType.PROPERTIES, true);
+    public static MConfigBuilder common = new MConfigBuilder(LeftForgotten.ID, "common", FileType.PROPERTIES, true);
 
     public static ConfigEntry<Boolean> fog, caveFog;
     public static ConfigEntry<Boolean> blockyLighting, steveSkin;

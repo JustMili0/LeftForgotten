@@ -11,20 +11,20 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 
 @Environment(EnvType.CLIENT)
 public class CommonClient {
-    public static void register() {
+
+    public static void init() {
         Config.client();
 
-        ClientEventRegistry.register();
+        ClientEventRegistry.init();
 
         DimSpecialEffectsAccessor.getEffects().put(LeftForgotten.asId("alpha_minecraft"), new AlphaMinecraft());
     }
 
-    public static boolean shouldReplaceBakedModel(ModelResourceLocation modelLocation) {
-        if (modelLocation == null) return false;
+    public static boolean shouldReplaceBakedModel(ModelResourceLocation id) {
+        if (id == null) return false;
+        var modelId = id.id();
 
-        return modelLocation.id().getNamespace().equals("minecraft")
-            && !modelLocation.getVariant().equals("inventory")
-            && (modelLocation.id().getPath().equals("furnace")
-            || modelLocation.id().getPath().equals("crafting_table"));
+        return modelId.getNamespace().equals("minecraft") && !id.getVariant().equals("inventory")
+            && (modelId.getPath().equals("furnace") || modelId.getPath().equals("crafting_table"));
     }
 }

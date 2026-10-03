@@ -1,7 +1,8 @@
-package net.justmili.leftforgotten.content.entity;
+package net.justmili.leftforgotten.core.network;
 
 import dev.architectury.networking.NetworkManager;
 import net.justmili.leftforgotten.LeftForgotten;
+import net.justmili.leftforgotten.content.entity.OldBoatEntity;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

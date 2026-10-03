@@ -11,7 +11,7 @@ import net.justmili.leftforgotten.content.mechanics.gameplay.WoolDrop;
 
 public class EventRegistry {
 
-    public static void register() {
+    public static void init() {
         TickEvent.PLAYER_POST.register(MoveToAlpha::onPlayerTick);
         EntityEvent.LIVING_HURT.register(MoveToAlpha::onEntityHurt);
         EntityEvent.LIVING_HURT.register(MoveToAlpha::onHurtByDimensionEntry);
