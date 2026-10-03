@@ -2,9 +2,11 @@ package net.justmili.leftforgotten.core.mixin.fabric.client;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.justmili.leftforgotten.client.CommonVersionOverlay;
 import net.justmili.leftforgotten.core.util.Versions;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.client.RenderingUtil;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -24,7 +26,7 @@ import static net.justmili.leftforgotten.client.CommonHudModifier.Common.*;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Fabric.*;
 
 @Mixin(value = Gui.class, priority = 2500)
-public abstract class HudModifier {
+public abstract class GuiMixin {
 
     @Shadow
     protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
@@ -120,5 +122,11 @@ public abstract class HudModifier {
 
         if (ClientUtil.player().getArmorValue() == 0) return mountHpOffset() + mountHpH_na + mountHpH;
         return mountHpOffset();
+    }
+
+    // Render version overlay
+    @Inject(at = @At("TAIL"), method = "render")
+    public void lf$renderVersionOverlay(GuiGraphics graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+        if (!ClientUtil.isDebugScreenOn() && Versions.hadVersionOverlay(ClientUtil.level())) CommonVersionOverlay.render(graphics);
     }
 }

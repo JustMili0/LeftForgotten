@@ -8,12 +8,13 @@
   },
   "client": [
     "client.UnrenderAppleSkinHud",
-    "client.UnrenderClouds"
+    "client.UnrenderClouds",
+    "compat.nt.ClientEventHandlerMixin"
   ],
   "mixins": [
     "ExpDroppingBlocksMixin",
     "FluidInteractionRegistryMixin",
-    "compat.MTLayerMixin"
+    "compat.mt.MTLayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

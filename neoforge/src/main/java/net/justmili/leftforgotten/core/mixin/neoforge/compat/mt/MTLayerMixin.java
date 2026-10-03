@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.core.mixin.neoforge.compat;
+package net.justmili.leftforgotten.core.mixin.neoforge.compat.mt;
 
 import net.minecraft.world.level.LevelHeightAccessor;
 import org.spongepowered.asm.mixin.Mixin;

@@ -18,6 +18,6 @@ public final class AlphaTreeGrower {
             Optional.empty()
         );
 
-    private AlphaTreeGrower() {
+    public AlphaTreeGrower() {
     }
 }

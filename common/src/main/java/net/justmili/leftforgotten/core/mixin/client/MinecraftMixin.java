@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.core.mixin.client;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.core.util.Versions;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
@@ -17,10 +18,10 @@ public abstract class MinecraftMixin {
     @Shadow
     protected int missTime;
 
-    @Inject(method = "useAmbientOcclusion", at = @At("HEAD"), cancellable = true)
-    private static void lf$setNoAO(CallbackInfoReturnable<Boolean> cir) {
-        if (Config.blockyLighting.isNull() || !Config.blockyLighting.get()) return;
-        if (Versions.hadBlockyLighting(ClientUtil.level())) cir.setReturnValue(false);
+    @ModifyReturnValue(method = "useAmbientOcclusion", at = @At("RETURN"))
+    private static boolean lf$setNoAO(boolean original) {
+        if (Config.blockyLighting.isNull() || !Config.blockyLighting.get()) return original;
+        return !Versions.hadBlockyLighting(ClientUtil.level()) && original;
     }
 
     @Inject(method = "startAttack", at = @At("HEAD"))

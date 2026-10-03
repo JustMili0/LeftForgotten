@@ -7,8 +7,8 @@
     "minVersion": "0.5.0"
   },
   "client": [
-    "client.HudModifier",
-    "client.VersionOverlay"
+    "client.GuiMixin",
+    "compat.nt.HudHelperMixin"
   ],
   "mixins": [
     "BlockLootSubProviderMixin",
