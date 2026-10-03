@@ -4,17 +4,30 @@ import com.google.common.collect.Streams;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.content.block.*;
+import net.justmili.leftforgotten.content.block.Cactus;
+import net.justmili.leftforgotten.content.block.Farmland;
+import net.justmili.leftforgotten.content.block.GrassBlock;
+import net.justmili.leftforgotten.content.block.OldTillableBlock;
 import net.justmili.leftforgotten.content.block.dev.FeatureVoid;
-import net.justmili.leftforgotten.content.block.dev.RemodelChest;
-import net.justmili.leftforgotten.content.block.dev.RemodelCraftingTable;
-import net.justmili.leftforgotten.content.block.dev.RemodelFurnace;
+import net.justmili.leftforgotten.content.block.dev.RmdlChest;
+import net.justmili.leftforgotten.content.block.dev.RmdlCrafting;
+import net.justmili.leftforgotten.content.block.dev.RmdlFurnace;
+import net.justmili.leftforgotten.content.world.block.grower.AlphaTreeGrower;
 import net.justmili.leftforgotten.core.references.LFBlockItemIds;
 import net.justmili.leftforgotten.libs.v1.references.BlockItemId;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.data.worldgen.features.TreeFeatures;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.material.MapColor;
 
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class BlockRegistry {
@@ -34,85 +47,93 @@ public class BlockRegistry {
 
     static {
         // In-Overworld
-        BRITTLE_BEDROCK = block(LFBlockItemIds.BRITTLE_BEDROCK, BrittleBedrock::new);
+        BRITTLE_BEDROCK = block(LFBlockItemIds.BRITTLE_BEDROCK, Block::new, copy(Blocks.BEDROCK).strength(Block.INDESTRUCTIBLE, 6.5f));
 
         // Nature / Ground
-        GRASS_BLOCK = block(LFBlockItemIds.GRASS_BLOCK, GrassBlock::new);
-        DIRT = block(LFBlockItemIds.DIRT, Dirt::new);
-        FARMLAND = block(LFBlockItemIds.FARMLAND, Farmland::new);
-        GRAVEL = block(LFBlockItemIds.GRAVEL, Gravel::new);
-        SAND = block(LFBlockItemIds.SAND, Sand::new);
-        CLAY = block(LFBlockItemIds.CLAY, Clay::new);
+        GRASS_BLOCK = block(LFBlockItemIds.GRASS_BLOCK, GrassBlock::new, copy(Blocks.GRASS_BLOCK).mapColor(MapColor.COLOR_LIGHT_GREEN));
+        DIRT = block(LFBlockItemIds.DIRT, OldTillableBlock::new, copy(Blocks.DIRT));
+        FARMLAND = block(LFBlockItemIds.FARMLAND, Farmland::new, copy(Blocks.FARMLAND));
+        GRAVEL = block(LFBlockItemIds.GRAVEL, FallingBlock::new, copy(Blocks.GRAVEL));
+        SAND = block(LFBlockItemIds.SAND, FallingBlock::new, copy(Blocks.SAND));
+        CLAY = block(LFBlockItemIds.CLAY, Block::new, copy(Blocks.CLAY));
 
         // Nature / Vegetation
-        RED_FLOWER = block(LFBlockItemIds.RED_FLOWER, RedFlower::new);
-        YELLOW_FLOWER = block(LFBlockItemIds.YELLOW_FLOWER, YellowFlower::new);
-        RED_MUSHROOM = block(LFBlockItemIds.RED_MUSHROOM, RedMushroom::new);
-        BROWN_MUSHROOM = block(LFBlockItemIds.BROWN_MUSHROOM, BrownMushroom::new);
-        CACTUS = block(LFBlockItemIds.CACTUS, Cactus::new);
-        SAPLING = block(LFBlockItemIds.SAPLING, Sapling::new);
-        LEAVES = block(LFBlockItemIds.LEAVES, Leaves::new);
+        RED_FLOWER = block(LFBlockItemIds.RED_FLOWER, p -> new FlowerBlock(MobEffects.NIGHT_VISION, 5, p), copy(Blocks.POPPY));
+        YELLOW_FLOWER = block(LFBlockItemIds.YELLOW_FLOWER, p -> new FlowerBlock(MobEffects.SATURATION, 7, p), copy(Blocks.DANDELION));
+        RED_MUSHROOM = block(LFBlockItemIds.RED_MUSHROOM, p -> new MushroomBlock(p, TreeFeatures.HUGE_RED_MUSHROOM), copy(Blocks.RED_MUSHROOM));
+        BROWN_MUSHROOM = block(LFBlockItemIds.BROWN_MUSHROOM, p -> new MushroomBlock(p, TreeFeatures.HUGE_BROWN_MUSHROOM), copy(Blocks.BROWN_MUSHROOM));
+        CACTUS = block(LFBlockItemIds.CACTUS, Cactus::new, copy(Blocks.CACTUS));
+        SAPLING = block(LFBlockItemIds.SAPLING, p -> new SaplingBlock(new AlphaTreeGrower(), p), copy(Blocks.OAK_SAPLING).mapColor(MapColor.COLOR_LIGHT_GREEN));
+        LEAVES = block(LFBlockItemIds.LEAVES, LeavesBlock::new, copy(Blocks.OAK_LEAVES).mapColor(MapColor.COLOR_LIGHT_GREEN));
 
         // Building / Wood
-        WOOD = block(LFBlockItemIds.WOOD, Wood::new);
-        WOOD_6_SIDED = block(LFBlockItemIds.WOOD_6_SIDED, Wood6Sided::new);
-        WOODEN_PLANKS = block(LFBlockItemIds.WOODEN_PLANKS, WoodenPlanks::new);
-        WOODEN_STAIRS = block(LFBlockItemIds.WOODEN_STAIRS, WoodenStairs::new);
-        WOODEN_SLAB = block(LFBlockItemIds.WOODEN_SLAB, WoodenSlab::new);
-        FENCE = block(LFBlockItemIds.FENCE, WoodenFence::new);
-        FENCE_GATE = block(LFBlockItemIds.FENCE_GATE, WoodenFenceGate::new);
-        DOOR = block(LFBlockItemIds.DOOR, WoodenDoor::new);
-        TRAPDOOR = block(LFBlockItemIds.TRAPDOOR, WoodenTrapdoor::new);
-        PRESSURE_PLATE = block(LFBlockItemIds.PRESSURE_PLATE, WoodenPressurePlate::new);
-        BUTTON = block(LFBlockItemIds.BUTTON, WoodenButton::new);
+        WOOD = block(LFBlockItemIds.WOOD, RotatedPillarBlock::new, copy(Blocks.OAK_LOG));
+        WOOD_6_SIDED = block(LFBlockItemIds.WOOD_6_SIDED, RotatedPillarBlock::new, copy(Blocks.OAK_WOOD));
+        WOODEN_PLANKS = block(LFBlockItemIds.WOODEN_PLANKS, Block::new, copy(Blocks.OAK_PLANKS));
+        WOODEN_STAIRS = block(LFBlockItemIds.WOODEN_STAIRS, p -> new StairBlock(getState(WOODEN_PLANKS), p), copy(Blocks.OAK_STAIRS));
+        WOODEN_SLAB = block(LFBlockItemIds.WOODEN_SLAB, SlabBlock::new, copy(Blocks.OAK_SLAB));
+        FENCE = block(LFBlockItemIds.FENCE, FenceBlock::new, copy(Blocks.OAK_FENCE));
+        FENCE_GATE = block(LFBlockItemIds.FENCE_GATE, p -> new FenceGateBlock(p, WoodType.OAK), copy(Blocks.OAK_FENCE_GATE));
+        DOOR = block(LFBlockItemIds.DOOR, p -> new DoorBlock(p, BlockSetType.OAK),copy(Blocks.OAK_DOOR));
+        TRAPDOOR = block(LFBlockItemIds.TRAPDOOR, p -> new TrapDoorBlock(p, BlockSetType.OAK), copy(Blocks.OAK_TRAPDOOR));
+        PRESSURE_PLATE = block(LFBlockItemIds.PRESSURE_PLATE, p -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, p, BlockSetType.OAK), copy(Blocks.OAK_PRESSURE_PLATE));
+        BUTTON = block(LFBlockItemIds.BUTTON, p -> new ButtonBlock(p, BlockSetType.OAK, 30, true), copy(Blocks.OAK_BUTTON));
 
         // Nature / Underground
-        COAL_ORE = block(LFBlockItemIds.COAL_ORE, CoalOre::new);
-        IRON_ORE = block(LFBlockItemIds.IRON_ORE, IronOre::new);
-        GOLD_ORE = block(LFBlockItemIds.GOLD_ORE, GoldOre::new);
-        REDSTONE_ORE = block(LFBlockItemIds.REDSTONE_ORE, RedstoneOre::new);
-        DIAMOND_ORE = block(LFBlockItemIds.DIAMOND_ORE, DiamondOre::new);
-        STONE = block(LFBlockItemIds.STONE, Stone::new);
+        COAL_ORE = block(LFBlockItemIds.COAL_ORE, p -> new DropExperienceBlock(p, UniformInt.of(0, 2)), copy(Blocks.COAL_ORE));
+        IRON_ORE = block(LFBlockItemIds.IRON_ORE, Block::new, copy(Blocks.IRON_ORE));
+        GOLD_ORE = block(LFBlockItemIds.GOLD_ORE, Block::new, copy(Blocks.GOLD_ORE));
+        REDSTONE_ORE = block(LFBlockItemIds.REDSTONE_ORE, RedStoneOreBlock::new, copy(Blocks.REDSTONE_ORE));
+        DIAMOND_ORE = block(LFBlockItemIds.DIAMOND_ORE, p -> new DropExperienceBlock(p, UniformInt.of(3, 7)), copy(Blocks.DIAMOND_ORE));
+        STONE = block(LFBlockItemIds.STONE, Block::new, copy(Blocks.STONE));
 
         // Building / Stone
-        STONE_STAIRS = block(LFBlockItemIds.STONE_STAIRS, StoneStairs::new);
-        STONE_SLAB = block(LFBlockItemIds.STONE_SLAB, StoneSlab::new);
-        STONE_PRESSURE_PLATE = block(LFBlockItemIds.STONE_PRESSURE_PLATE, StonePressurePlate::new);
-        STONE_BUTTON = block(LFBlockItemIds.STONE_BUTTON, StoneButton::new);
-        COBBLESTONE = block(LFBlockItemIds.COBBLESTONE, Cobblestone::new);
-        COBBLESTONE_STAIRS = block(LFBlockItemIds.COBBLESTONE_STAIRS, CobblestoneStairs::new);
-        COBBLESTONE_SLAB = block(LFBlockItemIds.COBBLESTONE_SLAB, CobblestoneSlab::new);
-        COBBLESTONE_WALL = block(LFBlockItemIds.COBBLESTONE_WALL, CobblestoneWall::new);
-        MOSSY_COBBLESTONE = block(LFBlockItemIds.MOSSY_COBBLESTONE, MossyCobblestone::new);
-        MOSSY_COBBLESTONE_STAIRS = block(LFBlockItemIds.MOSSY_COBBLESTONE_STAIRS, MossyCobblestoneStairs::new);
-        MOSSY_COBBLESTONE_SLAB = block(LFBlockItemIds.MOSSY_COBBLESTONE_SLAB, MossyCobblestoneSlab::new);
-        MOSSY_COBBLESTONE_WALL = block(LFBlockItemIds.MOSSY_COBBLESTONE_WALL, MossyCobblestoneWall::new);
-        BRICKS = block(LFBlockItemIds.BRICKS, Bricks::new);
-        BRICK_STAIRS = block(LFBlockItemIds.BRICK_STAIRS, BrickStairs::new);
-        BRICK_SLAB = block(LFBlockItemIds.BRICK_SLAB, BrickSlab::new);
-        BRICK_WALL = block(LFBlockItemIds.BRICK_WALL, BrickWall::new);
+        STONE_STAIRS = block(LFBlockItemIds.STONE_STAIRS, p -> new StairBlock(getState(STONE), p), copy(Blocks.STONE_STAIRS));
+        STONE_SLAB = block(LFBlockItemIds.STONE_SLAB, SlabBlock::new, copy(Blocks.STONE_SLAB));
+        STONE_PRESSURE_PLATE = block(LFBlockItemIds.STONE_PRESSURE_PLATE, p -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, p, BlockSetType.STONE), copy(Blocks.STONE_PRESSURE_PLATE));
+        STONE_BUTTON = block(LFBlockItemIds.STONE_BUTTON, p -> new ButtonBlock(p, BlockSetType.STONE, 20, false), copy(Blocks.STONE_BUTTON));
+        COBBLESTONE = block(LFBlockItemIds.COBBLESTONE, Block::new, copy(Blocks.COBBLESTONE));
+        COBBLESTONE_STAIRS = block(LFBlockItemIds.COBBLESTONE_STAIRS, p -> new StairBlock(getState(COBBLESTONE), p), copy(Blocks.COBBLESTONE_STAIRS));
+        COBBLESTONE_SLAB = block(LFBlockItemIds.COBBLESTONE_SLAB, SlabBlock::new, copy(Blocks.COBBLESTONE_SLAB));
+        COBBLESTONE_WALL = block(LFBlockItemIds.COBBLESTONE_WALL, WallBlock::new, copy(Blocks.COBBLESTONE_WALL));
+        MOSSY_COBBLESTONE = block(LFBlockItemIds.MOSSY_COBBLESTONE, Block::new, copy(Blocks.MOSSY_COBBLESTONE));
+        MOSSY_COBBLESTONE_STAIRS = block(LFBlockItemIds.MOSSY_COBBLESTONE_STAIRS, p -> new StairBlock(getState(MOSSY_COBBLESTONE), p), copy(Blocks.MOSSY_COBBLESTONE_STAIRS));
+        MOSSY_COBBLESTONE_SLAB = block(LFBlockItemIds.MOSSY_COBBLESTONE_SLAB, SlabBlock::new, copy(Blocks.MOSSY_COBBLESTONE_SLAB));
+        MOSSY_COBBLESTONE_WALL = block(LFBlockItemIds.MOSSY_COBBLESTONE_WALL, WallBlock::new, copy(Blocks.MOSSY_COBBLESTONE_WALL));
+        BRICKS = block(LFBlockItemIds.BRICKS, Block::new, copy(Blocks.BRICKS));
+        BRICK_STAIRS = block(LFBlockItemIds.BRICK_STAIRS, p -> new StairBlock(getState(BRICKS), p), copy(Blocks.BRICK_STAIRS));
+        BRICK_SLAB = block(LFBlockItemIds.BRICK_SLAB, SlabBlock::new, copy(Blocks.BRICK_SLAB));
+        BRICK_WALL = block(LFBlockItemIds.BRICK_WALL, WallBlock::new, copy(Blocks.BRICK_WALL));
 
         // Building / Deco
-        OBSIDIAN = block(LFBlockItemIds.OBSIDIAN, Obsidian::new);
-        IRON_BLOCK = block(LFBlockItemIds.IRON_BLOCK, IronBlock::new);
-        GOLD_BLOCK = block(LFBlockItemIds.GOLD_BLOCK, GoldBlock::new);
-        DIAMOND_BLOCK = block(LFBlockItemIds.DIAMOND_BLOCK, DiamondBlock::new);
-        BOOKSHELF = block(LFBlockItemIds.BOOKSHELF, Bookshelf::new);
-        GLASS = block(LFBlockItemIds.GLASS, Glass::new);
-        GLASS_PANE = block(LFBlockItemIds.GLASS_PANE, GlassPane::new);
-        TNT = block(LFBlockItemIds.TNT, Tnt::new);
-        IRON_DOOR = block(LFBlockItemIds.IRON_DOOR, IronDoor::new);
+        OBSIDIAN = block(LFBlockItemIds.OBSIDIAN, Block::new, copy(Blocks.OBSIDIAN));
+        IRON_BLOCK = block(LFBlockItemIds.IRON_BLOCK, Block::new, copy(Blocks.IRON_BLOCK));
+        GOLD_BLOCK = block(LFBlockItemIds.GOLD_BLOCK, Block::new, copy(Blocks.GOLD_BLOCK));
+        DIAMOND_BLOCK = block(LFBlockItemIds.DIAMOND_BLOCK, Block::new, copy(Blocks.DIAMOND_BLOCK));
+        BOOKSHELF = block(LFBlockItemIds.BOOKSHELF, Block::new, copy(Blocks.BOOKSHELF));
+        GLASS = block(LFBlockItemIds.GLASS, GlassBlock::new, copy(Blocks.GLASS));
+        GLASS_PANE = block(LFBlockItemIds.GLASS_PANE, IronBarsBlock::new, copy(Blocks.GLASS_PANE));
+        TNT = block(LFBlockItemIds.TNT, TntBlock::new, copy(Blocks.TNT));
+        IRON_DOOR = block(LFBlockItemIds.IRON_DOOR, p -> new DoorBlock(p, BlockSetType.IRON), copy(Blocks.IRON_DOOR));
 
         // Dev
-        FEATURE_VOID = block(LFBlockItemIds.FEATURE_VOID, FeatureVoid::new);
-        RMDL_FURNACE_STONE = block(LFBlockItemIds.RMDL_FURNACE_STONE, RemodelFurnace::new);
-        RMDL_FURNACE = block(LFBlockItemIds.RMDL_FURNACE, RemodelFurnace::new);
-        RMDL_CRAFTING = block(LFBlockItemIds.RMDL_CRAFTING, RemodelCraftingTable::new);
-        RMDL_CHEST = block(LFBlockItemIds.RMDL_CHEST, RemodelChest::new);
+        FEATURE_VOID = block(LFBlockItemIds.FEATURE_VOID, FeatureVoid::new, copy(Blocks.BARRIER));
+        RMDL_FURNACE_STONE = block(LFBlockItemIds.RMDL_FURNACE_STONE, RmdlFurnace::new, copy(Blocks.BARRIER));
+        RMDL_FURNACE = block(LFBlockItemIds.RMDL_FURNACE, RmdlFurnace::new, copy(Blocks.BARRIER));
+        RMDL_CRAFTING = block(LFBlockItemIds.RMDL_CRAFTING, RmdlCrafting::new, copy(Blocks.BARRIER));
+        RMDL_CHEST = block(LFBlockItemIds.RMDL_CHEST, RmdlChest::new, copy(Blocks.BARRIER));
     }
 
-    private static RegistrySupplier<Block> block(BlockItemId id, Supplier<Block> block) {
-        return REGISTRY.register(id.block().location().getPath(), block);
+    private static RegistrySupplier<Block> block(BlockItemId id, Function<BlockBehaviour.Properties, Block> block, BlockBehaviour.Properties properties) {
+        return REGISTRY.register(id.block().location().getPath(), () -> block.apply(properties));
+    }
+
+    private static BlockState getState(RegistrySupplier<Block> block) {
+        return block.get().defaultBlockState();
+    }
+
+    private static BlockBehaviour.Properties copy(Block block) {
+        return BlockBehaviour.Properties.copy(block);
     }
 
     public static void register() {

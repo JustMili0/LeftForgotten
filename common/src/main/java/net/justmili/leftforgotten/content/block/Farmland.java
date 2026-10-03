@@ -1,7 +1,6 @@
 package net.justmili.leftforgotten.content.block;
 
 import net.justmili.leftforgotten.core.registries.BlockRegistry;
-import net.justmili.leftforgotten.libs.v1.utils.common.BlockBehaviorUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -16,17 +15,14 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.FarmBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.gameevent.GameEvent.Context;
-import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.Nullable;
 
 public class Farmland extends FarmBlock {
-	public Farmland() {
-		super(Properties.of().mapColor(MapColor.DIRT).sound(SoundType.GRAVEL).strength(1.5f, 6f)
-			.isViewBlocking(BlockBehaviorUtil::no).isSuffocating(BlockBehaviorUtil::no).randomTicks());
+	public Farmland(Properties properties) {
+		super(properties);
 	}
 
 	@Override

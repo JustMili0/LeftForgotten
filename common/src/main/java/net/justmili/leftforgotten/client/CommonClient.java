@@ -1,12 +1,12 @@
 package net.justmili.leftforgotten.client;
 
-import dev.architectury.event.events.client.ClientTickEvent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.client.dimension.AlphaMinecraft;
 import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.core.mixin.accessors.DimSpecialEffectsAccessor;
+import net.justmili.leftforgotten.core.registries.client.ClientEventRegistry;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 
@@ -15,7 +15,7 @@ public class CommonClient {
     public static void register() {
         Config.client();
 
-        ClientTickEvent.CLIENT_POST.register(CommonVersionOverlay::onClientTick);
+        ClientEventRegistry.register();
 
         DimSpecialEffectsAccessor.getEffects().put(LeftForgotten.asId("alpha_minecraft"), new AlphaMinecraft());
     }

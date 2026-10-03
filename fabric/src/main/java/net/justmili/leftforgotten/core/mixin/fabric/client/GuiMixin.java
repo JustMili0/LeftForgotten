@@ -2,6 +2,7 @@ package net.justmili.leftforgotten.core.mixin.fabric.client;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.justmili.leftforgotten.client.CommonVersionOverlay;
 import net.justmili.leftforgotten.core.util.Versions;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.minecraft.client.gui.Gui;
@@ -24,7 +25,7 @@ import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderF
 import static net.justmili.leftforgotten.client.CommonHudModifier.Fabric.*;
 
 @Mixin(value = Gui.class, priority = 2500)
-public abstract class HudModifier {
+public abstract class GuiMixin {
 
     @Shadow
     protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
@@ -108,5 +109,11 @@ public abstract class HudModifier {
 
         if (ClientUtil.player().getArmorValue() == 0) return mountHpOffset() + mountHpH_na + mountHpH;
         return mountHpOffset();
+    }
+
+    // Render version overlay
+    @Inject(at = @At("TAIL"), method = "render")
+    public void lf$renderVersionOverlay(GuiGraphics graphics, float partialTick, CallbackInfo ci) {
+        if (!ClientUtil.isDebugScreenOn() && Versions.hadVersionOverlay(ClientUtil.level())) CommonVersionOverlay.render(graphics);
     }
 }

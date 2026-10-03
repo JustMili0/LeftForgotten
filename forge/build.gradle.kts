@@ -59,7 +59,7 @@ dependencies {
     modImplementation("dev.architectury:architectury-forge:${libs.versions.arch.api.get()}")
 
     // Other
-    modImplementation("maven.modrinth:nostalgic-tweaks:${root.property("nt_fabric")}")
+    modImplementation("maven.modrinth:nostalgic-tweaks:${root.property("nt_forge")}")
     modImplementation("me.shedaniel.cloth:cloth-config-forge:${root.property("cloth_config")}")
 
     // Forge doesn't mainline MixinExtras until 1.21.11, so here we need it
