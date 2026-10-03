@@ -10,7 +10,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = LeftForgotten.MODID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = LeftForgotten.ID, value = Dist.CLIENT)
 public class VersionOverlay {
 
     @SubscribeEvent(priority = EventPriority.NORMAL)

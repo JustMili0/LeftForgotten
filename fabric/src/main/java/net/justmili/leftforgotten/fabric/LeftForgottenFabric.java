@@ -5,6 +5,7 @@ import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.core.registries.fabric.BiomeModifierRegistry;
 
 public final class LeftForgottenFabric implements ModInitializer {
+
     @Override
     public void onInitialize() {
         LeftForgotten.init();

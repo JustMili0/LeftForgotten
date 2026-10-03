@@ -1,8 +1,9 @@
-package net.justmili.leftforgotten.content.entity;
+package net.justmili.leftforgotten.core.network;
 
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
 import net.justmili.leftforgotten.LeftForgotten;
+import net.justmili.leftforgotten.content.entity.OldBoatEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 

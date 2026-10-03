@@ -13,23 +13,25 @@ import org.joml.Matrix4f;
 import static net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil.*;
 
 public class CommonHudModifier {
+
     public static class Common {
-        static boolean hasSaddle() {
+
+        private static boolean isJumpMeterOn() {
             return player().getVehicle() instanceof AbstractHorse horse && horse.isSaddled();
         }
 
         public static int mirrorX(int x) {
-            return 2 * (width() / 2-91)+72-x;
+            return 2 * (width() / 2 - 91) + 72 - x;
         }
 
         public static void renderFlippedBlit(GuiGraphics graphics, ResourceLocation texture,
                                              int x1, int y1, int width, int height, int uOffset, int vOffset) {
-            int x2 = x1+width;
-            int y2 = y1+height;
-            float minU = (uOffset+width) / 256f;
-            float maxU = (uOffset+0.0f) / 256f;
+            int x2 = x1 + width;
+            int y2 = y1 + height;
+            float minU = (uOffset + width) / 256f;
+            float maxU = uOffset / 256f;
             float minV = vOffset / 256f;
-            float maxV = (vOffset+height) / 256f;
+            float maxV = (vOffset + height) / 256f;
 
             RenderSystem.setShaderTexture(0, texture);
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -55,7 +57,7 @@ public class CommonHudModifier {
 
             float maxHealth = Maths.max(player.getMaxHealth(), player.getHealth());
             int absorption = Maths.ceil(player.getAbsorptionAmount());
-            int rows = Maths.ceil((maxHealth + absorption) / 2.0F / 10.0F);
+            int rows = Maths.ceil((maxHealth + absorption) / 2f / 10f);
             if (rows <= 1) return 0;
 
             int rowHeight = Maths.max(10 - (rows - 2), 3);
@@ -76,8 +78,9 @@ public class CommonHudModifier {
 
         public static int yOffset() { // Account for horse bar and Creative, Fabric doesn't need to account for fullscreen
             int creativeOffset = ClientUtil.isCreative()? -9 : 0;
-            return Common.hasSaddle()? horseBar + creativeOffset : creativeOffset;
+            return Common.isJumpMeterOn()? horseBar + creativeOffset : creativeOffset;
         }
+
         public static int mountHpOffset() {
             return height() - 39 - yOffset() - mountHpH;
         }
@@ -97,7 +100,7 @@ public class CommonHudModifier {
             fullscreenOffset = 1;
 
         public static int yOffset() {
-            return (Common.hasSaddle() ? horseBar : 0) - fullscreenOffset;
+            return (Common.isJumpMeterOn()? horseBar : 0) - fullscreenOffset;
         }
     }
 }

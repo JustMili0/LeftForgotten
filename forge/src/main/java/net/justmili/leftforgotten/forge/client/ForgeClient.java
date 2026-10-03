@@ -1,12 +1,11 @@
 package net.justmili.leftforgotten.forge.client;
 
 import net.justmili.leftforgotten.client.CommonClient;
-import net.justmili.leftforgotten.content.entity.renderer.OldBoatRenderer;
+import net.justmili.leftforgotten.client.renderer.entity.OldBoatRenderer;
 import net.justmili.leftforgotten.core.registries.BlockRegistry;
 import net.justmili.leftforgotten.core.registries.EntityRegistry;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -17,22 +16,21 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ForgeClient {
+
     @SubscribeEvent
     public static void init(FMLClientSetupEvent event) {
         /// DEV NOTE: DEPRECATED API USAGE
         for (Block block : BlockRegistry.getBlocksFromRegistry()) {
             ItemBlockRenderTypes.setRenderLayer(block, RenderType.cutout());
         }
-        CommonClient.register();
+        CommonClient.init();
     }
 
     @SubscribeEvent
     public static void wrapModelsForRemodelBlocks(ModelEvent.ModifyBakingResult event) {
         var models = event.getModels();
-        for (ResourceLocation id : models.keySet()) {
-            if (CommonClient.shouldReplaceBakedModel(id)) {
-                models.put(id, new ClassicBlockModelsForge(models.get(id)));
-            }
+        for (var id : models.keySet()) {
+            if (CommonClient.shouldReplaceBakedModel(id)) models.put(id, new ClassicBlockModelsForge(models.get(id)));
         }
     }
 

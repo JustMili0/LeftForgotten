@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.content.entity.renderer;
+package net.justmili.leftforgotten.client.renderer.entity;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.vertex.PoseStack;

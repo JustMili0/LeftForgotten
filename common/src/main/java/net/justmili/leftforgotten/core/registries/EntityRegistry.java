@@ -10,20 +10,19 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 
 public class EntityRegistry {
-    public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(LeftForgotten.MODID, Registries.ENTITY_TYPE);
+    public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(LeftForgotten.ID, Registries.ENTITY_TYPE);
 
     public static final RegistrySupplier<EntityType<OldBoatEntity>> BOAT;
 
     static {
-        //BOAT = REGISTRY.register("boat", () -> EntityType.Builder.<LFBoatEntity>of(LFBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).clientTrackingRange(10).build("boat"));
-        BOAT = register("boat", EntityType.Builder.<OldBoatEntity>of(OldBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).clientTrackingRange(10));
+        BOAT = entity("boat", EntityType.Builder.<OldBoatEntity>of(OldBoatEntity::new, MobCategory.MISC).sized(1.375f, 0.5625f).clientTrackingRange(10));
     }
 
-    private static <T extends Entity> RegistrySupplier<EntityType<T>> register(String id, EntityType.Builder<T> builder) {
+    private static <T extends Entity> RegistrySupplier<EntityType<T>> entity(String id, EntityType.Builder<T> builder) {
         return REGISTRY.register(id, () -> builder.build(id));
     }
 
-    public static void register() {
+    public static void init() {
         REGISTRY.register();
     }
 }

@@ -8,10 +8,10 @@ import net.minecraft.world.level.block.Block;
 
 public class TagRegistry {
 
-    public static final TagKey<Block> ALPHA_NATURAL_LOGS = TagUtil.block(id("alpha_natural_logs"));
-    public static final TagKey<Block> BETA_NATURAL_LOGS = TagUtil.block(id("beta_natural_logs"));
+    public static final TagKey<Block> ALPHA_NATURAL_LOGS = blockTag("alpha_natural_logs");
+    public static final TagKey<Block> BETA_NATURAL_LOGS = blockTag("beta_natural_logs");
 
-    private static ResourceLocation id(String path) {
-        return LeftForgotten.asId(path);
+    private static TagKey<Block> blockTag(String path) {
+        return TagUtil.block(LeftForgotten.asId(path));
     }
 }

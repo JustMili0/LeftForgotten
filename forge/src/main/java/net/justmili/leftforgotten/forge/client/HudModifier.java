@@ -18,7 +18,7 @@ import static net.justmili.leftforgotten.client.CommonHudModifier.Forge.*;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {
-    static final ResourceLocation GUI_ICONS_LOCATION = ResourceUtil.asMinecraft("textures/gui/icons.png");
+    private static final ResourceLocation GUI_ICONS_LOCATION = ResourceUtil.asMinecraft("textures/gui/icons.png");
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiOverlayEvent.Pre event) {

@@ -1,6 +1,7 @@
 package net.justmili.leftforgotten.content.entity;
 
 import dev.architectury.platform.Platform;
+import net.justmili.leftforgotten.core.network.OldBoatImpactPacket;
 import net.justmili.leftforgotten.core.registries.EntityRegistry;
 import net.justmili.leftforgotten.core.registries.ItemRegistry;
 import net.justmili.leftforgotten.libs.v1.utils.common.Maths;
