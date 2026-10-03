@@ -1,8 +1,11 @@
-Last updated October 3nd 2026 2:53pm CEST
+Last updated October 3nd 2026 4:46pm CEST
 
 <hr>
 
 ## TODO
+
+Next 1.20.1 commit (1.2.0-beta.2):
+- Fix the weird issues with arm swinging with Nostalgic Tweaks' `Config Menu -> Animation -> Arm Animations -> Arm Swing -> whichever the fuck are causing issues`
 
 Next 1.21.1 commit (1.2.0-beta.2):
 - Copy last 1.20.1 commit
