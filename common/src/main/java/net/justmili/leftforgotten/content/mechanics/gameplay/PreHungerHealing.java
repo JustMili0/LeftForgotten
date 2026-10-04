@@ -41,7 +41,7 @@ public class PreHungerHealing {
         }
     }
 
-    static final Map<Item, FoodEntry> FOOD_HEALTH = Map.ofEntries(
+    private static final Map<Item, FoodEntry> FOOD_HEALTH = Map.ofEntries(
         Map.entry(Items.PORKCHOP, new FoodEntry(1.5f)),
         Map.entry(Items.COOKED_PORKCHOP, new FoodEntry(4f)),
         Map.entry(Items.BEEF, new FoodEntry(1.5f)),
@@ -136,7 +136,7 @@ public class PreHungerHealing {
         return EventResult.pass();
     }
 
-    static void applyAction(FoodAction action, Player player, ItemStack stack, Item item) {
+    private static void applyAction(FoodAction action, Player player, ItemStack stack, Item item) {
         switch (action) {
             case RESULT_BOWL -> giveResultItem(player, Items.BOWL);
             case RESULT_BOTTLE -> giveResultItem(player, Items.GLASS_BOTTLE);
@@ -151,16 +151,16 @@ public class PreHungerHealing {
         }
     }
 
-    static void giveResultItem(Player player, Item resultItem) {
+    private static void giveResultItem(Player player, Item resultItem) {
         var result = new ItemStack(resultItem);
         if (!player.getInventory().add(result)) player.drop(result, false);
     }
 
-    static void applyPoisonWithChance(Player player) {
+    private static void applyPoisonWithChance(Player player) {
         if (Maths.chance(0.6f)) player.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0));
     }
 
-    static void applyPoison(Player player, Item item) {
+    private static void applyPoison(Player player, Item item) {
         if (item == Items.SPIDER_EYE) {
             player.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0));
         } else if (item == Items.PUFFERFISH) {
@@ -168,7 +168,7 @@ public class PreHungerHealing {
         }
     }
 
-    static void applyHungerWithChance(Player player, Item item) {
+    private static void applyHungerWithChance(Player player, Item item) {
         if (item == Items.ROTTEN_FLESH && Maths.chance(0.8f)) {
             player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 600, 0));
         } else if (item == Items.CHICKEN && Maths.chance(0.3f)) {
@@ -176,7 +176,7 @@ public class PreHungerHealing {
         }
     }
 
-    static void applySuspiciousStewEffect(Player player, ItemStack stack) {
+    private static void applySuspiciousStewEffect(Player player, ItemStack stack) {
         var tag = stack.getTag();
         if (tag == null || !tag.contains("Effects", 9)) return;
         var list = tag.getList("Effects", 10);
@@ -188,7 +188,7 @@ public class PreHungerHealing {
         }
     }
 
-    static void applyChorusTeleport(Player player) {
+    private static void applyChorusTeleport(Player player) {
         var level = player.level();
         for (int attempt = 0; attempt < 16; attempt++) {
             double x = player.getX() + (level.random.nextDouble() - 0.5) * 16;
@@ -203,7 +203,7 @@ public class PreHungerHealing {
         }
     }
 
-    static double findGroundY(Level level, double x, double startY, double z) {
+    private static double findGroundY(Level level, double x, double startY, double z) {
         var pos = new BlockPos.MutableBlockPos((int) x, (int) startY, (int) z);
         while (pos.getY() > level.getMinBuildHeight()) {
             if (level.getBlockState(pos).isSolid()) {
@@ -216,7 +216,7 @@ public class PreHungerHealing {
         return -1;
     }
 
-    static void playConsumptionSound(Player player, LevelAccessor world, double x, double y, double z, Item item) {
+    private static void playConsumptionSound(Player player, LevelAccessor world, double x, double y, double z, Item item) {
         float pitch = Maths.randomFloat(0.8f, 1.2f);
         var sound = item == Items.HONEY_BOTTLE ? SoundEvents.HONEY_DRINK : SoundEvents.GENERIC_EAT;
         if (world instanceof Level level) {
@@ -228,7 +228,7 @@ public class PreHungerHealing {
         }
     }
 
-    static boolean healthCheck(Player player) {
+    private static boolean healthCheck(Player player) {
         return player.getHealth() >= player.getMaxHealth();
     }
 }

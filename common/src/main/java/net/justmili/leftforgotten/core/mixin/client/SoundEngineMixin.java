@@ -30,7 +30,7 @@ public class SoundEngineMixin {
         // Replace vanilla hurt with alpha hurt
         if (Sounds.PLAYER_HURT.equals(soundPath)) {
             ci.cancel();
-            engine.play(SimpleSoundInstance.forUI(SoundRegistry.HURT.get(), 1.0f));
+            engine.play(SimpleSoundInstance.forUI(SoundRegistry.HURT.get(), 1f));
             return;
         }
         // Play alpha hurt on top of other hurt sounds
@@ -38,7 +38,7 @@ public class SoundEngineMixin {
             || Sounds.HURT_FIRE.equals(soundPath)
             || Sounds.HURT_DROWN.equals(soundPath)
             || Sounds.HURT_BERRY.equals(soundPath)) {
-            engine.play(SimpleSoundInstance.forUI(SoundRegistry.HURT.get(), 1.0f));
+            engine.play(SimpleSoundInstance.forUI(SoundRegistry.HURT.get(), 1f));
             // Don't cancel original sound
         }
     }
