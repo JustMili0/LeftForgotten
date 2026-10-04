@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class FeatureVoid extends BarrierBlock {
-    private final float[] CHANCES = new float[]{0.38f, 0.34f, 0.08f};
+    private final float[] CHANCES = new float[]{0.5f, 0.3f, 0.2f};
 
     public FeatureVoid(Properties properties) {
         super(properties);
@@ -34,12 +34,11 @@ public class FeatureVoid extends BarrierBlock {
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!level.getBlockState(pos.above()).is(BlockRegistry.LEAVES.get())) return;
 
-        var wood = BlockRegistry.WOOD.get().defaultBlockState();
         var current = pos;
         for (float chance : CHANCES) {
             if (!level.getBlockState(current).is(this)) break;
             if (random.nextFloat() >= chance) break;
-            level.setBlock(current, wood, UPDATE_ALL);
+            level.setBlockAndUpdate(current, BlockRegistry.WOOD.get().defaultBlockState());
             current = current.below();
         }
         clearAtAndBelow(level, current);
@@ -51,9 +50,8 @@ public class FeatureVoid extends BarrierBlock {
         var current = pos;
         while (true) {
             var state = level.getBlockState(current);
-            if (state.is(BlockRegistry.DIRT.get()) || state.is(BlockRegistry.GRASS_BLOCK.get())) break;
-            if (state.isAir()) break;
-            if (state.is(this)) level.setBlock(current, Blocks.AIR.defaultBlockState(), UPDATE_ALL);
+            if (!state.is(this)) break;
+            if (state.is(this)) level.setBlockAndUpdate(current, Blocks.AIR.defaultBlockState());
             current = current.below();
         }
     }

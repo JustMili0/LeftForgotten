@@ -13,15 +13,14 @@ import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class Sounds {
-    public static final ResourceLocation
-        STOMACH_GROWL = ResourceUtil.asPath("subtle_effects:entity.player.stomach_growl"),
-        CHEST_OPEN = SoundEvents.CHEST_OPEN.getLocation(),
-        CHEST_CLOSE = SoundEvents.CHEST_CLOSE.getLocation(),
-        PLAYER_HURT = SoundEvents.PLAYER_HURT.getLocation(),
-        HURT_FREEZE = SoundEvents.PLAYER_HURT_FREEZE.getLocation(),
-        HURT_FIRE = SoundEvents.PLAYER_HURT_ON_FIRE.getLocation(),
-        HURT_DROWN = SoundEvents.PLAYER_HURT_DROWN.getLocation(),
-        HURT_BERRY = SoundEvents.PLAYER_HURT_SWEET_BERRY_BUSH.getLocation();
+    public static final ResourceLocation STOMACH_GROWL = ResourceUtil.asPath("subtle_effects:entity.player.stomach_growl");
+    public static final ResourceLocation CHEST_OPEN = SoundEvents.CHEST_OPEN.getLocation();
+    public static final ResourceLocation CHEST_CLOSE = SoundEvents.CHEST_CLOSE.getLocation();
+    public static final ResourceLocation PLAYER_HURT = SoundEvents.PLAYER_HURT.getLocation();
+    public static final ResourceLocation HURT_FREEZE = SoundEvents.PLAYER_HURT_FREEZE.getLocation();
+    public static final ResourceLocation HURT_FIRE = SoundEvents.PLAYER_HURT_ON_FIRE.getLocation();
+    public static final ResourceLocation HURT_DROWN = SoundEvents.PLAYER_HURT_DROWN.getLocation();
+    public static final ResourceLocation HURT_BERRY = SoundEvents.PLAYER_HURT_SWEET_BERRY_BUSH.getLocation();
 
     public static SoundEvent getRandomTrack() {
         var tracks = getMusicTracks();

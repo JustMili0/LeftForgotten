@@ -11,7 +11,6 @@ import net.minecraft.world.entity.MobCategory;
 
 public class EntityRegistry {
     public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(LeftForgotten.ID, Registries.ENTITY_TYPE);
-
     public static final RegistrySupplier<EntityType<OldBoatEntity>> BOAT;
 
     static {

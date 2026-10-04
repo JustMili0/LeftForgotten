@@ -12,10 +12,10 @@ import net.minecraft.world.level.Level;
 @Environment(EnvType.CLIENT)
 public class ApplyProgrammerArt {
     private static boolean shouldResetProgrammerArt = false;
-    private static String resourcePack = "programmer_art";
+    private static final String resourcePack = "programmer_art";
 
     public static void onChangeDimension(ServerPlayer player, ResourceKey<Level> fromLevel, ResourceKey<Level> toLevel) {
-        if (!Config.applyOldResourcepacks.get()) return;
+        if (!Config.applyProgrammerArt.get()) return;
         if (!ClientUtil.arePackLoaded("golden_days", "golden_days_alpha", "golden_days_beta")) return;
 
         if (Versions.isOldVersion(Versions.get(player, toLevel))) setupProgrammerArt();
@@ -26,7 +26,7 @@ public class ApplyProgrammerArt {
         if (Versions.isOldVersion(player.level())) shouldResetProgrammerArt = true;
     }
 
-    static void setupProgrammerArt() {
+    private static void setupProgrammerArt() {
         if (ClientUtil.addPackAndTell(resourcePack)) {
             ClientUtil.reloadPacks();
             shouldResetProgrammerArt = true;
@@ -35,7 +35,7 @@ public class ApplyProgrammerArt {
         }
     }
 
-    static void clearProgrammerArt() {
+    private static void clearProgrammerArt() {
         if (shouldResetProgrammerArt) ClientUtil.removePack(resourcePack);
     }
 }

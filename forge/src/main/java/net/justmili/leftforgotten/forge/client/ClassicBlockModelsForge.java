@@ -29,11 +29,7 @@ public class ClassicBlockModelsForge extends ClassicBlockModels implements IForg
     @Override
     public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData data, @Nullable RenderType renderType) {
         var replacedModel = this.getBakedModel(state);
-        if (replacedModel != null) {
-            return replacedModel.getQuads(state, side, rand, data, renderType);
-        }
-
-        return List.of();
+        return replacedModel == null? List.of() : replacedModel.getQuads(state, side, rand, data, renderType);
     }
 
     @Override

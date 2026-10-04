@@ -19,7 +19,7 @@
     "issues": "https://github.com/JustMili0/LeftForgotten/issues"
   },
   "license": "${mod_license}",
-  "icon": "icon_32px.png",
+  "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -44,9 +44,6 @@
     "fabric-api": ">=${fabric_api_version}",
     "minecraft": "${minecraft_version_constraint}",
     "architectury": ">=${architectury_api}"
-  },
-  "breaks": {
-    "true_end": "*"
   },
   "custom": {
     "modmenu": {

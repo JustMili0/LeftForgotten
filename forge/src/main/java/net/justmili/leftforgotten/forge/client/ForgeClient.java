@@ -6,7 +6,6 @@ import net.justmili.leftforgotten.core.registries.BlockRegistry;
 import net.justmili.leftforgotten.core.registries.EntityRegistry;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelEvent;
@@ -20,7 +19,7 @@ public class ForgeClient {
     @SubscribeEvent
     public static void init(FMLClientSetupEvent event) {
         /// DEV NOTE: DEPRECATED API USAGE
-        for (Block block : BlockRegistry.getBlocksFromRegistry()) {
+        for (var block : BlockRegistry.getBlocksFromRegistry()) {
             ItemBlockRenderTypes.setRenderLayer(block, RenderType.cutout());
         }
         CommonClient.init();

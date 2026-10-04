@@ -1,10 +1,9 @@
 package net.justmili.leftforgotten.core.mixin.client;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.mojang.math.Axis;
 import net.justmili.leftforgotten.core.util.Versions;
+import net.justmili.leftforgotten.core.util.client.BillboardItems;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
-import net.justmili.leftforgotten.libs.v1.utils.client.RenderingUtil;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.world.entity.item.ItemEntity;
 import org.joml.Quaternionf;
@@ -15,9 +14,8 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class ItemEntityRendererMixin {
 
     @ModifyExpressionValue(method = "render(Lnet/minecraft/world/entity/item/ItemEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At(value = "INVOKE", target = "Lcom/mojang/math/Axis;rotation(F)Lorg/joml/Quaternionf;"))
-    private Quaternionf lf$billboardItemRotation(Quaternionf quaternion, ItemEntity entity) {
-        if (!Versions.hadBillboardItems(ClientUtil.level())) return quaternion;
-        if (!RenderingUtil.getItemModel(entity.getItem()).usesBlockLight()) return Axis.YP.rotationDegrees(180.0f - RenderingUtil.getMainCam().getYRot());
-        return quaternion;
+    private Quaternionf lf$billboardItemRotation(Quaternionf original, ItemEntity entity) {
+        if (!Versions.hadBillboardItems(ClientUtil.level())) return original;
+        return BillboardItems.is3D(entity)? original : BillboardItems.getFacingAxis();
     }
 }

@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.forge.client;
 
+import net.justmili.leftforgotten.client.CommonVersionOverlay;
 import net.justmili.leftforgotten.core.util.Versions;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.common.Maths;
@@ -7,9 +8,11 @@ import net.justmili.leftforgotten.libs.v1.utils.common.ResourceUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -17,11 +20,11 @@ import static net.justmili.leftforgotten.client.CommonHudModifier.Common.*;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Forge.*;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
-public class HudModifier {
+public class RenderGuiEvents {
     private static final ResourceLocation GUI_ICONS_LOCATION = ResourceUtil.asMinecraft("textures/gui/icons.png");
 
     @SubscribeEvent
-    public static void onGuiOverlayPre(RenderGuiOverlayEvent.Pre event) {
+    public static void modifyHud(RenderGuiOverlayEvent.Pre event) {
         if (!Versions.hadOldHUD(ClientUtil.level())) return;
         var player = ClientUtil.player();
         if (player == null) return;
@@ -93,5 +96,10 @@ public class HudModifier {
                 overlay.render(gui, graphics, partTick, width - mountHpW, height - mountHpH - yOffset() + mountHpH_na);
             }
         }
+    }
+
+    @SubscribeEvent(priority = EventPriority.NORMAL)
+    public static void renderVersionOverlay(RenderGuiEvent.Post event) {
+        if (!ClientUtil.isDebugScreenOn()) CommonVersionOverlay.renderTextOverlay(event.getGuiGraphics());
     }
 }

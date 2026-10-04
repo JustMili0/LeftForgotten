@@ -11,7 +11,7 @@ import net.justmili.leftforgotten.content.mechanics.gameplay.ApplyProgrammerArt;
 public class ClientEventRegistry {
 
     public static void init() {
-        ClientTickEvent.CLIENT_POST.register(CommonVersionOverlay::onClientTick);
+        ClientTickEvent.CLIENT_POST.register(CommonVersionOverlay::updateTextOverlay);
 
         PlayerEvent.PLAYER_JOIN.register(ApplyProgrammerArt::onPlayerJoin);
         PlayerEvent.CHANGE_DIMENSION.register(ApplyProgrammerArt::onChangeDimension);

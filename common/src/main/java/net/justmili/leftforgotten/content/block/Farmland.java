@@ -73,7 +73,7 @@ public class Farmland extends FarmBlock {
 	}
 
 	static boolean isNearWater(LevelReader level, BlockPos pos) {
-		for (BlockPos blockPos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4))) {
+		for (var blockPos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4))) {
 			if (level.getFluidState(blockPos).is(FluidTags.WATER)) return true;
 		}
 		return false;

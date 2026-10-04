@@ -57,12 +57,10 @@ public abstract class ItemRendererMixin {
 
         var random = RandomSource.create(42L);
         var originalQuads = model.getQuads(null, null, random);
-
         if (originalQuads.isEmpty()) return;
 
         pose.pushPose();
         List<BakedQuad> quads = new ArrayList<>(originalQuads);
-
         for (var quad : originalQuads) {
             if (quad.getDirection() != Direction.SOUTH) {
                 quads.remove(quad);
@@ -70,7 +68,6 @@ public abstract class ItemRendererMixin {
                 BillboardItems.setUnitNormals(pose.last().normal(), quad);
             }
         }
-
         this.renderQuadList(pose, consumer, quads, stack, light, overlay);
         pose.popPose();
     }

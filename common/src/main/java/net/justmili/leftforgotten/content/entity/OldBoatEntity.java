@@ -1,6 +1,5 @@
 package net.justmili.leftforgotten.content.entity;
 
-import dev.architectury.platform.Platform;
 import net.justmili.leftforgotten.core.network.OldBoatImpactPacket;
 import net.justmili.leftforgotten.core.registries.EntityRegistry;
 import net.justmili.leftforgotten.core.registries.ItemRegistry;
@@ -65,38 +64,22 @@ public class OldBoatEntity extends Boat {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if (isInvulnerableTo(source)) return false;
-        if (!level().isClientSide) {
-            boolean isCreative = source.getEntity() instanceof Player player && player.getAbilities().instabuild;
-            if (isCreative) {
-                discard();
-                return true;
-            }
-            health -= amount;
-            if (health <= 0.0F && !isRemoved()) {
-                spawnAtLocation(new ItemStack(ItemRegistry.WOODEN_PLANKS.get(), 3));
-                spawnAtLocation(new ItemStack(Items.STICK, 2));
-                discard();
-            }
-        }
-        return true;
-    }
+        if (isInvulnerableTo(source) || level().isClientSide()) return false;
 
-    @Override
-    public boolean isControlledByLocalInstance() {
-        if (Platform.isModLoaded("wurst") ||
-            Platform.isModLoaded("wurstclient") ||
-            Platform.isModLoaded("meteor-client") ||
-            Platform.isModLoaded("meteor") ||
-            Platform.isModLoaded("liquidbounce") ||
-            Platform.isModLoaded("future") ||
-            Platform.isModLoaded("impact") ||
-            Platform.isModLoaded("ares") ||
-            Platform.isModLoaded("sigma") ||
-            Platform.isModLoaded("inertia")) {
-            return false;
+        boolean isCreative = source.getEntity() instanceof Player player && player.getAbilities().instabuild;
+        if (isCreative) {
+            discard();
+            return true;
         }
-        return super.isControlledByLocalInstance();
+
+        health -= amount;
+        if (health <= 0 && !isRemoved()) {
+            spawnAtLocation(new ItemStack(ItemRegistry.WOODEN_PLANKS.get(), 3));
+            spawnAtLocation(new ItemStack(Items.STICK, 2));
+            discard();
+        }
+
+        return true;
     }
 
     @Override

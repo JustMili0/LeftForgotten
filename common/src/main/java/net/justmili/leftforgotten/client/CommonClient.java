@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 public class CommonClient {
 
     public static void init() {
-        Config.client();
+        Config.initClient();
 
         ClientEventRegistry.init();
 
@@ -23,7 +23,6 @@ public class CommonClient {
 
     public static boolean shouldReplaceBakedModel(ResourceLocation id) {
         if (!(id instanceof ModelResourceLocation modelId)) return false;
-
         return id.getNamespace().equals("minecraft") && !modelId.getVariant().equals("inventory")
             && (id.getPath().equals("furnace") || id.getPath().equals("crafting_table"));
     }

@@ -24,8 +24,7 @@ public class CommonHudModifier {
             return 2 * (width() / 2 - 91) + 72 - x;
         }
 
-        public static void renderFlippedBlit(GuiGraphics graphics, ResourceLocation texture,
-                                             int x1, int y1, int width, int height, int uOffset, int vOffset) {
+        public static void renderFlippedBlit(GuiGraphics graphics, ResourceLocation texture, int x1, int y1, int width, int height, int uOffset, int vOffset) {
             int x2 = x1 + width;
             int y2 = y1 + height;
             float minU = (uOffset + width) / 256f;

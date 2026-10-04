@@ -19,15 +19,15 @@ public final class LeftForgotten {
         CoreLibs.init();
 
         ModUtil.specialInitMessage(LOGGER, NAME, ID, BUILD, ModUtil.VersionBuildType.BETA);
-        Config.common();
+        Config.initCommon();
 
+        SoundRegistry.init();
+        LevelRegistry.init();
         BlockRegistry.init();
         ItemRegistry.init();
-        TabRegistry.init();
         EntityRegistry.init();
-        SoundRegistry.init();
-
         PacketRegistry.init();
+        TabRegistry.init();
         EventRegistry.init();
     }
 
