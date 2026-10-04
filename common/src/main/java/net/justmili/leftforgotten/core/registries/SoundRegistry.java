@@ -8,7 +8,6 @@ import net.minecraft.sounds.SoundEvent;
 
 public class SoundRegistry {
     public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(LeftForgotten.ID,Registries.SOUND_EVENT);
-
     public static final RegistrySupplier<SoundEvent> HURT,
         MUSIC_13, MUSIC_BOO, MUSIC_CALM1, MUSIC_CALM2, MUSIC_CALM3,
         MUSIC_HAL1, MUSIC_HAL2, MUSIC_HAL3, MUSIC_HAL4,

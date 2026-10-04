@@ -26,7 +26,6 @@ public class ClassicBlockModelsFabric extends ClassicBlockModels implements Fabr
     public void emitBlockQuads(BlockAndTintGetter blockView, BlockState state, BlockPos pos, Supplier<RandomSource> randomSupplier, RenderContext context) {
         var replacedModel = this.getBakedModel(state);
         if (replacedModel == null) return; // EBE please don't
-
         replacedModel.emitBlockQuads(blockView, state, pos, randomSupplier, context);
     }
 

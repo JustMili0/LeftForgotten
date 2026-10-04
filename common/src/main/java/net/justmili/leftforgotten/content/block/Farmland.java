@@ -27,7 +27,7 @@ public class Farmland extends FarmBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return !this.defaultBlockState().canSurvive(context.getLevel(), context.getClickedPos()) ?
+		return !this.defaultBlockState().canSurvive(context.getLevel(), context.getClickedPos())?
 			BlockRegistry.DIRT.get().defaultBlockState() : super.getStateForPlacement(context);
 	}
 
@@ -54,26 +54,26 @@ public class Farmland extends FarmBlock {
 
 	@Override
 	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-		if (!level.isClientSide && level.random.nextFloat() < fallDistance - 0.5F && entity instanceof LivingEntity
+		if (!level.isClientSide && level.random.nextFloat() < fallDistance - 0.5f && entity instanceof LivingEntity
 			&& (entity instanceof Player || level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING))
-			&& entity.getBbWidth() * entity.getBbWidth() * entity.getBbHeight() > 0.512F) {
+			&& entity.getBbWidth() * entity.getBbWidth() * entity.getBbHeight() > 0.512f) {
 			turnToOldDirt(entity, state, level, pos);
 		}
-		entity.causeFallDamage(fallDistance, 1.0F, entity.damageSources().fall());
+		entity.causeFallDamage(fallDistance, 1f, entity.damageSources().fall());
 	}
 
-	static void turnToOldDirt(@Nullable Entity entity, BlockState state, Level level, BlockPos pos) {
+	private static void turnToOldDirt(@Nullable Entity entity, BlockState state, Level level, BlockPos pos) {
 		var newState = pushEntitiesUp(state, BlockRegistry.DIRT.get().defaultBlockState(), level, pos);
 		level.setBlockAndUpdate(pos, newState);
 		level.gameEvent(GameEvent.BLOCK_CHANGE, pos, Context.of(entity, newState));
 	}
 
-	static boolean shouldMaintainFarmland(BlockGetter getter, BlockPos pos) {
+	private static boolean shouldMaintainFarmland(BlockGetter getter, BlockPos pos) {
 		return getter.getBlockState(pos.above()).is(BlockTags.MAINTAINS_FARMLAND);
 	}
 
-	static boolean isNearWater(LevelReader level, BlockPos pos) {
-		for (BlockPos blockPos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4))) {
+	private static boolean isNearWater(LevelReader level, BlockPos pos) {
+		for (var blockPos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4))) {
 			if (level.getFluidState(blockPos).is(FluidTags.WATER)) return true;
 		}
 		return false;

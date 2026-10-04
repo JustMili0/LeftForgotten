@@ -9,13 +9,12 @@ import net.justmili.leftforgotten.client.renderer.entity.OldBoatRenderer;
 import net.justmili.leftforgotten.core.registries.BlockRegistry;
 import net.justmili.leftforgotten.core.registries.EntityRegistry;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.level.block.Block;
 
 public final class FabricClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        for (Block block : BlockRegistry.getBlocksFromRegistry()) {
+        for (var block : BlockRegistry.getBlocksFromRegistry()) {
             BlockRenderLayerMap.INSTANCE.putBlock(block, RenderType.cutout());
         }
         CommonClient.init();

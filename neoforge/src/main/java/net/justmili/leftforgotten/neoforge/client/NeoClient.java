@@ -22,7 +22,7 @@ public class NeoClient {
     @SubscribeEvent
     public static void init(FMLClientSetupEvent event) {
         // DEV NOTE: DEPRECATED API USAGE
-        for (Block block : BlockRegistry.getBlocksFromRegistry()) {
+        for (var block : BlockRegistry.getBlocksFromRegistry()) {
             ItemBlockRenderTypes.setRenderLayer(block, RenderType.cutoutMipped());
         }
         CommonClient.init();

@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.neoforge.client;
 
+import net.justmili.leftforgotten.client.CommonVersionOverlay;
 import net.justmili.leftforgotten.core.util.Versions;
 import net.justmili.leftforgotten.libs.v1.utils.client.ClientUtil;
 import net.justmili.leftforgotten.libs.v1.utils.client.RenderingUtil;
@@ -11,8 +12,10 @@ import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
@@ -20,7 +23,7 @@ import static net.justmili.leftforgotten.client.CommonHudModifier.Common.*;
 import static net.justmili.leftforgotten.client.CommonHudModifier.NeoForge.*;
 
 @EventBusSubscriber(value = Dist.CLIENT)
-public class HudModifier {
+public class RenderGuiEvents {
     private static final ResourceLocation ARMOR_EMPTY = ResourceUtil.asMinecraft("hud/armor_empty");
     private static final ResourceLocation ARMOR_HALF = ResourceUtil.asMinecraft("hud/armor_half");
     private static final ResourceLocation ARMOR_FULL = ResourceUtil.asMinecraft("hud/armor_full");
@@ -101,11 +104,16 @@ public class HudModifier {
         }
     }
 
-    static void render(GuiGraphics graphics, LayeredDraw.Layer overlay, DeltaTracker partialTick, int x, int y) {
+    private static void render(GuiGraphics graphics, LayeredDraw.Layer overlay, DeltaTracker partialTick, int x, int y) {
         var pose = graphics.pose();
         pose.pushPose();
         pose.translate(x, y, 0);
         overlay.render(graphics, partialTick);
         pose.popPose();
+    }
+
+    @SubscribeEvent(priority = EventPriority.NORMAL)
+    public static void renderVersionOverlay(RenderGuiEvent.Post event) {
+        if (!ClientUtil.isDebugScreenOn()) CommonVersionOverlay.renderTextOverlay(event.getGuiGraphics());
     }
 }

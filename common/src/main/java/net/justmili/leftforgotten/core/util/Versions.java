@@ -9,7 +9,9 @@ import java.util.List;
 import static net.justmili.leftforgotten.core.registries.LevelRegistry.*;
 
 public class Versions {
-    static final List<ResourceKey<Level>> VERSIONS = List.of(PRECLASSIC, CLASSIC, INDEV, INFDEV, ALPHA, BETA);
+    private static final List<ResourceKey<Level>> VERSIONS = List.of(PRECLASSIC, CLASSIC, INDEV, INFDEV, ALPHA, BETA);
+    private static final List<ResourceKey<Level>> UP_TO_ALPHA = List.of(PRECLASSIC, CLASSIC, INDEV, INFDEV, ALPHA);
+    private static final List<ResourceKey<Level>> HAD_VERSION_OVERLAY = List.of(CLASSIC, INDEV, INFDEV, ALPHA, BETA);
 
     public static Level get(LivingEntity entity, ResourceKey<Level> dimension) {
         var server = entity.level().getServer();
@@ -19,7 +21,7 @@ public class Versions {
 
     public static boolean isOverworld(Level level) {
         if (level == null) return false;
-        return level.dimension().equals(Level.OVERWORLD);
+        return level.dimension() == Level.OVERWORLD;
     }
 
     public static boolean isOldVersion(Level level) {
@@ -29,7 +31,7 @@ public class Versions {
 
     public static boolean isHighestLayer(Level level) {
         if (level == null) return false;
-        return level.dimension().equals(ALPHA); // TODO: Change to BETA once added in 1.3
+        return level.dimension() == ALPHA; // TODO: Change to BETA once added in 1.3
     }
 
     public static boolean upToAny(Level level) {
@@ -43,11 +45,11 @@ public class Versions {
 
     public static boolean upToAlpha(Level level) {
         if (level == null) return false;
-        return List.of(PRECLASSIC, CLASSIC, INDEV, INFDEV, ALPHA).contains(level.dimension());
+        return UP_TO_ALPHA.contains(level.dimension());
     }
 
     public static boolean hadVersionOverlay(Level level) {
-        return upToBeta(level);
+        return HAD_VERSION_OVERLAY.contains(level.dimension());
     }
 
     public static boolean hadOldHUD(Level level) {
@@ -76,7 +78,7 @@ public class Versions {
 
     public static boolean hadBedMonsters(Level level) {
         if (level == null) return false;
-        return level.dimension().equals(BETA);
+        return level.dimension() == BETA;
     }
 
     public static boolean hadBlockyLighting(Level level) {
@@ -85,7 +87,7 @@ public class Versions {
 
     public static boolean hadCaveFog(Level level) {
         if (level == null) return false;
-        return level.dimension().equals(BETA);
+        return level.dimension() == BETA;
     }
 
     public static boolean hadBlockyChests(Level level) {

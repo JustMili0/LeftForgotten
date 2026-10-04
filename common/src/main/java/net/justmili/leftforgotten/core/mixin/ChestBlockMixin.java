@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.core.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.core.util.Versions;
 import net.minecraft.core.BlockPos;
@@ -23,13 +24,10 @@ public class ChestBlockMixin {
     @Unique
     private static final VoxelShape FULL_BLOCK = Block.box(0, 0, 0, 16, 16, 16);
 
-    @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
-    private void lf$tryReshapeChest(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        if (!(getter instanceof Level level)) return;
-        if (!Versions.hadBlockyChests(level)) return;
-        if (Config.chestRemodel.isNull() || !Config.chestRemodel.get()) return;
-        if ((Object) this != Blocks.CHEST) return;
-
-        cir.setReturnValue(FULL_BLOCK);
+    @ModifyReturnValue(method = "getShape", at = @At("RETURN"))
+    private VoxelShape lf$tryReshapeChest(VoxelShape original, BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
+        if (!(getter instanceof Level level)) return original;
+        if (!Config.chestRemodel.get() || !Versions.hadBlockyChests(level)) return original;
+        return FULL_BLOCK;
     }
 }

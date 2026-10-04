@@ -6,7 +6,6 @@ import net.justmili.leftforgotten.core.registries.LevelRegistry;
 import net.justmili.leftforgotten.core.util.Versions;
 import net.justmili.leftforgotten.libs.v1.utils.common.TickUtil;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,50 +18,48 @@ import net.minecraft.world.level.Level;
 import java.util.Set;
 
 public class MoveToAlpha {
-    static int returnY() {
-        return Platform.isModLoaded("bigglobe")? -1049 : -88;
-    }
 
     public static EventResult onEntityHurt(LivingEntity entity, DamageSource source, float value) {
-        if (source == null) return EventResult.pass();
-        if (!Versions.isOverworld(entity.level())) return EventResult.pass();
-        if (!source.is(DamageTypes.FELL_OUT_OF_WORLD)) return EventResult.pass();
+        if (!Versions.isOverworld(entity.level())
+            || source == null
+            || !source.is(DamageTypes.FELL_OUT_OF_WORLD)
+        ) return EventResult.pass();
+        if (!(Versions.get(entity, LevelRegistry.ALPHA) instanceof ServerLevel level)) return EventResult.pass();
 
-        var level = Versions.get(entity, LevelRegistry.ALPHA);
-        if (!(level instanceof ServerLevel serverLevel)) return EventResult.pass();
-
-        entity.teleportTo(serverLevel, entity.getX(), 156, entity.getZ(), Set.of(), entity.getYRot(), entity.getXRot());
+        entity.teleportTo(level, entity.getX(), 156, entity.getZ(), Set.of(), entity.getYRot(), entity.getXRot());
 
         return EventResult.interruptFalse();
     }
 
     public static EventResult onHurtByDimensionEntry(LivingEntity entity, DamageSource source, float value) {
-        if (!(entity instanceof ServerPlayer player)) return EventResult.pass();
-        if (source == null) return EventResult.pass();
-        if (!Versions.isHighestLayer(player.level())) return EventResult.pass();
-        if (!source.is(DamageTypes.FALL)) return EventResult.pass(); // Filter only for fall aka for entry
-        if (value > 512f) return EventResult.pass(); // Cancel the damage
-        if (player.getHealth() - value > 0) return EventResult.pass();
+        if (!Versions.isHighestLayer(entity.level())
+            || source == null
+            || !source.is(DamageTypes.FALL)
+            || value > 512f
+            || entity.getHealth() - value > 0
+        ) return EventResult.pass();
 
-        player.setHealth(2);
-        player.hurt(player.damageSources().fall(), 1f);
+        entity.setHealth(2);
+        entity.hurt(entity.damageSources().fall(), 1f);
 
         return EventResult.interruptFalse();
     }
 
     public static void onPlayerTick(Player player) {
-        if (!Versions.isHighestLayer(player.level())) return;
-        if (player.getY() < 196) return;
-
-        var level = Versions.get(player, Level.OVERWORLD);
-        if (!(level instanceof ServerLevel serverLevel)) return;
+        if (!Versions.isHighestLayer(player.level()) || player.getY() < 196) return;
+        if (!(Versions.get(player, Level.OVERWORLD) instanceof ServerLevel level)) return;
 
         var delta = player.getDeltaMovement();
-        player.teleportTo(serverLevel, player.getX(), returnY(), player.getZ(), RelativeMovement.ROTATION, player.getYRot(), player.getXRot());
+        boolean wasFallFlying = player.isFallFlying();
+        player.teleportTo(level, player.getX(), getReturnY(), player.getZ(), RelativeMovement.ROTATION, player.getYRot(), player.getXRot());
         player.setDeltaMovement(delta);
-        player.startFallFlying();
+        if (wasFallFlying) player.startFallFlying();
 
         // Schedule effect for next tick
         TickUtil.waitTicks(1, () -> player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 40, 0, false, false)));
+    }
+
+    static int getReturnY() {
+        return Platform.isModLoaded("bigglobe")? -1049 : -88;
     }
 }

@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.core.mixin.client;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.config.Config;
 import net.justmili.leftforgotten.core.util.Versions;
@@ -10,8 +11,6 @@ import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerInfo.class)
 public abstract class PlayerInfoMixin {
@@ -19,17 +18,15 @@ public abstract class PlayerInfoMixin {
     @Unique
     private static final ResourceLocation lf$STEVE_SKIN = LeftForgotten.asId("textures/entity/player/steve.png");
 
-    @Inject(method = "getSkin", at = @At("RETURN"), cancellable = true)
-    private void lf$tryForceSteveSkinAndModel(CallbackInfoReturnable<PlayerSkin> cir) {
-        if (Versions.hadNoSkins(ClientUtil.level()) || !Config.steveSkin.get()) return;
-        var original = cir.getReturnValue();
-        cir.setReturnValue(new PlayerSkin(
+    @ModifyReturnValue(method = "getSkin", at = @At("RETURN"))
+    private PlayerSkin lf$tryForceSteveSkinAndModel(PlayerSkin original) {
+        return Versions.hadNoSkins(ClientUtil.level()) || !Config.steveSkin.get()? original : new PlayerSkin(
             lf$STEVE_SKIN,
             original.textureUrl(),
             original.capeTexture(),
             original.elytraTexture(),
             PlayerSkin.Model.WIDE,
             original.secure()
-        ));
+        );
     }
 }

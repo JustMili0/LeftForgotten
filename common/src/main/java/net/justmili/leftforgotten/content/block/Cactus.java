@@ -19,15 +19,13 @@ public class Cactus extends CactusBlock {
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        for (Direction direction : Plane.HORIZONTAL) {
+        for (var direction : Plane.HORIZONTAL) {
             var relative = level.getBlockState(pos.relative(direction));
             if (relative.isSolid() || level.getFluidState(pos.relative(direction)).is(FluidTags.LAVA)) return false;
         }
 
         var below = level.getBlockState(pos.below());
-        return (below.is(Blocks.CACTUS)
-            || below.is(BlockRegistry.CACTUS.get())
-            || below.is(BlockTags.SAND))
-            && !level.getBlockState(pos.above()).liquid();
+        return (below.is(Blocks.CACTUS) || below.is(BlockRegistry.CACTUS.get())
+            || below.is(BlockTags.SAND)) && !level.getBlockState(pos.above()).liquid();
     }
 }

@@ -36,12 +36,7 @@ public abstract class ClassicBlockModels implements BakedModel {
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction direction, RandomSource random) {
         var replacedModel = this.getBakedModel(state);
-
-        if (replacedModel != null) {
-            return replacedModel.getQuads(state, direction, random);
-        }
-
-        return List.of();
+        return replacedModel == null? List.of() : replacedModel.getQuads(state, direction, random);
     }
 
     @Override

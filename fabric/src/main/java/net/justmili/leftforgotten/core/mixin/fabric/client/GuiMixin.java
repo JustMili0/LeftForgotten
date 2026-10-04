@@ -127,6 +127,6 @@ public abstract class GuiMixin {
     // Render version overlay
     @Inject(at = @At("TAIL"), method = "render")
     public void lf$renderVersionOverlay(GuiGraphics graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-        if (!ClientUtil.isDebugScreenOn() && Versions.hadVersionOverlay(ClientUtil.level())) CommonVersionOverlay.render(graphics);
+        if (!ClientUtil.isDebugScreenOn()) CommonVersionOverlay.renderTextOverlay(graphics);
     }
 }

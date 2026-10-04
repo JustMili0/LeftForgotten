@@ -12,10 +12,10 @@ public class Config {
     public static ConfigEntry<Boolean> fog, caveFog;
     public static ConfigEntry<Boolean> blockyLighting, steveSkin;
     public static ConfigEntry<Boolean> chestRemodel, workstationRemodel;
-    public static ConfigEntry<Boolean> applyOldResourcepacks;
+    public static ConfigEntry<Boolean> applyProgrammerArt;
     public static ConfigEntry<Boolean> farlands;
 
-    public static void client() {
+    public static void initClient() {
         fog = client.comment("Should it be foggy in version layers with thick fog?")
             .define("enableFog", false);
 
@@ -28,13 +28,13 @@ public class Config {
         workstationRemodel = client.comment("Should models/textures of the Furnace and Crafting Table be changed to pre-1.14?")
             .define("enableWorkstationRemodel", true);
 
-        applyOldResourcepacks = client.comment("Should a resourcepack be loaded upon entering any version layer?")
-            .define("enableOldResourcepacks", true);
+        applyProgrammerArt = client.comment("Should Programmer Art be loaded upon entering any version layer?")
+            .define("enableLoadingProgrammerArt", true);
 
         client.build();
     }
 
-    public static void common() {
+    public static void initCommon() {
         farlands = common.comment("Should Farlands generate?")
             .define("enableFarlandsGeneration", true);
 
