@@ -14,29 +14,11 @@ import org.joml.Quaternionf;
 @Environment(EnvType.CLIENT)
 public class BillboardItems {
 
-    private static float getCamXRot() {
-        return RenderingUtil.getMainCam().getYRot();
-    }
-
     public static boolean is3D(ItemEntity entity) {
         return RenderingUtil.getItemModel(entity.getItem()).usesBlockLight();
     }
 
     public static Quaternionf getFacingAxis() {
-        return Axis.YP.rotationDegrees(180f - getCamXRot());
-    }
-
-    public static void setUnitNormals(Matrix3f matrix3f, BakedQuad quad) {
-        float sign = Maths.sign(getCamXRot());
-
-        matrix3f.m20(1f);
-        matrix3f.m21(1f);
-        matrix3f.m22(sign);
-
-        if (quad.getDirection() == Direction.NORTH) {
-            matrix3f.m20(-1f);
-            matrix3f.m21(-1f);
-            matrix3f.m22(-1f * sign);
-        }
+        return Axis.YP.rotationDegrees(180f - RenderingUtil.getMainCam().getYRot());
     }
 }
