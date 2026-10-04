@@ -33,21 +33,19 @@ public class Farmland extends FarmBlock {
 
 	@Override
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		if (!state.canSurvive(level, pos)) {
-			turnToOldDirt(null, state, level, pos);
-		}
+		if (!state.canSurvive(level, pos)) turnToOldDirt(null, state, level, pos);
 	}
 
 	@Override
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		int i = state.getValue(MOISTURE);
+		int moisture = state.getValue(MOISTURE);
 		if (!isNearWater(level, pos) && !level.isRainingAt(pos.above())) {
-			if (i > 0) {
-				level.setBlock(pos, state.setValue(MOISTURE, i - 1), UPDATE_CLIENTS);
+			if (moisture > 0) {
+				level.setBlock(pos, state.setValue(MOISTURE, moisture - 1), UPDATE_CLIENTS);
 			} else if (!shouldMaintainFarmland(level, pos)) {
 				turnToOldDirt(null, state, level, pos);
 			}
-		} else if (i < 7) {
+		} else if (moisture < 7) {
 			level.setBlock(pos, state.setValue(MOISTURE, 7), UPDATE_CLIENTS);
 		}
 	}

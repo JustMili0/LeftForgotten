@@ -44,14 +44,14 @@ public class LFRecipeProvider extends RecipeProvider {
         // Ores
         gen.smelt(ItemRegistry.COAL_ORE.get(), Items.COAL, 0.1f);
         gen.smelt(ItemRegistry.IRON_ORE.get(), Items.IRON_INGOT, 0.7f);
-        gen.smelt(ItemRegistry.GOLD_ORE.get(), Items.GOLD_INGOT, 1.0f);
+        gen.smelt(ItemRegistry.GOLD_ORE.get(), Items.GOLD_INGOT, 1f);
         gen.smelt(ItemRegistry.REDSTONE_ORE.get(), Items.REDSTONE, 0.7f);
-        gen.smelt(ItemRegistry.DIAMOND_ORE.get(), Items.DIAMOND, 1.0f);
+        gen.smelt(ItemRegistry.DIAMOND_ORE.get(), Items.DIAMOND, 1f);
         gen.blast(ItemRegistry.COAL_ORE.get(), Items.COAL, 0.1f);
         gen.blast(ItemRegistry.IRON_ORE.get(), Items.IRON_INGOT, 0.7f);
-        gen.blast(ItemRegistry.GOLD_ORE.get(), Items.GOLD_INGOT, 1.0f);
+        gen.blast(ItemRegistry.GOLD_ORE.get(), Items.GOLD_INGOT, 1f);
         gen.blast(ItemRegistry.REDSTONE_ORE.get(), Items.REDSTONE, 0.7f);
-        gen.blast(ItemRegistry.DIAMOND_ORE.get(), Items.DIAMOND, 1.0f);
+        gen.blast(ItemRegistry.DIAMOND_ORE.get(), Items.DIAMOND, 1f);
 
         // Cobblestone
         gen.stairs(ItemRegistry.COBBLESTONE.get(), ItemRegistry.COBBLESTONE_STAIRS.get());

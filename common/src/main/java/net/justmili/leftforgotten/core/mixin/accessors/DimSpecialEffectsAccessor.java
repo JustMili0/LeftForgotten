@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(DimensionSpecialEffects.class)
 public interface DimSpecialEffectsAccessor {
+
     @Accessor("EFFECTS")
     static Object2ObjectMap<ResourceLocation, DimensionSpecialEffects> getEffects() {
         throw new AssertionError();

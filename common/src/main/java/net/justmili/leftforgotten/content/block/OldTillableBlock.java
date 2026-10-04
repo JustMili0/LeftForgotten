@@ -29,12 +29,13 @@ public class OldTillableBlock extends Block {
 
         if (!level.isClientSide()) {
             level.setBlockAndUpdate(pos, BlockRegistry.FARMLAND.get().defaultBlockState());
-            level.playSound(null, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0f, 0.9f + level.getRandom().nextFloat() * 0.2f);
+            level.playSound(null, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1f, 0.9f + level.getRandom().nextFloat() * 0.2f);
             held.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
             onTilled((ServerLevel) level, pos, player);
         }
         return ItemInteractionResult.SUCCESS;
     }
 
-    protected void onTilled(ServerLevel level, BlockPos pos, Player player) {}
+    protected void onTilled(ServerLevel level, BlockPos pos, Player player) {
+    }
 }

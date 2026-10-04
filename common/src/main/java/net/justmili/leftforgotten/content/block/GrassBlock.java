@@ -40,7 +40,7 @@ public class GrassBlock extends OldTillableBlock {
         level.addFreshEntity(seeds);
     }
 
-    static boolean canSurvive(LevelReader level, BlockPos pos) {
+    private static boolean canSurvive(LevelReader level, BlockPos pos) {
         var above = pos.above();
         var aboveState = level.getBlockState(above);
         if (aboveState.is(BlockRegistry.LEAVES.get())) return true;

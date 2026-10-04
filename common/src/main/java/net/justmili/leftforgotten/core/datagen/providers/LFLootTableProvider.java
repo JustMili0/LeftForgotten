@@ -48,7 +48,7 @@ public class LFLootTableProvider extends LootTableProvider {
             other(BlockRegistry.FARMLAND, BlockRegistry.DIRT);
             var gravel = BlockRegistry.GRAVEL;
             loot(gravel, createSilkTouchDispatchTable(gravel.get(), applyExplosionCondition(gravel.get(), LootItem.lootTableItem(Items.FLINT)
-                .when(BonusLevelTableCondition.bonusLevelFlatChance(registryLookup.getOrThrow(Enchantments.FORTUNE), 0.1F, 0.14285715F, 0.25F, 1.0F))
+                .when(BonusLevelTableCondition.bonusLevelFlatChance(registryLookup.getOrThrow(Enchantments.FORTUNE), 0.1f, 0.14285715f, 0.25f, 1f))
                 .otherwise(LootItem.lootTableItem(gravel.get()))
             )));
             self(BlockRegistry.SAND);

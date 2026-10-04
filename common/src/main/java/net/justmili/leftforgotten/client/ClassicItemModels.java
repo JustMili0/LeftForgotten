@@ -1,7 +1,5 @@
 package net.justmili.leftforgotten.client;
 
-import net.justmili.leftforgotten.core.util.client.Remodels;
-import net.justmili.leftforgotten.libs.v1.utils.client.RenderingUtil;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -9,69 +7,64 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ClassicBlockModels implements BakedModel {
+public class ClassicItemModels implements BakedModel {
     protected final BakedModel wrapped;
 
-    public ClassicBlockModels(BakedModel wrapped) {
+    public ClassicItemModels(BakedModel wrapped) {
         this.wrapped = wrapped;
-    }
-
-    protected @Nullable BakedModel getBakedModel(BlockState state) {
-        if (state == null) return this.wrapped;
-
-        var block = state.getBlock();
-        var remodel = Remodels.of(block);
-        if (remodel == block) return this.wrapped;
-
-        // Chest here only exists purely for EBE purposes really
-        return state.is(Blocks.CHEST)? null : RenderingUtil.getBlockModel(remodel.withPropertiesOf(state));
     }
 
     @Override
     public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction direction, RandomSource random) {
-        var originalModel = this.getBakedModel(state);
-        return originalModel == null? List.of() : originalModel.getQuads(state, direction, random);
+        List<BakedQuad> originalQuads = wrapped.getQuads(state, direction, random);
+        if (originalQuads.isEmpty()) return List.of();
+
+        List<BakedQuad> quads = new ArrayList<>(originalQuads.size());
+        for (var quad : originalQuads) {
+            if (quad.getDirection() == Direction.SOUTH) quads.add(quad);
+        }
+        return quads;
     }
 
     @Override
     public boolean useAmbientOcclusion() {
-        return this.wrapped.useAmbientOcclusion();
+        return wrapped.useAmbientOcclusion();
     }
 
     @Override
     public boolean isGui3d() {
-        return this.wrapped.isGui3d();
+        return wrapped.isGui3d();
     }
 
     @Override
     public boolean usesBlockLight() {
-        return this.wrapped.usesBlockLight();
+        return wrapped.usesBlockLight();
     }
 
     @Override
     public boolean isCustomRenderer() {
-        return this.wrapped.isCustomRenderer();
+        return wrapped.isCustomRenderer();
     }
 
     @Override
     public @NotNull TextureAtlasSprite getParticleIcon() {
-        return this.wrapped.getParticleIcon();
+        return wrapped.getParticleIcon();
     }
 
     @Override
     public @NotNull ItemTransforms getTransforms() {
-        return this.wrapped.getTransforms();
+        return wrapped.getTransforms();
     }
 
     @Override
     public @NotNull ItemOverrides getOverrides() {
-        return this.wrapped.getOverrides();
+        return wrapped.getOverrides();
     }
 }
