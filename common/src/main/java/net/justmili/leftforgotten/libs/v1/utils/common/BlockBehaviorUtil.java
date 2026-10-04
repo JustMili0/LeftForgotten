@@ -77,7 +77,7 @@ public class BlockBehaviorUtil {
          *  stone - BlockSetType.STONE, 20, false
          */
 
-        return BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY);
+        return BlockBehaviour.Properties.of().noCollission().strength(0.5f).pushReaction(PushReaction.DESTROY);
     }
 
     private static boolean ocelotOrParrot(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entity) {
