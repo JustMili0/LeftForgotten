@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class FeatureVoid extends BarrierBlock {
-    private final float[] CHANCES = new float[]{0.5f, 0.3f, 0.2f};
+    private final float[] CHANCES = new float[]{0.5f, 0.3f, 0.1f};
 
     public FeatureVoid(Properties properties) {
         super(properties);
