@@ -16,9 +16,6 @@ public class EventRegistry {
         EntityEvent.LIVING_HURT.register(MoveToAlpha::onEntityHurt);
         EntityEvent.LIVING_HURT.register(MoveToAlpha::onHurtByDimensionEntry);
 
-        InteractionEvent.RIGHT_CLICK_ITEM.register(PreHungerHealing::onRightClickItem);
-        InteractionEvent.RIGHT_CLICK_BLOCK.register(PreHungerHealing::onRightClickBlock);
-
         PlayerEvent.CHANGE_DIMENSION.register(NoCooldown::onChangeDimension);
         PlayerEvent.PLAYER_RESPAWN.register(NoCooldown::onPlayerRespawn);
         PlayerEvent.PLAYER_JOIN.register(NoCooldown::onPlayerJoin);
